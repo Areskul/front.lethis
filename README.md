@@ -1,4 +1,4 @@
-# maroga.front
+# lightfront
 
 ## Project setup
 ```
