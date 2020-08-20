@@ -1,0 +1,34 @@
+@use "sass:color";
+
+$primary-colors: (
+  "primary": #c5c5c5,
+  "secondary": #ffffff,
+  "ternary": #000000,
+  "success": #38fa11,
+  "info": #099fcc,
+  "warning": #da9a11,
+  "error": #ec0b0b,
+);
+$percentages: (
+  "": 3%,
+  "2": 6%,
+  "3": 9%,
+  "4": 12%,
+  "5": 15%,
+);
+
+@mixin generate-colors-gradient($name, $value) {
+  --#{$name}: #{$value};
+  $modes: lighten, darken;
+  @each $mode in $modes {
+    @each $deg, $percentage in $percentages {
+      --#{$name}-#{$mode}#{$deg}: darken(#{$value}, #{$percentage});
+    }
+  }
+}
+
+:root {
+  @each $name, $value in $primary-colors {
+    @include generate-colors-gradient($name, $value);
+  }
+}

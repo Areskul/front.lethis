@@ -1,6 +1,6 @@
-export const auth = {
+export const cart = {
   namespaced: true,
   state: {},
   actions: {},
-  mutations: {},
+  mutations: {}
 };
