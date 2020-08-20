@@ -7,7 +7,10 @@
     <router-view />
   </div>
 </template>
-
+<script>
+import "@storefront-ui/vue/styles.scss";
+export default {};
+</script>
 <style lang="scss">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
