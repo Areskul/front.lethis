@@ -1,4 +1,4 @@
-@use "../functions/palette.scss" as function;
+@use "../functions/index.scss" as functions;
 
 $theme-colors: (
   "primary": #c5c5c5,
@@ -11,5 +11,5 @@ $theme-colors: (
 );
 
 :root {
-  @include function.setRoot($theme-colors);
+  @include functions.setRoot($theme-colors);
 }

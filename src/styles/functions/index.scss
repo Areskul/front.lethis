@@ -1,0 +1,9 @@
+@use "../functions/palette.scss" as color;
+@use "../functions/shadows.scss" as shadow;
+
+@mixin setRoot($theme-colors) {
+  @each $name, $value in $theme-colors {
+    @include color.generate-gradient($name, $value);
+  }
+  @include shadow.generate-box-shadow();
+}

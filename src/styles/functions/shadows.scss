@@ -1,0 +1,15 @@
+@mixin generate-box-shadow() {
+  $i: 1;
+  $degres: 10 + $i;
+  $color: rgba(0, 0, 0, 0.4);
+  $a: 0;
+  $b: 0;
+  $c: 0;
+  @while $i <= $degres {
+    @if $i % 2 !=0 {
+      $b: $b + 2;
+    }
+    --box#{$i}: #{0px $i px};
+    $i: $i + 1;
+  }
+}
