@@ -5,14 +5,15 @@
 import Vue from "vue";
 import style from "@/mixins/style.js";
 export default Vue.extend({
-  name: "Card",
+  name: "card",
   mixins: [style],
   mounted() {
     this.setColor();
+    this.setElevation();
   },
 });
 </script>
-<style scoped lang="css">
+<style scoped lang="scss">
 .tbig {
   height: 150px;
 }
