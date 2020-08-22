@@ -21,13 +21,10 @@ const colorProps = {
     },
     setHeight: function () {
       let height = this.height;
-      console.log(height);
-
       this.$el.style.height = height;
     },
     setWidth: function () {
       let width = this.width;
-      console.log(width);
       this.$el.style.width = width;
     },
   },

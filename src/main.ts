@@ -4,6 +4,7 @@ import router from "./router";
 import App from "./App.vue";
 import "@/styles/colors/light.scss";
 import "@/styles/grid/all.scss";
+import "@/styles/animations/transitions.scss";
 
 Vue.config.productionTip = false;
 
