@@ -1,8 +1,8 @@
 <template>
   <div class="columns">
     <div class="column">
-      <card color="primary-lighten5" height="10vh">
-        <img :src="src" width="42" height="42" />
+      <card color="primary" height="100px">
+        <icon />
       </card>
     </div>
   </div>
@@ -12,11 +12,9 @@ import card from "../containers/card";
 import icon from "../buttons/icon";
 export default {
   name: "vheader",
-  data: () => ({
-    src: "../../assets/logo.png",
-  }),
   components: {
     card,
+    icon,
   },
 };
 </script>

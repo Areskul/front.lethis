@@ -1,15 +1,10 @@
 <template>
-  <div class="hello">
-    <card color="error-darken5" elevation="4" height="150px"></card>
-  </div>
+  <div></div>
 </template>
 <script>
-import card from "@/components/containers/card.vue";
 export default {
   name: "List",
   props: {},
-  components: {
-    card,
-  },
+  components: {},
 };
 </script>
