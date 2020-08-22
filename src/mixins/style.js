@@ -1,8 +1,14 @@
 const colorProps = {
   props: {
     color: String,
-    shape: String,
     elevation: String,
+    height: String,
+  },
+  mounted() {
+    this.setColor();
+    this.setElevation();
+    this.setHeight();
+    this.setWidth();
   },
   methods: {
     setColor: function () {
@@ -12,6 +18,17 @@ const colorProps = {
     setElevation: function () {
       let elevation = `var(--box${this.elevation})`;
       this.$el.style.boxShadow = elevation;
+    },
+    setHeight: function () {
+      let height = this.height;
+      console.log(height);
+
+      this.$el.style.height = height;
+    },
+    setWidth: function () {
+      let width = this.width;
+      console.log(width);
+      this.$el.style.width = width;
     },
   },
 };
