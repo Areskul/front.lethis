@@ -1,7 +1,7 @@
-@use "../functions/index.scss" as functions;
+@use "../functions/gradient.scss" as functions;
 
 $theme-colors: (
-  "primary": #e6e6e6,
+  "primary": #ffffff,
   "secondary": #cccccc,
   "ternary": #000000,
   "success": #38fa11,
@@ -11,5 +11,5 @@ $theme-colors: (
 );
 
 :root {
-  @include functions.setRoot($theme-colors);
+  @include functions.gradient($theme-colors);
 }

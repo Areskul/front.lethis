@@ -21,6 +21,8 @@
   }
 }
 
-@mixin generate-variable($name, $value) {
-  --#{$name}: #{$value};
+@mixin gradient($theme-colors) {
+  @each $name, $value in $theme-colors {
+    @include generate-gradient($name, $value);
+  }
 }

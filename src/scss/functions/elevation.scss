@@ -1,7 +1,7 @@
 @mixin generate-box-shadow() {
   $i: 0;
   $degres: 10 + $i;
-  $color: rgba(0, 0, 0, 0.417);
+  $color: rgba(0, 0, 0, 0.16);
   $a: 2;
   $b: 8;
   $c: 8;
@@ -19,4 +19,8 @@
 ) {
   transition: box-shadow $duration $easing;
   will-change: box-shadow;
+}
+
+:root {
+  @include generate-box-shadow();
 }

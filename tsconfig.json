@@ -7,6 +7,11 @@
     "jsx": "preserve",
     "importHelpers": true,
     "moduleResolution": "node",
+    "declaration": false,
+    "composite": false,
+    "noImplicitAny": false,
+    // "allowJs": true,
+    "noImplicitThis": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
@@ -25,7 +30,8 @@
     "src/**/*.vue",
     "tests/**/*.ts",
     "tests/**/*.tsx",
-    "src/mixins/style.js"
+    "src/store/theme.js",
+    "src/store/theme.js"
   ],
   "exclude": ["node_modules"]
 }
