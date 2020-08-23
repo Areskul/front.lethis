@@ -20,31 +20,6 @@ const global = {
         await import("@/scss/colors/light.scss");
       }
     },
-    //Deprecated
-    getTheme: async function () {
-      const degres = ["", "2", "3", "4", "5"];
-      const modes = ["lighten", "darken"];
-      const prefixes = [
-        "primary",
-        "secondary",
-        "ternary",
-        "success",
-        "info",
-        "warning",
-        "error",
-      ];
-      prefixes.forEach((prefix) => {
-        modes.forEach((mode) => {
-          degres.forEach((degre) => {
-            let name = `${prefix}-${mode}${degre}`;
-            let variable = `--${name}`;
-            let value = getComputedStyle().getPropertyValue(name);
-            console.log(value);
-            this.colors[name] = value;
-          });
-        });
-      });
-    },
   },
 };
 export default global;
