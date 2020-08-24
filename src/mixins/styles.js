@@ -8,9 +8,11 @@ const styles = {
     height: String,
     rounded: Boolean,
     border: String,
+    text: String,
   },
   mounted() {
     this.setColor();
+    this.setText();
     this.setElevation();
     this.setHeight();
     this.setWidth();
@@ -21,6 +23,16 @@ const styles = {
     setColor: function () {
       let color = `var(--${this.color})`;
       this.$el.style.background = color;
+    },
+    setText: function () {
+      if (this.text) {
+        let color = `var(--${this.text})`;
+        this.$el.style.color = color;
+      } else {
+        let text = "ternary-lighten2";
+        let color = `var(--${text})`;
+        this.$el.style.color = color;
+      }
     },
     setElevation: function () {
       let elevation = `var(--box${this.elevation})`;
