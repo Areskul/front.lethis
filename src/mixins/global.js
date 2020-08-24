@@ -10,7 +10,8 @@ const global = {
   }),
   async mounted() {
     await this.setTheme();
-    this.$store.dispatch("theme/isDark", false);
+    //Musn't call a plugin (store) in mixins
+    this.$store.dispatch("theme/setDark", false);
   },
   methods: {
     setTheme: async function () {

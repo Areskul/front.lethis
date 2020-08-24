@@ -10,7 +10,7 @@
     "declaration": false,
     "composite": false,
     "noImplicitAny": false,
-    // "allowJs": true,
+    "allowJs": true,
     "noImplicitThis": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -31,7 +31,8 @@
     "tests/**/*.ts",
     "tests/**/*.tsx",
     "src/store/theme.js",
-    "src/store/theme.js"
+    "src/store/theme.js",
+    "src/vue-apollo.js"
   ],
   "exclude": ["node_modules"]
 }
