@@ -6,9 +6,7 @@ import "@/scss/_all.scss";
 import global from "./mixins/global";
 import { createProvider } from "./vue-apollo";
 
-Vue.config.devtools =
-  process.env.VUE_APP_NODE_ENV == "production" ? false : true;
-
+Vue.config.devtools = process.env.NODE_ENV == "production" ? false : true;
 new Vue({
   store,
   router,

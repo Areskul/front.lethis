@@ -1,27 +1,24 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
+    "outDir": "dist",
+    "sourceMap": false,
     "target": "esnext",
     "module": "esnext",
-    "lib": ["esnext", "dom", "dom.iterable", "scripthost"],
-    "strict": true,
-    "jsx": "preserve",
-    "importHelpers": true,
     "moduleResolution": "node",
-    "declaration": false,
-    "composite": false,
-    "noImplicitAny": false,
     "allowJs": true,
-    "noImplicitThis": true,
-    "skipLibCheck": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "noUnusedLocals": true,
     "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
-    "sourceMap": true,
-    "baseUrl": ".",
-    "types": ["webpack-env"],
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "removeComments": false,
+    "jsx": "preserve",
+    "lib": ["esnext", "dom"],
+    "rootDir": ".",
     "paths": {
-      "@/*": ["src/*"]
+      "@vue/*": ["packages/*/src"],
+      "vue": ["packages/vue/src"]
     }
   },
   "include": [
@@ -31,8 +28,7 @@
     "tests/**/*.ts",
     "tests/**/*.tsx",
     "src/store/theme.js",
-    "src/store/theme.js",
-    "src/vue-apollo.js"
+    "src/store/theme.js"
   ],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "src/vue-apollo.js"]
 }
