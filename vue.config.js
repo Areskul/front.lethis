@@ -1,18 +1,25 @@
 const TerserPlugin = require("terser-webpack-plugin");
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
+// const ExtractTextPlugin = require("extract-text-webpack-plugin");
 module.exports = {
   publicPath: "/",
   productionSourceMap: false,
+  css: {
+    extract: true,
+  },
   // devtool: "",
-  // rules: [
-  //   {
-  //     test: /\.scss$/,
-  //     use: ExtractTextPlugin.extract({
-  //       fallback: "style-loader",
-  //       use: ["css-loader", "sass-loader"],
-  //     }),
-  //   },
-  // ],
+
+  chainWebpack: (config) => {
+    config.module
+      .rule("graphql")
+      .test(/\.graphql$/)
+      .use("graphql-tag/loader")
+      .loader("graphql-tag/loader")
+      .end();
+  },
+  // options: {
+  //   publicPath: "../",
+  //   hmr: process.env.NODE_ENV === "development",
+  // },
   configureWebpack: (config) => {
     config.optimization = {
       minimize: true,

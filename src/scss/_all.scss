@@ -2,8 +2,4 @@
 @import "animations/transitions.scss";
 @import "grid/_all.scss";
 @import "functions/elevation.scss";
-
-:root {
-  --border-radius: 5px;
-  --border-width: 1px;
-}
+@import "reset.scss";

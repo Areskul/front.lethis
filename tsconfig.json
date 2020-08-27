@@ -18,7 +18,8 @@
     "rootDir": ".",
     "paths": {
       "@vue/*": ["packages/*/src"],
-      "vue": ["packages/vue/src"]
+      "vue": ["packages/vue/src"],
+      "*": ["types/*"]
     }
   },
   "include": [
