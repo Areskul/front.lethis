@@ -1,21 +1,29 @@
 <template>
-  <div class="columns px-0 py-0">
-    <div class="column">
-      <card color="secondary" height="10vh">
-        <div class="columns px-0 py-5">
-          <div class="column"></div>
+  <card color="secondary" height="60px">
+    <nav class="level fill-height is-mobile pt-5">
+      <div class="level-left"></div>
+      <div class="level-right pr-5">
+        <div class="level-item">
+          <menuIcons />
         </div>
-      </card>
-    </div>
-  </div>
+      </div>
+    </nav>
+  </card>
 </template>
 <script>
 import card from "../containers/card";
+import menuIcons from "./menuIcons";
 export default {
-  name: "vheader",
+  name: "myHeader",
   data: () => ({}),
   components: {
     card,
+    menuIcons,
   },
 };
 </script>
+<style>
+.fill-height {
+  height: inherit;
+}
+</style>

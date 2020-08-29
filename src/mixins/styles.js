@@ -40,7 +40,7 @@ const styles = {
     },
     setHeight: function () {
       let height = this.height;
-      this.$el.style.height = height;
+      this.$el.style.minHeight = height;
     },
     setWidth: function () {
       let width = this.width;

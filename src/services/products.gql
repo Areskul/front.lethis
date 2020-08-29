@@ -1,0 +1,8 @@
+query productQuery {
+  products {
+    name
+    description
+    price
+    unity
+  }
+}
