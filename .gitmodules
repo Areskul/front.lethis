@@ -1,0 +1,3 @@
+[submodule "src/mixins"]
+	path = src/mixins
+	url = https://github.com/Areskul/mixins.git
