@@ -18,6 +18,14 @@ const routes: Array<RouteConfig> = [
     },
   },
   {
+    path: "/forgotPassword",
+    name: "ForgotPassword",
+    components: {
+      header: () => import("@/components/navigation/header.vue"),
+      contentRefreshed: () => import("@/views/ForgotPassword.vue"),
+    },
+  },
+  {
     path: "/contact",
     name: "Contact",
     components: {

@@ -1,5 +1,5 @@
 <template>
-  <card color="secondary" height="60px">
+  <card class="mb-6" color="secondary" height="60px">
     <nav class="level fill-height is-mobile pt-5">
       <div class="level-left"></div>
       <div class="level-right pr-5">

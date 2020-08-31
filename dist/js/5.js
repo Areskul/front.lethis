@@ -1,0 +1,2 @@
+/*! For license information please see 5.js.LICENSE.txt */
+(window.webpackJsonp=window.webpackJsonp||[]).push([[5],{"./src/scss/bulmaConf/bulmaLight.scss":function(module,exports,__webpack_require__){eval("// extracted by mini-css-extract-plugin\n    if(false) { var cssReload; }\n  \n\n//# sourceURL=webpack:///./src/scss/bulmaConf/bulmaLight.scss?")}}]);
