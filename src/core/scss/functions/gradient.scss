@@ -1,0 +1,28 @@
+@mixin generate-gradient($name, $value) {
+  $percentages: (
+    "": 10%,
+    "2": 20%,
+    "3": 30%,
+    "4": 40%,
+    "5": 50%,
+  );
+  $modes: lighten, darken;
+  --#{$name}: #{$value};
+  @each $mode in $modes {
+    @each $deg, $percentage in $percentages {
+      @if $mode==darken {
+        $percentage: -$percentage;
+      }
+      --#{$name}-#{$mode}#{$deg}: #{scale-color(
+          $value,
+          $lightness: $percentage
+        )};
+    }
+  }
+}
+
+@mixin gradient($theme-colors) {
+  @each $name, $value in $theme-colors {
+    @include generate-gradient($name, $value);
+  }
+}

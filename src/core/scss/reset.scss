@@ -1,0 +1,19 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 100%;
+}
+
+body {
+  margin: 0px;
+  padding: 0px;
+}
+
+:root {
+  --border-radius: 5px;
+  --border-width: 1px;
+}

@@ -1,0 +1,22 @@
+@mixin generate-box-shadow() {
+  $i: 0;
+  $degres: 10 + $i;
+  $color: rgba(0, 0, 0, 0.16);
+  $a: 2;
+  $b: 8;
+  $c: 8;
+  @while $i <= $degres {
+    $i: $i + 1;
+    $a: $i + $a/2;
+    $b: $b + $i;
+    --box#{$i}: #{0px ($a) +"px" $b + "px" $c + "px" $color};
+  }
+}
+
+@mixin elevationTransition(
+  $duration: 280ms,
+  $easing: cubic-bezier(0.4, 0, 0.2, 1)
+) {
+  transition: box-shadow $duration $easing;
+  will-change: box-shadow;
+}
