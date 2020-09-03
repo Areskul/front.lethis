@@ -3,7 +3,7 @@ import store from "./store";
 import router from "./router";
 import App from "./App.vue";
 import "@/scss/_all.scss";
-import global from "./components/core/mixins/global";
+import global from "./core/mixins/global";
 import { createProvider } from "./vue-apollo";
 
 // import KeenUi from "keen-ui";
