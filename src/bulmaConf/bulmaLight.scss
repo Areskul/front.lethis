@@ -1,0 +1,50 @@
+@import "bulma/sass/utilities/_all.sass";
+@import "bulma/sass/utilities/initial-variables";
+@import "../colors/light.scss";
+
+$primary: map-get($colors, "primary");
+$secondary: map-get($colors, "secondary");
+$info: map-get($colors, "info");
+$success: map-get($colors, "success");
+$warning: map-get($colors, "warning");
+$danger: map-get($colors, "danger");
+$fg: map-get($colors, "fg");
+$bg: map-get($colors, "bg");
+
+// Setup $colors to use as bulma classes (e.g. 'is-twitter')
+$colors: (
+  "primary": (
+    $primary,
+    $primary,
+  ),
+  "secondary": (
+    $secondary,
+    $secondary,
+  ),
+  "info": (
+    $info,
+    $info,
+  ),
+  "success": (
+    $success,
+    $success,
+  ),
+  "warning": (
+    $warning,
+    $warning,
+  ),
+  "danger": (
+    $danger,
+    $danger,
+  ),
+);
+
+// Links
+$link: $primary;
+$link-invert: $primary;
+$link-focus-border: $primary;
+
+// Import Bulma and Buefy styles
+
+@import "bulma";
+@import "buefy/src/scss/buefy";

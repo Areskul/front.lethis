@@ -1,0 +1,5 @@
+@use "../functions/elevation.scss" as functions;
+
+:root {
+  @include functions.generate-box-shadow();
+}
