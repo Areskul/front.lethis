@@ -1,6 +1,6 @@
 <template>
   <div>
-    <card color="primary" text="ternary" elevation="4" rounded height="40vh">
+    <card color="bg" text="ternary" elevation="4" rounded height="40vh">
       <h4>{{ item.name }}</h4>
       <p>{{ item.description }}</p>
       <p>{{ item.price }}</p>
@@ -8,7 +8,7 @@
   </div>
 </template>
 <script>
-import card from "../core/card";
+import card from "@/core/components/card";
 export default {
   props: {
     item: Object,

@@ -3,7 +3,7 @@ module.exports = {
   publicPath: "/",
   productionSourceMap: false,
   css: {
-    extract: true,
+    // extract: true,
   },
   chainWebpack: (config) => {
     config.module

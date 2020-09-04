@@ -11,7 +11,7 @@
   </card>
 </template>
 <script>
-import card from "../containers/card";
+import card from "@/core/components/card";
 import headerButtons from "../buttons/headerButtons";
 export default {
   name: "myHeader",

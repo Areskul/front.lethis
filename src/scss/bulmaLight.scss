@@ -1,6 +1,6 @@
 @import "bulma/sass/utilities/_all.sass";
 @import "bulma/sass/utilities/initial-variables";
-@import "core/colors/dark.scss";
+@import "../core/scss/colors/light.scss";
 
 $primary: map-get($colors, "primary");
 $secondary: map-get($colors, "secondary");
