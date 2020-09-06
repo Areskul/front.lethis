@@ -23,13 +23,12 @@
     }
   },
   "include": [
+    "src/**/*.js",
     "src/**/*.ts",
     "src/**/*.tsx",
     "src/**/*.vue",
     "tests/**/*.ts",
-    "tests/**/*.tsx",
-    "src/store/theme.js",
-    "src/store/theme.js"
+    "tests/**/*.tsx"
   ],
   "exclude": ["node_modules", "src/vue-apollo.js"]
 }

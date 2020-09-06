@@ -1,18 +1,53 @@
 @import "bulma/sass/utilities/_all.sass";
 @import "bulma/sass/utilities/initial-variables";
+
+$colors: (
+  "fg": #cccccc,
+  "bg": #ffffff,
+  "primary": #c725b1,
+  "secondary": #b88181,
+  "ternary": #000000,
+  "success": #38fa11,
+  "info": #099fcc,
+  "warning": #da9a11,
+  "danger": #ec0b0b,
+);
+
+@import "../core/scss/colors/light.scss";
+
+$colors: (
+  "fg": #1f1e1e,
+  "bg": #161313,
+  "primary": #141fb3,
+  "secondary": #474747,
+  "ternary": #ffffff,
+  "success": #1b6e0a,
+  "info": #099fcc,
+  "warning": #da9a11,
+  "danger": #ec0b0b,
+);
+
 @import "../core/scss/colors/dark.scss";
 
+$fg: map-get($colors, "fg");
+$bg: map-get($colors, "bg");
 $primary: map-get($colors, "primary");
 $secondary: map-get($colors, "secondary");
 $info: map-get($colors, "info");
 $success: map-get($colors, "success");
 $warning: map-get($colors, "warning");
 $danger: map-get($colors, "danger");
-$fg: map-get($colors, "fg");
-$bg: map-get($colors, "bg");
 
 // Setup $colors to use as bulma classes (e.g. 'is-twitter')
 $colors: (
+  "fg": (
+    $fg,
+    $fg,
+  ),
+  "bg": (
+    $bg,
+    $bg,
+  ),
   "primary": (
     $primary,
     $primary,
