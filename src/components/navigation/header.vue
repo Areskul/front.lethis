@@ -1,14 +1,16 @@
 <template>
-  <card class="mb-6" color="secondary" height="60px">
-    <nav class="level fill-height is-mobile pt-5">
-      <div class="level-left"></div>
-      <div class="level-right pr-5">
-        <div class="level-item">
-          <headerButtons />
+  <header>
+    <card class="mb-6" color="secondary" height="60px">
+      <nav class="level is-mobile pt-5">
+        <div class="level-left"></div>
+        <div class="level-right pr-5">
+          <div class="level-item">
+            <headerButtons />
+          </div>
         </div>
-      </div>
-    </nav>
-  </card>
+      </nav>
+    </card>
+  </header>
 </template>
 <script>
 import card from "@/core/components/card";
@@ -22,8 +24,3 @@ export default {
   },
 };
 </script>
-<style>
-.fill-height {
-  height: inherit;
-}
-</style>

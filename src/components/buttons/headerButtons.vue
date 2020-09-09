@@ -21,8 +21,4 @@ export default {
   },
 };
 </script>
-<style>
-.anchor {
-  position: inherit;
-}
-</style>
+<style></style>

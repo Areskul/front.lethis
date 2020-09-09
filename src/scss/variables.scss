@@ -33,6 +33,7 @@ $fg: map-get($colors, "fg");
 $bg: map-get($colors, "bg");
 $primary: map-get($colors, "primary");
 $secondary: map-get($colors, "secondary");
+$ternary: map-get($colors, "ternary");
 $info: map-get($colors, "info");
 $success: map-get($colors, "success");
 $warning: map-get($colors, "warning");
@@ -55,6 +56,10 @@ $colors: (
   "secondary": (
     $secondary,
     $secondary,
+  ),
+  "ternary": (
+    $ternary,
+    $ternary,
   ),
   "info": (
     $info,

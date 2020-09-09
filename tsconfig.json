@@ -17,9 +17,9 @@
     "lib": ["esnext", "dom"],
     "rootDir": ".",
     "paths": {
+      "@/*": ["src/*"],
       "@vue/*": ["packages/*/src"],
-      "vue": ["packages/vue/src"],
-      "*": ["types/*"]
+      "vue": ["packages/vue/src"]
     }
   },
   "include": [
