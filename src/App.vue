@@ -1,7 +1,11 @@
 <template>
-  <div :class="{ 'theme--dark' : isDark , 'theme--light' : !isDark }">
+  <div :class="{ 'theme--dark': isDark, 'theme--light': !isDark }">
     <card color="bg" id="app">
-      <transition mode="out-in" enter-active-class="fade-in-top" leave-active-class="fade-ou-top">
+      <transition
+        mode="out-in"
+        enter-active-class="fade-in-top"
+        leave-active-class="fade-ou-top"
+      >
         <router-view name="header"></router-view>
       </transition>
       <transition
@@ -11,7 +15,11 @@
       >
         <router-view name="contentRefreshed"></router-view>
       </transition>
-      <transition mode="out-in" enter-active-class="fade-in-top" leave-active-class="fade-ou-top">
+      <transition
+        mode="out-in"
+        enter-active-class="fade-in-top"
+        leave-active-class="fade-ou-top"
+      >
         <router-view name="footer"></router-view>
       </transition>
       <router-view />
@@ -19,9 +27,9 @@
   </div>
 </template>
 <script>
-import card from "@/core/components/card";
+import card from "@/core/components/containers/card";
 export default {
-  components:{
+  components: {
     card,
   },
   computed: {

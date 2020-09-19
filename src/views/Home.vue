@@ -12,14 +12,12 @@
 </template>
 
 <script>
-import productCatalogue from "../components/productCatalogue"
+import productCatalogue from "../components/productCatalogue";
 export default {
   name: "Home",
-  data: () => ({
-   
-  }),
+  data: () => ({}),
   components: {
-    productCatalogue
+    productCatalogue,
   },
 };
 </script>

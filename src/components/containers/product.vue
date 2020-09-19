@@ -8,7 +8,7 @@
   </div>
 </template>
 <script>
-import card from "@/core/components/card";
+import card from "@/core/components/containers/card";
 export default {
   props: {
     item: Object,
