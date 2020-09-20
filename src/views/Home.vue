@@ -7,7 +7,6 @@
     >
       <productCatalogue />
     </transition>
-    <productCatalogue />
   </div>
 </template>
 

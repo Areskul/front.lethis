@@ -4,9 +4,11 @@ import router from "./router";
 import App from "./App.vue";
 import VueMeta from "vue-meta";
 
+import { createProvider } from "./vue-apollo";
 //Directives
 //Must have directives (Lazy-loading, scroll, outside-click)
 import { intersect } from "@/core/directives/intersect";
+import { scroll } from "@/core/directives/scroll";
 
 // Colors, Shadows, Text and Breakpoints
 import "@/core/scss/_all.scss";
@@ -20,22 +22,23 @@ import "bootstrap/scss/bootstrap-grid.scss";
 import "./registerServiceWorker";
 
 //UI lib compponents
-import KeenUI from "keen-ui";
+// import KeenUI from "keen-ui";
+
+// impport in file
+// import { UiAlert, UiButton } from "keen-ui";
+//Load css at the begining
 import "keen-ui/dist/keen-ui.css";
 
 Vue.config.devtools = process.env.NODE_ENV == "production" ? false : true;
 
 Vue.directive("intersect", intersect);
-
-Vue.use(KeenUI);
+Vue.directive("scroll", scroll);
+// Vue.use(KeenUI);
 Vue.use(VueMeta);
 
 new Vue({
-  components: {
-    // UiAlert,
-    // UiButton,
-  },
   store,
   router,
+  apolloProvider: createProvider(),
   render: (h) => h(App),
 }).$mount("#app");
