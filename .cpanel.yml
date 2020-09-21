@@ -1,6 +1,7 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home2/lian73342/areskul/lightfront.deploy
+    - export NAME=lightfront
+    - export SUFFIX=.deploy
+    - export DEPLOYPATH=../$NAME$SUFFIX
     - /bin/cp -R dist/* $DEPLOYPATH
-    - /bin/cp .htaccess $DEPLOYPATH
