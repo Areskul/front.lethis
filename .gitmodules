@@ -1,3 +1,6 @@
 [submodule "src/core"]
 	path = src/core
 	url = https://github.com/Areskul/core.git
+[submodule "core-minimal"]
+	path = core-minimal
+	url = https://github.com/Areskul/core-minimal.git
