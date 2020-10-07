@@ -1,40 +1,64 @@
 <template>
-  <div :class="{ 'theme--dark': isDark, 'theme--light': !isDark }">
-    <card color="bg" id="app">
-      <transition mode="out-in" enter-active-class="fade-in-top" leave-active-class="fade-ou-top">
-        <router-view name="header"></router-view>
-      </transition>
+  <card
+    id="app-theme"
+    :class="{ 'theme--dark': isDark, 'theme--light': !isDark }"
+    class="no-select"
+    color="bg"
+  >
+    <router-view name="header" v-slot="{ Component }">
       <transition
         mode="out-in"
-        enter-active-class="slide-in-bck-center"
-        leave-active-class="slide-out-bck-center"
+        appear
+        enter-active-class="fade-in-top"
+        leave-active-class="fade-out-top"
       >
-        <router-view name="contentRefreshed"></router-view>
+        <component :is="Component"></component>
       </transition>
-      <transition mode="out-in" enter-active-class="fade-in-top" leave-active-class="fade-ou-top">
-        <router-view name="footer"></router-view>
+    </router-view>
+
+    <router-view name="contentRefreshed" v-slot="{ Component }">
+      <transition
+        mode="out-in"
+        enter-active-class="fade-in-fwd"
+        leave-active-class="fade-out-bck"
+      >
+        <component :is="Component"></component>
       </transition>
-      <router-view />
-    </card>
-  </div>
+    </router-view>
+
+    <router-view name="footer" v-slot="{ Component }">
+      <transition
+        mode="out-in"
+        enter-active-class="fade-in-fwd"
+        leave-active-class="fade-out-bck"
+      >
+        <component :is="Component"></component>
+      </transition>
+    </router-view>
+  </card>
 </template>
 <script>
-import card from "@/core/components/containers/card";
+import card from "@/components/containers/card";
+import { theme } from "@/../core-minimal/mixins/theme.js";
 export default {
   components: {
     card,
   },
-  computed: {
-    isDark: {
-      set: function (bool) {
-        this.$store.dispatch("theme/setDark", bool);
-      },
-      get: function () {
-        return this.$store.state.theme.isDark;
-      },
-    },
+  mixins: [theme],
+  metaInfo: {
+    // if no subcomponents specify a metaInfo.title, this title will be used
+    title: "Agence Web Areskul ",
+    // all titles will be injected into this template
+    titleTemplate: "%s",
   },
 };
 </script>
-<style scoped lang="scss">
+<style lang="scss">
+#app {
+  font-family: Ubuntu, Avenir, Helvetica, Arial, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol" !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
+}
 </style>

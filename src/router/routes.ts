@@ -1,36 +1,43 @@
-import { RouteConfig } from "vue-router";
+import { RouteRecordRaw } from "vue-router";
 
-const routes: Array<RouteConfig> = [
+const baseTitle = "Agence Web Areskul";
+const separator = " | ";
+const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
+    alias: ["/Home"],
     name: "Home",
     components: {
       header: () => import("@/components/navigation/header.vue"),
-      contentRefreshed: () => import("@/views/Home.vue"),
+      // contentRefreshed: () => import("@/views/Services.vue"),
+      // footer: () => import("@/components/navigation/footer.vue"),
+    },
+    meta: {
+      title: baseTitle + separator + "Services",
     },
   },
   {
-    path: "/about",
-    name: "About",
+    path: "/Tarifs",
+    name: "Tarifs",
     components: {
       header: () => import("@/components/navigation/header.vue"),
-      contentRefreshed: () => import("@/views/About.vue"),
+      // contentRefreshed: () => import("@/views/Tarifs.vue"),
+      // footer: () => import("@/components/navigation/footer.vue"),
+    },
+    meta: {
+      title: baseTitle + separator + "Tarifs",
     },
   },
   {
-    path: "/forgotPassword",
-    name: "ForgotPassword",
+    path: "/AboutUs",
+    name: "AboutUs",
     components: {
       header: () => import("@/components/navigation/header.vue"),
-      contentRefreshed: () => import("@/views/ForgotPassword.vue"),
+      // contentRefreshed: () => import("@/views/AboutUs.vue"),
+      // footer: () => import("@/components/navigation/footer.vue"),
     },
-  },
-  {
-    path: "/contact",
-    name: "Contact",
-    components: {
-      header: () => import("@/components/navigation/header.vue"),
-      contentRefreshed: () => import("@/views/Home.vue"),
+    meta: {
+      title: baseTitle + separator + "Pourquoi nous?",
     },
   },
 ];

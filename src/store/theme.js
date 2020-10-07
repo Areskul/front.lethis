@@ -1,5 +1,4 @@
-const colors = {};
-let isDark = localStorage.getItem("isDark")
+const isDark = localStorage.getItem("isDark")
   ? JSON.parse(localStorage.getItem("isDark"))
   : false;
 

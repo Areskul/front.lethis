@@ -1,44 +1,27 @@
-import Vue from "vue";
-import store from "./store";
-import router from "./router";
-import App from "./App.vue";
-import VueMeta from "vue-meta";
-
-import { createProvider } from "./vue-apollo";
-//Directives
-//Must have directives (Lazy-loading, scroll, outside-click)
-import { intersect } from "@/core/directives/intersect";
-import { scroll } from "@/core/directives/scroll";
-
-// Colors, Shadows, Text and Breakpoints
-import "@/core/scss/_all.scss";
+//Import text alignement classes
 import "./scss/_all.scss";
+import "@areskul/minimal-grid/breakpoints.scss";
+import "@areskul/minimal-grid/text.scss";
+import "@areskul/minimal-elevation/elevation.scss";
+import "@areskul/minimal-border/border.scss";
 
-//Grid and Spacing and Reboot
-import "bootstrap/scss/bootstrap-reboot.scss";
-import "bootstrap/scss/bootstrap-grid.scss";
+// import { intersect } from "../core-minimal/minimal-directives";
+//Mandatory to use Keen-UI
+import "@areskul/keen-ui-next/src/bootstrap";
 
-//Service worker
-import "./registerServiceWorker";
+import "../core-minimal/minimal-transition/transitions.scss";
+// import VueMeta from "@areskul/vue-meta";
 
-//UI lib compponents
-// import KeenUI from "keen-ui";
+import { createApp } from "vue";
+import App from "./App.vue";
+import { store } from "./store";
+import { router } from "./router";
 
-// impport in file
-// import { UiAlert, UiButton } from "keen-ui";
-//Load css at the begining
-import "keen-ui/dist/keen-ui.css";
+const app = createApp(App);
 
-Vue.config.devtools = process.env.NODE_ENV == "production" ? false : true;
+// app.use(color, text, elevation, border);
+app.use(store);
+app.use(router);
+// app.directive("intersect", intersect);
 
-Vue.directive("intersect", intersect);
-Vue.directive("scroll", scroll);
-// Vue.use(KeenUI);
-Vue.use(VueMeta);
-
-new Vue({
-  store,
-  router,
-  apolloProvider: createProvider(),
-  render: (h) => h(App),
-}).$mount("#app");
+app.mount("#app");

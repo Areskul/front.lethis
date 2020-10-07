@@ -1,16 +1,16 @@
-import Vue from "vue";
-import Vuex from "vuex";
+import { createStore } from "vuex";
 import { theme } from "./theme.js";
 
-Vue.use(Vuex);
+export type State = {
+  counter: number;
+};
 
-const store = new Vuex.Store({
+export const store = createStore({
   state: {},
   mutations: {},
   actions: {},
+  getters: {},
   modules: {
     theme,
   },
 });
-
-export default store;

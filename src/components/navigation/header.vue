@@ -11,8 +11,8 @@
   </v-header>
 </template>
 <script>
-import vHeader from "@/core/components/navigation/vHeader";
-import card from "@/core/components/containers/card";
+import vHeader from "@/../core-minimal/components/navigation/vHeader";
+import card from "@/components/containers/card";
 export default {
   name: "myHeader",
   data: () => ({}),

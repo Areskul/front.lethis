@@ -1,0 +1,50 @@
+//KeenUI theming
+div[class^="ui-icon"] {
+  color: var(--secondary-lighten2);
+  //   background: var(--secondary-lighten2);
+}
+div[class$="thumb"] {
+  background: var(--primary-lighten) !important;
+  //   background: var(--secondary-lighten2);
+}
+div[class$="track"] {
+  background: var(--primary-lighten) !important;
+  //   background: var(--secondary-lighten2);
+}
+span[class*="chevron"] {
+  color: var(--ternary-lighten);
+}
+span[class*="cart"] {
+  color: var(--bg);
+}
+span[class*="lock"] {
+  color: var(--success);
+}
+span[class*="shield"] {
+  color: var(--success);
+}
+span[class*="speed"] {
+  color: var(--info);
+}
+span[class*="wrench"] {
+  color: var(--info);
+}
+span[class*="branch"] {
+  color: var(--info);
+}
+[class*="ui-button"] {
+  color: inherit !important;
+  opacity: 1;
+  text-transform: none;
+  font-size: inherit;
+  background: inherit;
+  &:hover {
+    opacity: 0.7;
+    background: none !important;
+  }
+}
+[class*="ui-icon"] {
+  &.is-disabled {
+    opacity: 1 !important;
+  }
+}
