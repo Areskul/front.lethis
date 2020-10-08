@@ -9,7 +9,7 @@ const routes: Array<RouteRecordRaw> = [
     name: "Home",
     components: {
       header: () => import("@/components/navigation/header.vue"),
-      // contentRefreshed: () => import("@/views/Services.vue"),
+      contentRefreshed: () => import("@/components/productCatalogue.vue"),
       // footer: () => import("@/components/navigation/footer.vue"),
     },
     meta: {

@@ -38,19 +38,19 @@
   </card>
 </template>
 <script>
+import { useClient } from "villus";
 import card from "@/components/containers/card";
 import { theme } from "@/../core-minimal/mixins/theme.js";
 export default {
+  setup() {
+    useClient({
+      url: "http://localhost:8081/graphql",
+    });
+  },
   components: {
     card,
   },
   mixins: [theme],
-  metaInfo: {
-    // if no subcomponents specify a metaInfo.title, this title will be used
-    title: "Agence Web Areskul ",
-    // all titles will be injected into this template
-    titleTemplate: "%s",
-  },
 };
 </script>
 <style lang="scss">
