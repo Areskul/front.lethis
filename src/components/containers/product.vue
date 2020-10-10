@@ -16,10 +16,10 @@
         </div>
         <div class="row justify-content-between">
           <div class="col-auto">
-            <h4>{{ item.name }}</h4>
+            <!-- <h4>{{ item.name }}</h4> -->
           </div>
           <div class="col-auto">
-            <p>{{ item.price }}</p>
+            <!-- <p>{{ item.price }}</p> -->
           </div>
         </div>
       </div>
