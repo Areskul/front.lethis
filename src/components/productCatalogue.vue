@@ -1,17 +1,26 @@
 <template>
-  <div class="container">
-    <product></product>
+  <div v-if="data" class="container">
+    <product
+      v-for="item in data.products"
+      :key="item.id"
+      :item="item"
+    ></product>
   </div>
 </template>
 <script>
-// import PRODUCTS from '../services/products.gql';
 // import { UiAlert } from "@areskul/keen-ui-next";
 import product from "./containers/product";
-// import gql from "graphql-tag";
+// import { gql } from "graphql-tag";
+import { useQuery } from "villus";
+import getProducts from "../strapi/products.gql";
 export default {
-  data: () => ({
-    // getProducts: require("../services/products.gql"),
-  }),
+  data: () => ({}),
+  setup() {
+    const { data } = useQuery({
+      query: getProducts,
+    });
+    return { data };
+  },
   components: {
     product,
     // UiAlert,

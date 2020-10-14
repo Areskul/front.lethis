@@ -44,7 +44,8 @@ import { theme } from "@/../core-minimal/mixins/theme.js";
 export default {
   setup() {
     useClient({
-      url: "http://localhost:8081/graphql",
+      url: "http://localhost:1337/graphql",
+      cachePolicy: "network-only",
     });
   },
   components: {

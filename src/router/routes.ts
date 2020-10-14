@@ -1,6 +1,6 @@
 import { RouteRecordRaw } from "vue-router";
 
-const baseTitle = "Agence Web Areskul";
+const baseTitle = "lightfront";
 const separator = " | ";
 const routes: Array<RouteRecordRaw> = [
   {
