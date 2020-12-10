@@ -1,1 +1,0 @@
-import{o as e,c as a,a as n,T as t}from"./index.1676cde6.js";var c={name:"Home",data:()=>({}),components:{}};c.render=function(c,s,o,r,i,d){return e(),a("div",null,[n(t,{mode:"out-in","enter-active-class":"slide-in-bck-center","leave-active-class":"slide-out-bck-center"})])};export default c;
