@@ -36,10 +36,11 @@
       </transition>
     </router-view>
   </card>
+  caca
 </template>
 <script>
 import { useClient } from "villus";
-import card from "@/components/containers/card";
+import card from "@components/containers/card";
 import { theme } from "@/../core-minimal/mixins/theme.js";
 export default {
   setup() {

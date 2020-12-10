@@ -5,9 +5,7 @@ import "@areskul/minimal-grid/text.scss";
 import "@areskul/minimal-elevation/elevation.scss";
 import "@areskul/minimal-border/border.scss";
 
-// import { intersect } from "../core-minimal/minimal-directives";
-//Mandatory to use Keen-UI
-import "@areskul/keen-ui-next/src/bootstrap";
+//import { intersect } from "../core-minimal/minimal-directives";
 
 import "../core-minimal/minimal-transition/transitions.scss";
 // import VueMeta from "@areskul/vue-meta";
