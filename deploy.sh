@@ -1,7 +1,10 @@
 #!/usr/bin/sh
-npm run build
-git rm --cached dist/js/*
-git rm --cached dist/css/*
-git add dist/js/*
-git add dist/css/*
-git commit -m "[repush dist]"
+if yarn vbuild ; then
+    echo "build succeeded"
+    if scp -r dist/* linode-arch:Static/front.poc.com; then
+        echo "sended dist folder via ssh"
+    fi
+else
+    echo "build failed"
+    echo "doing nothing"
+fi
