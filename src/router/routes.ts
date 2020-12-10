@@ -8,8 +8,8 @@ export const routes: Array<RouteRecordRaw> = [
     alias: ["/Home"],
     name: "Home",
     components: {
-      header: () => import("@/components/navigation/header.vue"),
-      contentRefreshed: () => import("@/views/Home.vue"),
+      header: () => import("@components/navigation/header.vue"),
+      contentRefreshed: () => import("@views/Home.vue"),
       // footer: () => import("@/components/navigation/footer.vue"),
     },
     meta: {
@@ -20,7 +20,7 @@ export const routes: Array<RouteRecordRaw> = [
     path: "/Tarifs",
     name: "Tarifs",
     components: {
-      header: () => import("@/components/navigation/header.vue"),
+      header: () => import("@components/navigation/header.vue"),
       // contentRefreshed: () => import("@/views/Tarifs.vue"),
       // footer: () => import("@/components/navigation/footer.vue"),
     },
@@ -32,7 +32,7 @@ export const routes: Array<RouteRecordRaw> = [
     path: "/AboutUs",
     name: "AboutUs",
     components: {
-      header: () => import("@/components/navigation/header.vue"),
+      header: () => import("@components/navigation/header.vue"),
       // contentRefreshed: () => import("@/views/AboutUs.vue"),
       // footer: () => import("@/components/navigation/footer.vue"),
     },

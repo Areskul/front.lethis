@@ -13,7 +13,6 @@
 export default {
   name: "Home",
   data: () => ({}),
-  components: {
-  },
+  components: {},
 };
 </script>
