@@ -16,14 +16,15 @@
     "@areskul/minimal-grid": "^1.0.7",
     "@areskul/minimal-palette": "^1.1.1",
     "@areskul/minimal-transition": "^1.0.0",
+    "@capacitor/android": "2.4.4",
     "@mdi/js": "^5.8.55",
     "@popperjs/core": "^2.5.4",
     "core-js": "^3.8.1",
     "graphql": "^15.4.0",
     "villus": "^1.0.0-rc.6",
     "vue": "^3.0.4",
-    "vue-router": "^4.0.1",
-    "vuex": "^4.0.0"
+    "vue-router": "4",
+    "vuex": "^4.0.0-rc.2"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^4.9.1",
