@@ -2,7 +2,7 @@ import { RouteRecordRaw } from "vue-router";
 
 const baseTitle = "lightfront";
 const separator = " | ";
-const routes: Array<RouteRecordRaw> = [
+export const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
     alias: ["/Home"],
@@ -41,5 +41,3 @@ const routes: Array<RouteRecordRaw> = [
     },
   },
 ];
-
-export default routes;

@@ -11,10 +11,9 @@
   </v-header>
 </template>
 <script>
-import vHeader from "@/../core-minimal/components/navigation/vHeader";
-import card from "@/components/containers/card";
+import card from "@components/containers/card.vue";
 export default {
-  name: "myHeader",
+  name: "v-header",
   data: () => ({}),
   components: {
     card,
