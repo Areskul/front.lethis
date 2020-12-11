@@ -4,7 +4,7 @@
   </card>
 </template>
 <script>
-import card from "@components/containers/card.vue";
+import card from "@/components/containers/card";
 export default {
   name: "v-header",
   data: () => ({}),

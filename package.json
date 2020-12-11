@@ -16,20 +16,25 @@
     "@areskul/minimal-grid": "^1.0.7",
     "@areskul/minimal-palette": "^1.1.1",
     "@areskul/minimal-transition": "^1.0.0",
-    "@capacitor/android": "2.4.4",
     "@mdi/js": "^5.8.55",
     "@popperjs/core": "^2.5.4",
+    "babel-loader": "^8.2.2",
     "core-js": "^3.8.1",
     "graphql": "^15.4.0",
+    "pug": "^3.0.0",
+    "pug-plain-loader": "^1.1.0",
+    "stylus": "^0.54.8",
+    "stylus-loader": "^4.3.1",
     "villus": "^1.0.0-rc.6",
     "vue": "^3.0.4",
     "vue-router": "4",
     "vuex": "^4.0.0-rc.2"
   },
   "devDependencies": {
+    "@prettier/plugin-pug": "^1.13.1",
     "@typescript-eslint/eslint-plugin": "^4.9.1",
     "@typescript-eslint/parser": "^4.9.1",
-    "@vue/cli-plugin-babel": "~4.5.9",
+    "@vue/cli-plugin-babel": "^4.5.9",
     "@vue/cli-plugin-eslint": "~4.5.9",
     "@vue/cli-plugin-router": "~4.5.9",
     "@vue/cli-plugin-typescript": "~4.5.9",
@@ -54,7 +59,7 @@
     "uglifyjs-webpack-plugin": "^2.2.0",
     "vite": "^1.0.0-rc.13",
     "vue-template-compiler": "^2.6.11",
-    "webpack": "^5.10.0"
+    "webpack": "^4.10.0"
   },
   "_id": "boc.front@0.0.1"
 }
