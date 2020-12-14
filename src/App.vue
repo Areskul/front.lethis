@@ -40,8 +40,9 @@ import { theme } from "@/mixins/theme.js";
 export default defineComponent({
   mixins: [theme],
   setup() {
+    const api = process.env.VUE_APP_API || "";
     useClient({
-      url: "http://localhost:8080/graphql",
+      url: api,
       cachePolicy: "network-only",
     });
   },

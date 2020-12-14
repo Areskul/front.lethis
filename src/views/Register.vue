@@ -25,12 +25,12 @@ export default defineComponent({
   setup() {
     //Vueliate
     const state = ref({
-      username: "",
+      name: "",
       password: "",
       email: "",
     });
     const rules = {
-      username: {
+      name: {
         required,
       },
       password: {

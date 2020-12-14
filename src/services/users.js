@@ -8,8 +8,8 @@ export const LOGIN_USER = gql`
   }
 `;
 export const REGISTER_USER = gql`
-  mutation createUser($name: String!, $email: String!, $password: String!) {
-    createUser(name: $name, email: $email, password: $password) {
+  mutation registerUser($name: String!, $email: String!, $password: String!) {
+    registerUser(name: $name, email: $email, password: $password) {
       token
     }
   }
