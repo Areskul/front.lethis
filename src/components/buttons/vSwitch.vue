@@ -1,15 +1,14 @@
 <template lang="pug">
-.container-fluid
-  .row.justify-content-end
-    label(for="input") theme
-    .col-auto
-      .switch.px-2
-        input#input(type="checkbox", v-model="isDark")
-        span.slider.round(@click="isDark = !isDark")
+label(for="input") theme
+.switch.px-2
+  input#input(type="checkbox", v-model="isDark")
+  span.slider.round(@click="isDark = !isDark")
+button(@click="isOld = !isOld") old-school
 </template>
+
 <script lang="ts">
 import { defineComponent } from "vue";
-import { theme } from "@/../core-minimal/mixins/theme.js";
+import { theme } from "@/mixins/theme.js";
 export default defineComponent({
   name: "v-switch",
   mixins: [theme],

@@ -1,10 +1,5 @@
 <template>
-  <v-card
-    id="app-theme"
-    :class="{ 'theme--dark': isDark, 'theme--light': !isDark }"
-    class="no-select"
-    color="bg"
-  >
+  <v-card id="app-theme" :class="mytheme" class="no-select" color="bg">
     <router-view name="header" v-slot="{ Component }">
       <transition
         mode="out-in"
@@ -41,14 +36,25 @@
 import { defineComponent } from "vue";
 import { useClient } from "villus";
 import vCard from "@/components/containers/vCard.vue";
-import { theme } from "@/../core-minimal/mixins/theme.js";
+import { theme } from "@/mixins/theme.js";
 export default defineComponent({
   mixins: [theme],
   setup() {
     useClient({
-      url: "http://localhost:1337/graphql",
+      url: "http://localhost:8080/graphql",
       cachePolicy: "network-only",
     });
+  },
+  computed: {
+    mytheme: function () {
+      if (this.isDark && !this.isOld) {
+        return "theme--dark";
+      } else if (!this.isDark && !this.isOld) {
+        return "theme--light";
+      } else if (this.isOld) {
+        return "theme--old";
+      } else return "theme--light";
+    },
   },
   components: {
     vCard,

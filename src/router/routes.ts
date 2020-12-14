@@ -5,7 +5,7 @@ const separator = " | ";
 export const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
-    alias: ["/Home"],
+    alias: ["/Home", "/:pathMatch(.*)*"],
     name: "Home",
     components: {
       header: () => import("@/components/navigation/header.vue"),
@@ -14,6 +14,30 @@ export const routes: Array<RouteRecordRaw> = [
     },
     meta: {
       title: baseTitle + separator + "Services",
+    },
+  },
+  {
+    path: "/register",
+    name: "register",
+    components: {
+      header: () => import("@/components/navigation/header.vue"),
+      contentRefreshed: () => import("@/views/Register.vue"),
+      // footer: () => import("@/components/navigation/footer.vue"),
+    },
+    meta: {
+      title: baseTitle + separator + "register",
+    },
+  },
+  {
+    path: "/login",
+    name: "login",
+    components: {
+      header: () => import("@/components/navigation/header.vue"),
+      contentRefreshed: () => import("@/views/LogIn.vue"),
+      // footer: () => import("@/components/navigation/footer.vue"),
+    },
+    meta: {
+      title: baseTitle + separator + "login",
     },
   },
   {

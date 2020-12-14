@@ -1,5 +1,5 @@
 import { createStore } from "vuex";
-import { theme } from "./theme.js";
+import { theme } from "./theme";
 
 export type State = {
   counter: number;

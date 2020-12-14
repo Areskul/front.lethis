@@ -1,0 +1,18 @@
+input {
+  background: inherit;
+  outline: none;
+  border-color: var(--secondary-lighten4);
+  &:focus {
+    border-color: var(--info);
+  }
+  &.error {
+    border-color: var(--danger);
+  }
+  &.success {
+    border-color: var(--success);
+  }
+}
+label {
+  padding-right: 2px;
+  padding-left: 2px;
+}

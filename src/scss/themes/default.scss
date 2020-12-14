@@ -1,0 +1,76 @@
+h1 {
+  font-family: Ubuntu;
+  font-size: 4vmax;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 700;
+  line-height: 4vmax;
+}
+h2 {
+  font-family: Ubuntu;
+  font-size: 3.5vmax;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 700;
+  line-height: 3.5vmax;
+}
+h3 {
+  font-family: Ubuntu;
+  font-size: 17px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 700;
+  line-height: 20px;
+  display: inline-block;
+}
+p {
+  font-family: Ubuntu;
+  font-size: 16px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 400;
+  line-height: 20px;
+  word-spacing: 1.2px;
+}
+input {
+  background: inherit;
+  outline: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  border: none;
+  height: 2rem;
+  border-radius: none;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-color: var(--secondary-lighten4);
+  &:focus {
+    border-bottom-width: 2px;
+    border-color: var(--info);
+  }
+  &.error {
+    border-color: var(--danger);
+  }
+  &.success {
+    border-color: var(--success);
+  }
+}
+label {
+  position: absolute;
+  left: 10px;
+  top: -8px;
+  cursor: default;
+  line-height: normal;
+  margin-bottom: 0;
+  color: var(--secondary-lighten2);
+  display: inline-block;
+  &:focus {
+    color: var(--info);
+  }
+  &.error {
+    color: var(--danger);
+  }
+  &.success {
+    color: var(--success);
+  }
+}

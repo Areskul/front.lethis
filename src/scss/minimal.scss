@@ -22,5 +22,16 @@ $themes: (
     "warning": #da9a11,
     "danger": #ec0b0b,
   ),
+  "old": (
+    "fg": #eeeeee,
+    "bg": #ffffff,
+    "primary": #4e4e4e,
+    "secondary": #2e2e2e,
+    "ternary": #000000,
+    "success": #7ccc13,
+    "info": #18d1ff,
+    "warning": #fee140,
+    "danger": #cf0000,
+  ),
 );
 @import "@areskul/minimal-palette/palette.scss";

@@ -10,8 +10,6 @@
     .col-auto
       label(for="pasword") password
       input#password(type="password")
-    .col-auto
-      button(@click="execute") submit
 </template>
 
 <script>
@@ -19,7 +17,6 @@ import { defineComponent, ref } from "vue";
 import useVuelidate from "@vuelidate/core";
 import { required, email } from "@vuelidate/validators";
 import { useMutation } from "villus";
-import { REGISTER_USER } from "@/services/users";
 export default defineComponent({
   name: "Home",
   setup() {
@@ -44,10 +41,10 @@ export default defineComponent({
     const model = useVuelidate(rules, state);
     //Villus
     const variables = { user: { data: state.value } };
-    const { data, execute } = useMutation(REGISTER_USER);
+    /*const { data, execute } = useMutation(addUser);*/
     return {
-      data,
-      execute,
+      /*data,*/
+      /*execute,*/
       state,
       variables,
       model,
