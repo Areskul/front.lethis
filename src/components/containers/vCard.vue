@@ -1,15 +1,15 @@
-<template>
-  <div>
-    <slot></slot>
-  </div>
+<template lang="pug">
+div
+  slot
 </template>
-<script>
+<script lang="ts">
+import { defineComponent } from "vue";
+import { color, text } from "@areskul/minimal-palette";
 import { dimension } from "@areskul/minimal-dimension";
 import { border } from "@areskul/minimal-border";
 import { elevation } from "@areskul/minimal-elevation";
-import { color, text } from "@areskul/minimal-palette";
-export default {
-  name: "card",
+export default defineComponent({
+  name: "v-card",
   mixins: [color, text, elevation, border, dimension],
-};
+});
 </script>

@@ -1,6 +1,7 @@
 <template lang="pug">
-  h1{{title}}
-
+div
+  h2 {{ title }}
+  input 
 </template>
 <script lang="ts">
 import { defineComponent } from "vue";

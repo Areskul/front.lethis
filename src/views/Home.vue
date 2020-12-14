@@ -1,18 +1,14 @@
-<template>
-  <div>
-    <transition
-      mode="out-in"
-      enter-active-class="slide-in-bck-center"
-      leave-active-class="slide-out-bck-center"
-    >
-    </transition>
-  </div>
+<template lang="pug">
+post
 </template>
-
 <script>
-export default {
+import { defineComponent } from "vue";
+import post from "@/components/containers/createPost";
+export default defineComponent({
   name: "Home",
   data: () => ({}),
-  components: {},
-};
+  components: {
+    post,
+  },
+});
 </script>

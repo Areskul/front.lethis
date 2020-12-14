@@ -1,5 +1,5 @@
 <template>
-  <card
+  <v-card
     id="app-theme"
     :class="{ 'theme--dark': isDark, 'theme--light': !isDark }"
     class="no-select"
@@ -35,13 +35,15 @@
         <component :is="Component"></component>
       </transition>
     </router-view>
-  </card>
+  </v-card>
 </template>
 <script lang="ts">
+import { defineComponent } from "vue";
 import { useClient } from "villus";
-import card from "@/components/containers/card.vue";
+import vCard from "@/components/containers/vCard.vue";
 import { theme } from "@/../core-minimal/mixins/theme.js";
-export default {
+export default defineComponent({
+  mixins: [theme],
   setup() {
     useClient({
       url: "http://localhost:1337/graphql",
@@ -49,10 +51,9 @@ export default {
     });
   },
   components: {
-    card,
+    vCard,
   },
-  mixins: [theme],
-};
+});
 </script>
 <style lang="scss">
 #app {

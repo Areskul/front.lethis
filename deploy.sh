@@ -1,5 +1,5 @@
 #!/usr/bin/sh
-if yarn vbuild ; then
+if yarn build ; then
     echo "build succeeded"
     if scp -r dist/* linode-arch:Static/front.poc.com; then
         echo "sended dist folder via ssh"

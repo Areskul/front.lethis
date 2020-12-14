@@ -1,15 +1,17 @@
-<template>
-  <card class="mb-5" color="secondary" height="60px">
-    <nav></nav>
-  </card>
+<template lang="pug">
+v-card.mb-5(color="secondary", height="60px")
+  v-switch
 </template>
 <script>
-import card from "@/components/containers/card";
-export default {
+import { defineComponent } from "vue";
+import vCard from "@/components/containers/vCard";
+import vSwitch from "@/components/buttons/vSwitch.vue";
+export default defineComponent({
   name: "v-header",
   data: () => ({}),
   components: {
-    card,
+    vCard,
+    vSwitch,
   },
-};
+});
 </script>
