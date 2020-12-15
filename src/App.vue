@@ -34,7 +34,8 @@
 </template>
 <script lang="ts">
 import { defineComponent } from "vue";
-import { useClient } from "villus";
+import { useClient, defaultPlugins } from "villus";
+import { authPlugin } from "@/services/token";
 import vCard from "@/components/containers/vCard.vue";
 import { theme } from "@/mixins/theme.js";
 export default defineComponent({
@@ -43,18 +44,19 @@ export default defineComponent({
     const api = process.env.VUE_APP_API || "";
     useClient({
       url: api,
+      use: [authPlugin, defaultPlugins],
       cachePolicy: "network-only",
     });
   },
   computed: {
     mytheme: function () {
-      if (this.isDark && !this.isOld) {
+      if (this.isDark) {
         return "theme--dark";
-      } else if (!this.isDark && !this.isOld) {
-        return "theme--light";
       } else if (this.isOld) {
         return "theme--old";
-      } else return "theme--light";
+      } else {
+        return "theme--light";
+      }
     },
   },
   components: {
