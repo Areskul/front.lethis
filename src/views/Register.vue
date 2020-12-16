@@ -21,7 +21,10 @@ import { required, email } from "@vuelidate/validators";
 import { useMutation } from "villus";
 import { REGISTER_USER } from "@/services/users";
 export default defineComponent({
-  name: "Home",
+  name: "Register",
+  props: {
+    token: String,
+  },
   setup() {
     //Vueliate
     const state = ref({
@@ -58,6 +61,10 @@ export default defineComponent({
     handleSubmit: function () {
       this.execute(this.variables).then((result) => {
         console.log(result);
+        if (result.data) {
+          const token = result;
+          this.$store.dispatch("auth/setAuth", token);
+        }
         /*if (!this.model.$invalid) {*/
         /*this.color = "success";*/
         /*this.message = "Votre participation a été pris en compte";*/

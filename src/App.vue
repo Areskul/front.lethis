@@ -1,41 +1,43 @@
 <template>
   <v-card id="app-theme" :class="mytheme" class="no-select" color="bg">
-    <router-view name="header" v-slot="{ Component }">
-      <transition
-        mode="out-in"
-        appear
-        enter-active-class="fade-in-top"
-        leave-active-class="fade-out-top"
-      >
-        <component :is="Component"></component>
-      </transition>
-    </router-view>
+    <inject-token :token="$store.state.auth.token">
+      <router-view name="header" v-slot="{ Component }">
+        <transition
+          mode="out-in"
+          appear
+          enter-active-class="fade-in-top"
+          leave-active-class="fade-out-top"
+        >
+          <component :is="Component"></component>
+        </transition>
+      </router-view>
 
-    <router-view name="contentRefreshed" v-slot="{ Component }">
-      <transition
-        mode="out-in"
-        enter-active-class="fade-in-fwd"
-        leave-active-class="fade-out-bck"
-      >
-        <component :is="Component"></component>
-      </transition>
-    </router-view>
+      <router-view name="contentRefreshed" v-slot="{ Component }">
+        <transition
+          mode="out-in"
+          enter-active-class="fade-in-fwd"
+          leave-active-class="fade-out-bck"
+        >
+          <component :is="Component"></component>
+        </transition>
+      </router-view>
 
-    <router-view name="footer" v-slot="{ Component }">
-      <transition
-        mode="out-in"
-        enter-active-class="fade-in-fwd"
-        leave-active-class="fade-out-bck"
-      >
-        <component :is="Component"></component>
-      </transition>
-    </router-view>
+      <router-view name="footer" v-slot="{ Component }">
+        <transition
+          mode="out-in"
+          enter-active-class="fade-in-fwd"
+          leave-active-class="fade-out-bck"
+        >
+          <component :is="Component"></component>
+        </transition>
+      </router-view>
+    </inject-token>
   </v-card>
 </template>
 <script lang="ts">
 import { defineComponent } from "vue";
-import { useClient, defaultPlugins } from "villus";
-import { authPlugin } from "@/services/token";
+import { useClient } from "villus";
+import injectToken from "@/components/containers/injectToken.vue";
 import vCard from "@/components/containers/vCard.vue";
 import { theme } from "@/mixins/theme.js";
 export default defineComponent({
@@ -44,8 +46,8 @@ export default defineComponent({
     const api = process.env.VUE_APP_API || "";
     useClient({
       url: api,
-      use: [authPlugin, ...defaultPlugins()],
-      cachePolicy: "network-only",
+      /*use: [authPlugin, ...defaultPlugins()],*/
+      /*cachePolicy: "network-only",*/
     });
   },
   computed: {
@@ -60,6 +62,7 @@ export default defineComponent({
     },
   },
   components: {
+    injectToken,
     vCard,
   },
 });
