@@ -3,15 +3,15 @@
   .row.justify-content-center
     .col-auto 
       label(for="username") username
-      input#username(type="text")
+      input#username(type="text", v-model="model.name.$model")
     .col-auto
       label(for="email") email
-      input#email(type="email")
+      input#email(type="email", v-model="model.email.$model")
     .col-auto
       label(for="pasword") password
-      input#password(type="password")
+      input#password(type="password", v-model="model.password.$model")
     .col-auto
-      button(@click="execute") submit
+      button(@click="handleSubmit") submit
 </template>
 
 <script>
@@ -43,17 +43,38 @@ export default defineComponent({
     };
     const model = useVuelidate(rules, state);
     //Villus
-    const variables = { user: { data: state.value } };
+    const variables = state.value;
     const { data, execute } = useMutation(REGISTER_USER);
     return {
-      data,
-      execute,
-      state,
       variables,
+      execute,
+      data,
       model,
     };
   },
   data: () => ({}),
   components: {},
+  methods: {
+    handleSubmit: function () {
+      this.execute(this.variables).then((result) => {
+        console.log(result);
+        /*if (!this.model.$invalid) {*/
+        /*this.color = "success";*/
+        /*this.message = "Votre participation a été pris en compte";*/
+        /*this.state = this.initialaState;*/
+        /*} else {*/
+        /*this.color = "danger";*/
+        /*this.message = "Oooups, quelquechose n'a pas marché";*/
+        /*}*/
+        /*[>this.alert = true;<]*/
+        /*setTimeout(*/
+        /*function () {*/
+        /*this.alert = false;*/
+        /*}.bind(this),*/
+        /*2400*/
+        /*);*/
+      });
+    },
+  },
 });
 </script>

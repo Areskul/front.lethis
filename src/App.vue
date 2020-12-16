@@ -44,7 +44,7 @@ export default defineComponent({
     const api = process.env.VUE_APP_API || "";
     useClient({
       url: api,
-      use: [authPlugin, defaultPlugins],
+      use: [authPlugin, ...defaultPlugins()],
       cachePolicy: "network-only",
     });
   },
