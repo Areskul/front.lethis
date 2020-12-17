@@ -6,7 +6,7 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import { useClient, defaultPlugins } from "villus";
-import { authPlugin } from "@/services/token";
+import { authPlugin } from "@/services/authPlugin";
 export default defineComponent({
   name: "inject-token",
   props: {
