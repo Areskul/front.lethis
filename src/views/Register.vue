@@ -14,13 +14,13 @@
       button(@click="handleSubmit") submit
 </template>
 
-<script>
+<script lang="ts">
 import { defineComponent, ref } from "vue";
 import { auth } from "@/mixins/auth";
 import useVuelidate from "@vuelidate/core";
 import { required, email } from "@vuelidate/validators";
 import { useMutation } from "villus";
-import { REGISTER_USER } from "@/services/users";
+import { REGISTER_USER } from "@/services/users.ts";
 export default defineComponent({
   name: "Register",
   mixins: [auth],

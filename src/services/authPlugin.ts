@@ -1,7 +1,6 @@
 import { definePlugin } from "villus";
 export const authPlugin = (config: { token: string }): any => {
   return definePlugin(({ opContext }) => {
-    console.log(config.token);
     if (config.token != null) {
       opContext.headers = { Authorisation: config.token };
     }

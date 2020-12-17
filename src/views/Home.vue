@@ -1,5 +1,7 @@
 <template lang="pug">
-post
+.container
+  .row
+  post
 </template>
 <script>
 import { defineComponent } from "vue";

@@ -4,7 +4,7 @@ v-card.mb-5(color="secondary", height="60px")
     .row.justify-content-between
       .col-auto
         v-switch
-      .col-auto
+      .col-auto(v-if="isAuthenticated")
         router-link(exact, tag="div", to="/register")
           button s'inscrire
         router-link(exact, tag="div", to="/login")
@@ -20,6 +20,13 @@ export default defineComponent({
   components: {
     vCard,
     vSwitch,
+  },
+  computed: {
+    isAuthenticated: {
+      get: function () {
+        return this.$store.state.auth.isAuthenticated;
+      },
+    },
   },
 });
 </script>

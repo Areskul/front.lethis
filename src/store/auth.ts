@@ -1,6 +1,5 @@
-//import { authPlugin } from "@/services/token";
 import { useQuery } from "villus";
-import { authPlugin } from "@/services/authPlugin";
+import { USER_INFO } from "@/services/users.ts";
 
 const isAuthenticated = false;
 const user = {};
@@ -28,9 +27,10 @@ export const auth = {
     updateAuth(state: any, bool: boolean) {
       state.isAuthenticated = bool;
     },
-    updateUser(state: any, token: string) {
-      state.user = token;
-      const me = useQuery();
+    updateUser(state: any) {
+      const { data } = useQuery({ query: USER_INFO });
+      console.log(data);
+      state.user = data;
     },
   },
 };
