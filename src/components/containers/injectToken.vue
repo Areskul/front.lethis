@@ -14,14 +14,13 @@ export default defineComponent({
   },
   setup(props) {
     const token = props.token;
-    const api = process.env.VUE_APP_API || "";
+    const api = process.env.VUE_APP_API as string;
     useClient({
       url: api,
-      use: [authPlugin({ token: token || "" }), ...defaultPlugins()],
+      /*use: [...defaultPlugins()],*/
+      use: [authPlugin({ token: token as string }), ...defaultPlugins()],
       cachePolicy: "network-only",
     });
   },
-  data: () => ({}),
-  components: {},
 });
 </script>

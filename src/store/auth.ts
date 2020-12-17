@@ -12,14 +12,13 @@ export const auth = {
     token: token,
   },
   actions: {
-    setAuth({ commit }: any, token: string) {
-      commit("updateAuth", token);
+    setToken({ commit }: any, token: string) {
+      commit("updateToken", token);
     },
   },
   mutations: {
-    updateAuth(state: any, token: string) {
+    updateToken(state: any, token: string) {
       state.token = token;
-      //authPlugin(opContext, token);
       localStorage.setItem("token", JSON.stringify(state.token));
     },
   },

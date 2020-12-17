@@ -16,15 +16,14 @@
 
 <script>
 import { defineComponent, ref } from "vue";
+import { auth } from "@/mixins/auth";
 import useVuelidate from "@vuelidate/core";
 import { required, email } from "@vuelidate/validators";
 import { useMutation } from "villus";
 import { REGISTER_USER } from "@/services/users";
 export default defineComponent({
   name: "Register",
-  props: {
-    token: String,
-  },
+  mixins: [auth],
   setup() {
     //Vueliate
     const state = ref({
@@ -61,25 +60,7 @@ export default defineComponent({
     handleSubmit: function () {
       this.execute(this.variables).then((result) => {
         console.log(result);
-        if (result.data) {
-          const token = result;
-          this.$store.dispatch("auth/setAuth", token);
-        }
-        /*if (!this.model.$invalid) {*/
-        /*this.color = "success";*/
-        /*this.message = "Votre participation a été pris en compte";*/
-        /*this.state = this.initialaState;*/
-        /*} else {*/
-        /*this.color = "danger";*/
-        /*this.message = "Oooups, quelquechose n'a pas marché";*/
-        /*}*/
-        /*[>this.alert = true;<]*/
-        /*setTimeout(*/
-        /*function () {*/
-        /*this.alert = false;*/
-        /*}.bind(this),*/
-        /*2400*/
-        /*);*/
+        this.token = result.data.registerUser;
       });
     },
   },

@@ -1,6 +1,6 @@
 <template>
   <v-card id="app-theme" :class="mytheme" class="no-select" color="bg">
-    <inject-token :token="$store.state.auth.token">
+    <inject-token :token="token">
       <router-view name="header" v-slot="{ Component }">
         <transition
           mode="out-in"
@@ -36,20 +36,13 @@
 </template>
 <script lang="ts">
 import { defineComponent } from "vue";
-import { useClient } from "villus";
+/*import { useClient } from "villus";*/
 import injectToken from "@/components/containers/injectToken.vue";
 import vCard from "@/components/containers/vCard.vue";
+import { auth } from "@/mixins/auth.js";
 import { theme } from "@/mixins/theme.js";
 export default defineComponent({
-  mixins: [theme],
-  setup() {
-    const api = process.env.VUE_APP_API || "";
-    useClient({
-      url: api,
-      /*use: [authPlugin, ...defaultPlugins()],*/
-      /*cachePolicy: "network-only",*/
-    });
-  },
+  mixins: [auth, theme],
   computed: {
     mytheme: function () {
       if (this.isDark) {
