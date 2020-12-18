@@ -38,13 +38,22 @@ import { auth } from "@/composables/auth";
 import { store } from "@/store";
 import vCard from "@/components/containers/vCard.vue";
 import { theme } from "@/mixins/theme.js";
+import { useQuery } from "villus";
+import { USER_INFO } from "@/services/users.ts";
 export default defineComponent({
   mixins: [theme],
   setup() {
     const { token, villusClientSetup } = auth();
     villusClientSetup(token.value);
+    const { execute } = useQuery({ query: USER_INFO });
+    return {
+      execute,
+    };
   },
   mounted() {
+    this.execute().then((result: any) => {
+      console.log(result);
+    });
     store.dispatch("auth/setUser");
   },
   computed: {

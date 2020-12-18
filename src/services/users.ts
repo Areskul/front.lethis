@@ -12,7 +12,7 @@ export const REGISTER_USER = gql`
 `;
 export const USER_INFO = gql`
   query userInfo {
-    user {
+    users {
       name
       email
     }
