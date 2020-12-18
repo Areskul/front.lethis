@@ -17,9 +17,7 @@
     "lib": ["esnext", "dom"],
     "rootDir": ".",
     "paths": {
-      "@components/*": ["src/components/*"],
-      "@/*": ["src/*"],
-      "@views/*": ["@/views/*"]
+      "@/*": ["src/*"]
     }
   },
   "include": [

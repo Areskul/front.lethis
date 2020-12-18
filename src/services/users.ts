@@ -11,8 +11,9 @@ export const REGISTER_USER = gql`
   }
 `;
 export const USER_INFO = gql`
-  query userInfo {
-    users {
+  query getUserInfo {
+    user {
+      id
       name
       email
     }

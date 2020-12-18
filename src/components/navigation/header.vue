@@ -9,9 +9,12 @@ v-card.mb-5(color="secondary", height="60px")
           button s'inscrire
         router-link(exact, tag="div", to="/login")
           button se connecter
+      .col-auto(v-if="isAuthenticated")
+        p {{ user }}
 </template>
 <script>
 import { defineComponent } from "vue";
+import { store } from "@/store";
 import vCard from "@/components/containers/vCard";
 import vSwitch from "@/components/buttons/vSwitch.vue";
 export default defineComponent({
@@ -23,9 +26,10 @@ export default defineComponent({
   },
   computed: {
     isAuthenticated: {
-      get: function () {
-        return this.$store.state.auth.isAuthenticated;
-      },
+      get: () => store.state.auth.isAuthenticated,
+    },
+    user: {
+      get: () => store.state.auth.user,
     },
   },
 });
