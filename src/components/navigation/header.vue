@@ -4,7 +4,7 @@ v-card.mb-5(color="secondary", height="60px")
     .row.justify-content-between
       .col-auto
         v-switch
-      .col-auto(v-if="isAuthenticated")
+      .col-auto(v-if="!isAuthenticated")
         router-link(exact, tag="div", to="/register")
           button s'inscrire
         router-link(exact, tag="div", to="/login")

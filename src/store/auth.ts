@@ -1,5 +1,6 @@
-import { useQuery } from "villus";
+import { useClient, defaultPlugins, useQuery } from "villus";
 import { USER_INFO } from "@/services/users.ts";
+import { authPlugin } from "@/services/authPlugin";
 
 const isAuthenticated = false;
 const user = {};
@@ -27,10 +28,19 @@ export const auth = {
     updateAuth(state: any, bool: boolean) {
       state.isAuthenticated = bool;
     },
-    updateUser(state: any) {
-      const { data } = useQuery({ query: USER_INFO });
-      console.log(data);
-      state.user = data;
+    async updateUser(state: any) {
+      const token = state.token;
+      const api = process.env.VUE_APP_API as string;
+      useClient({
+        url: api,
+        use: [authPlugin({ token: token as string }), ...defaultPlugins()],
+        cachePolicy: "network-only",
+      });
+      const { execute } = await useQuery({ query: USER_INFO });
+      execute().then((result: any) => {
+        console.log(result);
+        //state.user = data;
+      });
     },
   },
 };
