@@ -16,14 +16,13 @@
 
 <script lang="ts">
 import { defineComponent, ref } from "vue";
-import { auth } from "@/mixins/auth";
+import { auth } from "@/composables/auth";
 import useVuelidate from "@vuelidate/core";
 import { required, email } from "@vuelidate/validators";
 import { useMutation } from "villus";
 import { REGISTER_USER } from "@/services/users.ts";
 export default defineComponent({
   name: "Register",
-  mixins: [auth],
   setup() {
     //Vueliate
     const state = ref({
@@ -44,6 +43,8 @@ export default defineComponent({
       },
     };
     const model = useVuelidate(rules, state);
+    //Token
+    const { token } = auth();
     //Villus
     const variables = state.value;
     const { data, execute } = useMutation(REGISTER_USER);
@@ -51,6 +52,7 @@ export default defineComponent({
       variables,
       execute,
       data,
+      token,
       model,
     };
   },

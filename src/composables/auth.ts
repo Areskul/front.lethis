@@ -3,14 +3,12 @@ import { authPlugin } from "@/services/authPlugin";
 import { useStore } from "vuex";
 import { computed } from "vue";
 
-export function auth() {
+export const auth = () => {
   const store = useStore();
   const token = computed({
-    get: function () {
-      return store.state.auth.token;
-    },
-    set: function (string) {
-      store.dispatch("auth/setToken", string);
+    get: () => store.state.auth.token,
+    set: (val) => {
+      store.dispatch("auth/setToken", val);
     },
   });
   const villusClientSetup = (token: string) => {
@@ -22,4 +20,8 @@ export function auth() {
       cachePolicy: "network-only",
     });
   };
-}
+  return {
+    token,
+    villusClientSetup,
+  };
+};

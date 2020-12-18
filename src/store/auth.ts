@@ -1,7 +1,6 @@
-import { useClient, defaultPlugins, useQuery } from "villus";
+import { useQuery } from "villus";
 import { USER_INFO } from "@/services/users.ts";
-import { authPlugin } from "@/services/authPlugin";
-
+import { auth as authClient } from "@/composables/auth";
 const isAuthenticated = false;
 const user = {};
 const token = JSON.parse(localStorage.getItem("token") as string);
@@ -17,7 +16,11 @@ export const auth = {
     setToken({ commit }: any, token: string) {
       commit("updateToken", token);
       commit("updateAuth", !!token);
-      commit("updateUser", token);
+      commit("updateUser");
+    },
+    setUser({ commit }: any) {
+      commit("updateAuth", !!token);
+      commit("updateUser");
     },
   },
   mutations: {
@@ -30,12 +33,10 @@ export const auth = {
     },
     async updateUser(state: any) {
       const token = state.token;
-      const api = process.env.VUE_APP_API as string;
-      useClient({
-        url: api,
-        use: [authPlugin({ token: token as string }), ...defaultPlugins()],
-        cachePolicy: "network-only",
-      });
+
+      const { villusClientSetup } = authClient();
+      villusClientSetup(token);
+
       const { execute } = await useQuery({ query: USER_INFO });
       execute().then((result: any) => {
         console.log(result);
