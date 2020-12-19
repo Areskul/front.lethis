@@ -21,5 +21,5 @@ app.use(store);
 app.use(router);
 //app.use(VuelidatePlugin);
 // app.directive("intersect", intersect);
-
+app.provide("#app", "app");
 app.mount("#app");

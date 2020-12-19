@@ -19,3 +19,53 @@ export const theme = () => {
     isOld,
   };
 };
+
+export const metaTheme = () => {
+  const getColor = function () {
+    const color = window
+      .getComputedStyle(document.querySelector(":root") as Element)
+      .getPropertyValue("--bg");
+    console.log(color);
+    return color;
+  };
+
+  const creatMeta = function (metaTags: any) {
+    metaTags
+      .map((tagDef: any) => {
+        const tag = document.createElement("meta");
+        Object.keys(tagDef).forEach((key) => {
+          tag.setAttribute(key, tagDef[key]);
+          tag.setAttribute("data-vue-mixins-controlled", "");
+        });
+        return tag;
+      })
+      .forEach((tag: any) => document.head.appendChild(tag));
+  };
+  const setMeta = function () {
+    const fg = getColor();
+    const metaTags = [
+      {
+        name: "theme-color",
+        content: fg,
+      },
+      {
+        name: "msapplication-TileColor",
+        content: fg,
+      },
+    ];
+    creatMeta(metaTags);
+  };
+  const changeMeta = function () {
+    Array.from(document.querySelectorAll("[data-vue-mixins-controlled]")).map(
+      (el: any) => {
+        console.log("Change meta -> removed old tags");
+        el.parentNode.removeChild(el);
+      }
+    );
+    setMeta();
+  };
+  return {
+    setMeta,
+    changeMeta,
+  };
+};

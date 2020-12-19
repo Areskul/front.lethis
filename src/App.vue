@@ -46,7 +46,7 @@ export default defineComponent({
     const { token, villusClientSetup } = auth();
     villusClientSetup(token.value);
     const { data } = useQuery({ query: USER_INFO });
-    console.log(data)
+    console.log(data);
     store.dispatch("auth/setUser", data);
   },
   computed: {

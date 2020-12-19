@@ -8,10 +8,16 @@ button(@click="isOld = !isOld") old-school
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { theme } from "@/mixins/theme.js";
+import { theme } from "@/composables/theme";
 export default defineComponent({
   name: "v-switch",
-  mixins: [theme],
+  setup() {
+    const { isDark, isOld } = theme();
+    return {
+      isDark,
+      isOld,
+    };
+  },
   data: () => ({}),
   computed: {},
   components: {},
