@@ -33,21 +33,32 @@
   </v-card>
 </template>
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, onMounted } from "vue";
 import { auth } from "@/composables/auth";
 import { store } from "@/store";
 import vCard from "@/components/containers/vCard.vue";
-import { theme } from "@/mixins/theme.js";
+import { theme } from "@/composables/theme";
+import { metaTheme } from "@/composables/theme";
 import { useQuery } from "villus";
 import { USER_INFO } from "@/services/users.ts";
 export default defineComponent({
-  mixins: [theme],
   setup() {
+    //villus
     const { token, villusClientSetup } = auth();
     villusClientSetup(token.value);
     const { data } = useQuery({ query: USER_INFO });
     console.log(data);
     store.dispatch("auth/setUser", data);
+    //theme
+    const { isDark, isOld } = theme();
+    const { setMeta } = metaTheme();
+    onMounted(() => {
+      setMeta();
+    });
+    return {
+      isDark,
+      isOld,
+    };
   },
   computed: {
     mytheme: function () {
