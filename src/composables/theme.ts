@@ -25,7 +25,6 @@ export const metaTheme = () => {
     const color = window
       .getComputedStyle(document.querySelector(":root") as Element)
       .getPropertyValue("--bg");
-    console.log(color);
     return color;
   };
 
