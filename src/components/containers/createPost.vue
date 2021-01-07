@@ -1,13 +1,40 @@
 <template lang="pug">
-div
-  h2 {{ title }}
-  input 
+.container
+  .row.justify-content-center
+    h2 {{ title }}
+    input.py-2 
+    button(@click="handleSubmit") submit
 </template>
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
+import useVuelidate from "@vuelidate/core";
+import { required } from "@vuelidate/validators";
+import { useMutation } from "villus";
+import { CREATE_POST } from "@/services/posts.ts";
 export default defineComponent({
   data: () => ({
     title: "New Posts",
   }),
+  setup() {
+    //Vueliate
+    const state = ref({
+      content: "",
+    });
+    const rules = {
+      content: {
+        required,
+      },
+    };
+    const model = useVuelidate(rules, state);
+    //Villus
+    const variables = state.value;
+    const { data, execute } = useMutation(CREATE_POST);
+    return {
+      variables,
+      execute,
+      data,
+      model,
+    };
+  },
 });
 </script>

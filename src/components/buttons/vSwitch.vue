@@ -1,5 +1,5 @@
 <template lang="pug">
-label(for="input") theme
+label(for="input")
 .switch.px-2
   input#input(type="checkbox", v-model="isDark")
   span.slider.round(@click="isDark = !isDark")

@@ -56,8 +56,6 @@ export default defineComponent({
       model,
     };
   },
-  data: () => ({}),
-  components: {},
   methods: {
     handleSubmit: function () {
       this.execute(this.variables).then((result) => {

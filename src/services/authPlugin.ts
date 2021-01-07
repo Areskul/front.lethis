@@ -7,6 +7,11 @@ export const authPlugin = (config: { token: string }): any => {
         "Content-type": "application/json",
         "Access-Control-Allow-Origin": "*",
       };
+    } else {
+      opContext.headers = {
+        "Content-type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+      };
     }
   });
 };

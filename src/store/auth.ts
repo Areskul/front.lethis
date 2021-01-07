@@ -15,9 +15,9 @@ export const auth = {
       commit("updateAuth", !!token);
       commit("updateUser");
     },
-    setUser({ commit }: any) {
+    setUser({ commit }: any, data: any) {
       commit("updateAuth", !!token);
-      commit("updateUser");
+      commit("updateUser", data);
     },
   },
   mutations: {
@@ -28,8 +28,8 @@ export const auth = {
     updateAuth(state: any, bool: boolean) {
       state.isAuthenticated = bool;
     },
-    async updateUser(state: any, user: any) {
-      state.user = user;
+    async updateUser(state: any, data: any) {
+      state.user = data;
     },
   },
 };

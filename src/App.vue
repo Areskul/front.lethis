@@ -33,9 +33,9 @@
   </v-card>
 </template>
 <script lang="ts">
-import { defineComponent, onMounted } from "vue";
+import { defineComponent, onMounted, computed } from "vue";
 import { auth } from "@/composables/auth";
-import { store } from "@/store";
+import { useStore } from "vuex";
 import vCard from "@/components/containers/vCard.vue";
 import { theme } from "@/composables/theme";
 import { metaTheme } from "@/composables/theme";
@@ -43,12 +43,18 @@ import { useQuery } from "villus";
 import { USER_INFO } from "@/services/users.ts";
 export default defineComponent({
   setup() {
+    const store = useStore();
     //villus
     const { token, villusClientSetup } = auth();
     villusClientSetup(token.value);
-    const { data } = useQuery({ query: USER_INFO });
-    console.log(data);
+    const { data, execute } = useQuery({ query: USER_INFO });
     store.dispatch("auth/setUser", data);
+
+    const isAuthenticated = computed({
+      get: () => store.state.auth.isAuthenticated,
+      set: (val) => val,
+    });
+
     //theme
     const { isDark, isOld } = theme();
     const { setMeta } = metaTheme();
@@ -56,9 +62,17 @@ export default defineComponent({
       setMeta();
     });
     return {
+      isAuthenticated,
+      execute,
       isDark,
       isOld,
     };
+  },
+
+  watch: {
+    isAuthenticated: function () {
+      this.execute();
+    },
   },
   computed: {
     mytheme: function () {

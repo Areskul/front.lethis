@@ -1,7 +1,8 @@
 <template lang="pug">
 .container
-  .row
-  post
+  .row.justify-content-center
+    .col-auto 
+      post
 </template>
 <script>
 import { defineComponent } from "vue";
