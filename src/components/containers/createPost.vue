@@ -2,7 +2,8 @@
 .container
   .row.justify-content-center
     h2 {{ title }}
-    input.py-2 
+    label(for="content")
+    input#content(type="text", v-model="model.content.$model")
     button(@click="handleSubmit") submit
 </template>
 <script lang="ts">
@@ -35,6 +36,13 @@ export default defineComponent({
       data,
       model,
     };
+  },
+  methods: {
+    handleSubmit: function () {
+      this.execute(this.variables).then((result) => {
+        console.log(result);
+      });
+    },
   },
 });
 </script>
