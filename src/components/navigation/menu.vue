@@ -54,9 +54,4 @@ export default defineComponent({
   width: 40px;
   height: 45px;
 }
-/*.menu {*/
-/*position: absolute;*/
-/*top: 0;*/
-/*right: 0;*/
-/*}*/
 </style>

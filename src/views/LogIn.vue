@@ -1,12 +1,9 @@
 <template lang="pug">
 .container
   .row.justify-content-center
-    .col-auto 
-      label(for="username") username
-      input#username(type="text", v-model="model.name.$model")
     .col-auto
-      label(for="email") email
-      input#email(type="email", v-model="model.email.$model")
+      label(for="email") username or email
+      input#email(type="text", v-model="nameAndMailC")
     .col-auto
       label(for="pasword") password
       input#password(type="password", v-model="model.password.$model")
@@ -65,5 +62,32 @@ export default defineComponent({
       });
     },
   },
+  data: () => ({
+    nameAndMail: "",
+  }),
+  computed: {
+    nameAndMailC: {
+      get: function (): string {
+        return this.nameAndMail as string;
+      },
+      set: function (val: string) {
+        this.nameAndMail = val;
+      },
+    },
+  },
+  watch: {
+    nameAndMailC: function (val) {
+      this.state.name = val;
+      this.state.email = val;
+      this.model.name.$touch();
+      this.model.email.$touch();
+      this.model.email.$invalid
+        ? (this.state.email = "")
+        : (this.state.name = "");
+    },
+  },
 });
 </script>
+
+<style lang="scss" scoped>
+</style>

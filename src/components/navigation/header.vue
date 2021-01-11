@@ -2,6 +2,10 @@
 v-card.mb-5(color="secondary", height="60px")
   .container-fluid
     .row.justify-content-between
+      .col-auto
+        router-link(exact, tag="div", to="/home")
+          svg.svg(viewBox="0 0 24 36")
+            path(fill="var(--bg)", :d="home")
       .col-auto(v-if="!isAuthenticated")
         router-link(exact, tag="div", to="/register")
           button s'inscrire
@@ -13,14 +17,18 @@ v-card.mb-5(color="secondary", height="60px")
       .col-auto
         mainMenu
 </template>
+
 <script lang="ts">
 import { defineComponent, computed } from "vue";
 import { useStore } from "vuex";
 import vCard from "@/components/containers/vCard.vue";
 import mainMenu from "@/components/navigation/menu.vue";
+import { mdiHome } from "@mdi/js";
 export default defineComponent({
   name: "v-header",
-  data: () => ({}),
+  data: () => ({
+    home: mdiHome,
+  }),
   components: {
     vCard,
     mainMenu,
@@ -47,3 +55,12 @@ export default defineComponent({
   computed: {},
 });
 </script>
+
+<style lang="scss" scoped>
+.svg {
+  margin-top: 9px;
+  margin-bottom: -12px;
+  width: 40px;
+  height: 45px;
+}
+</style>
