@@ -2,16 +2,20 @@
 .container
   .row.justify-content-center
     .col-auto 
-      post
+      postForm
+  .row
+    Feed
 </template>
 <script>
 import { defineComponent } from "vue";
-import post from "@/components/containers/createPost";
+import postForm from "@/components/containers/createPost";
+import Feed from "@/views/feed.vue";
 export default defineComponent({
   name: "Home",
   data: () => ({}),
   components: {
-    post,
+    postForm,
+    Feed,
   },
 });
 </script>

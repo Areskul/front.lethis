@@ -5,3 +5,10 @@ export const CREATE_POST = gql`
     createPost(content: $content)
   }
 `;
+export const GET_POSTS = gql`
+  subscription newPost {
+    newPost {
+      content
+    }
+  }
+`;

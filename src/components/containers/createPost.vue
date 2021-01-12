@@ -19,7 +19,7 @@ export default defineComponent({
   setup() {
     //Vueliate
     const state = ref({
-      content: "",
+      content: null,
     });
     const rules = {
       content: {
