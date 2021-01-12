@@ -6,7 +6,7 @@ div {{ data }}
 
 <script lang="ts">
 import { useSubscription } from "villus";
-import { defineComponent } from "vue";
+import { defineComponent, watch } from "vue";
 import post from "@/components/containers/post.vue";
 import { GET_POSTS } from "@/services/posts";
 export default defineComponent({
@@ -16,9 +16,19 @@ export default defineComponent({
       query: GET_POSTS,
     });
     console.log(data);
+    watch(data, (incoming) => {
+      console.log(data);
+      console.log(incoming);
+      // do stuff with incoming data
+    });
     return {
       data,
     };
+  },
+  watch: {
+    data: function (val) {
+      console.log(val);
+    },
   },
   components: {
     post,

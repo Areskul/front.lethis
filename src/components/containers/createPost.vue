@@ -15,6 +15,7 @@ import { CREATE_POST } from "@/services/posts.ts";
 export default defineComponent({
   data: () => ({
     title: "New Posts",
+    isCreated: false,
   }),
   setup() {
     //Vueliate
@@ -38,10 +39,13 @@ export default defineComponent({
     };
   },
   methods: {
-    handleSubmit: function () {
-      this.execute(this.variables).then((result) => {
-        console.log(result);
-      });
+    handleSubmit: async function () {
+      const result = await this.execute(this.variables);
+      if (result.error) {
+        console.error(result.error);
+      } else {
+        this.isCreated = result.data.createPost as boolean;
+      }
     },
   },
 });
