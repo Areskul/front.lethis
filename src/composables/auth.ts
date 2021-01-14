@@ -1,6 +1,14 @@
-import { useClient, defaultPlugins, handleSubscriptions } from "villus";
+import {
+  useClient,
+  defaultPlugins,
+  //handleSubscriptions,
+  ClientPlugin,
+} from "villus";
 import { authPlugin } from "@/services/authPlugin";
-import { subscriptionForwarder } from "@/services/subPlugin";
+import {
+  handleSubscriptions,
+  subscriptionForwarder,
+} from "@/services/subPlugin";
 import { useStore } from "vuex";
 import { computed } from "vue";
 
@@ -19,7 +27,7 @@ export const auth = () => {
       /*use: [...defaultPlugins()],*/
       use: [
         authPlugin({ token: token }),
-        handleSubscriptions(subscriptionForwarder),
+        handleSubscriptions(subscriptionForwarder) as ClientPlugin,
         ...defaultPlugins(),
       ],
       cachePolicy: "network-only",

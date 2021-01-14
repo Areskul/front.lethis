@@ -1,7 +1,7 @@
 <template lang="pug">
 .container
-  post
-div {{ data }}
+  post(v-for="post in data.newPost", :post="post")
+  div {{ data }}
 </template>
 
 <script lang="ts">
@@ -15,20 +15,14 @@ export default defineComponent({
     const { data } = useSubscription({
       query: GET_POSTS,
     });
-    console.log(data);
     watch(data, (incoming) => {
       console.log(data);
-      console.log(incoming);
+      /*console.log(incoming);*/
       // do stuff with incoming data
     });
     return {
       data,
     };
-  },
-  watch: {
-    data: function (val) {
-      console.log(val);
-    },
   },
   components: {
     post,

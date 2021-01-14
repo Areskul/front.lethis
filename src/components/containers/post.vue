@@ -1,6 +1,6 @@
 <template lang="pug">
 .container
-  v-card {{ post }}
+  v-card.py-2.my-2(rounded, elevation="2") {{ post.content }}
 </template>
 
 <script lang="ts">
