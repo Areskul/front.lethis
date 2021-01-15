@@ -9,6 +9,9 @@ export const GET_POSTS = gql`
   subscription newPost {
     newPost {
       content
+      user {
+        name
+      }
     }
   }
 `;
