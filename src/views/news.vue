@@ -1,18 +1,18 @@
 <template lang="pug">
 .container(v-if="data")
-  post(v-for="post in data.posts", :post="post", :key="post.id")
+  post(:post="data.newPost")
 </template>
 
 <script lang="ts">
-import { useQuery } from "villus";
+import { useSubscription } from "villus";
 import { defineComponent } from "vue";
 import post from "@/components/containers/post.vue";
-import { GET_POSTS } from "@/services/posts";
+import { NEW_POSTS } from "@/services/posts";
 export default defineComponent({
-  name: "Feed",
+  name: "News",
   setup() {
-    const { data } = useQuery({
-      query: GET_POSTS,
+    const { data } = useSubscription({
+      query: NEW_POSTS,
     });
     return {
       data,

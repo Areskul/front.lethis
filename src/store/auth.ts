@@ -21,7 +21,7 @@ export const auth = {
     },
   },
   mutations: {
-    updateToken(state: any, token: string) {
+    updateToken(state: any, token: string | null) {
       state.token = token;
       localStorage.setItem("token", JSON.stringify(state.token));
     },

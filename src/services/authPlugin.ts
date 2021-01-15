@@ -1,7 +1,9 @@
-import { definePlugin } from "villus";
-export const authPlugin = (config: { token: string }): any => {
+import { definePlugin, ClientPlugin } from "villus";
+export const authPlugin = (config: {
+  token: string | undefined;
+}): ClientPlugin => {
   return definePlugin(({ opContext }) => {
-    if (config.token != null) {
+    if (config.token) {
       opContext.headers = {
         Authorization: "Bearer " + config.token,
         "Content-type": "application/json",

@@ -1,14 +1,19 @@
 <template lang="pug">
 .container
   .row.justify-content-center
-    .col-auto
-      label(for="email") username or email
-      input#email(type="text", v-model="nameAndMailC")
-    .col-auto
-      label(for="pasword") password
-      input#password(type="password", v-model="model.password.$model")
-    .col-auto
-      button(@click="handleSubmit") submit
+    form(@submit.prevent)
+      .col-auto
+        label(for="email") username or email
+        input#email(type="text", autocomplete="on", v-model="nameAndMailC")
+      .col-auto
+        label(for="pasword") password
+        input#password(
+          type="password",
+          autocomplete="on",
+          v-model="model.password.$model"
+        )
+      .col-auto
+        button(@click="handleSubmit") submit
 </template>
 
 <script lang="ts">

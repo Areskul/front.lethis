@@ -1,10 +1,11 @@
 <template lang="pug">
 .container
-  .row.justify-content-center
+  .row.justify-content-center 
     h2 {{ title }}
-    label(for="content")
-    input#content(type="text", v-model="model.content.$model")
-    button(@click="handleSubmit") submit
+    form(@submit.prevent)
+      label(for="content")
+      input#content(type="text", v-model="model.content.$model")
+      button(@click="handleSubmit") submit
 </template>
 <script lang="ts">
 import { defineComponent, ref } from "vue";
