@@ -1,5 +1,5 @@
 <template lang="pug">
-.container(v-if="data")
+v-card.container(v-if="data", color="danger")
   post(:post="data.newPost")
 </template>
 
@@ -8,6 +8,7 @@ import { useSubscription } from "villus";
 import { defineComponent } from "vue";
 import post from "@/components/containers/post.vue";
 import { NEW_POSTS } from "@/services/posts";
+import vCard from "@/components/containers/vCard.vue";
 export default defineComponent({
   name: "News",
   setup() {
@@ -19,6 +20,7 @@ export default defineComponent({
     };
   },
   components: {
+    vCard,
     post,
   },
 });
