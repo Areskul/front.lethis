@@ -1,6 +1,8 @@
-const isAuthenticated = false;
 const user = {};
-const token = JSON.parse(localStorage.getItem("token") as string);
+const token: string | undefined = JSON.parse(
+  localStorage.getItem("token") as string
+);
+const isAuthenticated = token ? true : false;
 
 export const auth = {
   namespaced: true,
@@ -12,21 +14,16 @@ export const auth = {
   actions: {
     setToken({ commit }: any, token: string) {
       commit("updateToken", token);
-      commit("updateAuth", !!token);
-      commit("updateUser");
     },
     setUser({ commit }: any, data: any) {
-      commit("updateAuth", !!token);
       commit("updateUser", data);
     },
   },
   mutations: {
-    updateToken(state: any, token: string | null) {
+    updateToken(state: any, token: string) {
       state.token = token;
       localStorage.setItem("token", JSON.stringify(state.token));
-    },
-    updateAuth(state: any, bool: boolean) {
-      state.isAuthenticated = bool;
+      state.isAuthenticated = !!token;
     },
     async updateUser(state: any, data: any) {
       state.user = data;

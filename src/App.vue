@@ -33,7 +33,7 @@
   </v-card>
 </template>
 <script lang="ts">
-import { defineComponent, onMounted, computed } from "vue";
+import { defineComponent, onMounted, watch } from "vue";
 import { auth } from "@/composables/auth";
 import { useStore } from "vuex";
 import vCard from "@/components/containers/vCard.vue";
@@ -45,24 +45,29 @@ export default defineComponent({
   setup() {
     const store = useStore();
     //villus
-    const { token, villusClientSetup } = auth();
-    villusClientSetup(token.value);
-    const { data, execute } = useQuery({ query: USER_INFO });
-    store.dispatch("auth/setUser", data);
-
-    const isAuthenticated = computed({
-      get: () => store.state.auth.isAuthenticated,
-      set: (val) => val,
+    const { token, villusClientSetup, isAuthenticated } = auth();
+    /*villusClientSetup(token.value);*/
+    villusClientSetup();
+    watch(token, () => {
+      /*villusClientSetup(token.value);*/
+      villusClientSetup();
     });
+    const { data, execute } = useQuery({ query: USER_INFO });
+
+    //DIspatch villus data in app
+    if (isAuthenticated) {
+      store.dispatch("auth/setUser", data);
+    }
 
     //theme
     const { isDark, isOld } = theme();
     const { setMeta } = metaTheme();
-    onMounted(() => {
+    onMounted(async () => {
       setMeta();
     });
     return {
-      isAuthenticated,
+      token,
+      store,
       execute,
       isDark,
       isOld,
@@ -70,8 +75,9 @@ export default defineComponent({
   },
 
   watch: {
-    isAuthenticated: function () {
-      this.execute();
+    token: async function () {
+      const { data } = await this.execute();
+      await this.store.dispatch("auth/setUser", data);
     },
   },
   computed: {

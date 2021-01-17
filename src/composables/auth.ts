@@ -20,13 +20,21 @@ export const auth = () => {
       store.dispatch("auth/setToken", val);
     },
   });
-  const villusClientSetup = (token: string) => {
+  const isAuthenticated = computed(() => store.state.auth.isAuthenticated);
+  const user = computed({
+    get: () => store.state.auth.user,
+    set: (val) => {
+      store.dispatch("auth/setUser", val);
+    },
+  });
+  const villusClientSetup = function () {
     const api = process.env.VUE_APP_API as string;
     useClient({
       url: api,
       /*use: [...defaultPlugins()],*/
       use: [
-        authPlugin({ token: token }),
+        //authPlugin({ token: token }),
+        authPlugin(token.value),
         handleSubscriptions(subscriptionForwarder) as ClientPlugin,
         ...defaultPlugins(),
       ],
@@ -35,6 +43,8 @@ export const auth = () => {
   };
   return {
     token,
+    user,
+    isAuthenticated,
     villusClientSetup,
   };
 };

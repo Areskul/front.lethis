@@ -1,7 +1,7 @@
 <template lang="pug">
 .container
   .row.justify-content-center
-    form
+    form(@submit.prevent)
       .col-auto 
         label(for="username") username
         input#username(
@@ -72,7 +72,6 @@ export default defineComponent({
   methods: {
     handleSubmit: function () {
       this.execute(this.variables).then((result) => {
-        console.log(result);
         this.token = result.data.registerUser;
       });
     },
