@@ -13,7 +13,7 @@ v-card.mb-5(color="secondary", height="60px")
           button se connecter
       .col-auto(v-if="isAuthenticated")
         v-card(text="bg")
-          p {{ user }}
+          p {{ user.name }}
       .col-auto
         mainMenu
 </template>

@@ -46,7 +46,7 @@ export default defineComponent({
     };
     const model = useVuelidate(rules, state);
     //Token
-    const { token } = auth();
+    const { token, user } = auth();
     //Villus
     const variables = state.value;
     const { data, execute } = useMutation(LOGIN_USER);
@@ -56,6 +56,7 @@ export default defineComponent({
       state,
       variables,
       token,
+      user,
       model,
     };
   },
@@ -63,8 +64,10 @@ export default defineComponent({
     handleSubmit: function () {
       this.execute(this.variables).then((result) => {
         console.log(result);
-        this.token = result.data.loginUser;
+        this.token = result.data.loginUser.token;
+        this.user = result.data.loginUser.user;
       });
+      this.$router.push("/home");
     },
   },
   data: () => ({
