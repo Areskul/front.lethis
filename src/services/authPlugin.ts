@@ -1,11 +1,27 @@
-import { definePlugin, ClientPlugin } from "villus";
-export const authPlugin = (config: {
-  token: string | undefined;
-}): ClientPlugin => {
+import { definePlugin } from "villus";
+//export const authPlugin = (config: {
+//token: string | undefined;
+//}): ClientPlugin => {
+//return definePlugin(({ opContext }) => {
+//if (config.token) {
+//opContext.headers = {
+//Authorization: "Bearer " + config.token,
+//"Content-type": "application/json",
+//"Access-Control-Allow-Origin": "*",
+//};
+//} else {
+//opContext.headers = {
+//"Content-type": "application/json",
+//"Access-Control-Allow-Origin": "*",
+//};
+//}
+//});
+//};
+export const authPlugin = (token: string) => {
   return definePlugin(({ opContext }) => {
-    if (config.token) {
+    if (token) {
       opContext.headers = {
-        Authorization: "Bearer " + config.token,
+        Authorization: "Bearer " + token,
         "Content-type": "application/json",
         "Access-Control-Allow-Origin": "*",
       };

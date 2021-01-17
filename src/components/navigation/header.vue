@@ -13,14 +13,15 @@ v-card.mb-5(color="secondary", height="60px")
           button se connecter
       .col-auto(v-if="isAuthenticated")
         v-card(text="bg")
-          p {{ user.name }}
+          p {{ user }}
       .col-auto
         mainMenu
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from "vue";
+import { defineComponent } from "vue";
 import { useStore } from "vuex";
+import { auth } from "@/composables/auth";
 import vCard from "@/components/containers/vCard.vue";
 import mainMenu from "@/components/navigation/menu.vue";
 import { mdiHome } from "@mdi/js";
@@ -35,24 +36,13 @@ export default defineComponent({
   },
   setup() {
     const store = useStore();
-    const isAuthenticated = computed({
-      get: () => store.state.auth.isAuthenticated,
-      set: (val) => val,
-    });
-    const user = computed({
-      get: () => {
-        const data = store.state.auth.user;
-        const user = data ? data.user : "";
-        return user;
-      },
-      set: (val) => val,
-    });
+    const { user, isAuthenticated } = auth();
     return {
-      isAuthenticated,
       user,
+      store,
+      isAuthenticated,
     };
   },
-  computed: {},
 });
 </script>
 
