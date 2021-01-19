@@ -1,7 +1,7 @@
 <template lang="pug">
 v-card.mb-5(color="secondary", height="60px")
-  .container-fluid
-    .row.justify-content-between
+  .container
+    .grid.grid-cols-3
       .col-auto
         router-link(exact, tag="div", to="/home")
           svg.svg(viewBox="0 0 24 36")
