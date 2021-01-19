@@ -3,8 +3,8 @@ import "@mdi/js";
 import "./scss/_all.scss";
 //import "@areskul/minimal-grid/breakpoints.scss";
 //import "@areskul/minimal-grid/text.scss";
-import "@areskul/minimal-elevation/elevation.scss";
-import "@areskul/minimal-border/border.scss";
+//import "@areskul/minimal-elevation/elevation.scss";
+//import "@areskul/minimal-border/border.scss";
 import "@/css/tailwind.css";
 
 //import { VuelidatePlugin } from "@vuelidate/core";
