@@ -34,7 +34,7 @@ export const auth = () => {
       /*use: [...defaultPlugins()],*/
       use: [
         //authPlugin({ token: token }),
-        authPlugin(token.value),
+        authPlugin(),
         handleSubscriptions(subscriptionForwarder) as ClientPlugin,
         ...defaultPlugins(),
       ],
