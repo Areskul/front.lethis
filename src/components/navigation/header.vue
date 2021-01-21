@@ -1,20 +1,18 @@
 <template lang="pug">
-.container
-  .grid.grid-cols-3
-    .col-auto
-      router-link(exact, tag="div", to="/home")
-        svg.svg(viewBox="0 0 24 36")
-          path(fill="var(--bg)", :d="home")
-    .col-auto(v-if="!isAuthenticated")
-      router-link(exact, tag="div", to="/register")
-        button s'inscrire
-      router-link(exact, tag="div", to="/login")
-        button se connecter
-    .col-auto(v-if="isAuthenticated")
-      v-card(text="bg")
-        p {{ user.name }}
-    .col-auto
-      mainMenu
+.flex
+  .flex-1
+    router-link(exact, tag="div", to="/home")
+      svg.svg(viewBox="0 0 24 36")
+        path(fill="var(--bg)", :d="home")
+  .flex-1(v-if="!isAuthenticated")
+    router-link(exact, tag="div", to="/register")
+      button s'inscrire
+    router-link(exact, tag="div", to="/login")
+      button se connecter
+  .flex-1.justify-seld-center(v-if="isAuthenticated")
+    p {{ user.name }}
+  .col-auto
+    mainMenu
 </template>
 
 <script lang="ts">
