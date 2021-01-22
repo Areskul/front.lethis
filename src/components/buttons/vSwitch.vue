@@ -3,7 +3,6 @@ label(for="input")
 .switch.px-2
   input#input(type="checkbox", v-model="isDark")
   span.slider.round(@click="isDark = !isDark")
-button(@click="isOld = !isOld") old-school
 </template>
 
 <script lang="ts">
@@ -12,18 +11,14 @@ import { theme } from "@/composables/theme";
 export default defineComponent({
   name: "v-switch",
   setup() {
-    const { isDark, isOld } = theme();
+    const { isDark } = theme();
     return {
       isDark,
-      isOld,
     };
   },
-  data: () => ({}),
-  computed: {},
-  components: {},
-  methods: {},
 });
 </script>
+
 <style lang="scss" scoped>
 .switch {
   position: relative;

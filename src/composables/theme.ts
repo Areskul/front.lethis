@@ -9,14 +9,8 @@ export const theme = () => {
       store.dispatch("theme/setDark", bool);
     },
   });
-
-  const isOld = computed({
-    get: () => store.state.theme.isOld,
-    set: (bool) => store.dispatch("theme/setOld", bool),
-  });
   return {
     isDark,
-    isOld,
   };
 };
 

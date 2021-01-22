@@ -23,36 +23,6 @@
     postcss "^7.0.32"
     postcss-value-parser "^4.1.0"
 
-"@areskul/minimal-border@^1.0.0":
-  version "1.0.7"
-  resolved "https://npm.pkg.github.com/download/@areskul/minimal-border/1.0.7/89a4ec1f453c2d58d5dffe64fd60f99578015ddd8c17d343ed0082ba642eea94#46ea5e56202eff2982e17a596509c7f48986efd5"
-  integrity sha512-36OXtREUawYqSqMVKPDrmMWxHOVIhbk6/KOlNBg91McI8Ib+KpRvrJpmqvI4pfcfD4svUK25CsN9URyeh3//Pg==
-
-"@areskul/minimal-dimension@^1.0.0":
-  version "1.0.0"
-  resolved "https://npm.pkg.github.com/download/@areskul/minimal-dimension/1.0.0/189350db2064428e646a71d9bf331e738a90cd7ddb42efdc1247a0c2ecda8ed3#e24237479421d8a925d5daa07933d8b630a9373d"
-  integrity sha512-o5b1jY3Pl4C/394x57evC/JLoZBquAs4Zkd6RnX8SGIgDcsUwFb9KnUr2MHjCtpH2iuQ8PVALxAIsWKZj3VCjw==
-
-"@areskul/minimal-elevation@^1.0.2":
-  version "1.0.3"
-  resolved "https://npm.pkg.github.com/download/@areskul/minimal-elevation/1.0.3/5fecf4b795fffcaded91df96be81639fa68c518ef88e12554f10f777392df393#c7de263d765a08a7c16c16f15d516788eba835b6"
-  integrity sha512-916gkRFIs1oyLW6eTVCf9CSKMHDKy2/8UxcyRKK/uF/PWMYNjpb1fiHR3cm7RSC4RgsWnRB+ZVGu/pK8Ghu0Pg==
-
-"@areskul/minimal-grid@^1.0.7":
-  version "1.0.7"
-  resolved "https://npm.pkg.github.com/download/@areskul/minimal-grid/1.0.7/667ee723e7d4c4abfe8a528a3cf6ce19692981bbb3f3dcb1777a701d75dba846#0a6e1aaf4d6a85b466412cd7ac5f199aecda430c"
-  integrity sha512-0FcmDfhuXpJQ5nNjTyPQQ87HdtMp97xICJTN/6eCAFShyPR7/sa2GDC4umIJTJk8fS2n8nzpBzXNc+9dUv1c0Q==
-
-"@areskul/minimal-palette@^1.1.1":
-  version "1.1.1"
-  resolved "https://npm.pkg.github.com/download/@areskul/minimal-palette/1.1.1/ba0e6aacebaf83153fbefcef12e1bf3ca06bf71daa0070c87253fad7efa4ee02#de18a369727dade5be3bce68cfec20b8794a62fc"
-  integrity sha512-SKXS6mZmmdsOqPotx3/pqxEABF2nPYV01aueN1ZH5gUWHRNJOxCSfArZlsAEQV76wIvakixtVGz7g7HAOX4wkw==
-
-"@areskul/minimal-transition@^1.0.0":
-  version "1.0.0"
-  resolved "https://npm.pkg.github.com/download/@areskul/minimal-transition/1.0.0/3817fe14ef78b03139d7ec97479ca1061e4309edf4379b1e1b587107f5032d75#280b3a9dee42267f8c0f086a49706cddee1906c8"
-  integrity sha512-HUysrrZXm3s0TpWoBVmAXlmg5uTU/+dD9wYoTgBYJ4egQQut+8ztVe2Zg0vbr1rMQu4fVxT/K+8oaT5CKESFyQ==
-
 "@areskul/postcss@^7.0.35":
   version "7.0.35"
   resolved "https://npm.pkg.github.com/download/@areskul/postcss/7.0.35/43ab764d2be0c9557a8e270990b6e1c5232480dd43dc8564e0882cab7cdd5dd0#d61d84ef5d3da6fe676966e490e441ecac0169f4"
@@ -5335,11 +5305,6 @@ graphql-ws@4.1.0:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/graphql-ws/-/graphql-ws-4.1.0.tgz#cebe281474b5501d7be66210fb5711633b27fd78"
   integrity sha512-DxJP1y2YzCqVLy7DrQN0iuR2l48vMOBWukX2d/J9aN2o5x9un5psIIq/2UFRh91UGARmfvPH86y1p4qbC1dITg==
-
-graphql-ws@^3.2.0:
-  version "3.2.0"
-  resolved "https://registry.yarnpkg.com/graphql-ws/-/graphql-ws-3.2.0.tgz#76a3813202701297d91eb1c8cff47042416caec6"
-  integrity sha512-IQBTRZRVDm784IoxRG6rAsGvAEtytWtXt55jVIhz7LwKiPqE4S4ClrOlt61aLoWswod56xdzujGANcfXJtVvGw==
 
 graphql@^15.4.0:
   version "15.4.0"

@@ -17,6 +17,6 @@ export default defineComponent({
 <style>
 .box {
   min-height: 60px;
-  @apply shadow-md;
+  @apply shadow;
 }
 </style>

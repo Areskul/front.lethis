@@ -1,3 +1,51 @@
+//Default balise
+.router-link-exact-active {
+  .dot {
+    visibility: visible !important;
+  }
+}
+.router-link {
+  color: inherit;
+}
+#app {
+  font-family: Ubuntu, Avenir, Helvetica, Arial, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol" !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
+}
+blockquote {
+  font-family: Ubuntu;
+  font-size: 21px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 400;
+  line-height: 30px;
+}
+pre {
+  font-family: Ubuntu;
+  font-size: 13px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 400;
+  line-height: 18.5714px;
+}
+// reset chrome stylesheet
+menu {
+  display: block;
+  list-style-type: none;
+  margin-block-start: 0em;
+  margin-block-end: 0em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  padding-inline-start: 0px;
+}
+// take size of parent
+img {
+  max-width: inherit;
+  max-height: inherit;
+  object-fit: contain;
+}
 h1 {
   font-family: Ubuntu;
   font-size: 4vmax;

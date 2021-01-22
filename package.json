@@ -1,5 +1,5 @@
 {
-  "name": "boc.front",
+  "name": "poc.front",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -11,12 +11,6 @@
   },
   "dependencies": {
     "@areskul/autoprefixer": "^9.8.6",
-    "@areskul/minimal-border": "^1.0.0",
-    "@areskul/minimal-dimension": "^1.0.0",
-    "@areskul/minimal-elevation": "^1.0.2",
-    "@areskul/minimal-grid": "^1.0.7",
-    "@areskul/minimal-palette": "^1.1.1",
-    "@areskul/minimal-transition": "^1.0.0",
     "@areskul/postcss": "^7.0.35",
     "@mdi/js": "^5.8.55",
     "@vuelidate/core": "^2.0.0-alpha.8",
@@ -24,7 +18,6 @@
     "babel-loader": "^8.2.2",
     "core-js": "^3.8.1",
     "graphql": "^15.4.0",
-    "graphql-ws": "^3.2.0",
     "pug": "^3.0.0",
     "pug-plain-loader": "^1.1.0",
     "stylus": "^0.54.8",

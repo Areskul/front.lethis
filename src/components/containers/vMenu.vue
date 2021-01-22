@@ -3,7 +3,7 @@
   .clickable
     slot(name="anchor")
   transition(name="fade")
-    .popper(v-show="show")
+    .popper.shadow-md(v-show="show")
       slot(name="popper")
 </template>
 
@@ -47,6 +47,8 @@ export default defineComponent({
   margin-top: 10px;
   right: 0;
   top: 0;
+  height: 100px;
+  width: 100px;
   display: inline;
   z-index: 10;
 }

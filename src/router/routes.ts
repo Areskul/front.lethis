@@ -1,6 +1,6 @@
 import { RouteRecordRaw } from "vue-router";
 
-const baseTitle = "lightfront";
+const baseTitle = "POC";
 const separator = " | ";
 export const routes: Array<RouteRecordRaw> = [
   {
@@ -9,11 +9,11 @@ export const routes: Array<RouteRecordRaw> = [
     name: "Home",
     components: {
       header: () => import("@/components/navigation/header.vue"),
-      contentRefreshed: () => import("@/views/Home.vue"),
+      bodyContent: () => import("@/views/Home.vue"),
       // footer: () => import("@/components/navigation/footer.vue"),
     },
     meta: {
-      title: baseTitle + separator + "Services",
+      title: baseTitle + separator + "Feed",
     },
   },
   {
@@ -21,7 +21,7 @@ export const routes: Array<RouteRecordRaw> = [
     name: "register",
     components: {
       header: () => import("@/components/navigation/header.vue"),
-      contentRefreshed: () => import("@/views/Register.vue"),
+      bodyContent: () => import("@/views/Register.vue"),
       // footer: () => import("@/components/navigation/footer.vue"),
     },
     meta: {
@@ -33,7 +33,7 @@ export const routes: Array<RouteRecordRaw> = [
     name: "login",
     components: {
       header: () => import("@/components/navigation/header.vue"),
-      contentRefreshed: () => import("@/views/LogIn.vue"),
+      bodyContent: () => import("@/views/LogIn.vue"),
       // footer: () => import("@/components/navigation/footer.vue"),
     },
     meta: {
@@ -45,11 +45,11 @@ export const routes: Array<RouteRecordRaw> = [
     name: "Tarifs",
     components: {
       header: () => import("@/components/navigation/header.vue"),
-      // contentRefreshed: () => import("@/views/Tarifs.vue"),
+      // bodyContent: () => import("@/views/Tarifs.vue"),
       // footer: () => import("@/components/navigation/footer.vue"),
     },
     meta: {
-      title: baseTitle + separator + "Tarifs",
+      title: baseTitle + separator + "forgotten passwd",
     },
   },
   {
@@ -57,7 +57,7 @@ export const routes: Array<RouteRecordRaw> = [
     name: "AboutUs",
     components: {
       header: () => import("@/components/navigation/header.vue"),
-      // contentRefreshed: () => import("@/views/AboutUs.vue"),
+      // bodyContent: () => import("@/views/AboutUs.vue"),
       // footer: () => import("@/components/navigation/footer.vue"),
     },
     meta: {
