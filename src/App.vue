@@ -1,5 +1,5 @@
 <template lang="pug">
-.no-select
+.body
   router-view(name="header", v-slot="{ Component }")
     transition(
       mode="out-in",
@@ -33,11 +33,11 @@ import { USER_INFO } from "@/services/users.ts";
 export default defineComponent({
   setup() {
     //villus
-    const { villusClientSetup, user } = auth();
+    const { villusClientSetup, token, user } = auth();
     villusClientSetup();
 
     //Dispatch villus data in app
-    const { data } = useQuery({ query: USER_INFO });
+    const { data, execute } = useQuery({ query: USER_INFO });
 
     //theme
     const { setMeta } = metaTheme();
@@ -47,14 +47,29 @@ export default defineComponent({
     });
 
     return {
+      execute,
       data,
       user,
+      token,
     };
   },
   watch: {
     data: function (val) {
-      this.user = val.user;
+      if (val) {
+        this.user = val.user;
+      }
+    },
+    token: function () {
+      this.execute();
     },
   },
 });
 </script>
+
+
+
+<style lang="postcss" scoped>
+.body {
+  @apply bg-white text-black dark:bg-black dark:text-white;
+}
+</style>

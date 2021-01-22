@@ -35,7 +35,7 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss" scoped>
+<style lang="css" scoped>
 .svg {
   margin-top: 9px;
   margin-bottom: -12px;

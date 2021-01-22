@@ -1,6 +1,6 @@
 <template lang="pug">
 .container
-  .row.justify-content-center
+  .grids
     form(@submit.prevent)
       .col-auto
         label(for="email") username or email
@@ -14,6 +14,7 @@
         )
       .col-auto
         button(@click="handleSubmit") submit
+  button(@click="handleForgot") forgot password ?
 </template>
 
 <script lang="ts">
@@ -64,8 +65,7 @@ export default defineComponent({
     handleSubmit: function () {
       this.execute(this.variables).then((result) => {
         console.log(result);
-        this.token = result.data.loginUser.token;
-        this.user = result.data.loginUser.user;
+        this.token = result.data.loginUser;
       });
       this.$router.push("/home");
     },
