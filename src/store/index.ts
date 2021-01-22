@@ -1,5 +1,4 @@
 import { createStore } from "vuex";
-import { theme } from "./theme";
 import { auth } from "./auth";
 
 export type State = {
@@ -12,7 +11,6 @@ export const store = createStore({
   actions: {},
   getters: {},
   modules: {
-    theme,
     auth,
   },
 });

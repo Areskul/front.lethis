@@ -5,9 +5,7 @@ v-menu(hover)
       path(fill="var(--bg)", :d="down")
   template(#popper)
     .menu
-      .row
-        .col
-          v-switch
+      .grids
         .col
           button(@click="logout") logout
 </template>
@@ -15,7 +13,6 @@ v-menu(hover)
 import { mdiChevronDown } from "@mdi/js";
 import { defineComponent } from "vue";
 import vMenu from "@/components/containers/vMenu.vue";
-import vSwitch from "@/components/buttons/vSwitch.vue";
 import { auth } from "@/composables/auth";
 export default defineComponent({
   setup() {
@@ -29,7 +26,6 @@ export default defineComponent({
   }),
   components: {
     vMenu,
-    vSwitch,
   },
   methods: {
     logout: function () {

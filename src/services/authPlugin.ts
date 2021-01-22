@@ -1,24 +1,6 @@
 import { definePlugin } from "villus";
 import { computed } from "vue";
 import { useStore } from "vuex";
-//export const authPlugin = (config: {
-//token: string | undefined;
-//}): ClientPlugin => {
-//return definePlugin(({ opContext }) => {
-//if (config.token) {
-//opContext.headers = {
-//Authorization: "Bearer " + config.token,
-//"Content-type": "application/json",
-//"Access-Control-Allow-Origin": "*",
-//};
-//} else {
-//opContext.headers = {
-//"Content-type": "application/json",
-//"Access-Control-Allow-Origin": "*",
-//};
-//}
-//});
-//};
 
 export const authPlugin = () => {
   const store = useStore();
@@ -43,9 +25,3 @@ export const authPlugin = () => {
     }
   });
 };
-
-//export const authPlugin = (config: { token: string }) => {
-//function authSetPlugin({ opContext }: any): void {
-//opContext.headers.Authorization = `Bearer ${config.token}`;
-//}
-//};

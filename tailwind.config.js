@@ -1,5 +1,9 @@
 module.exports = {
-  purge: [],
+  purge: {
+    mode: "all",
+    preserveHtmlElements: false,
+    content: ["./src/**/*.js", "./node_modules/flatpickr/**/*.js"],
+  },
   darkMode: "media",
   theme: {
     container: {

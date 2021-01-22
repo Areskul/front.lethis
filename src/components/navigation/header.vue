@@ -1,5 +1,5 @@
 <template lang="pug">
-.flex
+.flex.colors
   .flex-1
     router-link(exact, tag="div", to="/home")
       svg.svg(viewBox="0 0 24 36")
@@ -41,11 +41,14 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss" scoped>
+<style lang="postcss" scoped>
 .svg {
   margin-top: 9px;
   margin-bottom: -12px;
   width: 40px;
   height: 45px;
+}
+.colors {
+  @apply bg-pink-500 dark:bg-purple-500;
 }
 </style>

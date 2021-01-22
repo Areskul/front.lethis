@@ -9,7 +9,6 @@
 
 <script lang="ts">
 import { defineComponent, computed } from "vue";
-/*import { createPopper } from "@popperjs/core";*/
 export default defineComponent({
   setup(props) {
     const placement = computed({

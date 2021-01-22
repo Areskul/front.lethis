@@ -1,19 +1,3 @@
-import { useStore } from "vuex";
-import { computed } from "vue";
-
-export const theme = () => {
-  const store = useStore();
-  const isDark = computed({
-    get: () => store.state.theme.isDark,
-    set: (bool) => {
-      store.dispatch("theme/setDark", bool);
-    },
-  });
-  return {
-    isDark,
-  };
-};
-
 export const metaTheme = () => {
   const getColor = function () {
     const color = window

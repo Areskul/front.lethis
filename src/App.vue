@@ -23,10 +23,10 @@
     )
       component(:is="Component")
 </template>
+
 <script lang="ts">
 import { defineComponent, onMounted } from "vue";
 import { auth } from "@/composables/auth";
-import { theme } from "@/composables/theme";
 import { metaTheme } from "@/composables/theme";
 import { useQuery } from "villus";
 import { USER_INFO } from "@/services/users.ts";
@@ -40,9 +40,8 @@ export default defineComponent({
     const { data } = useQuery({ query: USER_INFO });
 
     //theme
-    const { isDark } = theme();
-
     const { setMeta } = metaTheme();
+
     onMounted(async () => {
       setMeta();
     });
@@ -50,7 +49,6 @@ export default defineComponent({
     return {
       data,
       user,
-      isDark,
     };
   },
   watch: {
