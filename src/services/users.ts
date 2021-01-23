@@ -1,12 +1,12 @@
 import gql from "graphql-tag";
 
 export const LOGIN_USER = gql`
-  query loginUser($name: String, $email: String, $password: String!) {
+  query($name: String, $email: String, $password: String!) {
     loginUser(name: $name, email: $email, password: $password)
   }
 `;
 export const REGISTER_USER = gql`
-  mutation registerUser($name: String!, $email: String!, $password: String!) {
+  mutation($name: String!, $email: String!, $password: String!) {
     registerUser(name: $name, email: $email, password: $password) {
       token
       user {
@@ -25,7 +25,7 @@ export const USER_INFO = gql`
   }
 `;
 export const FORGOT_PASSWD = gql`
-  query($name: String, $email: String) {
-    getPasswordResetToken(name: $name, email: $email)
+  mutation($name: String, $email: String) {
+    getResetPasswordToken(name: $name, email: $email)
   }
 `;

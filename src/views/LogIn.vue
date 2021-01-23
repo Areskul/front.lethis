@@ -14,7 +14,7 @@
         )
       .col-auto
         button(@click="handleSubmit") submit
-  button(@click="handleForgot", :variables="state.value") forgot password ?
+  ForgotPasswd(:variables="variables")
 </template>
 
 <script lang="ts">
@@ -24,8 +24,12 @@ import useVuelidate from "@vuelidate/core";
 import { required, email } from "@vuelidate/validators";
 import { useMutation } from "villus";
 import { LOGIN_USER } from "@/services/users.ts";
+import ForgotPasswd from "@/views/ForgotPassword.vue";
 export default defineComponent({
   name: "LogIn",
+  components: {
+    ForgotPasswd,
+  },
   setup() {
     //Vueliate
     const state = ref({
@@ -54,7 +58,6 @@ export default defineComponent({
 
     return {
       execute,
-      state,
       variables,
       token,
       model,
@@ -83,13 +86,13 @@ export default defineComponent({
   },
   watch: {
     nameAndMailC: function (val) {
-      this.state.name = val;
-      this.state.email = val;
+      this.variables.name = val;
+      this.variables.email = val;
       this.model.name.$touch();
       this.model.email.$touch();
       this.model.email.$invalid
-        ? (this.state.email = "")
-        : (this.state.name = "");
+        ? (this.variables.email = "")
+        : (this.variables.name = "");
     },
   },
 });
