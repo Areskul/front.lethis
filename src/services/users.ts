@@ -24,3 +24,8 @@ export const USER_INFO = gql`
     }
   }
 `;
+export const FORGOT_PASSWD = gql`
+  query($name: String, $email: String) {
+    getPasswordResetToken(name: $name, email: $email)
+  }
+`;

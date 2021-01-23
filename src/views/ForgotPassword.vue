@@ -1,29 +1,40 @@
-<template>
-  <div class="container px-5">
-    <div class="columns is-centered">
-      <div class="column is-half">
-        <card elevation="6" height="10vh">
-          {{ message }}
-          <b-field
-            label="Email"
-            type="is-error"
-            message="This email is invalid"
-          >
-            <b-input type="email" value="john@" maxlength="30"></b-input>
-          </b-field>
-        </card>
-      </div>
-    </div>
-  </div>
+<template lang="pug">
+.container
+  button Forgot pasword ?
 </template>
-<script>
-import card from "@/core/components/containers/card";
-export default {
+<script lang="ts">
+import { defineComponent } from "vue";
+import { useQuery } from "villus";
+import { FORGOT_PASSWD } from "@/services/users";
+export default defineComponent({
+  name: "ForgotPasswd",
   data: () => ({
-    message: "Nous vous envoyons un lien pour changer votre mot de passe",
+    success: false,
   }),
-  components: {
-    card,
+  props: {
+    variables: {
+      type: Object,
+      required: true,
+    },
   },
-};
+  setup(props) {
+    //Villus
+    const { execute } = useQuery({
+      query: FORGOT_PASSWD,
+      variables: props.variables,
+    });
+
+    return {
+      execute,
+    };
+  },
+  methods: {
+    handleSubmit: function () {
+      this.execute().then((result) => {
+        this.success = result.data.getResetPasswordToken;
+      });
+      this.$router.push("/home");
+    },
+  },
+});
 </script>

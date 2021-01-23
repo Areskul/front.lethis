@@ -14,7 +14,7 @@
         )
       .col-auto
         button(@click="handleSubmit") submit
-  button(@click="handleForgot") forgot password ?
+  button(@click="handleForgot", :variables="state.value") forgot password ?
 </template>
 
 <script lang="ts">
@@ -47,24 +47,22 @@ export default defineComponent({
     };
     const model = useVuelidate(rules, state);
     //Token
-    const { token, user } = auth();
+    const { token } = auth();
     //Villus
     const variables = state.value;
-    const { data, execute } = useMutation(LOGIN_USER);
+    const { execute } = useMutation(LOGIN_USER);
+
     return {
-      data,
       execute,
       state,
       variables,
       token,
-      user,
       model,
     };
   },
   methods: {
     handleSubmit: function () {
       this.execute(this.variables).then((result) => {
-        console.log(result);
         this.token = result.data.loginUser;
       });
       this.$router.push("/home");
