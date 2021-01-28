@@ -13,7 +13,7 @@
           v-model="model.password.$model"
         )
       .col-auto
-        button(@click="handleSubmit") submit
+        button.btn(@click="handleSubmit") submit
   ForgotPasswd(:variables="variables")
 </template>
 

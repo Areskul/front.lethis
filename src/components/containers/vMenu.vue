@@ -46,8 +46,6 @@ export default defineComponent({
   margin-top: 10px;
   right: 0;
   top: 0;
-  height: 100px;
-  width: 100px;
   display: inline;
   z-index: 10;
 }

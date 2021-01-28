@@ -1,7 +1,8 @@
 <template lang="pug">
-.container
+.container.px-4
   .box {{ post.content }}
-  div {{ post.user.name }}
+  .grid.justify-items-end 
+    div @{{ post.user.name }}
 </template>
 
 <script lang="ts">
@@ -14,9 +15,10 @@ export default defineComponent({
   components: {},
 });
 </script>
-<style>
+<style lang="postcss" scoped>
 .box {
   min-height: 60px;
   @apply shadow;
+  @apply dark:bg-gray-900;
 }
 </style>

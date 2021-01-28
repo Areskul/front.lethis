@@ -1,7 +1,7 @@
 //Import text alignement classes
 import "@mdi/js";
-import "@/css/tailwind.css";
 import "@/css/default.scss";
+import "@/css/tailwind.css";
 
 import { createApp } from "vue";
 import App from "./App.vue";

@@ -4,10 +4,9 @@ v-menu(hover)
     svg.svg(viewBox="0 0 24 36")
       path(fill="var(--bg)", :d="down")
   template(#popper)
-    .menu
-      .grids
-        .col
-          button(@click="logout") logout
+    .menu.grids
+      .col
+        button.btn(@click="logout") logout
 </template>
 <script lang="ts">
 import { mdiChevronDown } from "@mdi/js";
@@ -35,11 +34,15 @@ export default defineComponent({
 });
 </script>
 
-<style lang="css" scoped>
+<style lang="postcss" scoped>
 .svg {
   margin-top: 9px;
   margin-bottom: -12px;
   width: 40px;
   height: 45px;
+}
+.menu {
+  @apply bg-white;
+  @apply dark:bg-black;
 }
 </style>

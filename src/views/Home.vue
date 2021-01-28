@@ -13,8 +13,8 @@ div
 import { defineComponent } from "vue";
 import { store } from "@/store";
 import postForm from "@/components/containers/createPost";
-import Feed from "@/views/feed.vue";
-import News from "@/views/news.vue";
+import Feed from "@/views/feed";
+import News from "@/views/news";
 export default defineComponent({
   name: "Home",
   data: () => ({}),

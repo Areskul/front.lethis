@@ -1,3 +1,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@layer base {
+  .body {
+    min-height: 100vh;
+    @apply bg-white text-black;
+    @apply dark:bg-black dark:text-white;
+  }
+  .btn {
+    @apply px-3 py-2 rounded-md;
+    @apply bg-blue-400 text-white;
+    @apply dark:bg-purple-400 dark:text-white;
+  }
+  input[type="text"] {
+    @apply bg-white text-black;
+    @apply dark:bg-black dark:text-white;
+  }
+}

@@ -6,9 +6,9 @@
         path(fill="var(--bg)", :d="home")
   .flex-1(v-if="!isAuthenticated")
     router-link(exact, tag="div", to="/register")
-      button s'inscrire
+      button.btn s'inscrire
     router-link(exact, tag="div", to="/login")
-      button se connecter
+      button.btn se connecter
   .flex-1.justify-seld-center(v-if="isAuthenticated")
     p {{ user.name }}
   .col-auto

@@ -65,11 +65,3 @@ export default defineComponent({
   },
 });
 </script>
-
-
-
-<style lang="postcss" scoped>
-.body {
-  @apply bg-white text-black dark:bg-black dark:text-white;
-}
-</style>
