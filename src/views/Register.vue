@@ -1,6 +1,6 @@
 <template lang="pug">
 .container
-  .row.justify-content-center
+  .grid
     form(@submit.prevent)
       .col-auto 
         label(for="username") username
@@ -17,7 +17,7 @@
           v-model="model.email.$model"
         )
       .col-auto
-        label(for="pasword") password
+        label(for="password") password
         input#password(
           type="password",
           autocomplete="on",
@@ -57,7 +57,7 @@ export default defineComponent({
     };
     const model = useVuelidate(rules, state);
     //Token
-    const { token, user } = auth();
+    const { token } = auth();
     //Villus
     const variables = state.value;
     const { data, execute } = useMutation(REGISTER_USER);
@@ -66,16 +66,19 @@ export default defineComponent({
       execute,
       data,
       token,
-      user,
       model,
     };
   },
   methods: {
     handleSubmit: function () {
-      this.execute(this.variables).then((result) => {
-        this.token = result.data.loginUser.token;
-        this.user = result.data.loginUser.user;
-      });
+      try {
+        this.execute(this.variables).then((result) => {
+          this.token = result.data.registerUser;
+        });
+        this.$router.push("/home");
+      } catch {
+        throw new Error("Couldn't register user");
+      }
     },
   },
 });

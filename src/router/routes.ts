@@ -41,6 +41,18 @@ export const routes: Array<RouteRecordRaw> = [
     },
   },
   {
+    path: "/reset/:resetToken",
+    name: "reset",
+    components: {
+      header: () => import("@/components/navigation/header.vue"),
+      bodyContent: () => import("@/views/ResetPasswd.vue"),
+      // footer: () => import("@/components/navigation/footer.vue"),
+    },
+    meta: {
+      title: baseTitle + separator + "login",
+    },
+  },
+  {
     path: "/Tarifs",
     name: "Tarifs",
     components: {

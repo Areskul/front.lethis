@@ -6,7 +6,7 @@
         label(for="email") username or email
         input#email(type="text", autocomplete="on", v-model="nameAndMailC")
       .col-auto
-        label(for="pasword") password
+        label(for="password") password
         input#password(
           type="password",
           autocomplete="on",
