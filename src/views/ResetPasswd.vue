@@ -30,11 +30,18 @@ export default defineComponent({
   data: () => ({
     success: false,
   }),
+  props: {
+    resetToken: {
+      type: String,
+      required: true,
+    },
+  },
   setup(props) {
     //Vueliate
     const state = ref({
       password: "",
       password_bis: "",
+      token: props.resetToken,
     });
     const rules = {
       password: {
@@ -44,8 +51,6 @@ export default defineComponent({
         required,
       },
     };
-    console.log(props);
-    console.log(state);
     const model = useVuelidate(rules, state);
     //Villus
     const { data, execute } = useMutation(RESET_PASSWD);
@@ -61,7 +66,7 @@ export default defineComponent({
   methods: {
     handleSubmit: function () {
       this.execute(this.variables).then((result) => {
-        this.success = result.data.getResetPasswordToken;
+        this.success = result.data.resetPassword;
       });
     },
   },

@@ -40,17 +40,12 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss" scoped>
+<style lang="postcss" scoped>
 .popper {
-  position: absolute;
-  margin-top: 10px;
-  right: 0;
-  top: 0;
-  display: inline;
-  z-index: 10;
+  @apply absolute top-1 right-1;
 }
 .anchor {
-  position: relative;
+  @apply relative;
 }
 .fade-enter-active,
 .fade-leave-active {
