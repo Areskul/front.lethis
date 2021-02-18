@@ -15,7 +15,7 @@ import { useMutation } from "villus";
 import { CREATE_POST } from "@/services/posts.ts";
 export default defineComponent({
   data: () => ({
-    title: "New Posts",
+    title: "new posts",
     isCreated: false,
   }),
   setup() {

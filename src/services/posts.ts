@@ -27,3 +27,8 @@ export const NEW_POSTS = gql`
     }
   }
 `;
+export const LIKE_POST = gql`
+  mutation likePost($id: number) {
+    likePost(id: $id)
+  }
+`;
