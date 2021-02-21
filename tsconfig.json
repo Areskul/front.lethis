@@ -8,6 +8,7 @@
     "moduleResolution": "node",
     "allowJs": true,
     "strict": true,
+    "importHelpers": true,
     "noUnusedLocals": true,
     "noImplicitAny": false,
     "experimentalDecorators": true,
@@ -18,6 +19,7 @@
     "lib": ["esnext", "dom"],
     "rootDir": ".",
     "paths": {
+      "/": ["/"],
       "@/*": ["src/*"]
     }
   },
