@@ -23,22 +23,22 @@ export const GET_CLIENTS = gql`
 `;
 export const CREATE_CLIENT = gql`
   mutation createClient(
-      $lastname
-      $firstname
-      $type
-      $civilite
-      $birthdate
-      $dependants
-      $employees
-      $job
-      $retirementAge
-      $adress
-      $cedex
-      $city
-      $phone
-      $email
-) {
-    createPost(
+    $lastname: String!
+    $firstname: String!
+    $type: String
+    $civilite: String
+    $birthdate: String
+    $dependants: String
+    $employees: String
+    $job: String
+    $retirementAge: String
+    $adress: String
+    $cedex: String
+    $city: String
+    $phone: String
+    $email: String
+  ) {
+    createClient(
       lastname: $lastname
       firstname: $firstname
       type: $type
@@ -53,7 +53,7 @@ export const CREATE_CLIENT = gql`
       city: $city
       phone: $phone
       email: $email
-)
+    )
   }
 `;
 export const NEW_CLIENT = gql`

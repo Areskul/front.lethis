@@ -67,68 +67,55 @@ export default defineComponent({
     const state = ref({
       type: "",
       civilite: "",
+      lastname: "",
+      firstname: "",
+      family: "",
+      birthdate: "",
+      dependants: "",
+      employees: "",
+      job: "",
+      retirementAge: "",
+      adress: "",
+      cedex: "",
+      city: "",
+      phone: "",
+      email: "",
     });
     const rules = {
-      type: {
-        required,
-      },
-      civilite: {
-        required,
-      },
+      type: {},
+      civilite: {},
       lastname: {
         required,
       },
       firstname: {
         required,
       },
-      family: {
-        required,
-      },
-      birthdate: {
-        required,
-      },
-      dependants: {
-        required,
-      },
-      employees: {
-        required,
-      },
-      job: {
-        required,
-      },
-      retirementAge: {
-        required,
-      },
-      adress: {
-        required,
-      },
-      cedex: {
-        required,
-      },
-      city: {
-        required,
-      },
-      phone: {
-        required,
-      },
-      email: {
-        required,
-      },
+      family: {},
+      birthdate: {},
+      dependants: {},
+      employees: {},
+      job: {},
+      retirementAge: {},
+      adress: {},
+      cedex: {},
+      city: {},
+      phone: {},
+      email: {},
     };
     const model = useVuelidate(rules, state);
     //Villus
     const variables = state.value;
-    const { execute } = useMutation({
-      query: CREATE_CLIENT,
-    });
+    const { data, execute } = useMutation(CREATE_CLIENT);
     return {
       model,
       variables,
       execute,
+      data,
     };
   },
   methods: {
     handleSubmit: function () {
+      console.log(this.variables);
       this.execute(this.variables).then((result) => {
         console.log(result);
       });
