@@ -59,7 +59,7 @@ import { defineComponent, ref } from "vue";
 import useVuelidate from "@vuelidate/core";
 import { required } from "@vuelidate/validators";
 import { useMutation } from "villus";
-import { GET_POSTS } from "@/services/posts";
+import { CREATE_CLIENT } from "@/services/clients";
 export default defineComponent({
   name: "Discover",
   setup() {
@@ -119,7 +119,7 @@ export default defineComponent({
     //Villus
     const variables = state.value;
     const { execute } = useMutation({
-      query: GET_POSTS,
+      query: CREATE_CLIENT,
     });
     return {
       model,
