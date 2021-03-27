@@ -54,11 +54,11 @@ export const routes: Array<RouteRecordRaw> = [
     },
   },
   {
-    path: "/Tarifs",
-    name: "Tarifs",
+    path: "/Discover",
+    name: "Discover",
     components: {
       header: () => import("@/components/navigation/header.vue"),
-      // bodyContent: () => import("@/views/Tarifs.vue"),
+      bodyContent: () => import("@/views/Discover.vue"),
       // footer: () => import("@/components/navigation/footer.vue"),
     },
     meta: {

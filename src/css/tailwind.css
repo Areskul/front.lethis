@@ -12,8 +12,23 @@
     @apply bg-blue-400 text-white;
     @apply dark:bg-purple-400 dark:text-white;
   }
-  input[type="text"] {
-    @apply bg-white text-black;
-    @apply dark:bg-black dark:text-white;
+  .myinput {
+    @apply relative rounded h-10 mb-5;
+  }
+  input[type="text"],
+  input[type="date"],
+  input[type="email"],
+  input[type="tel"] {
+    @apply rounded w-full h-full py-2 transition-all;
+  }
+  label {
+    @apply absolute text-pink-400 bg-white dark:bg-black left-3 transition-all px-1;
+    @apply dark:bg-black;
+    top: 0%;
+    transform: translateY(-50%);
+  }
+  .empty input:not(focus) + label {
+    top: 50%;
+    transform: translateY(-50%);
   }
 }

@@ -12,17 +12,10 @@ div
 <script>
 import { defineComponent } from "vue";
 import { store } from "@/store";
-import postForm from "@/components/containers/createPost";
-import Feed from "@/views/feed";
-import News from "@/views/news";
 export default defineComponent({
   name: "Home",
   data: () => ({}),
-  components: {
-    postForm,
-    Feed,
-    News,
-  },
+  components: {},
   computed: {
     isAuthenticated: {
       get: () => store.state.auth.isAuthenticated,
