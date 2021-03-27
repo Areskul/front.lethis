@@ -12,11 +12,11 @@
         label(for="civilite") civilite
         input#civilite(type="text", v-model="model.civilite.$model")
       .myinput
-        label(for="nom") nom
-        input#nom(type="text", v-model="model.nom.$model")
+        label(for="lastname") nom
+        input#lastname(type="text", v-model="model.lastname.$model")
       .myinput.empty
-        label(for="prenom") prenom
-        input#prenom(type="text", v-model="model.prenom.$model")
+        label(for="firstname") prenom
+        input#firstname(type="text", v-model="model.firstname.$model")
       .myinput
         label(for="birthdate") date de naissance
         input#birthdate(type="date", v-model="model.birthdate.$model")
@@ -75,10 +75,10 @@ export default defineComponent({
       civilite: {
         required,
       },
-      nom: {
+      lastname: {
         required,
       },
-      prenom: {
+      firstname: {
         required,
       },
       family: {
