@@ -137,9 +137,5 @@ export default defineComponent({
 });
 </script>
 <style lang="postcss" scoped>
-.empty input:not(focus) + label {
-  top: 50%;
-  transform: translateY(-50%);
-}
 </style>
 

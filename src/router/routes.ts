@@ -54,11 +54,23 @@ export const routes: Array<RouteRecordRaw> = [
     },
   },
   {
-    path: "/Discover",
-    name: "Discover",
+    path: "/Informations",
+    name: "Informations",
     components: {
       header: () => import("@/components/navigation/header.vue"),
-      bodyContent: () => import("@/views/Discover.vue"),
+      bodyContent: () => import("@/views/Informations.vue"),
+      // footer: () => import("@/components/navigation/footer.vue"),
+    },
+    meta: {
+      title: baseTitle + separator + "forgotten passwd",
+    },
+  },
+  {
+    path: "/Incomes",
+    name: "Incomes",
+    components: {
+      header: () => import("@/components/navigation/header.vue"),
+      bodyContent: () => import("@/views/Incomes.vue"),
       // footer: () => import("@/components/navigation/footer.vue"),
     },
     meta: {
