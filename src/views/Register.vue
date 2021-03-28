@@ -1,30 +1,34 @@
 <template lang="pug">
-.container
-  .grid
+.container.py-5
+  .flex.justify-center.items-center
     form(@submit.prevent)
-      .col-auto 
-        label(for="username") username
-        input#username(
-          type="text",
-          autocomplete="on",
-          v-model="model.name.$model"
-        )
-      .col-auto
-        label(for="email") email
-        input#email(
-          type="email",
-          autocomplete="on",
-          v-model="model.email.$model"
-        )
-      .col-auto
-        label(for="password") password
-        input#password(
-          type="password",
-          autocomplete="on",
-          v-model="model.password.$model"
-        )
-      .col-auto
-        button.btn(@click="handleSubmit") submit
+      .py-4
+        .myinput 
+          label.autocomplete(for="username") username
+          input#username(
+            type="text",
+            autocomplete="on",
+            v-model="model.name.$model"
+          )
+      .py-4
+        .myinput
+          label.autocomplete(for="email") email
+          input#email(
+            type="email",
+            autocomplete="on",
+            v-model="model.email.$model"
+          )
+      .py-4
+        .myinput
+          label.autocomplete(for="password") password
+          input#password(
+            type="password",
+            autocomplete="on",
+            v-model="model.password.$model"
+          )
+      .py-4
+        .myinput
+          button.btn(@click="handleSubmit") submit
 </template>
 
 <script lang="ts">
@@ -83,3 +87,15 @@ export default defineComponent({
   },
 });
 </script>
+<style lang="postcss" scoped>
+.autocomplete {
+  @apply absolute text-pink-400 bg-white dark:bg-black left-3 transition-all px-1;
+  @apply dark:bg-black;
+  top: 0%;
+  transform: translateY(-100%);
+}
+.empty input:not(focus) + label {
+  top: 50%;
+  transform: translateY(-50%);
+}
+</style>

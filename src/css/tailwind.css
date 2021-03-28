@@ -5,7 +5,7 @@
   .body {
     @apply h-screen;
     @apply bg-white text-black;
-    @apply dark:bg-black dark:text-white;
+    @apply dark:bg-gray-900 dark:text-white;
   }
   .btn {
     @apply px-3 py-2 rounded-md;
@@ -13,12 +13,13 @@
     @apply dark:bg-purple-400 dark:text-white;
   }
   .myinput {
-    @apply relative rounded h-10 mb-5;
+    @apply relative rounded h-10;
   }
   input[type="text"],
   input[type="date"],
   input[type="email"],
-  input[type="tel"] {
+  input[type="tel"],
+  input[type="password"] {
     @apply rounded w-full h-full py-2 transition-all;
   }
   label {

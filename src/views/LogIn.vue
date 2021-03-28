@@ -1,19 +1,18 @@
 <template lang="pug">
-.container
-  .grids
+.container.py-5
+  .flex.justify-center.items-center
     form(@submit.prevent)
-      .col-auto
-        label(for="email") username or email
-        input#email(type="text", autocomplete="on", v-model="nameAndMailC")
-      .col-auto
-        label(for="password") password
-        input#password(
-          type="password",
-          autocomplete="on",
-          v-model="model.password.$model"
-        )
-      .col-auto
-        button.btn(@click="handleSubmit") submit
+      .py-4
+        .myinput
+          label.autocomplete(for="email") username or email
+          input#email(type="text", autocomplete="on", v-model="nameAndMailC")
+      .py-4
+        .myinput
+          label.autocomplete(for="password") password
+          input#password(type="password", v-model="model.password.$model")
+      .py-4
+        .myinput
+          button.btn(@click="handleSubmit") submit
   ForgotPasswd(:variables="variables")
 </template>
 
@@ -98,5 +97,15 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss" scoped>
+<style lang="postcss" scoped>
+.autocomplete {
+  @apply absolute text-pink-400 bg-white dark:bg-black left-3 transition-all px-1;
+  @apply dark:bg-black;
+  top: 0%;
+  transform: translateY(-100%);
+}
+.empty input:not(focus) + label {
+  top: 50%;
+  transform: translateY(-50%);
+}
 </style>

@@ -1,5 +1,5 @@
 <template lang="pug">
-.flex.py-5(v-for="client in items", :key="client")
+.flex.py-5
   .card
     p {{ client.civilite }}
     p {{ client.lastname }}
@@ -10,8 +10,8 @@
 import { defineComponent } from "vue";
 export default defineComponent({
   props: {
-    items: {
-      type: Array,
+    client: {
+      type: Object,
       required: true,
     },
   },
@@ -20,6 +20,6 @@ export default defineComponent({
 
 <style lang="postcss" scoped>
 .card {
-  @apply shadow-lg w-60 h-24 bg-gray-200;
+  @apply shadow-md w-60 h-24;
 }
 </style>

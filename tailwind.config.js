@@ -1,3 +1,4 @@
+const colors = require("tailwindcss/colors");
 module.exports = {
   purge: {
     content: ["./src/**/*.vue"],
@@ -7,10 +8,24 @@ module.exports = {
     container: {
       center: true,
     },
+    colors: {
+      pink: colors.pink,
+      purple: colors.purple,
+      white: colors.white,
+      black: colors.black,
+      blue: colors.blue,
+      gray: {
+        200: "#555555",
+        800: "#222222",
+        900: "#121212",
+      },
+    },
     extend: {},
   },
   variants: {
-    extend: {},
+    extend: {
+      gradientColorStops: ["dark"],
+    },
   },
   plugins: [require("@tailwindcss/forms"), require("@tailwindcss/line-clamp")],
 };

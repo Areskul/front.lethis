@@ -1,18 +1,14 @@
 <template lang="pug">
-.flex.colors
-  .flex-1
-    router-link(exact, tag="div", to="/home")
-      svg.svg(viewBox="0 0 24 36")
-        path(fill="var(--bg)", :d="home")
-  .flex-1(v-if="!isAuthenticated")
+.flex.header
+  div
+  div(v-if="!isAuthenticated")
     router-link(exact, tag="div", to="/register")
       button.btn s'inscrire
     router-link(exact, tag="div", to="/login")
       button.btn se connecter
-  .flex-1.justify-seld-center(v-if="isAuthenticated")
+  .justify-seld-center(v-if="isAuthenticated")
     p {{ user.name }}
-  .col-auto
-    mainMenu
+  mainMenu
 </template>
 
 <script lang="ts">
@@ -48,7 +44,8 @@ export default defineComponent({
   width: 40px;
   height: 45px;
 }
-.colors {
+.header {
+  @apply justify-between py-4;
   @apply bg-pink-500 dark:bg-purple-500;
 }
 </style>
