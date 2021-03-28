@@ -9,8 +9,8 @@ export const routes: Array<RouteRecordRaw> = [
     name: "Home",
     components: {
       header: () => import("@/components/navigation/header.vue"),
-      //bodyContent: () => import("@/views/Home.vue"),
-      // footer: () => import("@/components/navigation/footer.vue"),
+      bodyContent: () => import("@/views/Home.vue"),
+      footer: () => import("@/components/navigation/footer.vue"),
       meta: {
         title: baseTitle + separator + "Feed",
       },
