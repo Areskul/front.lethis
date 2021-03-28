@@ -1,5 +1,5 @@
 <template lang="pug">
-.h-screen.bg-grey-600
+div
   breadcrumbs
   router-view(name="input", v-slot="{ Component }")
     transition(

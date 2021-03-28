@@ -1,6 +1,7 @@
 <template lang="pug">
-.flex.justify-content-center(v-for="client in items", :key="client")
+.flex.py-5(v-for="client in items", :key="client")
   .card
+    p {{ client.civilite }}
     p {{ client.lastname }}
     p {{ client.firstname }}
 </template>
@@ -19,6 +20,6 @@ export default defineComponent({
 
 <style lang="postcss" scoped>
 .card {
-  @apply shadow w-24 h-24 bg-pink-400 p-5;
+  @apply shadow-lg w-60 h-24 bg-gray-200;
 }
 </style>

@@ -3,7 +3,7 @@
 @tailwind utilities;
 @layer base {
   .body {
-    min-height: 100vh;
+    @apply h-screen;
     @apply bg-white text-black;
     @apply dark:bg-black dark:text-white;
   }

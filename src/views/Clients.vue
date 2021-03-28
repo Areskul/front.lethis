@@ -1,7 +1,6 @@
 <template lang="pug">
-.h-screen.bg-white
-  .container(v-if="data")
-    client(:items="data.clients")
+.container(v-if="data")
+  client(:items="data.clients")
 </template>
 
 <script lang="ts">

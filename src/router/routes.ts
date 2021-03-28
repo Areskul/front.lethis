@@ -21,6 +21,7 @@ export const routes: Array<RouteRecordRaw> = [
     name: "NewClient",
     components: {
       header: () => import("@/components/navigation/header.vue"),
+      navbar: () => import("@/components/navigation/navbar.vue"),
       bodyContent: () => import("@/views/Home.vue"),
     },
     children: [
@@ -49,6 +50,7 @@ export const routes: Array<RouteRecordRaw> = [
     name: "Clients",
     components: {
       header: () => import("@/components/navigation/header.vue"),
+      navbar: () => import("@/components/navigation/navbar.vue"),
       bodyContent: () => import("@/views/Clients.vue"),
       // footer: () => import("@/components/navigation/footer.vue"),
     },
