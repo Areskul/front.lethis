@@ -53,7 +53,6 @@
       .myinput
         button.btn(@click="handleSubmit") submit
 </template>
-
 <script lang="ts">
 import { defineComponent, ref } from "vue";
 import useVuelidate from "@vuelidate/core";

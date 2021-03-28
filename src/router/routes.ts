@@ -1,6 +1,6 @@
 import { RouteRecordRaw } from "vue-router";
 
-const baseTitle = "POC";
+const baseTitle = "LETHIS";
 const separator = " | ";
 export const routes: Array<RouteRecordRaw> = [
   {
@@ -9,11 +9,51 @@ export const routes: Array<RouteRecordRaw> = [
     name: "Home",
     components: {
       header: () => import("@/components/navigation/header.vue"),
+      //bodyContent: () => import("@/views/Home.vue"),
+      // footer: () => import("@/components/navigation/footer.vue"),
+      meta: {
+        title: baseTitle + separator + "Feed",
+      },
+    },
+  },
+  {
+    path: "/NewClient",
+    name: "NewClient",
+    components: {
+      header: () => import("@/components/navigation/header.vue"),
       bodyContent: () => import("@/views/Home.vue"),
+    },
+    children: [
+      {
+        name: "Informations",
+        path: "Informations",
+        components: {
+          input: () => import("@/components/input/informations.vue"),
+        },
+      },
+      {
+        name: "Incomes",
+        path: "Incomes",
+        components: {
+          input: () => import("@/components/input/incomes.vue"),
+        },
+      },
+    ],
+    // footer: () => import("@/components/navigation/footer.vue"),
+    meta: {
+      title: baseTitle + separator + "Nouveau Client",
+    },
+  },
+  {
+    path: "/Clients",
+    name: "Clients",
+    components: {
+      header: () => import("@/components/navigation/header.vue"),
+      bodyContent: () => import("@/views/Clients.vue"),
       // footer: () => import("@/components/navigation/footer.vue"),
     },
     meta: {
-      title: baseTitle + separator + "Feed",
+      title: baseTitle + separator + "register",
     },
   },
   {
@@ -51,30 +91,6 @@ export const routes: Array<RouteRecordRaw> = [
     },
     meta: {
       title: baseTitle + separator + "login",
-    },
-  },
-  {
-    path: "/Informations",
-    name: "Informations",
-    components: {
-      header: () => import("@/components/navigation/header.vue"),
-      bodyContent: () => import("@/views/Informations.vue"),
-      // footer: () => import("@/components/navigation/footer.vue"),
-    },
-    meta: {
-      title: baseTitle + separator + "forgotten passwd",
-    },
-  },
-  {
-    path: "/Incomes",
-    name: "Incomes",
-    components: {
-      header: () => import("@/components/navigation/header.vue"),
-      bodyContent: () => import("@/views/Incomes.vue"),
-      // footer: () => import("@/components/navigation/footer.vue"),
-    },
-    meta: {
-      title: baseTitle + separator + "forgotten passwd",
     },
   },
   {

@@ -1,26 +1,25 @@
 <template lang="pug">
-div
-  .container(v-if="isAuthenticated")
-    .row.justify-content-center
-      .col-auto 
-        postForm
-  .container
-    .row
-      News
-      Feed
+.h-screen.bg-grey-600
+  breadcrumbs
+  router-view(name="input", v-slot="{ Component }")
+    transition(
+      mode="out-in",
+      appear,
+      enter-active-class="slide-in-left",
+      leave-active-class="slide-out-right"
+    )
+      component(:is="Component")
 </template>
-<script>
+<script lang="typescript">
 import { defineComponent } from "vue";
-import { store } from "@/store";
+import breadcrumbs from "@/components/navigation/breadcrumbs.vue";
+import informations from "@/components/input/informations.vue";
 export default defineComponent({
   name: "Home",
   data: () => ({}),
-  components: {},
-  computed: {
-    isAuthenticated: {
-      get: () => store.state.auth.isAuthenticated,
-      set: (val) => val,
-    },
+  components: {
+    breadcrumbs,
+    informations,
   },
 });
 </script>

@@ -13,11 +13,13 @@ export const GET_CLIENTS = gql`
       employees
       job
       retirementAge
-      adress
-      cedex
-      city
       phone
       email
+      place {
+        adress
+        cedex
+        city
+      }
     }
   }
 `;
@@ -32,11 +34,9 @@ export const CREATE_CLIENT = gql`
     $employees: String
     $job: String
     $retirementAge: String
-    $adress: String
-    $cedex: String
-    $city: String
     $phone: String
     $email: String
+    $place: PlaceInput
   ) {
     createClient(
       lastname: $lastname
@@ -48,12 +48,15 @@ export const CREATE_CLIENT = gql`
       employees: $employees
       job: $job
       retirementAge: $retirementAge
-      adress: $adress
-      cedex: $cedex
-      city: $city
       phone: $phone
       email: $email
+      place: $place
     )
+  }
+`;
+export const CREATE_PLACE = gql`
+  mutation createPlace($adress: String, $city: String, $cedex: String) {
+    createPlace(adress: $adress, city: $city, cedex: $cedex)
   }
 `;
 export const NEW_CLIENT = gql`

@@ -2,6 +2,7 @@
 import "@mdi/js";
 import "@/css/default.scss";
 import "@/css/tailwind.css";
+import "@/css/animate.scss";
 
 import { createApp } from "vue";
 import App from "./App.vue";
