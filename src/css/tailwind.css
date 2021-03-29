@@ -21,6 +21,7 @@
   input[type="tel"],
   input[type="password"] {
     @apply rounded w-full h-full py-2 transition-all;
+    @apply dark:bg-gray-900;
   }
   label {
     @apply absolute text-pink-400 bg-white dark:bg-black left-3 transition-all px-1;
