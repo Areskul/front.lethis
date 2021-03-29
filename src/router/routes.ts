@@ -39,6 +39,13 @@ export const routes: Array<RouteRecordRaw> = [
           input: () => import("@/components/input/incomes.vue"),
         },
       },
+      {
+        name: "Taxes",
+        path: "Taxes",
+        components: {
+          input: () => import("@/components/input/taxes.vue"),
+        },
+      },
     ],
     // footer: () => import("@/components/navigation/footer.vue"),
     meta: {

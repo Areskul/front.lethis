@@ -25,8 +25,13 @@ export default defineComponent({
         svg: info,
       },
       {
-        name: "Incomes",
+        name: "Revenues",
         path: "/NewClient/Incomes",
+        svg: cash,
+      },
+      {
+        name: "Charges",
+        path: "/NewClient/Taxes",
         svg: cash,
       },
     ];

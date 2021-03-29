@@ -1,13 +1,17 @@
 <template lang="pug">
-.container.pt-10.h-screen.transition-all.col(
+.container.transition-all.col(
   @mouseover="hover = true",
   @mouseleave="hover = false",
   :class="hover ? 'large' : 'tight'"
 )
-  .flex.py-4.justify-center(v-for="route in routes", :key="route.name")
-    svg.fill-current(viewBox="0 0 25 35")
-      path(:d="route.svg")
-    button.bottom(@click="handleClick(route.path)", v-if="hover") {{ route.name }}
+  .flex.flex-col.h-4.justify-between.min-h-screen
+    .flex.py-4.justify-center(v-for="route in routes", :key="route.name")
+      svg.fill-current(viewBox="0 0 25 35")
+        path(:d="route.svg")
+      button.bottom(@click="handleClick(route.path)", v-if="hover") {{ route.name }}
+    .flex.flex-grow
+    .flex.py-4.justify-center
+      button.btn(@click="logout") logout
 </template>
 
 <script lang="ts">
