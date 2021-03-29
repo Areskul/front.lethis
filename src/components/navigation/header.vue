@@ -7,24 +7,19 @@
     router-link(exact, tag="div", to="/login")
       button.btn se connecter
   .justify-seld-center(v-if="isAuthenticated")
-    p {{ user.name }}
-  mainMenu
+    p.px-3 {{ user.name }}
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
 import { useStore } from "vuex";
 import { auth } from "@/composables/auth";
-import mainMenu from "@/components/navigation/menu.vue";
 import { mdiHome } from "@mdi/js";
 export default defineComponent({
   name: "v-header",
   data: () => ({
     home: mdiHome,
   }),
-  components: {
-    mainMenu,
-  },
   setup() {
     const store = useStore();
     const { user, isAuthenticated } = auth();
