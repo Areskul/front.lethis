@@ -15,7 +15,7 @@
 <script lang="ts">
 import { defineComponent, watch, ref } from "vue";
 import useVuelidate from "@vuelidate/core";
-import { required, numeric } from "@vuelidate/validators";
+import { required } from "@vuelidate/validators";
 import { useMutation } from "villus";
 import { GET_POSTS } from "@/services/posts";
 import { local } from "@/composables/storage";
@@ -24,34 +24,41 @@ export default defineComponent({
   setup() {
     //LocalStorage
     const { set, get } = local();
-    const savedState = get("taxes");
+    const savedState = get("charges");
     const initialState = {
-      yearlyIncomeTax: "",
-      ifi: "",
-      housingTax: "",
+      rent: "",
+      food: "",
+      energies: "",
+      internet: "",
+      school: "",
     };
     const labels = {
-      yearlyIncomeTax: "Impôt sur le revenu annuel",
-      ifi: "IFI",
-      housingTax: "Taxe d'habitation",
+      rent: "Loyer",
+      food: "Alimentaire",
+      energies: "Eau/Electricité/Gaz",
+      internet: "Téléphone/Internet",
+      school: "Frais de scolairité",
     };
     const state = ref(savedState ? savedState : initialState);
     watch(state.value, () => {
-      set("taxes", state.value);
+      set("charges", state.value);
     });
     //Vueliate
     const rules = {
-      yearlyIncomeTax: {
+      rent: {
         required,
-        numeric,
       },
-      housingTax: {
+      food: {
         required,
-        numeric,
       },
-      ifi: {
+      energies: {
         required,
-        numeric,
+      },
+      internet: {
+        required,
+      },
+      school: {
+        required,
       },
     };
     const model = useVuelidate(rules, state);

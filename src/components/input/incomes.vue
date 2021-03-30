@@ -5,49 +5,48 @@
     h1 Informations personnelles du client
   .flex.justify-center
     form(@submit.prevent)
-      .myinput
-        label(for="benefit") Benefices professionnels
-        input#benefit(type="text", v-model="model.benefit.$model")
-      .myinput
-        label(for="employeeIncome") Revenus salariés
-        input#employeeIncome(
-          type="text",
-          v-model="model.employeeIncome.$model"
-        )
-      .myinput
-        label(for="jointIncome") Revenus du conjoint
-        input#jointIncome(type="text", v-model="model.jointIncome.$model")
-      .myinput.empty
-        label(for="landIncome") Revenus fonciers
-        input#landIncome(type="text", v-model="model.landIncome.$model")
-      .myinput
-        label(for="otherIncome") Autres revenus
-        input#otherIncome(type="date", v-model="model.otherIncome.$model")
-      .myinput
-        label(for="share") Quote Part
-        input#share(type="text", v-model="model.share.$model")
+      .myinput(v-for="(x, i) in labels")
+        label(for="x") {{ x }}
+        input#x(type="text", v-model="model[i].$model")
       .myinput
         button.btn(@click="handleSubmit") submit
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { defineComponent, watch, ref } from "vue";
 import useVuelidate from "@vuelidate/core";
 import { required } from "@vuelidate/validators";
 import { useMutation } from "villus";
 import { GET_POSTS } from "@/services/posts";
+import { local } from "@/composables/storage";
 export default defineComponent({
   name: "Discover",
   setup() {
-    //Vueliate
-    const state = ref({
+    //LocalStorage
+    const { set, get } = local();
+    const savedState = get("incomes");
+    const initialState = {
       benefit: "",
       employeeIncome: "",
       jointIncome: "",
       landIncome: "",
       otherIncome: "",
       share: "",
+    };
+    const labels = {
+      benefit: "Benefices professionnels",
+      employeeIncome: "Revenus salariés",
+      jointIncome: "Revenus du conjoint",
+      landIncome: "Revenus fonciers",
+      otherIncome: "Autres revenus",
+      share: "Quote Part",
+    };
+    console.log(labels);
+    const state = ref(savedState ? savedState : initialState);
+    watch(state.value, () => {
+      set("incomes", state.value);
     });
+    //Vueliate
     const rules = {
       benefit: {
         required,
@@ -76,6 +75,7 @@ export default defineComponent({
     });
     return {
       model,
+      labels,
       variables,
       execute,
     };

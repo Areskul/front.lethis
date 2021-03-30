@@ -31,6 +31,9 @@ export const routes: Array<RouteRecordRaw> = [
         components: {
           input: () => import("@/components/input/informations.vue"),
         },
+        meta: {
+          title: baseTitle + separator + "Informations",
+        },
       },
       {
         name: "Incomes",
@@ -38,12 +41,28 @@ export const routes: Array<RouteRecordRaw> = [
         components: {
           input: () => import("@/components/input/incomes.vue"),
         },
+        meta: {
+          title: baseTitle + separator + "Revenues",
+        },
+      },
+      {
+        name: "Charges",
+        path: "Charges",
+        components: {
+          input: () => import("@/components/input/charges.vue"),
+        },
+        meta: {
+          title: baseTitle + separator + "Charges courrantes",
+        },
       },
       {
         name: "Taxes",
         path: "Taxes",
         components: {
           input: () => import("@/components/input/taxes.vue"),
+        },
+        meta: {
+          title: baseTitle + separator + "Impots",
         },
       },
     ],

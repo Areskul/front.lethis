@@ -31,6 +31,11 @@ export default defineComponent({
       },
       {
         name: "Charges",
+        path: "/NewClient/Charges",
+        svg: cash,
+      },
+      {
+        name: "Taxes",
         path: "/NewClient/Taxes",
         svg: cash,
       },
