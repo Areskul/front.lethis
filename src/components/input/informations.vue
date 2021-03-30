@@ -19,7 +19,7 @@ import { useMutation } from "villus";
 import { CREATE_CLIENT } from "@/services/clients";
 import { local } from "@/composables/storage";
 export default defineComponent({
-  name: "Discover",
+  name: "Informations",
   setup() {
     //LocalStorage
     const { set, get } = local();

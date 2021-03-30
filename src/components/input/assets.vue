@@ -20,24 +20,26 @@ import { useMutation } from "villus";
 import { GET_POSTS } from "@/services/posts";
 import { local } from "@/composables/storage";
 export default defineComponent({
-  name: "Discover",
+  name: "Assets",
   setup() {
     //LocalStorage
     const { set, get } = local();
-    const savedState = get("taxes");
+    const savedState = get("assets");
     const initialState = {
-      yearlyIncomeTax: "",
-      ifi: "",
-      housingTax: "",
+      name: "",
+      value: null,
+      monthlyPayment: null,
+      propertyTax: null,
     };
     const labels = {
-      yearlyIncomeTax: "Impôt sur le revenu annuel",
-      ifi: "IFI",
-      housingTax: "Taxe d'habitation",
+      name: "Nom",
+      value: "Valeur bien immobiliers",
+      monthlyPayment: "Mensualité prèt immobilier",
+      propertyTax: "Taxe foncière",
     };
     const state = ref(savedState ? savedState : initialState);
     watch(state.value, () => {
-      set("taxes", state.value);
+      set("assets", state.value);
     });
     //Vueliate
     const rules = {

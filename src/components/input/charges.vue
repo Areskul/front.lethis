@@ -20,7 +20,7 @@ import { useMutation } from "villus";
 import { GET_POSTS } from "@/services/posts";
 import { local } from "@/composables/storage";
 export default defineComponent({
-  name: "Discover",
+  name: "Charges",
   setup() {
     //LocalStorage
     const { set, get } = local();
