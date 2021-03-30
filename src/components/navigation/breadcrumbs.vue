@@ -13,11 +13,12 @@ export default defineComponent({
   name: "breadcrumbs",
   setup() {
     const router = useRouter();
-    const routes = router.options.routes[1].children;
+    const routes = router.options.routes[0].children;
     const current = useRoute();
+    console.log(router);
     const isActive = (path) => {
-      console.log(current);
-      console.log(path);
+      /*console.log(current);*/
+      /*console.log(path);*/
       if (current == path) {
         return true;
       } else {
