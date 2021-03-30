@@ -1,33 +1,15 @@
 <template lang="pug">
 .flex.header
-  div
-  div(v-if="!isAuthenticated")
-    router-link(exact, tag="div", to="/register")
-      button.btn s'inscrire
-    router-link(exact, tag="div", to="/login")
-      button.btn se connecter
-  .justify-seld-center(v-if="isAuthenticated")
-    p.px-3 {{ user.name }}
+  breadcrumbs
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { useStore } from "vuex";
-import { auth } from "@/composables/auth";
-import { mdiHome } from "@mdi/js";
+import breadcrumbs from "@/components/navigation/breadcrumbs.vue";
 export default defineComponent({
   name: "v-header",
-  data: () => ({
-    home: mdiHome,
-  }),
-  setup() {
-    const store = useStore();
-    const { user, isAuthenticated } = auth();
-    return {
-      user,
-      store,
-      isAuthenticated,
-    };
+  components: {
+    breadcrumbs,
   },
 });
 </script>
@@ -41,6 +23,6 @@ export default defineComponent({
 }
 .header {
   @apply justify-between py-4;
-  @apply bg-pink-500 dark:bg-purple-500;
+  @apply bg-gray-200 dark:bg-gray-700;
 }
 </style>

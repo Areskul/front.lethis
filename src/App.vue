@@ -1,6 +1,6 @@
 <template lang="pug">
-.body.flex
-  .w-auto.static
+.body.flex.relative
+  .w-auto
     router-view(name="navbar", v-slot="{ Component }")
       transition(
         mode="out-in",

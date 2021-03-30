@@ -1,7 +1,7 @@
 <template lang="pug">
 .container
   .flex.justify-center.items-center.py-6
-    h1 Residence principale/secondaire
+    h1 Patyrimoine immobilier locatif
   .flex.justify-center
     form(@submit.prevent)
       .myinput(v-for="(x, i) in labels")
@@ -19,7 +19,7 @@ import { useMutation } from "villus";
 import { GET_POSTS } from "@/services/posts";
 import { local } from "@/composables/storage";
 export default defineComponent({
-  name: "Assets",
+  name: "RealEstate",
   setup() {
     //LocalStorage
     const { set, get } = local();

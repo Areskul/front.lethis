@@ -1,9 +1,8 @@
 <template lang="pug">
 .container
-  .flex.justify-center.items-center
-    .myinput
+  .flex.justify-center.py-6
     h1 Charges courantes
-  .flex.justify-center
+  .flex.justify-center.self-center
     form(@submit.prevent)
       .myinput(v-for="(x, i) in labels")
         label(for="x") {{ x }}

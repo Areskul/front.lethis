@@ -1,7 +1,6 @@
 <template lang="pug">
 .container
-  .flex.justify-center.items-center
-    .myinput
+  .flex.justify-center.items-center.py-6
     h1 Informations personnelles du client
   .flex.justify-center
     form(@submit.prevent)
@@ -41,7 +40,6 @@ export default defineComponent({
       otherIncome: "Autres revenus",
       share: "Quote Part",
     };
-    console.log(labels);
     const state = ref(savedState ? savedState : initialState);
     watch(state.value, () => {
       set("incomes", state.value);

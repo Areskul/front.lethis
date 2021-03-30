@@ -1,6 +1,5 @@
 <template lang="pug">
-div
-  breadcrumbs
+.container.pt-10
   router-view(name="input", v-slot="{ Component }")
     transition(
       mode="out-in",
@@ -12,13 +11,11 @@ div
 </template>
 <script lang="typescript">
 import { defineComponent } from "vue";
-import breadcrumbs from "@/components/navigation/breadcrumbs.vue";
 import informations from "@/components/input/informations.vue";
 export default defineComponent({
   name: "Home",
   data: () => ({}),
   components: {
-    breadcrumbs,
     informations,
   },
 });

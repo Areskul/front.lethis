@@ -17,8 +17,8 @@ export const routes: Array<RouteRecordRaw> = [
     },
   },
   {
-    path: "/NewClient",
-    name: "NewClient",
+    path: "/Discover",
+    name: "Découverte",
     components: {
       header: () => import("@/components/navigation/header.vue"),
       navbar: () => import("@/components/navigation/navbar.vue"),
@@ -36,7 +36,7 @@ export const routes: Array<RouteRecordRaw> = [
         },
       },
       {
-        name: "Incomes",
+        name: "Revenues",
         path: "Incomes",
         components: {
           input: () => import("@/components/input/incomes.vue"),
@@ -46,7 +46,7 @@ export const routes: Array<RouteRecordRaw> = [
         },
       },
       {
-        name: "Charges",
+        name: "Charges courrantes",
         path: "Charges",
         components: {
           input: () => import("@/components/input/charges.vue"),
@@ -56,7 +56,7 @@ export const routes: Array<RouteRecordRaw> = [
         },
       },
       {
-        name: "Taxes",
+        name: "Impôts",
         path: "Taxes",
         components: {
           input: () => import("@/components/input/taxes.vue"),
@@ -65,11 +65,52 @@ export const routes: Array<RouteRecordRaw> = [
           title: baseTitle + separator + "Impots",
         },
       },
+      {
+        name: "Patrimoine immobilier non-locatif",
+        path: "Assets",
+        components: {
+          input: () => import("@/components/input/assets.vue"),
+        },
+        meta: {
+          title: baseTitle + separator + "Imobilier non-locatif",
+        },
+      },
+      {
+        name: "Immobilier locatif",
+        path: "RealEstate",
+        components: {
+          input: () => import("@/components/input/realestate.vue"),
+        },
+        meta: {
+          title: baseTitle + separator + "Imobilier locatif",
+        },
+      },
     ],
     // footer: () => import("@/components/navigation/footer.vue"),
     meta: {
       title: baseTitle + separator + "Nouveau Client",
     },
+  },
+  {
+    path: "/Products",
+    name: "Produits",
+    components: {
+      header: () => import("@/components/navigation/header.vue"),
+      navbar: () => import("@/components/navigation/navbar.vue"),
+      bodyContent: () => import("@/views/Home.vue"),
+    },
+    children: [
+      {
+        name: "Comptes et livret",
+        path: "Accounts",
+        components: {
+          input: () => import("@/components/input/realestate.vue"),
+        },
+        meta: {
+          title: baseTitle + separator + "Comptes et livrets",
+        },
+      },
+    ],
   },
   {
     path: "/Clients",

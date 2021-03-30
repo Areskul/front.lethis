@@ -2,49 +2,46 @@
 .container
   .flex.flex-row.justify-around
     .flex.flex-col(v-for="route in routes", :key="route.name")
-      button(@click="handleClick(route.path)") {{ route.name }}
+      router-link(:to="route.path")
+        button(:class="[route.name == current.name ? 'active' : null]") {{ route.name }}
 </template>
 
 <script lang="ts">
-import { mdiCashMultiple, mdiInformationOutline } from "@mdi/js";
-import { useRouter } from "vue-router";
+import { useRouter, useRoute } from "vue-router";
 import { defineComponent } from "vue";
 export default defineComponent({
   name: "breadcrumbs",
   setup() {
-    const cash = mdiCashMultiple;
-    const info = mdiInformationOutline;
     const router = useRouter();
-    const handleClick = (path) => {
-      router.push(path);
+    const routes = router.options.routes[1].children;
+    const current = useRoute();
+    const isActive = (path) => {
+      console.log(current);
+      console.log(path);
+      if (current == path) {
+        return true;
+      } else {
+        return false;
+      }
     };
-    const routes = [
-      {
-        name: "Informations",
-        path: "/NewClient/Informations",
-        svg: info,
-      },
-      {
-        name: "Revenues",
-        path: "/NewClient/Incomes",
-        svg: cash,
-      },
-      {
-        name: "Charges",
-        path: "/NewClient/Charges",
-        svg: cash,
-      },
-      {
-        name: "Taxes",
-        path: "/NewClient/Taxes",
-        svg: cash,
-      },
-    ];
     return {
+      isActive,
+      current,
       routes,
       router,
-      handleClick,
     };
   },
 });
 </script>
+
+<style lang="postcss" scoped>
+button {
+  @apply p-2 text-sm font-semibold rounded-2xl transition-all;
+  @apply text-black;
+  @apply dark:text-white;
+}
+.active {
+  @apply bg-purple-500 text-white;
+  @apply dark:bg-purple-400 dark:text-black;
+}
+</style>

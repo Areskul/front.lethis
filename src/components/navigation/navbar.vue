@@ -4,19 +4,29 @@
   @mouseleave="hover = false",
   :class="hover ? 'large' : 'tight'"
 )
-  .flex.flex-col.h-4.justify-between.min-h-screen
+  .flex.fixed.flex-col.h-4.justify-between.min-h-screen.transition-all.pt-20(
+    :class="hover ? 'large' : 'tight'"
+  )
     .flex.py-4.justify-center(v-for="route in routes", :key="route.name")
       svg.fill-current(viewBox="0 0 25 35")
         path(:d="route.svg")
       button.bottom(@click="handleClick(route.path)", v-if="hover") {{ route.name }}
     .flex.flex-grow
     .flex.py-4.justify-center
-      button.btn(@click="logout") logout
+      div(v-if="!isAuthenticated")
+        router-link(to="/register")
+          button.btn s'inscrire
+        router-link(to="/login")
+          button.btn se connecter
+      div(v-if="isAuthenticated")
+        p.p-3.text-sm {{ user.name }}
+        button.btn.text-sm(v-if="isAuthenticated", @click="logout") logout
 </template>
 
 <script lang="ts">
 import { useRouter } from "vue-router";
 import { defineComponent } from "vue";
+import { auth } from "@/composables/auth";
 import { mdiAccountPlus, mdiAccountSearchOutline, mdiHome } from "@mdi/js";
 export default defineComponent({
   name: "breadcrumbs",
@@ -24,6 +34,7 @@ export default defineComponent({
     hover: false,
   }),
   setup() {
+    const { user, isAuthenticated } = auth();
     const home = mdiHome;
     const accounts = mdiAccountSearchOutline;
     const accountplus = mdiAccountPlus;
@@ -38,8 +49,13 @@ export default defineComponent({
         svg: home,
       },
       {
-        name: "Nouveau client",
-        path: "/NewClient/Informations",
+        name: "Découverte",
+        path: "/Discover/Informations",
+        svg: accountplus,
+      },
+      {
+        name: "Produits",
+        path: "/Products/Accounts",
         svg: accountplus,
       },
       {
@@ -49,6 +65,8 @@ export default defineComponent({
       },
     ];
     return {
+      user,
+      isAuthenticated,
       routes,
       router,
       handleClick,
@@ -59,8 +77,9 @@ export default defineComponent({
 
 <style lang="postcss" soped>
 .col {
-  @apply bg-blue-600;
-  @apply dark:bg-purple-600;
+  @apply relative;
+  @apply bg-gray-200;
+  @apply dark:bg-gray-700;
 }
 .large {
   width: 10rem;
