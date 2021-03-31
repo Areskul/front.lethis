@@ -8,23 +8,26 @@
 
 <script lang="ts">
 import { useRouter, useRoute, RouteRecordRaw } from "vue-router";
-import { defineComponent } from "vue";
+import { defineComponent, computed } from "vue";
 export default defineComponent({
   name: "breadcrumbs",
   setup() {
     //Use Router
     const router = useRouter();
     const current = useRoute();
-
-    const parent: RouteRecordRaw = current.matched[0];
-    const children: RouteRecordRaw[] = useRouter().options.routes.filter(
-      (e) => e.path === parent.path
-    )[0].children!;
-
-    console.log(children);
+    const parents = computed(
+      (): RouteRecordRaw => {
+        const parents = current.matched[0];
+        return parents;
+      }
+    );
+    const children = computed((): RouteRecordRaw[] => {
+      const children = router.options.routes.filter(
+        (e) => e.path === parents.value.path
+      )[0].children!;
+      return children;
+    });
     return {
-      /*parent,*/
-      router,
       current,
       children,
     };
