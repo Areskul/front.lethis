@@ -23,6 +23,6 @@ export default defineComponent({
 }
 .header {
   @apply justify-between py-4;
-  @apply bg-gray-200 dark:bg-gray-700;
+  @apply bg-white dark:bg-gray-900;
 }
 </style>

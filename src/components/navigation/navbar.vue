@@ -1,10 +1,10 @@
 <template lang="pug">
-.container.transition-all.col(
+.container.relative.transition-all(
   @mouseover="hover = true",
   @mouseleave="hover = false",
   :class="hover ? 'large' : 'tight'"
 )
-  .flex.fixed.flex-col.h-4.justify-between.min-h-screen.transition-all.pt-20(
+  .flex.fixed.flex-col.h-4.justify-between.min-h-screen.theme.transition-all.pt-20(
     :class="hover ? 'large' : 'tight'"
   )
     .flex.py-4.justify-center(v-for="route in routes", :key="route.name")
@@ -76,10 +76,9 @@ export default defineComponent({
 </script>
 
 <style lang="postcss" soped>
-.col {
-  @apply relative;
-  @apply bg-gray-200;
-  @apply dark:bg-gray-700;
+.theme {
+  @apply bg-gray-50;
+  @apply dark:bg-gray-800;
 }
 .large {
   width: 10rem;
