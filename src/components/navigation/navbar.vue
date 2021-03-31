@@ -13,12 +13,12 @@
       button.bottom(@click="handleClick(route.path)", v-if="hover") {{ route.name }}
     .flex.flex-grow
     .flex.py-4.justify-center
-      div(v-if="!isAuthenticated")
+      .flex.flex-col(v-if="!isAuthenticated && hover")
         router-link(to="/register")
           button.btn s'inscrire
         router-link(to="/login")
           button.btn se connecter
-      div(v-if="isAuthenticated")
+      div(v-if="isAuthenticated && hover")
         p.p-3.text-sm {{ user.name }}
         button.btn.text-sm(v-if="isAuthenticated", @click="logout") logout
 </template>
@@ -27,7 +27,13 @@
 import { useRouter } from "vue-router";
 import { defineComponent } from "vue";
 import { auth } from "@/composables/auth";
-import { mdiAccountPlus, mdiAccountSearchOutline, mdiCart } from "@mdi/js";
+import {
+  mdiAccountPlus,
+  mdiAccountSearchOutline,
+  mdiBatteryPositive,
+  mdiCart,
+  mdiPiggyBank,
+} from "@mdi/js";
 export default defineComponent({
   name: "breadcrumbs",
   data: () => ({
@@ -38,6 +44,8 @@ export default defineComponent({
     const accounts = mdiAccountSearchOutline;
     const accountplus = mdiAccountPlus;
     const cart = mdiCart;
+    const battery = mdiBatteryPositive;
+    const piggy = mdiPiggyBank;
     const router = useRouter();
     const handleClick = (path) => {
       router.push(path);
@@ -56,6 +64,16 @@ export default defineComponent({
         name: "Produits",
         path: "/Products/Accounts",
         svg: cart,
+      },
+      {
+        name: "Budget",
+        path: "/Budget",
+        svg: piggy,
+      },
+      {
+        name: "Capacité d'épargne",
+        path: "/Saving",
+        svg: battery,
       },
       {
         name: "Clients",
