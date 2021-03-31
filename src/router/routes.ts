@@ -1,39 +1,10 @@
 import { RouteRecordRaw } from "vue-router";
 import { discover } from "./discover";
+import { products } from "./products";
 const baseTitle = "LETHIS";
 const separator = " | ";
-export const routes: Array<RouteRecordRaw> = [
-  {
-    path: "/Products",
-    name: "Produits",
-    components: {
-      header: () => import("@/components/navigation/header.vue"),
-      navbar: () => import("@/components/navigation/navbar.vue"),
-      bodyContent: () => import("@/views/Home.vue"),
-    },
-    children: [
-      {
-        name: "Comptes et livrets",
-        path: "Accounts",
-        components: {
-          input: () => import("@/components/input/realestate.vue"),
-        },
-        meta: {
-          title: baseTitle + separator + "Comptes et livrets",
-        },
-      },
-      {
-        name: " et livrets",
-        path: "counts",
-        components: {
-          input: () => import("@/components/input/realestate.vue"),
-        },
-        meta: {
-          title: baseTitle + separator + "Comptes et livrets",
-        },
-      },
-    ],
-  },
+
+const others: Array<RouteRecordRaw> = [
   {
     path: "/Clients",
     name: "Clients",
@@ -48,3 +19,7 @@ export const routes: Array<RouteRecordRaw> = [
     },
   },
 ];
+
+export const routes: Array<RouteRecordRaw> = others
+  .concat(discover)
+  .concat(products);

@@ -1,35 +1,32 @@
 <template lang="pug">
 .container
   .flex.flex-row.justify-around
-    .flex.flex-col(v-for="route in routes", :key="route.name")
+    .flex.flex-col(v-for="route in children", :key="route.name")
       router-link(:to="route.path")
         button(:class="[route.name == current.name ? 'active' : null]") {{ route.name }}
 </template>
 
 <script lang="ts">
-import { useRouter, useRoute } from "vue-router";
+import { useRouter, useRoute, RouteRecordRaw } from "vue-router";
 import { defineComponent } from "vue";
 export default defineComponent({
   name: "breadcrumbs",
   setup() {
+    //Use Router
     const router = useRouter();
-    const routes = router.options.routes[0].children;
     const current = useRoute();
-    console.log(router);
-    const isActive = (path) => {
-      /*console.log(current);*/
-      /*console.log(path);*/
-      if (current == path) {
-        return true;
-      } else {
-        return false;
-      }
-    };
+
+    const parent: RouteRecordRaw = current.matched[0];
+    const children: RouteRecordRaw[] = useRouter().options.routes.filter(
+      (e) => e.path === parent.path
+    )[0].children!;
+
+    console.log(children);
     return {
-      isActive,
-      current,
-      routes,
+      /*parent,*/
       router,
+      current,
+      children,
     };
   },
 });
