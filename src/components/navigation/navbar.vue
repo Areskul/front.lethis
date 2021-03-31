@@ -27,27 +27,25 @@
 import { useRouter } from "vue-router";
 import { defineComponent } from "vue";
 import { auth } from "@/composables/auth";
-import { mdiAccountPlus, mdiAccountSearchOutline, mdiHome } from "@mdi/js";
+import { mdiAccountPlus, mdiAccountSearchOutline, mdiCart } from "@mdi/js";
 export default defineComponent({
   name: "breadcrumbs",
   data: () => ({
     hover: false,
   }),
   setup() {
-    const { user, isAuthenticated } = auth();
-    const home = mdiHome;
+    const { user, isAuthenticated, token } = auth();
     const accounts = mdiAccountSearchOutline;
     const accountplus = mdiAccountPlus;
+    const cart = mdiCart;
     const router = useRouter();
     const handleClick = (path) => {
       router.push(path);
     };
+    const logout = () => {
+      token.value = "";
+    };
     const routes = [
-      {
-        name: "Home",
-        path: "/",
-        svg: home,
-      },
       {
         name: "Découverte",
         path: "/Discover/Informations",
@@ -56,7 +54,7 @@ export default defineComponent({
       {
         name: "Produits",
         path: "/Products/Accounts",
-        svg: accountplus,
+        svg: cart,
       },
       {
         name: "Clients",
@@ -67,6 +65,7 @@ export default defineComponent({
     return {
       user,
       isAuthenticated,
+      logout,
       routes,
       router,
       handleClick,

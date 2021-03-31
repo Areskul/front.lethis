@@ -67,7 +67,7 @@ export default defineComponent({
       this.execute(this.variables).then((result) => {
         this.token = result.data.loginUser;
       });
-      this.$router.push("/home");
+      this.$router.push("/Clients");
     },
   },
   data: () => ({

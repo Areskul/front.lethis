@@ -7,7 +7,7 @@ export const discover: Array<RouteRecordRaw> = [
     path: "/Discover",
     name: "Découverte",
     components: {
-      header: () => import("@/components/navigation/header.vue"),
+      header: () => import("@/components/navigation/breadcrumbs.vue"),
       navbar: () => import("@/components/navigation/navbar.vue"),
       bodyContent: () => import("@/views/Home.vue"),
     },

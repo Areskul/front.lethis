@@ -1,5 +1,5 @@
 <template lang="pug">
-.container
+.container.header
   .flex.flex-row.justify-around
     .flex.flex-col(v-for="route in children", :key="route.name")
       router-link(:to="route.path")
@@ -44,5 +44,9 @@ button {
 .active {
   @apply bg-purple-500 text-white;
   @apply dark:bg-purple-400 dark:text-black;
+}
+.header {
+  @apply justify-between py-4;
+  @apply bg-white dark:bg-gray-900;
 }
 </style>

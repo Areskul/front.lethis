@@ -1,6 +1,6 @@
 <template lang="pug">
 .container(v-if="data")
-  .flex.justify-center
+  .flex.justify-around
     client(v-for="client in data.clients", :key="client", :client="client")
 </template>
 

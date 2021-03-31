@@ -1,16 +1,11 @@
 <template lang="pug">
-.flex.header
-  breadcrumbs
+.flex.header header boy
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import breadcrumbs from "@/components/navigation/breadcrumbs.vue";
 export default defineComponent({
   name: "v-header",
-  components: {
-    breadcrumbs,
-  },
 });
 </script>
 

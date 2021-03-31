@@ -1,6 +1,7 @@
 import { RouteRecordRaw } from "vue-router";
 import { discover } from "./discover";
 import { products } from "./products";
+import { auth } from "./auth";
 const baseTitle = "LETHIS";
 const separator = " | ";
 
@@ -22,4 +23,5 @@ const others: Array<RouteRecordRaw> = [
 
 export const routes: Array<RouteRecordRaw> = others
   .concat(discover)
-  .concat(products);
+  .concat(products)
+  .concat(auth);
