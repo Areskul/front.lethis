@@ -44,6 +44,7 @@ export default defineComponent({
     };
     const logout = () => {
       token.value = "";
+      router.push("/");
     };
     const routes = [
       {

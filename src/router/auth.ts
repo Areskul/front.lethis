@@ -3,18 +3,7 @@ const baseTitle = "LETHIS";
 const separator = " | ";
 export const auth: Array<RouteRecordRaw> = [
   {
-    path: "/register",
-    name: "register",
-    components: {
-      header: () => import("@/components/navigation/header.vue"),
-      bodyContent: () => import("@/views/Register.vue"),
-      // footer: () => import("@/components/navigation/footer.vue"),
-    },
-    meta: {
-      title: baseTitle + separator + "register",
-    },
-  },
-  {
+    alias: ["/", "/Home", "/:pathMatch(.*)*"],
     path: "/login",
     name: "login",
     components: {
@@ -24,6 +13,18 @@ export const auth: Array<RouteRecordRaw> = [
     },
     meta: {
       title: baseTitle + separator + "login",
+    },
+  },
+  {
+    path: "/register",
+    name: "register",
+    components: {
+      header: () => import("@/components/navigation/header.vue"),
+      bodyContent: () => import("@/views/Register.vue"),
+      // footer: () => import("@/components/navigation/footer.vue"),
+    },
+    meta: {
+      title: baseTitle + separator + "register",
     },
   },
   {

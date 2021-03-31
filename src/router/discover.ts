@@ -3,7 +3,6 @@ const baseTitle = "LETHIS";
 const separator = " | ";
 export const discover: Array<RouteRecordRaw> = [
   {
-    alias: ["/Home", "/:pathMatch(.*)*"],
     path: "/Discover",
     name: "Découverte",
     components: {
