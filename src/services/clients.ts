@@ -54,6 +54,40 @@ export const CREATE_CLIENT = gql`
     )
   }
 `;
+export const CREATE_INCOMES = gql`
+  mutation createIncome(
+    $benefit: Number
+    $employeeIncome: Number
+    $jointIncome: Number
+    $landIncome: Number
+    $otherIncome: Number
+    $share: Number
+  ) {
+    createClient(
+      benefit: $benefit
+      employeeIncome: $employeeIncome
+      jointIncome: $jointIncome
+      landIncome: $landIncome
+      otherIncome: $otherIncome
+      share: $share
+    )
+  }
+`;
+export const CREATE_ASSET = gql`
+  mutation createIncome(
+    $name: String
+    $value: Number
+    $monthlyPayment: Number
+    $propertyTax: Number
+  ) {
+    createClient(
+      name: $name
+      value: $value
+      monthlyPayment: $monthlyPayment
+      propertyTax: $propertyTax
+    )
+  }
+`;
 export const CREATE_PLACE = gql`
   mutation createPlace($adress: String, $city: String, $cedex: String) {
     createPlace(adress: $adress, city: $city, cedex: $cedex)
