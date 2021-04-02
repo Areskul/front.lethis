@@ -1,4 +1,4 @@
-export const metaResolver = function(to, from, next) {
+export const metaResolver = function (to, from, next) {
   const nearestWithTitle = to.matched
     .slice()
     .reverse()

@@ -1,7 +1,8 @@
 import { createRouter, createWebHistory } from "vue-router";
 import { routes } from "./routes";
 import { metaResolver } from "./metaResolver";
-export { metaResolver };
+import { auth } from "@/composables/auth";
+//export { metaResolver };
 
 export const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
@@ -19,11 +20,20 @@ export const router = createRouter({
 
 router.beforeEach((to, from) => {
   if (from.name == to.name) {
-    const err = false;
-    return err;
+    return false;
   }
 });
 
 router.beforeEach((to, from, next) => {
   metaResolver(to, from, next);
+});
+
+const { isAuthenticated } = auth();
+
+router.beforeEach(() => {
+  if (!isAuthenticated) {
+    return "/login";
+  } else {
+    return true;
+  }
 });

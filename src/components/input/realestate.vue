@@ -16,7 +16,7 @@ import { defineComponent, watch, ref } from "vue";
 import useVuelidate from "@vuelidate/core";
 import { required } from "@vuelidate/validators";
 import { useMutation } from "villus";
-import { GET_POSTS } from "@/services/posts";
+import { CREATE_REALESTATE } from "@/services/clients";
 import { local } from "@/composables/storage";
 export default defineComponent({
   name: "RealEstate",
@@ -52,9 +52,7 @@ export default defineComponent({
     const model = useVuelidate(rules, state);
     //Villus
     const variables = state.value;
-    const { execute } = useMutation({
-      query: GET_POSTS,
-    });
+    const { execute } = useMutation(CREATE_REALESTATE);
     return {
       model,
       labels,
@@ -71,6 +69,4 @@ export default defineComponent({
   },
 });
 </script>
-<style lang="postcss" scoped>
-</style>
-
+<style lang="postcss" scoped></style>

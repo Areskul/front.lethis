@@ -55,7 +55,7 @@ export const CREATE_CLIENT = gql`
   }
 `;
 export const CREATE_INCOMES = gql`
-  mutation createIncome(
+  mutation createIncomes(
     $benefit: Number
     $employeeIncome: Number
     $jointIncome: Number
@@ -73,8 +73,53 @@ export const CREATE_INCOMES = gql`
     )
   }
 `;
+export const CREATE_CHARGES = gql`
+  mutation createCharges(
+    $name: String
+    $value: Number
+    $monthlyPayment: Number
+    $propertyTax: Number
+  ) {
+    createClient(
+      name: $name
+      value: $value
+      monthlyPayment: $monthlyPayment
+      propertyTax: $propertyTax
+    )
+  }
+`;
 export const CREATE_ASSET = gql`
-  mutation createIncome(
+  mutation createAsset(
+    $name: String
+    $value: Number
+    $monthlyPayment: Number
+    $propertyTax: Number
+  ) {
+    createClient(
+      name: $name
+      value: $value
+      monthlyPayment: $monthlyPayment
+      propertyTax: $propertyTax
+    )
+  }
+`;
+export const CREATE_TAXES = gql`
+  mutation createTaxes(
+    $name: String
+    $value: Number
+    $monthlyPayment: Number
+    $propertyTax: Number
+  ) {
+    createClient(
+      name: $name
+      value: $value
+      monthlyPayment: $monthlyPayment
+      propertyTax: $propertyTax
+    )
+  }
+`;
+export const CREATE_REALESTATE = gql`
+  mutation createRealEstate(
     $name: String
     $value: Number
     $monthlyPayment: Number

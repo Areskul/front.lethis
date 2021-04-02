@@ -3,7 +3,6 @@ const baseTitle = "LETHIS";
 const separator = " | ";
 export const auth: Array<RouteRecordRaw> = [
   {
-    alias: ["/", "/Home", "/:pathMatch(.*)*"],
     path: "/login",
     name: "login",
     components: {

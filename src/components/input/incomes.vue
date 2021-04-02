@@ -16,7 +16,7 @@ import { defineComponent, watch, ref } from "vue";
 import useVuelidate from "@vuelidate/core";
 import { required } from "@vuelidate/validators";
 import { useMutation } from "villus";
-import { CREATE_INCOMES } from "@/services/incomes";
+import { CREATE_INCOMES } from "@/services/clients";
 import { local } from "@/composables/storage";
 export default defineComponent({
   name: "Incomes",
