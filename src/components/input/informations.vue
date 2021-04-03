@@ -2,13 +2,15 @@
 .container
   .flex.justify-center.items-center.py-6
     h1 Informations personnelles du client
-  .flex.justify-center
-    form(@submit.prevent)
-      .myinput(v-for="(x, i) in labels")
-        label(for="x") {{ x }}
-        input#x(type="text", v-model="model[i].$model")
-      .myinput
-        button.btn(@click="handleSubmit") submit
+  form(@submit.prevent)
+    .flex.flex-wrap.justify-center
+      .flex.p-4(v-for="(x, i) in labels")
+        .myinput
+          label(for="x") {{ x }}
+          input#x(type="text", v-model="model[i].$model")
+  .flex.justify-center.items-center.py-6
+    .myinput
+      button.btn(@click="handleSubmit") submit
 </template>
 <script lang="ts">
 import { defineComponent, watch, ref } from "vue";
