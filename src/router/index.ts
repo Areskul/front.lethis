@@ -4,6 +4,7 @@ import { metaResolver } from "./metaResolver";
 import { auth } from "@/composables/auth";
 //export { metaResolver };
 
+const { isAuthenticated } = auth();
 export const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
@@ -27,13 +28,14 @@ router.beforeEach((to, from) => {
 router.beforeEach((to, from, next) => {
   metaResolver(to, from, next);
 });
+router.beforeEach((to, from, next) => {
+  //const isAuthenticated = false;
+  if (!isAuthenticated && from.meta.type == "auth") {
+    console.log("is not auth");
 
-const { isAuthenticated } = auth();
-
-router.beforeEach(() => {
-  if (!isAuthenticated) {
-    return "/login";
+    next({ name: "login" });
   } else {
-    return true;
+    console.log("is auth");
+    next();
   }
 });

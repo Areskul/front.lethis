@@ -12,6 +12,7 @@ export const auth: Array<RouteRecordRaw> = [
     },
     meta: {
       title: baseTitle + separator + "login",
+      type: "auth",
     },
   },
   {
@@ -37,6 +38,7 @@ export const auth: Array<RouteRecordRaw> = [
     },
     meta: {
       title: baseTitle + separator + "login",
+      type: "auth",
     },
   },
 ];
