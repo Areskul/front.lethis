@@ -7,19 +7,31 @@
     p.p-5 {{ client.civilite }}
     p.p-5 {{ client.lastname }}
     p.p-5 {{ client.firstname }}
-    svg.fill-current.opacity-50(viewBox="0 0 35 45", v-show="show")
-      path(:d="pencil")
+    button(@click="dispatchClient")
+      svg.fill-current.opacity-50(viewBox="0 0 35 45", v-show="show")
+        path(:d="pencil")
 </template>
 
 <script lang="ts">
 import { mdiPencil } from "@mdi/js";
 import { defineComponent } from "vue";
+import { useStore } from "vuex";
 export default defineComponent({
   props: {
     client: {
       type: Object,
       required: true,
     },
+  },
+  setup(props) {
+    const store = useStore();
+    const dispatchClient = () => {
+      store.dispatch("client/setCurrentClient", props.client);
+    };
+    return {
+      store,
+      dispatchClient,
+    };
   },
   data: () => ({
     show: false,

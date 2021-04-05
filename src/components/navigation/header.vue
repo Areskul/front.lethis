@@ -1,11 +1,21 @@
 <template lang="pug">
-.flex.header header boy
+.flex.header {{ current.firstname }}
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { useStore } from "vuex";
+import { defineComponent, computed } from "vue";
 export default defineComponent({
   name: "v-header",
+  setup() {
+    const store = useStore();
+    const current = computed(() => {
+      return store.state.client.currentClient;
+    });
+    return {
+      current,
+    };
+  },
 });
 </script>
 

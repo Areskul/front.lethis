@@ -61,7 +61,7 @@ export default defineComponent({
     };
     const state = ref(savedState ? savedState : initialState);
     watch(state.value, () => {
-      set("incomes", state.value);
+      set("informations", state.value);
     });
     //Vueliate
     const rules = {
