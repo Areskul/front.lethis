@@ -21,6 +21,7 @@ module.exports = {
   variants: {
     extend: {
       gradientColorStops: ["dark"],
+      flexGrow: ["hover", "focus"],
     },
   },
   plugins: [require("@tailwindcss/forms"), require("@tailwindcss/line-clamp")],
