@@ -17,7 +17,7 @@ export default defineComponent({
   height: 45px;
 }
 .header {
-  @apply justify-between py-4;
+  @apply justify-between py-4 h-auto;
   @apply bg-white dark:bg-gray-900;
 }
 </style>

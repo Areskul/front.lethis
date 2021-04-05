@@ -14,5 +14,5 @@ const app = createApp(App);
 app.use(store);
 app.use(router);
 // app.directive("intersect", intersect);
-app.provide("#app", "app");
+//app.provide("#app", "app");
 app.mount("#app");
