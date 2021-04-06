@@ -1,12 +1,22 @@
 <template lang="pug">
-.flex.header {{ current.firstname }}
+div
+  .flex.header.p-3
+    p.p-1 {{ current.civilite }}
+    p.p-1 {{ current.firstname }}
+    p.p-1 {{ current.lastname }}
+  .flex
+  breadcrumbs
 </template>
 
 <script lang="ts">
 import { useStore } from "vuex";
 import { defineComponent, computed } from "vue";
+import breadcrumbs from "@/components/navigation/breadcrumbs.vue";
 export default defineComponent({
   name: "v-header",
+  components: {
+    breadcrumbs,
+  },
   setup() {
     const store = useStore();
     const current = computed(() => {
@@ -27,7 +37,11 @@ export default defineComponent({
   height: 45px;
 }
 .header {
-  @apply justify-between py-4 h-auto;
+  @apply justify-end py-4 h-auto;
   @apply bg-white dark:bg-gray-900;
+}
+p {
+  @apply text-purple-600;
+  @apply dark:text-purple-600;
 }
 </style>

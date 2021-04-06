@@ -3,7 +3,7 @@
 @tailwind utilities;
 @layer base {
   .body {
-    @apply h-screen;
+    @apply h-screen overflow-hidden;
     @apply bg-white text-black;
     @apply dark:bg-gray-900 dark:text-white;
   }

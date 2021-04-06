@@ -6,7 +6,7 @@ export const products: Array<RouteRecordRaw> = [
     path: "/Products",
     name: "Produits",
     components: {
-      header: () => import("@/components/navigation/breadcrumbs.vue"),
+      header: () => import("@/components/navigation/header.vue"),
       navbar: () => import("@/components/navigation/navbar.vue"),
       bodyContent: () => import("@/views/Home.vue"),
     },

@@ -18,12 +18,7 @@
       )
         component(:is="Component")
     router-view(name="bodyContent", v-slot="{ Component }")
-      transition(
-        mode="out-in",
-        enter-active-class="fade-in-fwd",
-        leave-active-class="fade-out-bck"
-      )
-        component(:is="Component")
+      component(:is="Component")
     router-view(name="footer", v-slot="{ Component }")
       transition(
         mode="out-in",

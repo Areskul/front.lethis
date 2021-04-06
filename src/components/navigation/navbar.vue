@@ -1,5 +1,5 @@
 <template lang="pug">
-.container.relative.transition-all(
+.container.relative.transition-all.z-10(
   @mouseover="hover = true",
   @mouseleave="hover = false",
   :class="hover ? 'large' : 'tight'"

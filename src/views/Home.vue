@@ -3,9 +3,8 @@
   router-view(name="input", v-slot="{ Component }")
     transition(
       mode="out-in",
-      appear,
-      enter-active-class="slide-in-left",
-      leave-active-class="slide-out-right"
+      enter-active-class="fade-in-fwd",
+      leave-active-class="fade-out-bck"
     )
       component(:is="Component")
 </template>
