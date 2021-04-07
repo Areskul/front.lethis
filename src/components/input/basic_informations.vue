@@ -19,6 +19,7 @@ import useVuelidate from "@vuelidate/core";
 import { required } from "@vuelidate/validators";
 import { useMutation } from "villus";
 import { CREATE_CLIENT } from "@/services/clients";
+import { UPDATE_CLIENT } from "@/services/clients";
 import { local } from "@/composables/storage";
 export default defineComponent({
   name: "basicInformations",
@@ -64,8 +65,9 @@ export default defineComponent({
     };
     const model = useVuelidate(rules, state);
     //Villus
+    const mutation = cli.id ? UPDATE_CLIENT : CREATE_CLIENT;
     const variables = state.value;
-    const { data, execute } = useMutation(CREATE_CLIENT);
+    const { data, execute } = useMutation(mutation);
     return {
       cli,
       model,

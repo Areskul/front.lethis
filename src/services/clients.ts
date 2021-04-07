@@ -56,8 +56,9 @@ export const CREATE_CLIENT = gql`
 `;
 export const UPDATE_CLIENT = gql`
   mutation updateClient(
-    $lastname: String!
-    $firstname: String!
+    $id: String!
+    $lastname: String
+    $firstname: String
     $type: String
     $civilite: String
     $birthdate: String
@@ -69,7 +70,8 @@ export const UPDATE_CLIENT = gql`
     $email: String
     $place: PlaceInput
   ) {
-    createClient(
+    updateClient(
+      id: $id
       lastname: $lastname
       firstname: $firstname
       type: $type
