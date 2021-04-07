@@ -1,24 +1,26 @@
 <template lang="pug">
-.container
-  .flex.justify-center.items-center.py-6
-    h1 Informations personnelles du client
-  form(@submit.prevent)
-    .flex.flex-wrap.justify-center
-      .flex.p-4(v-for="(x, i) in labels")
-        .myinput
-          label(for="x") {{ x }}
-          input#x(type="text", v-model="model[i].$model")
-  .flex.justify-center.items-center.py-6
-    .myinput
-      button.btn(@click="handleSubmit") submit
+div
+  basicInformations
+  .container
+    .flex.justify-center.items-center.py-6
+      h1 Informations personnelles du client
+    form(@submit.prevent)
+      .flex.flex-wrap.justify-center
+        .flex.p-4(v-for="(x, i) in labels")
+          .myinput
+            label(for="x") {{ x }}
+            input#x(type="text", v-model="model[i].$model")
+    .flex.justify-center.items-center.py-6
+      .myinput
+        button.btn(@click="handleSubmit") Enregistrer
 </template>
 <script lang="ts">
 import { defineComponent, watch, ref } from "vue";
 import useVuelidate from "@vuelidate/core";
-import { required } from "@vuelidate/validators";
 import { useMutation } from "villus";
 import { CREATE_CLIENT } from "@/services/clients";
 import { local } from "@/composables/storage";
+import basicInformations from "@/components/input/basic_informations.vue";
 export default defineComponent({
   name: "Informations",
   setup() {
@@ -27,9 +29,6 @@ export default defineComponent({
     const savedState = get("informations");
     const initialState = {
       type: "",
-      civilite: "",
-      lastname: "",
-      firstname: "",
       family: "",
       birthdate: "",
       dependants: "",
@@ -44,9 +43,6 @@ export default defineComponent({
     };
     const labels = {
       type: "type",
-      civilite: "civilité",
-      lastname: "nom",
-      firstname: "prénom",
       family: "date de naissance",
       birthdate: "situation familliale",
       dependants: "Personnes à charge",
@@ -66,13 +62,6 @@ export default defineComponent({
     //Vueliate
     const rules = {
       type: {},
-      civilite: {},
-      lastname: {
-        required,
-      },
-      firstname: {
-        required,
-      },
       family: {},
       birthdate: {},
       dependants: {},
@@ -99,11 +88,13 @@ export default defineComponent({
   },
   methods: {
     handleSubmit: function () {
-      console.log(this.variables);
       this.execute(this.variables).then((result) => {
         console.log(result);
       });
     },
+  },
+  components: {
+    basicInformations,
   },
 });
 </script>

@@ -1,7 +1,7 @@
 <template lang="pug">
 .container
   .flex.justify-center.items-center.py-6
-    h1 Residence principale/secondaire
+    h1 Informations personnelles du client
   form(@submit.prevent)
     .flex.flex-wrap.justify-center
       .flex.p-4(v-for="(x, i) in labels")
@@ -10,63 +10,69 @@
           input#x(type="text", v-model="model[i].$model")
   .flex.justify-center.items-center.py-6
     .myinput
-      button.btn(@click="handleSubmit") submit
+      button.btn(@click="handleSubmit") {{ cli.id ? 'Enregistrer' : 'Créer' }}
 </template>
-
 <script lang="ts">
-import { defineComponent, computed, watch, ref } from "vue";
+import { defineComponent, watch, ref } from "vue";
 import { useStore } from "vuex";
 import useVuelidate from "@vuelidate/core";
 import { required } from "@vuelidate/validators";
 import { useMutation } from "villus";
-import { CREATE_ASSET } from "@/services/clients";
-import { UPDATE_ASSET } from "@/services/clients";
+import { CREATE_CLIENT } from "@/services/clients";
 import { local } from "@/composables/storage";
 export default defineComponent({
-  name: "Assets",
+  name: "basicInformations",
   setup() {
+    //Store
+    const store = useStore();
+    const cli = store.state.client.currentClient;
     //LocalStorage
     const { set, get } = local();
-    const savedState = get("assets");
+    const savedState = get("basic_informations");
     const initialState = {
-      name: "",
-      value: null,
-      monthlyPayment: null,
-      propertyTax: null,
+      civilite: "",
+      lastname: "",
+      firstname: "",
     };
     const labels = {
-      name: "Nom",
-      value: "Valeur bien immobiliers",
-      monthlyPayment: "Mensualité prèt immobilier",
-      propertyTax: "Taxe foncière",
+      civilite: "civilité",
+      lastname: "nom",
+      firstname: "prénom",
     };
-    const state = ref(savedState ? savedState : initialState);
+    const useState = () => {
+      if (cli) {
+        return cli;
+      } else if (savedState) {
+        return savedState;
+      } else if (initialState) {
+        return initialState;
+      }
+    };
+    const state = ref(useState());
     watch(state.value, () => {
-      set("assets", state.value);
+      set("basic_informations", state.value);
     });
     //Vueliate
     const rules = {
-      name: {
+      civilite: {},
+      lastname: {
         required,
       },
-      value: {},
-      monthlyPayment: {},
-      propertyTax: {},
+      firstname: {
+        required,
+      },
     };
     const model = useVuelidate(rules, state);
-    //Store
-    const store = useStore();
-    const cli = computed(() => store.state.currentClient);
-
     //Villus
-    const mutation = cli ? UPDATE_ASSET : CREATE_ASSET;
     const variables = state.value;
-    const { execute } = useMutation(mutation);
+    const { data, execute } = useMutation(CREATE_CLIENT);
     return {
+      cli,
       model,
       labels,
       variables,
       execute,
+      data,
     };
   },
   methods: {
@@ -78,4 +84,3 @@ export default defineComponent({
   },
 });
 </script>
-<style lang="postcss" scoped></style>

@@ -7,7 +7,12 @@ const separator = " | ";
 
 const others: Array<RouteRecordRaw> = [
   {
-    alias: ["/", "/:pathMatch(.*)*"],
+    alias: ["/:pathMatch(.*)*"],
+    path: "/",
+    redirect: "/Clients",
+    name: "Catch",
+  },
+  {
     path: "/Clients",
     name: "Clients",
     components: {
@@ -17,7 +22,7 @@ const others: Array<RouteRecordRaw> = [
       // footer: () => import("@/components/navigation/footer.vue"),
     },
     meta: {
-      title: baseTitle + separator + "register",
+      title: baseTitle + separator + "Clients",
     },
   },
   {
@@ -30,7 +35,7 @@ const others: Array<RouteRecordRaw> = [
       // footer: () => import("@/components/navigation/footer.vue"),
     },
     meta: {
-      title: baseTitle + separator + "register",
+      title: baseTitle + separator + "Budget",
     },
   },
   {

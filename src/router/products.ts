@@ -12,6 +12,10 @@ export const products: Array<RouteRecordRaw> = [
     },
     children: [
       {
+        path: "",
+        redirect: "Accounts",
+      },
+      {
         name: "Comptes et livrets",
         path: "Accounts",
         components: {
