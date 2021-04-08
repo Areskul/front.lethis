@@ -3,7 +3,7 @@ const baseTitle = "LETHIS";
 const separator = " | ";
 export const products: Array<RouteRecordRaw> = [
   {
-    path: "/Products",
+    path: "/Products/:uid(\\d+)?/",
     name: "Produits",
     components: {
       header: () => import("@/components/navigation/header.vue"),

@@ -34,9 +34,16 @@ import { defineComponent, onMounted } from "vue";
 import { auth } from "@/composables/auth";
 import { metaTheme } from "@/composables/theme";
 import { useQuery } from "villus";
+import { useRoute } from "vue-router";
+/*import { useStore } from "vuex";*/
 import { USER_INFO } from "@/services/users.ts";
 export default defineComponent({
-  setup() {
+  setup(props) {
+    //Dispatch Client
+    /*const store= useStore()*/
+    const route = useRoute();
+    console.log(props);
+
     //villus
     const { villusClientSetup, token, user } = auth();
     villusClientSetup();
@@ -56,6 +63,7 @@ export default defineComponent({
       data,
       user,
       token,
+      route,
     };
   },
   watch: {
