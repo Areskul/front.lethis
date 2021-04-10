@@ -18,7 +18,7 @@ export const products: Array<RouteRecordRaw> = [
     children: [
       {
         path: "",
-        redirect: "Accounts",
+        redirect: "Products/Accounts",
       },
       {
         name: "Comptes et livrets",

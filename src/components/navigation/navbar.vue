@@ -12,7 +12,7 @@
         svg.fill-current(viewBox="0 0 25 35")
           path(:d="route.svg")
       button.bottom(
-        @click="handleClick(route.path)",
+        @click="handleClick(route)",
         v-if="hover",
         :class="[route.name == parents.name ? 'active' : null]"
       ) {{ route.name }}
@@ -41,10 +41,16 @@ import {
 } from "@mdi/js";
 export default defineComponent({
   name: "navbar",
+  props: {
+    uid: {
+      type: String,
+      required: false,
+    },
+  },
   data: () => ({
     hover: false,
   }),
-  setup() {
+  setup(props) {
     //Use Router
     const router = useRouter();
     const { user, isAuthenticated, token } = auth();
@@ -53,12 +59,16 @@ export default defineComponent({
     const cart = mdiCart;
     const battery = mdiBatteryPositive;
     const piggy = mdiPiggyBank;
-    const handleClick = (path) => {
-      router.push(path);
+
+    const handleClick = ({ path, name, childname }) => {
+      router.push({
+        name: childname ? childname : name,
+        params: { uid: props.uid ? props.uid : "" },
+      });
     };
     const logout = () => {
       token.value = "";
-      router.push("/");
+      router.push({ path: "/" });
     };
     const current = useRoute();
     const parents = computed(
@@ -73,7 +83,7 @@ export default defineComponent({
       )[0].children!;
       return children;
     });
-    const routes = [
+    const routes = computed(() => [
       {
         name: "Clients",
         path: "/Clients",
@@ -81,11 +91,13 @@ export default defineComponent({
       },
       {
         name: "Découverte",
+        childname: "Informations",
         path: "/Discover/Informations",
         svg: informations,
       },
       {
         name: "Produits",
+        childname: "Comptes et livrets",
         path: "/Products/Accounts",
         svg: cart,
       },
@@ -99,7 +111,7 @@ export default defineComponent({
         path: "/Saving",
         svg: battery,
       },
-    ];
+    ]);
     return {
       user,
       isAuthenticated,
@@ -141,6 +153,6 @@ button {
 }
 .active {
   @apply text-purple-600;
-  @apply dark:bg-gray-900 dark:text-blue-500;
+  @apply dark:text-blue-500;
 }
 </style>

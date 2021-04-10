@@ -3,6 +3,7 @@
   .w-auto
     router-view(name="navbar", v-slot="{ Component }")
       transition(
+        appear,
         mode="out-in",
         enter-active-class="slide-in-left",
         leave-active-class="slide-out-left"

@@ -36,12 +36,12 @@ export default defineComponent({
     };
   },
   mounted() {
-    this.execute().then(() => this.dispatchClifromRoute());
+    this.execute().then(() => this.dispatchClifromRoute(this.data));
   },
   methods: {
-    dispatchClifromRoute: function () {
-      console.log(this.data.client);
-      this.store.dispatch("client/setCurrentClient", this.data.client);
+    dispatchClifromRoute: function (data) {
+      const client = data ? data.client : {};
+      this.store.dispatch("client/setCurrentClient", client);
     },
   },
   components: {

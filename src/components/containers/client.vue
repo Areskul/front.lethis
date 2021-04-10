@@ -29,7 +29,7 @@ export default defineComponent({
     const router = useRouter();
     const dispatchClient = () => {
       store.dispatch("client/setCurrentClient", props.client);
-      router.push("/Discover/Informations");
+      router.push(`/Discover/${props.client.id}/Informations`);
     };
     return {
       store,

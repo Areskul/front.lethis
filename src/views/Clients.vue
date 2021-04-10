@@ -44,6 +44,6 @@ export default defineComponent({
   border-radius: 50%;
   @apply h-16 w-16 px-3 py-4 absolute bottom-10 right-10 shadow-xl;
   @apply text-white bg-blue-600;
-  @apply dark:text-white dark:bg-blue-600;
+  @apply dark:text-white dark:bg-purple-600;
 }
 </style>

@@ -18,7 +18,7 @@ export const discover: Array<RouteRecordRaw> = [
     children: [
       {
         path: "",
-        redirect: "Informations",
+        redirect: "/Discover/Informations",
       },
       {
         name: "Informations",

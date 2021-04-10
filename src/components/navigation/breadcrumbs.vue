@@ -1,7 +1,7 @@
 <template lang="pug">
 .container.header
-  .flex.flex-row.justify-around
-    .flex.flex-col(v-for="route in children", :key="route.name")
+  .flex.flex-row.flex-wrap.justify-center(class="md:justify-around")
+    .flex.flex-col.px-4(v-for="route in children", :key="route.name")
       router-link(:to="route.path")
         button(:class="[route.name == current.name ? 'active' : null]") {{ route.name }}
 </template>
