@@ -5,6 +5,11 @@ export const products: Array<RouteRecordRaw> = [
   {
     path: "/Products/:uid(\\d+)?/",
     name: "Produits",
+    props: {
+      bodyContent: true,
+      header: true,
+      navbar: true,
+    },
     components: {
       header: () => import("@/components/navigation/header.vue"),
       navbar: () => import("@/components/navigation/navbar.vue"),

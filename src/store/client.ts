@@ -5,6 +5,7 @@ const currentClient = () => {
   //return {};
   //}
 };
+
 //const currentClient = JSON.parse(
 //localStorage.getItem("currentClient") as string
 //);

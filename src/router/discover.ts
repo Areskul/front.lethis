@@ -5,7 +5,11 @@ export const discover: Array<RouteRecordRaw> = [
   {
     path: "/Discover/:uid(\\d+)?/",
     name: "Découverte",
-    props: true,
+    props: {
+      bodyContent: true,
+      header: true,
+      navbar: true,
+    },
     components: {
       header: () => import("@/components/navigation/header.vue"),
       navbar: () => import("@/components/navigation/navbar.vue"),
@@ -19,7 +23,6 @@ export const discover: Array<RouteRecordRaw> = [
       {
         name: "Informations",
         path: "Informations",
-        props: true,
         components: {
           input: () => import("@/components/input/informations.vue"),
         },

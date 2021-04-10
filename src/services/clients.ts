@@ -23,6 +23,29 @@ export const GET_CLIENTS = gql`
     }
   }
 `;
+export const GET_CLIENT = gql`
+  query client($id: String, $lastname: String, $firstname: String) {
+    client(id: $id, lastname: $lastname, firstname: $firstname) {
+      id
+      lastname
+      firstname
+      type
+      civilite
+      birthdate
+      dependants
+      employees
+      job
+      retirementAge
+      phone
+      email
+      place {
+        adress
+        cedex
+        city
+      }
+    }
+  }
+`;
 export const CREATE_CLIENT = gql`
   mutation createClient(
     $lastname: String!
