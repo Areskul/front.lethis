@@ -10,12 +10,14 @@ div
   button.fab(@click="handleClick")
     svg.fill-current(viewBox="0 0 25 35")
       path(:d="account")
+  newCli(v-model="state.show")
 </template>
 
 <script lang="ts">
+import newCli from "@/components/input/new.vue";
 import client from "@/components/containers/client.vue";
 import { mdiAccountPlus } from "@mdi/js";
-import { defineComponent, watch, onBeforeMount } from "vue";
+import { defineComponent, watch, onBeforeMount, ref } from "vue";
 import { useQuery } from "villus";
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
@@ -39,12 +41,17 @@ export default defineComponent({
     const { data } = useQuery({
       query: GET_CLIENTS,
     });
+    const state = ref({
+      show: false,
+    });
     const account = mdiAccountPlus;
     const handleClick = () => {
       store.dispatch("client/setCurrentClient", {});
-      router.push("/Discover/Identity");
+      /*router.push("/Discover/Identity");*/
+      state.value.show = !state.value.show;
     };
     return {
+      state,
       data,
       account,
       handleClick,
@@ -52,13 +59,14 @@ export default defineComponent({
   },
   components: {
     client,
+    newCli,
   },
 });
 </script>
 <style lang="postcss" scoped>
 .fab {
   border-radius: 50%;
-  @apply h-16 w-16 px-3 py-4 absolute bottom-10 right-10 shadow-xl;
+  @apply h-16 w-16 px-3 py-4 fixed bottom-10 right-10 shadow-xl;
   @apply text-white bg-blue-600;
   @apply dark:text-white dark:bg-purple-600;
 }
