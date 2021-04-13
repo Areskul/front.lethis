@@ -8,28 +8,33 @@
         .myinput
           label(for="x") {{ x }}
           input#x(type="text", v-model="model[i].$model")
-  .flex.justify-center.items-center.py-6
-    .myinput
-      button.btn(@click="handleSubmit") {{ cli.id ? 'Enregistrer' : 'Créer' }}
 </template>
 <script lang="ts">
-import { defineComponent, watch, ref } from "vue";
+import {
+  defineComponent,
+  computed,
+  /*watch, */
+  ref,
+} from "vue";
 import { useStore } from "vuex";
 import useVuelidate from "@vuelidate/core";
 import { required } from "@vuelidate/validators";
 import { useMutation } from "villus";
 import { CREATE_CLIENT } from "@/services/clients";
 import { UPDATE_CLIENT } from "@/services/clients";
-import { local } from "@/composables/storage";
+/*import { local } from "@/composables/storage";*/
 export default defineComponent({
   name: "basicInformations",
   setup() {
     //Store
     const store = useStore();
-    const cli = store.state.client.currentClient;
+    const cli = computed(() => store.state.client.currentClient);
+    const dispatchClient = (data) => {
+      store.dispatch("client/setCurrentClient", data);
+    };
     //LocalStorage
-    const { set, get } = local();
-    const savedState = get("basic_informations");
+    /*const { set, get } = local();*/
+    /*const savedState = get("basic_informations");*/
     const initialState = {
       civilite: "",
       lastname: "",
@@ -41,18 +46,18 @@ export default defineComponent({
       firstname: "prénom",
     };
     const useState = () => {
-      if (cli) {
-        return cli;
-      } else if (savedState) {
-        return savedState;
+      if (Object.entries(cli.value).length == 0) {
+        return cli.value;
+        /*} else if (savedState) {*/
+        /*return savedState;*/
       } else if (initialState) {
         return initialState;
       }
     };
     const state = ref(useState());
-    watch(state.value, () => {
-      set("basic_informations", state.value);
-    });
+    /*watch(state.value, () => {*/
+    /*set("basic_informations", state.value);*/
+    /*});*/
     //Vueliate
     const rules = {
       civilite: {},
@@ -65,22 +70,32 @@ export default defineComponent({
     };
     const model = useVuelidate(rules, state);
     //Villus
-    const mutation = cli.id ? UPDATE_CLIENT : CREATE_CLIENT;
+    const mutation = cli.value.id ? UPDATE_CLIENT : CREATE_CLIENT;
     const variables = state.value;
-    const { data, execute } = useMutation(mutation);
+    const { execute } = useMutation(mutation);
     return {
+      dispatchClient,
       cli,
       model,
       labels,
       variables,
       execute,
-      data,
     };
+  },
+  //Router
+  beforeRouteLeave() {
+    this.handleSubmit();
   },
   methods: {
     handleSubmit: function () {
       this.execute(this.variables).then((result) => {
-        console.log(result);
+        if (result.data.createClient) {
+          this.dispatchClient(result.data.createClient);
+        } else if (result.data.updateClient) {
+          this.dispatchClient(result.data.updateClient);
+        } else {
+          this.dispatchClient({});
+        }
       });
     },
   },

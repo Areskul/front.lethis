@@ -4,21 +4,24 @@
     form(@submit.prevent)
       .py-4
         .myinput
-          label.autocomplete(for="email") username or email
+          label.autocomplete(for="email") nom ou email
           input#email(type="text", autocomplete="on", v-model="nameAndMailC")
       .py-4
         .myinput
-          label.autocomplete(for="password") password
+          label.autocomplete(for="password") mot de passe
           input#password(type="password", v-model="model.password.$model")
       .py-4
         .myinput
-          button.btn(@click="handleSubmit") submit
-  ForgotPasswd(:variables="variables")
+          button.btn(@click="handleSubmit") Se connecter
+  .flex.justify-center.items-center
+    .flex
+      ForgotPasswd(:variables="variables")
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { defineComponent, onBeforeMount, ref, watch } from "vue";
 import { auth } from "@/composables/auth";
+import { useRouter } from "vue-router";
 import useVuelidate from "@vuelidate/core";
 import { required, email } from "@vuelidate/validators";
 import { useMutation } from "villus";
@@ -30,6 +33,8 @@ export default defineComponent({
     ForgotPasswd,
   },
   setup() {
+    //Router
+    const router = useRouter();
     //Vueliate
     const state = ref({
       name: "",
@@ -50,10 +55,23 @@ export default defineComponent({
     };
     const model = useVuelidate(rules, state);
     //Token
-    const { token } = auth();
+    const { token, isAuthenticated } = auth();
     //Villus
     const variables = state.value;
     const { execute } = useMutation(LOGIN_USER);
+
+    //Redirect
+    watch(isAuthenticated, (isAuthenticated) => {
+      if (isAuthenticated) {
+        console.log(isAuthenticated);
+        router.push("/Clients");
+      }
+    });
+    onBeforeMount(() => {
+      if (isAuthenticated.value) {
+        router.push("/Clients");
+      }
+    });
 
     return {
       execute,
@@ -67,7 +85,6 @@ export default defineComponent({
       this.execute(this.variables).then((result) => {
         this.token = result.data.loginUser;
       });
-      this.$router.push("/Clients");
     },
   },
   data: () => ({

@@ -3,7 +3,6 @@
   .w-auto
     router-view(name="navbar", v-slot="{ Component }")
       transition(
-        appear,
         mode="out-in",
         enter-active-class="slide-in-left",
         leave-active-class="slide-out-left"
@@ -65,8 +64,10 @@ export default defineComponent({
         this.user = val.user;
       }
     },
-    token: function () {
-      this.execute();
+    token: function (val) {
+      if (val != "") {
+        this.execute();
+      }
     },
   },
 });

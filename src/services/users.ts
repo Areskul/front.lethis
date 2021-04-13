@@ -1,5 +1,19 @@
 import gql from "graphql-tag";
 
+//export const LOGIN_USER = gql`
+//query($name: String, $email: String, $password: String!) {
+//loginUser(name: $name, email: $email, password: $password) {
+//... on User {
+//id
+//name
+//email
+//}
+//... on Token {
+//value
+//}
+//}
+//}
+//`;
 export const LOGIN_USER = gql`
   query($name: String, $email: String, $password: String!) {
     loginUser(name: $name, email: $email, password: $password)

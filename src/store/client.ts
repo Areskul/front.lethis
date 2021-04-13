@@ -19,18 +19,13 @@ export const client = {
   },
   mutations: {
     updateCurrentClient(state: any, data: any) {
+      //if (data == {} || data == undefined || data == null) {
+      //localStorage.setItem("currentClient", JSON.stringify({}));
+      //} else {
       state.currentClient = data;
-      if (data == {} || data == undefined || data == null) {
-        localStorage.setItem(
-          "currentClient",
-          JSON.stringify(state.currentClient)
-        );
-      } else {
-        localStorage.setItem(
-          "currentClient",
-          JSON.stringify(state.currentClient)
-        );
-      }
+      localStorage.setItem("currentClient", JSON.stringify(data));
+      //}
+      //console.log(state.currentClient);
     },
   },
 };

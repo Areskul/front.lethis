@@ -74,11 +74,29 @@ export const CREATE_CLIENT = gql`
       phone: $phone
       email: $email
       place: $place
-    )
+    ) {
+      id
+      lastname
+      firstname
+      type
+      civilite
+      birthdate
+      dependants
+      employees
+      job
+      retirementAge
+      phone
+      email
+      place {
+        adress
+        cedex
+        city
+      }
+    }
   }
 `;
 export const UPDATE_CLIENT = gql`
-  mutation updateClient(
+  mutation client(
     $id: String!
     $lastname: String
     $firstname: String
@@ -107,7 +125,25 @@ export const UPDATE_CLIENT = gql`
       phone: $phone
       email: $email
       place: $place
-    )
+    ) {
+      id
+      lastname
+      firstname
+      type
+      civilite
+      birthdate
+      dependants
+      employees
+      job
+      retirementAge
+      phone
+      email
+      place {
+        adress
+        cedex
+        city
+      }
+    }
   }
 `;
 export const CREATE_INCOMES = gql`

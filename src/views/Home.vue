@@ -13,7 +13,7 @@ import { defineComponent } from "vue";
 import { useStore } from "vuex";
 import { useQuery } from "villus";
 import { GET_CLIENT } from "@/services/clients";
-import informations from "@/components/input/informations.vue";
+import { auth } from "@/composables/auth";
 export default defineComponent({
   name: "Home",
   props: {
@@ -23,6 +23,7 @@ export default defineComponent({
     },
   },
   setup(props) {
+    const { isAuthenticated } = auth();
     const store = useStore();
     //Dispatch Client
     const { data, execute } = useQuery({
@@ -30,22 +31,26 @@ export default defineComponent({
       variables: { id: props.uid },
     });
     return {
+      isAuthenticated,
       data,
       execute,
       store,
     };
   },
   mounted() {
-    this.execute().then(() => this.dispatchClifromRoute(this.data));
+    if (this.uid) {
+      this.execute().then((res) => {
+        this.dispatchClifromRoute(this.data ? this.data : res);
+      });
+    } else {
+      this.dispatchClifromRoute({});
+    }
   },
   methods: {
     dispatchClifromRoute: function (data) {
-      const client = data ? data.client : {};
+      const client = data.client ? data.client : {};
       this.store.dispatch("client/setCurrentClient", client);
     },
-  },
-  components: {
-    informations,
   },
 });
 </script>

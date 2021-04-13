@@ -25,7 +25,7 @@
           button.btn se connecter
       div(v-if="isAuthenticated && hover")
         p.p-3.text-sm {{ user.name }}
-        button.btn.text-sm(v-if="isAuthenticated", @click="logout") logout
+        button.btn.text-sm(v-if="isAuthenticated", @click="logout") Se déconnecter
 </template>
 
 <script lang="ts">
@@ -68,7 +68,7 @@ export default defineComponent({
     };
     const logout = () => {
       token.value = "";
-      router.push({ path: "/" });
+      router.push({ path: "/login" });
     };
     const current = useRoute();
     const parents = computed(

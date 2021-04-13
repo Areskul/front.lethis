@@ -1,6 +1,6 @@
 <template lang="pug">
 div
-  .flex.header.p-3(v-if="current.id")
+  .flex.header.p-3(v-if="current")
     p.p-1 {{ current.civilite }}
     p.p-1 {{ current.firstname }}
     p.p-1 {{ current.lastname }}

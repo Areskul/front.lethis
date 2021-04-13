@@ -1,8 +1,12 @@
 <template lang="pug">
 div
   .container(v-if="data")
-    .flex.justify-around
-      client(v-for="client in data.clients", :key="client", :client="client")
+    .flex.flex-wrap.justify-around
+      client.px-4(
+        v-for="client in data.clients",
+        :key="client",
+        :client="client"
+      )
   button.fab(@click="handleClick")
     svg.fill-current(viewBox="0 0 25 35")
       path(:d="account")
@@ -11,14 +15,26 @@ div
 <script lang="ts">
 import client from "@/components/containers/client.vue";
 import { mdiAccountPlus } from "@mdi/js";
-import { defineComponent } from "vue";
+import { defineComponent, watch, onBeforeMount } from "vue";
 import { useQuery } from "villus";
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
 import { GET_CLIENTS } from "@/services/clients";
+import { auth } from "@/composables/auth";
 export default defineComponent({
   setup() {
     const router = useRouter();
+    const { isAuthenticated } = auth();
+    watch(isAuthenticated, (isAuthenticated) => {
+      if (!isAuthenticated) {
+        router.push("/login");
+      }
+    });
+    onBeforeMount(() => {
+      if (!isAuthenticated.value) {
+        router.push("/login");
+      }
+    });
     const store = useStore();
     const { data } = useQuery({
       query: GET_CLIENTS,
@@ -26,7 +42,7 @@ export default defineComponent({
     const account = mdiAccountPlus;
     const handleClick = () => {
       store.dispatch("client/setCurrentClient", {});
-      router.push("/Discover/Informations");
+      router.push("/Discover/Identity");
     };
     return {
       data,

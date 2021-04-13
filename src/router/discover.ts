@@ -21,6 +21,16 @@ export const discover: Array<RouteRecordRaw> = [
         redirect: "/Discover/Informations",
       },
       {
+        name: "Identité",
+        path: "Identity",
+        components: {
+          input: () => import("@/components/input/basic_informations.vue"),
+        },
+        meta: {
+          title: baseTitle + separator + "Identité",
+        },
+      },
+      {
         name: "Informations",
         path: "Informations",
         components: {

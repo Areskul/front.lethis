@@ -1,6 +1,6 @@
 <template lang="pug">
 .container
-  button(@click="handleSubmit") Forgot pasword ?
+  button(@click="handleSubmit") Mot de passe oublié ?
 </template>
 
 <script lang="ts">

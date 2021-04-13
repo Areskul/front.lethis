@@ -10,10 +10,12 @@ import {
   subscriptionForwarder,
 } from "@/services/subPlugin";
 import { useStore } from "vuex";
-import { computed } from "vue";
+import { watch, computed, onBeforeMount } from "vue";
+import { useRouter } from "vue-router";
 
 export const auth = () => {
   const store = useStore();
+  const router = useRouter();
   const token = computed({
     get: () => store.state.auth.token,
     set: (val) => {
@@ -41,6 +43,16 @@ export const auth = () => {
       cachePolicy: "network-only",
     });
   };
+  watch(isAuthenticated, (isAuthenticated) => {
+    if (!isAuthenticated) {
+      router.push("/login");
+    }
+  });
+  onBeforeMount(() => {
+    if (!isAuthenticated.value) {
+      router.push("/login");
+    }
+  });
   return {
     token,
     user,
