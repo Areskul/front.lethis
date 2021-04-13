@@ -5,11 +5,7 @@ export const discover: Array<RouteRecordRaw> = [
   {
     path: "/Discover/:uid(\\d+)?/",
     name: "Découverte",
-    props: {
-      bodyContent: true,
-      header: true,
-      navbar: true,
-    },
+    props: true,
     components: {
       header: () => import("@/components/navigation/header.vue"),
       navbar: () => import("@/components/navigation/navbar.vue"),
@@ -21,6 +17,7 @@ export const discover: Array<RouteRecordRaw> = [
         redirect: "/Discover/Informations",
       },
       {
+        props: true,
         name: "Identité",
         path: "Identity",
         components: {
@@ -31,6 +28,7 @@ export const discover: Array<RouteRecordRaw> = [
         },
       },
       {
+        props: true,
         name: "Informations",
         path: "Informations",
         components: {
@@ -41,6 +39,7 @@ export const discover: Array<RouteRecordRaw> = [
         },
       },
       {
+        props: true,
         name: "Revenues",
         path: "Incomes",
         components: {
@@ -51,6 +50,7 @@ export const discover: Array<RouteRecordRaw> = [
         },
       },
       {
+        props: true,
         name: "Charges courrantes",
         path: "Charges",
         components: {
@@ -61,6 +61,7 @@ export const discover: Array<RouteRecordRaw> = [
         },
       },
       {
+        props: true,
         name: "Impôts",
         path: "Taxes",
         components: {
@@ -71,6 +72,7 @@ export const discover: Array<RouteRecordRaw> = [
         },
       },
       {
+        props: true,
         name: "Patrimoine immobilier non-locatif",
         path: "Assets",
         components: {
@@ -81,6 +83,7 @@ export const discover: Array<RouteRecordRaw> = [
         },
       },
       {
+        props: true,
         name: "Immobilier locatif",
         path: "RealEstate",
         components: {

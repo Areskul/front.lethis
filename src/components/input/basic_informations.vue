@@ -25,7 +25,13 @@ import { UPDATE_CLIENT } from "@/services/clients";
 /*import { local } from "@/composables/storage";*/
 export default defineComponent({
   name: "basicInformations",
-  setup() {
+  props: {
+    uid: {
+      type: String,
+      required: false,
+    },
+  },
+  setup(props) {
     //Store
     const store = useStore();
     const cli = computed(() => store.state.client.currentClient);
@@ -37,8 +43,8 @@ export default defineComponent({
     /*const savedState = get("basic_informations");*/
     const initialState = {
       civilite: "",
-      lastname: "",
-      firstname: "",
+      lastname: null,
+      firstname: null,
     };
     const labels = {
       civilite: "civilité",
@@ -46,7 +52,7 @@ export default defineComponent({
       firstname: "prénom",
     };
     const useState = () => {
-      if (Object.entries(cli.value).length == 0) {
+      if (Object.entries(cli.value).length != 0) {
         return cli.value;
         /*} else if (savedState) {*/
         /*return savedState;*/
@@ -83,16 +89,22 @@ export default defineComponent({
     };
   },
   //Router
-  beforeRouteLeave() {
-    this.handleSubmit();
+  beforeRouteLeave(to, from) {
+    if (to.params.uid) {
+      this.dispatchClient({});
+    } else if (!this.uid) {
+      this.dispatchClient({});
+    } else {
+      this.handleSubmit();
+    }
   },
   methods: {
     handleSubmit: function () {
-      this.execute(this.variables).then((result) => {
-        if (result.data.createClient) {
-          this.dispatchClient(result.data.createClient);
-        } else if (result.data.updateClient) {
-          this.dispatchClient(result.data.updateClient);
+      this.execute(this.variables).then((res) => {
+        if (res.data.createClient) {
+          this.dispatchClient(res.data.createClient);
+        } else if (res.data.updateClient) {
+          this.dispatchClient(res.data.updateClient);
         } else {
           this.dispatchClient({});
         }

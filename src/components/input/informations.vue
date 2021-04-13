@@ -22,6 +22,12 @@ import { UPDATE_CLIENT } from "@/services/clients";
 /*import { local } from "@/composables/storage";*/
 export default defineComponent({
   name: "Informations",
+  props: {
+    uid: {
+      type: String,
+      required: false,
+    },
+  },
   setup() {
     //Store
     const store = useStore();
@@ -103,8 +109,14 @@ export default defineComponent({
     };
   },
   //Router
-  beforeRouteLeave() {
-    this.handleSubmit();
+  beforeRouteLeave(to, from) {
+    if (to.params.uid) {
+      this.dispatchClient({});
+    } else if (!this.uid) {
+      this.dispatchClient({});
+    } else {
+      this.handleSubmit();
+    }
   },
   methods: {
     handleSubmit: function () {

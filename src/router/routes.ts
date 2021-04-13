@@ -15,11 +15,6 @@ const others: Array<RouteRecordRaw> = [
   {
     path: "/Clients",
     name: "Clients",
-    props: {
-      bodyContent: true,
-      header: true,
-      navbar: true,
-    },
     components: {
       header: () => import("@/components/navigation/header.vue"),
       navbar: () => import("@/components/navigation/navbar.vue"),
