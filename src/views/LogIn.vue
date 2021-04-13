@@ -63,7 +63,6 @@ export default defineComponent({
     //Redirect
     watch(isAuthenticated, (isAuthenticated) => {
       if (isAuthenticated) {
-        console.log(isAuthenticated);
         router.push("/Clients");
       }
     });

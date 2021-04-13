@@ -13,6 +13,7 @@ const others: Array<RouteRecordRaw> = [
     name: "Catch",
   },
   {
+    props: true,
     path: "/Clients",
     name: "Clients",
     components: {
@@ -26,13 +27,9 @@ const others: Array<RouteRecordRaw> = [
     },
   },
   {
+    props: true,
     path: "/Budget",
     name: "Budget",
-    props: {
-      bodyContent: true,
-      header: true,
-      navbar: true,
-    },
     components: {
       header: () => import("@/components/navigation/header.vue"),
       navbar: () => import("@/components/navigation/navbar.vue"),
@@ -44,13 +41,9 @@ const others: Array<RouteRecordRaw> = [
     },
   },
   {
+    props: true,
     path: "/Saving",
     name: "Capacité d'épargne",
-    props: {
-      bodyContent: true,
-      header: true,
-      navbar: true,
-    },
     components: {
       header: () => import("@/components/navigation/header.vue"),
       navbar: () => import("@/components/navigation/navbar.vue"),

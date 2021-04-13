@@ -90,9 +90,9 @@ export default defineComponent({
   },
   //Router
   beforeRouteLeave(to, from) {
-    if (to.params.uid) {
+    if (!this.uid) {
       this.dispatchClient({});
-    } else if (!this.uid) {
+    } else if (!to.params.uid) {
       this.dispatchClient({});
     } else {
       this.handleSubmit();
