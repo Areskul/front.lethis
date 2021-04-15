@@ -42,26 +42,19 @@ export default defineComponent({
     const cli = computed(() => store.state.client.currentClient);
     const dispatchClient = (data) => {
       store.dispatch("client/setCurrentClient", data);
-      router.push({ name: "informations", params: { uid: cli.value.id } });
+      router.push({ name: "Informations", params: { uid: cli.value.id } });
     };
     const initialState = {
-      gender: null,
-      lastname: null,
-      firstname: null,
+      gender: "",
+      lastname: "",
+      firstname: "",
     };
     const labels = {
       gender: "civilité",
       lastname: "nom",
       firstname: "prénom",
     };
-    const useState = () => {
-      if (Object.entries(cli.value).length != 0) {
-        return cli.value;
-      } else if (initialState) {
-        return initialState;
-      }
-    };
-    const state = ref(useState());
+    const state = ref(initialState);
     //Vueliate
     const rules = {
       gender: {},
