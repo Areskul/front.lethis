@@ -1,8 +1,8 @@
 <template lang="pug">
 .overlay(v-show="modelValue")
-  .content(@click="handleClick(false)")
-  .container.justify-center.items-center
-    .flex.justify-center.items-center.py-6
+  .under(@click="handleClick(false)")
+  .alert(@click.prevent)
+    .flex.justify-center.pb-4
       h1 Informations personnelles du client
     form(@submit.prevent)
       .flex.flex-wrap.justify-center
@@ -105,13 +105,16 @@ export default defineComponent({
 });
 </script>
 <style lang="postcss" scoped>
+.alert {
+  @apply container bg-white py-3 max-w-2xl rounded-md shadow z-20;
+}
 .overlay {
   @apply bg-gray-100;
   @apply dark:bg-black;
-  @apply fixed z-10 inset-0 overflow-y-auto justify-center items-center align-middle;
+  @apply fixed z-10 inset-0 flex flex-row overflow-y-auto justify-center items-center;
   @apply bg-opacity-75 transition-opacity;
 }
-.content {
-  @apply fixed inset-0 flex flex-row items-center justify-center;
+.under {
+  @apply inset-0 fixed items-center justify-center;
 }
 </style>
