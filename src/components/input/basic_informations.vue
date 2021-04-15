@@ -20,7 +20,7 @@ import { useStore } from "vuex";
 import useVuelidate from "@vuelidate/core";
 import { required } from "@vuelidate/validators";
 import { useMutation } from "villus";
-import { CREATE_CLIENT } from "@/services/clients";
+/*import { CREATE_CLIENT } from "@/services/clients";*/
 import { UPDATE_CLIENT } from "@/services/clients";
 /*import { local } from "@/composables/storage";*/
 export default defineComponent({
@@ -42,12 +42,12 @@ export default defineComponent({
     /*const { set, get } = local();*/
     /*const savedState = get("basic_informations");*/
     const initialState = {
-      civilite: "",
+      gender: "",
       lastname: null,
       firstname: null,
     };
     const labels = {
-      civilite: "civilité",
+      gender: "civilité",
       lastname: "nom",
       firstname: "prénom",
     };
@@ -66,7 +66,7 @@ export default defineComponent({
     /*});*/
     //Vueliate
     const rules = {
-      civilite: {},
+      gender: {},
       lastname: {
         required,
       },
@@ -76,9 +76,9 @@ export default defineComponent({
     };
     const model = useVuelidate(rules, state);
     //Villus
-    const mutation = cli.value.id ? UPDATE_CLIENT : CREATE_CLIENT;
+    /*const mutation = cli.value.id ? UPDATE_CLIENT : CREATE_CLIENT;*/
     const variables = state.value;
-    const { execute } = useMutation(mutation);
+    const { execute } = useMutation(UPDATE_CLIENT);
     return {
       dispatchClient,
       cli,
@@ -102,11 +102,12 @@ export default defineComponent({
     handleSubmit: function () {
       let id = "";
       this.execute(this.variables).then((res) => {
-        if (res.data.createClient) {
-          this.dispatchClient(res.data.createClient);
-          /*this.$route.params.uid = res.data.createClient.id;*/
-          id = res.data.createClient.id;
-        } else if (res.data.updateClient) {
+        /*if (res.data.createClient) {*/
+        /*this.dispatchClient(res.data.createClient);*/
+        /*[>this.$route.params.uid = res.data.createClient.id;<]*/
+        /*id = res.data.createClient.id;*/
+        /*} else */
+        if (res.data.updateClient) {
           this.dispatchClient(res.data.updateClient);
           id = res.data.updateClient.id;
         } else {

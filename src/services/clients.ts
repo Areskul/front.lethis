@@ -6,8 +6,8 @@ export const GET_CLIENTS = gql`
       id
       lastname
       firstname
+      gender
       type
-      civilite
       birthdate
       dependants
       employees
@@ -30,7 +30,7 @@ export const GET_CLIENT = gql`
       lastname
       firstname
       type
-      civilite
+      gender
       birthdate
       dependants
       employees
@@ -51,7 +51,7 @@ export const CREATE_CLIENT = gql`
     $lastname: String!
     $firstname: String!
     $type: String
-    $civilite: String
+    $gender: String
     $birthdate: String
     $dependants: String
     $employees: String
@@ -65,7 +65,7 @@ export const CREATE_CLIENT = gql`
       lastname: $lastname
       firstname: $firstname
       type: $type
-      civilite: $civilite
+      gender: $gender
       birthdate: $birthdate
       dependants: $dependants
       employees: $employees
@@ -79,7 +79,7 @@ export const CREATE_CLIENT = gql`
       lastname
       firstname
       type
-      civilite
+      gender
       birthdate
       dependants
       employees
@@ -101,7 +101,7 @@ export const UPDATE_CLIENT = gql`
     $lastname: String
     $firstname: String
     $type: String
-    $civilite: String
+    $gender: String
     $birthdate: String
     $dependants: String
     $employees: String
@@ -116,7 +116,7 @@ export const UPDATE_CLIENT = gql`
       lastname: $lastname
       firstname: $firstname
       type: $type
-      civilite: $civilite
+      gender: $gender
       birthdate: $birthdate
       dependants: $dependants
       employees: $employees
@@ -130,7 +130,7 @@ export const UPDATE_CLIENT = gql`
       lastname
       firstname
       type
-      civilite
+      gender
       birthdate
       dependants
       employees

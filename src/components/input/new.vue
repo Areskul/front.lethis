@@ -1,5 +1,5 @@
 <template lang="pug">
-.overlay(v-show="modelValue")
+.overlay(v-if="modelValue")
   .under(@click="handleClick(false)")
   .alert(@click.prevent)
     .flex.justify-center.pb-4
@@ -16,6 +16,7 @@
 <script lang="ts">
 import { defineComponent, computed, ref } from "vue";
 import { useStore } from "vuex";
+import { useRouter } from "vue-router";
 import useVuelidate from "@vuelidate/core";
 import { required } from "@vuelidate/validators";
 import { useMutation } from "villus";
@@ -37,17 +38,19 @@ export default defineComponent({
   setup(props, { emit }) {
     //Store
     const store = useStore();
+    const router = useRouter();
     const cli = computed(() => store.state.client.currentClient);
     const dispatchClient = (data) => {
       store.dispatch("client/setCurrentClient", data);
+      router.push({ name: "informations", params: { uid: cli.value.id } });
     };
     const initialState = {
-      civilite: null,
+      gender: null,
       lastname: null,
       firstname: null,
     };
     const labels = {
-      civilite: "civilité",
+      gender: "civilité",
       lastname: "nom",
       firstname: "prénom",
     };
@@ -61,7 +64,7 @@ export default defineComponent({
     const state = ref(useState());
     //Vueliate
     const rules = {
-      civilite: {},
+      gender: {},
       lastname: {
         required,
       },
@@ -106,7 +109,9 @@ export default defineComponent({
 </script>
 <style lang="postcss" scoped>
 .alert {
-  @apply container bg-white py-3 max-w-2xl rounded-md shadow z-20;
+  @apply container py-3 max-w-2xl rounded-md shadow z-20;
+  @apply bg-white;
+  @apply dark:bg-gray-900;
 }
 .overlay {
   @apply bg-gray-100;
