@@ -19,7 +19,6 @@ import { useStore } from "vuex";
 import useVuelidate from "@vuelidate/core";
 import { useMutation } from "villus";
 import { UPDATE_CLIENT } from "@/services/clients";
-/*import { local } from "@/composables/storage";*/
 export default defineComponent({
   name: "Informations",
   props: {
@@ -35,16 +34,13 @@ export default defineComponent({
     const dispatchClient = (data) => {
       store.dispatch("client/setCurrentClient", data);
     };
-    //LocalStorage
-    /*const { set, get } = local();*/
-    /*const savedState = get("informations");*/
     const initialState = {
       type: "",
       family: "",
       birthdate: "",
       dependants: "",
       employees: "",
-      job: "",
+      job: { name: "" },
       retirementAge: "",
       adress: "",
       cedex: "",
@@ -69,15 +65,11 @@ export default defineComponent({
     const useState = () => {
       if (cli) {
         return cli;
-        /*} else if (savedState) {*/
-        /*return savedState;*/
       } else if (initialState) {
         return initialState;
       }
     };
     const state = ref(useState());
-    /*watch(state.value, () => {*/
-    /*set("informations", state.value);*/
     /*});*/
     //Vueliate
     const rules = {

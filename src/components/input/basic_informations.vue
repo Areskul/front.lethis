@@ -22,7 +22,7 @@ import { required } from "@vuelidate/validators";
 import { useMutation } from "villus";
 /*import { CREATE_CLIENT } from "@/services/clients";*/
 import { UPDATE_CLIENT } from "@/services/clients";
-/*import { local } from "@/composables/storage";*/
+import { local } from "@/composables/storage";
 export default defineComponent({
   name: "basicInformations",
   props: {
@@ -39,6 +39,7 @@ export default defineComponent({
       store.dispatch("client/setCurrentClient", data);
     };
     //LocalStorage
+    const { filter } = local();
     /*const { set, get } = local();*/
     /*const savedState = get("basic_informations");*/
     const initialState = {
@@ -78,6 +79,7 @@ export default defineComponent({
     //Villus
     /*const mutation = cli.value.id ? UPDATE_CLIENT : CREATE_CLIENT;*/
     const variables = state.value;
+    filter(variables);
     const { execute } = useMutation(UPDATE_CLIENT);
     return {
       dispatchClient,
@@ -90,13 +92,13 @@ export default defineComponent({
   },
   //Router
   beforeRouteLeave(to, from) {
-    /*if (!this.uid) {*/
-    /*this.dispatchClient({});*/
-    /*} else if (!to.params.uid) {*/
-    /*this.dispatchClient({});*/
-    /*} else {*/
-    this.handleSubmit();
-    /*}*/
+    if (!this.uid) {
+      this.dispatchClient({});
+    } else if (!to.params.uid) {
+      this.dispatchClient({});
+    } else {
+      this.handleSubmit();
+    }
   },
   methods: {
     handleSubmit: function () {
@@ -111,7 +113,8 @@ export default defineComponent({
           this.dispatchClient(res.data.updateClient);
           id = res.data.updateClient.id;
         } else {
-          this.dispatchClient({});
+          console.log(res.error);
+          /*this.dispatchClient({});*/
         }
       });
       return id;

@@ -6,8 +6,23 @@ export const local = () => {
     const value = JSON.parse(localStorage.getItem(key)!);
     return value;
   };
+  const isBlank = (str) => {
+    return !str || /^\s*$/.test(str);
+  };
+  const removeEmpty = (key: any, value: any) => {
+    console.log(key);
+    if (isBlank(value)) {
+      console.log(value + " = blank");
+    }
+  };
+  const filter = (obj: any) => {
+    const array = Object.entries(obj);
+    array.forEach(([key, value]) => removeEmpty(key, value));
+  };
+
   return {
     set,
     get,
+    filter,
   };
 };

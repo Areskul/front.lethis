@@ -11,15 +11,9 @@ export const GET_CLIENTS = gql`
       birthdate
       dependants
       employees
-      job
       retirementAge
       phone
       email
-      place {
-        adress
-        cedex
-        city
-      }
     }
   }
 `;
@@ -34,7 +28,9 @@ export const GET_CLIENT = gql`
       birthdate
       dependants
       employees
-      job
+      job {
+        name
+      }
       retirementAge
       phone
       email
@@ -82,8 +78,10 @@ export const CREATE_CLIENT = gql`
       gender
       birthdate
       dependants
+      job {
+        name
+      }
       employees
-      job
       retirementAge
       phone
       email
@@ -96,7 +94,7 @@ export const CREATE_CLIENT = gql`
   }
 `;
 export const UPDATE_CLIENT = gql`
-  mutation client(
+  mutation updateClient(
     $id: String!
     $lastname: String
     $firstname: String
@@ -133,8 +131,9 @@ export const UPDATE_CLIENT = gql`
       gender
       birthdate
       dependants
-      employees
-      job
+      job {
+        name
+      }
       retirementAge
       phone
       email
