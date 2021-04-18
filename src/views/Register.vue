@@ -1,5 +1,5 @@
 <template lang="pug">
-.container.py-5
+.container.py-5.my-52
   .flex.justify-center.items-center
     form(@submit.prevent)
       .py-4
@@ -28,7 +28,11 @@
           )
       .py-4
         .myinput
-          button.btn(@click="handleSubmit") submit
+          button.btn(@click="handleSubmit") S'enrigister
+  .flex.justify-center.items-center.pt-4
+    .flex
+      router-link(:to="path")
+        p.text-sm Vous avez déjà un compte ?
 </template>
 
 <script lang="ts">
@@ -44,6 +48,7 @@ export default defineComponent({
   setup() {
     //Router
     const router = useRouter();
+    const path = "/login";
     //Vueliate
     const state = ref({
       name: "",
@@ -70,12 +75,12 @@ export default defineComponent({
     const { data, execute } = useMutation(REGISTER_USER);
     //Redirect
     watch(isAuthenticated, (isAuthenticated) => {
-      if (isAuthenticated) {
+      if (isAuthenticated.value) {
         router.push("/Clients");
       }
     });
     onBeforeMount(() => {
-      if (isAuthenticated) {
+      if (isAuthenticated.value) {
         router.push("/Clients");
       }
     });
@@ -85,6 +90,7 @@ export default defineComponent({
       data,
       token,
       model,
+      path,
     };
   },
   methods: {
@@ -101,15 +107,3 @@ export default defineComponent({
   },
 });
 </script>
-<style lang="postcss" scoped>
-.autocomplete {
-  @apply absolute text-pink-400 bg-white dark:bg-black left-3 transition-all px-1;
-  @apply dark:bg-black;
-  top: 0%;
-  transform: translateY(-100%);
-}
-.empty input:not(focus) + label {
-  top: 50%;
-  transform: translateY(-50%);
-}
-</style>

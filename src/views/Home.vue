@@ -1,5 +1,5 @@
 <template lang="pug">
-.container.pt-10
+.container
   router-view(name="input", v-slot="{ Component }")
     transition(
       mode="out-in",
@@ -13,7 +13,7 @@ import { defineComponent } from "vue";
 import { useStore } from "vuex";
 import { useQuery } from "villus";
 import { GET_CLIENT } from "@/services/clients";
-import { auth } from "@/composables/auth";
+import { auth, guard } from "@/composables/auth";
 export default defineComponent({
   name: "Home",
   props: {
@@ -23,6 +23,7 @@ export default defineComponent({
     },
   },
   setup(props) {
+    guard();
     const { isAuthenticated } = auth();
     const store = useStore();
     //Dispatch Client

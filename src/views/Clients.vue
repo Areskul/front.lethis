@@ -7,9 +7,15 @@ div
         :key="client",
         :client="client"
       )
-  button.fab(@click="handleClick")
-    svg.fill-current(viewBox="0 0 25 35")
-      path(:d="account")
+
+  transition(
+    mode="out-in",
+    enter-active-class="scale-in-center",
+    leave-active-class="fade-out-bck"
+  )
+    button.fab(@click="handleClick")
+      svg.fill-current(viewBox="0 0 25 35")
+        path(:d="account")
   newCli(v-model="state.show")
 </template>
 
@@ -22,9 +28,10 @@ import { useQuery } from "villus";
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
 import { GET_CLIENTS } from "@/services/clients";
-import { auth } from "@/composables/auth";
+import { auth, guard } from "@/composables/auth";
 export default defineComponent({
   setup() {
+    guard();
     const router = useRouter();
     const { isAuthenticated } = auth();
     watch(isAuthenticated, (isAuthenticated) => {
@@ -65,9 +72,9 @@ export default defineComponent({
 </script>
 <style lang="postcss" scoped>
 .fab {
-  border-radius: 50%;
-  @apply h-16 w-16 px-3 py-4 fixed bottom-10 right-10 shadow-xl;
+  @apply absolute z-10 bottom-10 right-10 h-16 w-16 px-3 py-4 shadow-xl;
   @apply text-white bg-blue-600;
   @apply dark:text-white dark:bg-purple-600;
+  border-radius: 50%;
 }
 </style>

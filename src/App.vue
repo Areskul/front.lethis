@@ -1,5 +1,5 @@
 <template lang="pug">
-.body.flex.relative
+.body.flex
   .w-auto
     router-view(name="navbar", v-slot="{ Component }")
       transition(
@@ -12,13 +12,17 @@
     router-view(name="header", v-slot="{ Component }")
       transition(
         mode="out-in",
-        appear,
         enter-active-class="fade-in-top",
         leave-active-class="fade-out-top"
       )
         component(:is="Component")
     router-view(name="bodyContent", v-slot="{ Component }")
-      component(:is="Component")
+      transition(
+        mode="out-in",
+        enter-active-class="fade-in-fwd",
+        leave-active-class="fade-out-bck"
+      )
+        component(:is="Component")
     router-view(name="footer", v-slot="{ Component }")
       transition(
         mode="out-in",

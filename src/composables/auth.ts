@@ -15,7 +15,6 @@ import { useRouter } from "vue-router";
 
 export const auth = () => {
   const store = useStore();
-  const router = useRouter();
   const token = computed({
     get: () => store.state.auth.token,
     set: (val) => {
@@ -43,6 +42,18 @@ export const auth = () => {
       cachePolicy: "network-only",
     });
   };
+  return {
+    token,
+    user,
+    isAuthenticated,
+    villusClientSetup,
+  };
+};
+
+export const guard = () => {
+  const store = useStore();
+  const router = useRouter();
+  const isAuthenticated = computed(() => store.state.auth.isAuthenticated);
   watch(isAuthenticated, (isAuthenticated) => {
     if (!isAuthenticated) {
       router.push("/login");
@@ -53,10 +64,4 @@ export const auth = () => {
       router.push("/login");
     }
   });
-  return {
-    token,
-    user,
-    isAuthenticated,
-    villusClientSetup,
-  };
 };

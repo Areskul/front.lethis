@@ -1,5 +1,5 @@
 <template lang="pug">
-.container.py-5
+.container.py-5.my-52
   .flex.justify-center.items-center
     form(@submit.prevent)
       .py-4
@@ -16,6 +16,10 @@
   .flex.justify-center.items-center
     .flex
       ForgotPasswd(:variables="variables")
+  .flex.justify-center.items-center.pt-4
+    .flex
+      router-link(:to="path")
+        p.text-sm Créer un compte
 </template>
 
 <script lang="ts">
@@ -35,6 +39,7 @@ export default defineComponent({
   setup() {
     //Router
     const router = useRouter();
+    const path = "/register";
     //Vueliate
     const state = ref({
       name: "",
@@ -77,6 +82,7 @@ export default defineComponent({
       variables,
       token,
       model,
+      path,
     };
   },
   methods: {
@@ -112,16 +118,3 @@ export default defineComponent({
   },
 });
 </script>
-
-<style lang="postcss" scoped>
-.autocomplete {
-  @apply absolute text-pink-400 bg-white dark:bg-black left-3 transition-all px-1;
-  @apply dark:bg-black;
-  top: 0%;
-  transform: translateY(-100%);
-}
-.empty input:not(focus) + label {
-  top: 50%;
-  transform: translateY(-50%);
-}
-</style>

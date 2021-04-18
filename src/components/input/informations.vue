@@ -10,11 +10,8 @@
           input#x(type="text", v-model="model[i].$model")
 </template>
 <script lang="ts">
-import {
-  defineComponent,
-  /*, watch*/
-  ref,
-} from "vue";
+import { defineComponent, ref } from "vue";
+import { local } from "@/composables/storage";
 import { useStore } from "vuex";
 import useVuelidate from "@vuelidate/core";
 import { useMutation } from "villus";
@@ -34,6 +31,8 @@ export default defineComponent({
     const dispatchClient = (data) => {
       store.dispatch("client/setCurrentClient", data);
     };
+    //LocalStorage
+    const { filter } = local();
     const initialState = {
       type: "",
       family: "",
@@ -88,7 +87,7 @@ export default defineComponent({
     };
     const model = useVuelidate(rules, state);
     //Villus
-    const variables = state.value;
+    const variables = filter(state.value);
     const { data, execute } = useMutation(UPDATE_CLIENT);
     return {
       dispatchClient,

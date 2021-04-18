@@ -1,8 +1,3 @@
-.router-link-exact-active {
-  .dot {
-    visibility: visible !important;
-  }
-}
 .router-link {
   color: inherit;
 }
@@ -29,23 +24,6 @@ blockquote {
   font-variant: normal;
   font-weight: 400;
   line-height: 30px;
-}
-pre {
-  font-family: Ubuntu;
-  font-size: 13px;
-  font-style: normal;
-  font-variant: normal;
-  font-weight: 400;
-  line-height: 18.5714px;
-}
-menu {
-  display: block;
-  list-style-type: none;
-  margin-block-start: 0em;
-  margin-block-end: 0em;
-  margin-inline-start: 0px;
-  margin-inline-end: 0px;
-  padding-inline-start: 0px;
 }
 img {
   max-width: inherit;

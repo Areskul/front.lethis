@@ -6,18 +6,24 @@ export const local = () => {
     const value = JSON.parse(localStorage.getItem(key)!);
     return value;
   };
-  const isBlank = (str) => {
+  const isBlank = (str: any) => {
     return !str || /^\s*$/.test(str);
   };
-  const removeEmpty = (key: any, value: any) => {
-    console.log(key);
+  const isBlankTuple = (key: any, value: any) => {
     if (isBlank(value)) {
-      console.log(value + " = blank");
+      return key;
     }
   };
   const filter = (obj: any) => {
-    const array = Object.entries(obj);
-    array.forEach(([key, value]) => removeEmpty(key, value));
+    const entries = Object.entries(obj);
+    const empty: string[] = [];
+    entries.forEach(([key, value]) => {
+      empty.push(isBlankTuple(key, value));
+    });
+    empty.forEach((key) => {
+      delete obj[key];
+    });
+    return obj;
   };
 
   return {
