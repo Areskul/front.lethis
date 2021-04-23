@@ -8,11 +8,13 @@ import { createApp } from "vue";
 import App from "./App.vue";
 import { store } from "./store";
 import { router } from "./router";
+import { clickOutside } from "@/directives/clickOutSide";
 
 const app = createApp(App);
 
 app.use(store);
 app.use(router);
 // app.directive("intersect", intersect);
+app.directive("click-outside", clickOutside);
 //app.provide("#app", "app");
 app.mount("#app");

@@ -5,7 +5,14 @@
   form(@submit.prevent)
     .flex.flex-wrap.justify-center
       .flex.p-4(v-for="(x, i) in labels")
-        .myinput
+        .myinput(v-if="dropdown[i].bool")
+          label(for="x") {{ x }}
+          dropdown#x(
+            v-model="model[i].$model",
+            :query="dropdown[i].query",
+            :queryName="dropdown[i].name"
+          )
+        .myinput(v-else)
           label(for="x") {{ x }}
           input#x(type="text", v-model="model[i].$model")
 </template>
@@ -16,21 +23,26 @@ import {
   /*watch, */
   ref,
 } from "vue";
+import dropdown from "@/components/containers/dropdown.vue";
 import { useStore } from "vuex";
 import useVuelidate from "@vuelidate/core";
 import { required } from "@vuelidate/validators";
 import { useMutation } from "villus";
 import { UPDATE_CLIENT } from "@/services/clients";
+import { GET_GENDERS } from "@/services/fields";
 import { local } from "@/composables/storage";
 export default defineComponent({
   name: "basicInformations",
+  components: {
+    dropdown,
+  },
   props: {
     uid: {
       type: String,
       required: false,
     },
   },
-  setup(props) {
+  setup() {
     //Store
     const store = useStore();
     const cli = computed(() => store.state.client.currentClient);
@@ -40,7 +52,7 @@ export default defineComponent({
     //LocalStorage
     const { filter } = local();
     const initialState = {
-      gender: "",
+      gender: null,
       lastname: null,
       firstname: null,
     };
@@ -57,6 +69,19 @@ export default defineComponent({
       }
     };
     const state = ref(useState());
+    const dropdown = {
+      gender: {
+        bool: true,
+        query: GET_GENDERS,
+        name: "genders",
+      },
+      lastname: {
+        bool: false,
+      },
+      firstname: {
+        bool: false,
+      },
+    };
     //Vueliate
     const rules = {
       gender: {},
@@ -76,6 +101,7 @@ export default defineComponent({
       cli,
       model,
       labels,
+      dropdown,
       variables,
       execute,
     };

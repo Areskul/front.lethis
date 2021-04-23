@@ -13,13 +13,14 @@
     @apply dark:bg-purple-400 dark:text-white;
   }
   .myinput {
-    @apply relative rounded h-10;
+    @apply flex relative rounded h-10;
   }
   input[type="text"],
   input[type="date"],
   input[type="email"],
   input[type="tel"],
-  input[type="password"] {
+  input[type="password"],
+  select {
     @apply rounded w-full h-full py-2 transition-all;
     @apply dark:bg-gray-900;
   }
