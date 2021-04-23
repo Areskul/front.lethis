@@ -10,7 +10,8 @@ import {
   subscriptionForwarder,
 } from "@/services/subPlugin";
 import { useStore } from "vuex";
-import { computed } from "vue";
+import { watch, computed, onBeforeMount } from "vue";
+import { useRouter } from "vue-router";
 
 export const auth = () => {
   const store = useStore();
@@ -47,4 +48,20 @@ export const auth = () => {
     isAuthenticated,
     villusClientSetup,
   };
+};
+
+export const guard = () => {
+  const store = useStore();
+  const router = useRouter();
+  const isAuthenticated = computed(() => store.state.auth.isAuthenticated);
+  watch(isAuthenticated, (isAuthenticated) => {
+    if (!isAuthenticated) {
+      router.push("/login");
+    }
+  });
+  onBeforeMount(() => {
+    if (!isAuthenticated.value) {
+      router.push("/login");
+    }
+  });
 };

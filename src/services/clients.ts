@@ -6,12 +6,31 @@ export const GET_CLIENTS = gql`
       id
       lastname
       firstname
+      gender
       type
-      civilite
       birthdate
       dependants
       employees
-      job
+      retirementAge
+      phone
+      email
+    }
+  }
+`;
+export const GET_CLIENT = gql`
+  query client($id: String, $lastname: String, $firstname: String) {
+    client(id: $id, lastname: $lastname, firstname: $firstname) {
+      id
+      lastname
+      firstname
+      type
+      gender
+      birthdate
+      dependants
+      employees
+      job {
+        name
+      }
       retirementAge
       phone
       email
@@ -28,7 +47,7 @@ export const CREATE_CLIENT = gql`
     $lastname: String!
     $firstname: String!
     $type: String
-    $civilite: String
+    $gender: String
     $birthdate: String
     $dependants: String
     $employees: String
@@ -42,7 +61,7 @@ export const CREATE_CLIENT = gql`
       lastname: $lastname
       firstname: $firstname
       type: $type
-      civilite: $civilite
+      gender: $gender
       birthdate: $birthdate
       dependants: $dependants
       employees: $employees
@@ -51,7 +70,27 @@ export const CREATE_CLIENT = gql`
       phone: $phone
       email: $email
       place: $place
-    )
+    ) {
+      id
+      lastname
+      firstname
+      type
+      gender
+      birthdate
+      dependants
+      job {
+        name
+      }
+      employees
+      retirementAge
+      phone
+      email
+      place {
+        adress
+        cedex
+        city
+      }
+    }
   }
 `;
 export const UPDATE_CLIENT = gql`
@@ -60,7 +99,7 @@ export const UPDATE_CLIENT = gql`
     $lastname: String
     $firstname: String
     $type: String
-    $civilite: String
+    $gender: String
     $birthdate: String
     $dependants: String
     $employees: String
@@ -75,7 +114,7 @@ export const UPDATE_CLIENT = gql`
       lastname: $lastname
       firstname: $firstname
       type: $type
-      civilite: $civilite
+      gender: $gender
       birthdate: $birthdate
       dependants: $dependants
       employees: $employees
@@ -84,7 +123,26 @@ export const UPDATE_CLIENT = gql`
       phone: $phone
       email: $email
       place: $place
-    )
+    ) {
+      id
+      lastname
+      firstname
+      type
+      gender
+      birthdate
+      dependants
+      job {
+        name
+      }
+      retirementAge
+      phone
+      email
+      place {
+        adress
+        cedex
+        city
+      }
+    }
   }
 `;
 export const CREATE_INCOMES = gql`

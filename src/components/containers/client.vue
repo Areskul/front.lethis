@@ -4,7 +4,7 @@
     @mouseover="show = true",
     @mouseleave="show = false"
   )
-    p.p-5 {{ client.civilite }}
+    p.p-5 {{ client.gender }}
     p.p-5 {{ client.lastname }}
     p.p-5 {{ client.firstname }}
     button(@click="dispatchClient")
@@ -29,7 +29,7 @@ export default defineComponent({
     const router = useRouter();
     const dispatchClient = () => {
       store.dispatch("client/setCurrentClient", props.client);
-      router.push("/Discover/Informations");
+      router.push({ name: "Informations", params: { uid: props.client.id } });
     };
     return {
       store,

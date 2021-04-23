@@ -1,39 +1,45 @@
 <template lang="pug">
-div
-  basicInformations
-  .container
-    .flex.justify-center.items-center.py-6
-      h1 Informations personnelles du client
-    form(@submit.prevent)
-      .flex.flex-wrap.justify-center
-        .flex.p-4(v-for="(x, i) in labels")
-          .myinput
-            label(for="x") {{ x }}
-            input#x(type="text", v-model="model[i].$model")
-    .flex.justify-center.items-center.py-6
-      .myinput
-        button.btn(@click="handleSubmit") Enregistrer
+.container
+  .flex.justify-center.items-center.py-6
+    h1 Informations personnelles du client
+  form(@submit.prevent)
+    .flex.flex-wrap.justify-center
+      .flex.p-4(v-for="(x, i) in labels")
+        .myinput
+          label(for="x") {{ x }}
+          input#x(type="text", v-model="model[i].$model")
 </template>
 <script lang="ts">
-import { defineComponent, watch, ref } from "vue";
+import { defineComponent, ref } from "vue";
+import { local } from "@/composables/storage";
+import { useStore } from "vuex";
 import useVuelidate from "@vuelidate/core";
 import { useMutation } from "villus";
-import { CREATE_CLIENT } from "@/services/clients";
-import { local } from "@/composables/storage";
-import basicInformations from "@/components/input/basic_informations.vue";
+import { UPDATE_CLIENT } from "@/services/clients";
 export default defineComponent({
   name: "Informations",
+  props: {
+    uid: {
+      type: String,
+      required: false,
+    },
+  },
   setup() {
+    //Store
+    const store = useStore();
+    const cli = store.state.client.currentClient;
+    const dispatchClient = (data) => {
+      store.dispatch("client/setCurrentClient", data);
+    };
     //LocalStorage
-    const { set, get } = local();
-    const savedState = get("informations");
+    const { filter } = local();
     const initialState = {
       type: "",
       family: "",
       birthdate: "",
       dependants: "",
       employees: "",
-      job: "",
+      job: { name: "" },
       retirementAge: "",
       adress: "",
       cedex: "",
@@ -55,10 +61,15 @@ export default defineComponent({
       phone: "Téléphone",
       email: "Mail",
     };
-    const state = ref(savedState ? savedState : initialState);
-    watch(state.value, () => {
-      set("informations", state.value);
-    });
+    const useState = () => {
+      if (cli) {
+        return cli;
+      } else if (initialState) {
+        return initialState;
+      }
+    };
+    const state = ref(useState());
+    /*});*/
     //Vueliate
     const rules = {
       type: {},
@@ -76,9 +87,11 @@ export default defineComponent({
     };
     const model = useVuelidate(rules, state);
     //Villus
-    const variables = state.value;
-    const { data, execute } = useMutation(CREATE_CLIENT);
+    const variables = filter(state.value);
+    const { data, execute } = useMutation(UPDATE_CLIENT);
     return {
+      dispatchClient,
+      cli,
       model,
       labels,
       variables,
@@ -86,15 +99,22 @@ export default defineComponent({
       data,
     };
   },
+  //Router
+  beforeRouteLeave(to, from) {
+    if (!this.uid) {
+      this.dispatchClient({});
+    } else if (!to.params.uid) {
+      this.dispatchClient({});
+    } else {
+      this.handleSubmit();
+    }
+  },
   methods: {
     handleSubmit: function () {
       this.execute(this.variables).then((result) => {
-        console.log(result);
+        this.dispatchClient(result.data.updateClient);
       });
     },
-  },
-  components: {
-    basicInformations,
   },
 });
 </script>

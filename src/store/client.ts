@@ -1,10 +1,7 @@
-const currentClient = () => {
-  //if (localStorage.getItem("currentClient")) {
-  return JSON.parse(localStorage.getItem("currentClient") as string);
-  //} else {
-  //return {};
-  //}
-};
+const currentClient = JSON.parse(
+  localStorage.getItem("currentClient") as string
+);
+
 //const currentClient = JSON.parse(
 //localStorage.getItem("currentClient") as string
 //);
@@ -22,15 +19,13 @@ export const client = {
   },
   mutations: {
     updateCurrentClient(state: any, data: any) {
+      //if (data == {} || data == undefined || data == null) {
+      //localStorage.setItem("currentClient", JSON.stringify({}));
+      //} else {
       state.currentClient = data;
-      if (data == {} || data == undefined || data == null) {
-        localStorage.removeItem("currentClient");
-      } else {
-        localStorage.setItem(
-          "currentClient",
-          JSON.stringify(state.currentClient)
-        );
-      }
+      localStorage.setItem("currentClient", JSON.stringify(data));
+      //}
+      //console.log(state.currentClient);
     },
   },
 };

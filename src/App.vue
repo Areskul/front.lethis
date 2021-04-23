@@ -1,5 +1,5 @@
 <template lang="pug">
-.body.flex.relative
+.body.flex
   .w-auto
     router-view(name="navbar", v-slot="{ Component }")
       transition(
@@ -12,13 +12,17 @@
     router-view(name="header", v-slot="{ Component }")
       transition(
         mode="out-in",
-        appear,
         enter-active-class="fade-in-top",
         leave-active-class="fade-out-top"
       )
         component(:is="Component")
     router-view(name="bodyContent", v-slot="{ Component }")
-      component(:is="Component")
+      transition(
+        mode="out-in",
+        enter-active-class="fade-in-fwd",
+        leave-active-class="fade-out-bck"
+      )
+        component(:is="Component")
     router-view(name="footer", v-slot="{ Component }")
       transition(
         mode="out-in",
@@ -34,16 +38,9 @@ import { defineComponent, onMounted } from "vue";
 import { auth } from "@/composables/auth";
 import { metaTheme } from "@/composables/theme";
 import { useQuery } from "villus";
-import { useRoute } from "vue-router";
-/*import { useStore } from "vuex";*/
 import { USER_INFO } from "@/services/users.ts";
 export default defineComponent({
   setup(props) {
-    //Dispatch Client
-    /*const store= useStore()*/
-    const route = useRoute();
-    console.log(props);
-
     //villus
     const { villusClientSetup, token, user } = auth();
     villusClientSetup();
@@ -63,7 +60,6 @@ export default defineComponent({
       data,
       user,
       token,
-      route,
     };
   },
   watch: {
@@ -72,8 +68,10 @@ export default defineComponent({
         this.user = val.user;
       }
     },
-    token: function () {
-      this.execute();
+    token: function (val) {
+      if (val != "") {
+        this.execute();
+      }
     },
   },
 });

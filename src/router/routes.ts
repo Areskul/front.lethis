@@ -13,6 +13,7 @@ const others: Array<RouteRecordRaw> = [
     name: "Catch",
   },
   {
+    props: true,
     path: "/Clients",
     name: "Clients",
     components: {
@@ -26,6 +27,7 @@ const others: Array<RouteRecordRaw> = [
     },
   },
   {
+    props: true,
     path: "/Budget",
     name: "Budget",
     components: {
@@ -39,6 +41,7 @@ const others: Array<RouteRecordRaw> = [
     },
   },
   {
+    props: true,
     path: "/Saving",
     name: "Capacité d'épargne",
     components: {
