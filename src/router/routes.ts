@@ -8,6 +8,7 @@ const separator = " | ";
 const others: Array<RouteRecordRaw> = [
   {
     //alias: ["/:pathMatch(.*)*"],
+    alias: ["/home", "/Home"],
     path: "/",
     redirect: "/Clients",
     name: "Catch",

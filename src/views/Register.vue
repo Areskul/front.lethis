@@ -99,7 +99,6 @@ export default defineComponent({
         this.execute(this.variables).then((result) => {
           this.token = result.data.registerUser;
         });
-        this.$router.push("/home");
       } catch {
         throw new Error("Couldn't register user");
       }

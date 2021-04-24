@@ -87,9 +87,13 @@ export default defineComponent({
   },
   methods: {
     handleSubmit: function () {
-      this.execute(this.variables).then((result) => {
-        this.token = result.data.loginUser;
-      });
+      try {
+        this.execute(this.variables).then((result) => {
+          this.token = result.data.loginUser;
+        });
+      } catch {
+        throw new Error("Couldn't register user");
+      }
     },
   },
   data: () => ({
