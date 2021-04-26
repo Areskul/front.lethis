@@ -12,7 +12,7 @@
 <script lang="ts">
 import { defineComponent, ref } from "vue";
 import { local } from "@/composables/storage";
-import { useStore } from "vuex";
+import { client, saveCliToStore } from "@/composables/client";
 import useVuelidate from "@vuelidate/core";
 import { useMutation } from "villus";
 import { UPDATE_CLIENT } from "@/services/clients";
@@ -25,12 +25,7 @@ export default defineComponent({
     },
   },
   setup() {
-    //Store
-    const store = useStore();
-    const cli = store.state.client.currentClient;
-    const dispatchClient = (data) => {
-      store.dispatch("client/setCurrentClient", data);
-    };
+    const { cli } = client();
     //LocalStorage
     const { filter } = local();
     const initialState = {
@@ -62,8 +57,8 @@ export default defineComponent({
       email: "Mail",
     };
     const useState = () => {
-      if (cli) {
-        return cli;
+      if (Object.entries(cli.value).length != 0) {
+        return cli.value;
       } else if (initialState) {
         return initialState;
       }
@@ -88,33 +83,12 @@ export default defineComponent({
     const model = useVuelidate(rules, state);
     //Villus
     const variables = filter(state.value);
-    const { data, execute } = useMutation(UPDATE_CLIENT);
+    const { execute } = useMutation(UPDATE_CLIENT);
+    saveCliToStore(execute, variables);
     return {
-      dispatchClient,
-      cli,
       model,
       labels,
-      variables,
-      execute,
-      data,
     };
-  },
-  //Router
-  beforeRouteLeave(to, from) {
-    if (!this.uid) {
-      this.dispatchClient({});
-    } else if (!to.params.uid) {
-      this.dispatchClient({});
-    } else {
-      this.handleSubmit();
-    }
-  },
-  methods: {
-    handleSubmit: function () {
-      this.execute(this.variables).then((result) => {
-        this.dispatchClient(result.data.updateClient);
-      });
-    },
   },
 });
 </script>

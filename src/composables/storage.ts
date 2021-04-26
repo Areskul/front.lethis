@@ -25,7 +25,6 @@ export const local = () => {
     });
     return obj;
   };
-
   return {
     set,
     get,

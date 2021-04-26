@@ -7,7 +7,7 @@
       .flex.p-4(v-for="(x, i) in labels")
         .myinput(v-if="dropdown[i].bool")
           label(for="x") {{ x }}
-          dropdown#x(
+          selectable#x(
             v-model="model[i].$model",
             :query="dropdown[i].query",
             :queryName="dropdown[i].name"
@@ -17,24 +17,19 @@
           input#x(type="text", v-model="model[i].$model")
 </template>
 <script lang="ts">
-import {
-  defineComponent,
-  computed,
-  /*watch, */
-  ref,
-} from "vue";
-import dropdown from "@/components/containers/dropdown.vue";
-import { useStore } from "vuex";
+import { defineComponent, ref } from "vue";
+import selectable from "@/components/containers/selectable.vue";
 import useVuelidate from "@vuelidate/core";
 import { required } from "@vuelidate/validators";
 import { useMutation } from "villus";
 import { UPDATE_CLIENT } from "@/services/clients";
 import { GET_GENDERS } from "@/services/fields";
 import { local } from "@/composables/storage";
+import { client, saveCliToStore } from "@/composables/client";
 export default defineComponent({
   name: "basicInformations",
   components: {
-    dropdown,
+    selectable,
   },
   props: {
     uid: {
@@ -43,12 +38,7 @@ export default defineComponent({
     },
   },
   setup() {
-    //Store
-    const store = useStore();
-    const cli = computed(() => store.state.client.currentClient);
-    const dispatchClient = (data) => {
-      store.dispatch("client/setCurrentClient", data);
-    };
+    const { cli } = client();
     //LocalStorage
     const { filter } = local();
     const initialState = {
@@ -96,40 +86,12 @@ export default defineComponent({
     //Villus
     const variables = filter(state.value);
     const { execute } = useMutation(UPDATE_CLIENT);
+    saveCliToStore(execute, variables);
     return {
-      dispatchClient,
-      cli,
       model,
       labels,
       dropdown,
-      variables,
-      execute,
     };
-  },
-  //Router
-  beforeRouteLeave(to, from) {
-    if (!this.uid) {
-      this.dispatchClient({});
-    } else if (!to.params.uid) {
-      this.dispatchClient({});
-    } else {
-      this.handleSubmit();
-    }
-  },
-  methods: {
-    handleSubmit: function () {
-      let id = "";
-      this.execute(this.variables).then((res) => {
-        if (res.data.updateClient) {
-          this.dispatchClient(res.data.updateClient);
-          id = res.data.updateClient.id;
-        } else {
-          console.log(res.error);
-          /*this.dispatchClient({});*/
-        }
-      });
-      return id;
-    },
   },
 });
 </script>

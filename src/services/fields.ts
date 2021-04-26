@@ -9,3 +9,11 @@ export const GET_GENDERS = gql`
     }
   }
 `;
+
+export const GET_JOBS = gql`
+  query jobs {
+    jobs {
+      name
+    }
+  }
+`;

@@ -34,27 +34,17 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted } from "vue";
+import { defineComponent } from "vue";
 import { auth } from "@/composables/auth";
-import { metaTheme } from "@/composables/theme";
 import { useQuery } from "villus";
 import { USER_INFO } from "@/services/users.ts";
 export default defineComponent({
-  setup(props) {
-    //villus
+  setup() {
+    //Villus
     const { villusClientSetup, token, user } = auth();
     villusClientSetup();
-
     //Dispatch villus data in app
     const { data, execute } = useQuery({ query: USER_INFO });
-
-    //theme
-    const { setMeta } = metaTheme();
-
-    onMounted(async () => {
-      setMeta();
-    });
-
     return {
       execute,
       data,
