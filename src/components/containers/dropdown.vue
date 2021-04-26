@@ -1,6 +1,7 @@
 <template lang="pug">
-select(v-if="data", v-model="modelValueComputed")
-  option.dropdown(v-for="item in data.__type.enumValues") {{ item.name }}
+input(v-model="modelValueComputed")
+.card(v-if="data")
+  p(v-for="item in data.jobs") {{ item.name }}
 </template>
 
 <script lang="ts">
@@ -48,7 +49,7 @@ export default defineComponent({
 </script>
 
 <style lang="postcss" scoped>
-.dropdown {
+.card {
   @apply shadow-md;
 }
 </style>
