@@ -1,16 +1,17 @@
 <template lang="pug">
-input(v-model="modelValueComputed")
 .card(v-if="data")
-  p(v-for="item in data.jobs") {{ item.name }}
+  div {{ data }}
+  .item(v-for="item in data.jobs")
+    p {{ item.name }}
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from "vue";
+import { defineComponent, computed, watch } from "vue";
 import { useQuery } from "villus";
 export default defineComponent({
   props: {
     modelValue: {
-      type: String,
+      type: Object,
       required: true,
     },
     query: {
@@ -23,9 +24,10 @@ export default defineComponent({
     },
   },
   setup(props, { emit }) {
-    const { data } = useQuery({
+    let data;
+    const { execute } = useQuery({
       query: props.query,
-      /*fetchOnMount: false,*/
+      fetchOnMount: false,
     });
     const handleInput = function (string) {
       emit("update:modelValue", string);
@@ -39,9 +41,15 @@ export default defineComponent({
         return val;
       },
     });
+    watch(modelValueComputed, () => {
+      execute().then((res) => {
+        data = res;
+      });
+    });
     return {
       modelValueComputed,
       handleInput,
+      execute,
       data,
     };
   },

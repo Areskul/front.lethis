@@ -7,6 +7,7 @@
       .flex.p-4(v-for="(x, i) in labels")
         .myinput(v-if="dropdown[i].bool")
           label(for="x") {{ x }}
+          input#x(type="text", v-model="model[i].$model")
           dropdown#x(
             v-model="model[i].$model",
             :query="dropdown[i].query",
@@ -46,7 +47,7 @@ export default defineComponent({
       birthdate: "",
       dependants: "",
       employees: "",
-      job: { name: "" },
+      job: "",
       retirementAge: "",
       adress: "",
       cedex: "",

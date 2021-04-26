@@ -5,12 +5,12 @@
   form(@submit.prevent)
     .flex.flex-wrap.justify-center
       .flex.p-4(v-for="(x, i) in labels")
-        .myinput(v-if="dropdown[i].bool")
+        .myinput(v-if="selectable[i].bool")
           label(for="x") {{ x }}
           selectable#x(
             v-model="model[i].$model",
-            :query="dropdown[i].query",
-            :queryName="dropdown[i].name"
+            :query="selectable[i].query",
+            :queryName="selectable[i].name"
           )
         .myinput(v-else)
           label(for="x") {{ x }}
@@ -59,7 +59,7 @@ export default defineComponent({
       }
     };
     const state = ref(useState());
-    const dropdown = {
+    const selectable = {
       gender: {
         bool: true,
         query: GET_GENDERS,
@@ -90,7 +90,7 @@ export default defineComponent({
     return {
       model,
       labels,
-      dropdown,
+      selectable,
     };
   },
 });
