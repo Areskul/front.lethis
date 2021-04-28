@@ -1,5 +1,6 @@
 import { useClient, defaultPlugins, ClientPlugin } from "villus";
 import { authPlugin } from "@/villus/plugins/auth";
+import { omitDeepPlugin } from "@/villus/plugins/omit-deep";
 import {
   handleSubscriptions,
   subscriptionForwarder,
@@ -9,6 +10,7 @@ export const useVillus = () => {
   useClient({
     url: api,
     use: [
+      omitDeepPlugin,
       authPlugin(),
       handleSubscriptions(subscriptionForwarder) as ClientPlugin,
       ...defaultPlugins(),

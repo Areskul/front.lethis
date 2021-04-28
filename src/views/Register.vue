@@ -85,7 +85,7 @@ export default defineComponent({
     handleSubmit: function () {
       try {
         this.execute(this.variables).then((result) => {
-          this.token = result.data.registerUser;
+          this.token = result.data;
         });
       } catch {
         throw new Error("Couldn't register user");

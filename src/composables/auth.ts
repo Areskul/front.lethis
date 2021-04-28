@@ -15,8 +15,8 @@ export const auth = () => {
       store.dispatch("auth/setToken", val);
     },
   });
-  watch(token, (token) => {
-    if (token != "") {
+  watch(isAuthenticated, (bool) => {
+    if (bool) {
       execute();
     }
   });
@@ -28,7 +28,7 @@ export const auth = () => {
   });
   watch(data, (data) => {
     if (data) {
-      user.value = data.user;
+      user.value = data;
     }
   });
   return {
@@ -42,8 +42,9 @@ export const isUnauthNavguard = () => {
   const store = useStore();
   const router = useRouter();
   const isAuthenticated = computed(() => store.state.auth.isAuthenticated);
-  watch(isAuthenticated, (isAuthenticated) => {
-    if (!isAuthenticated) {
+
+  watch(isAuthenticated, (bool) => {
+    if (!bool) {
       router.push("/login");
     }
   });
@@ -58,6 +59,7 @@ export const isAuthNavguard = () => {
   const store = useStore();
   const router = useRouter();
   const isAuthenticated = computed(() => store.state.auth.isAuthenticated);
+
   watch(isAuthenticated, (isAuthenticated) => {
     if (isAuthenticated.value) {
       router.push("/Clients");

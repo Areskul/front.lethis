@@ -20,7 +20,7 @@
 <script lang="ts">
 import { defineComponent, ref } from "vue";
 import dropdown from "@/components/containers/dropdown.vue";
-import { local } from "@/composables/storage";
+import { removeBlankTuples } from "@/composables/utils";
 import { clientUtils } from "@/composables/client";
 import useVuelidate from "@vuelidate/core";
 import { useMutation } from "villus";
@@ -40,7 +40,6 @@ export default defineComponent({
   setup() {
     const { client } = clientUtils();
     //LocalStorage
-    const { filter } = local();
     const initialState = {
       type: "",
       family: "",
@@ -136,7 +135,7 @@ export default defineComponent({
     };
     const model = useVuelidate(rules, state);
     //Villus
-    const variables = filter(state.value);
+    const variables = removeBlankTuples(state.value);
     const { execute } = useMutation(UPDATE_CLIENT);
     /*saveCliToStore(execute, variables);*/
     return {

@@ -73,13 +73,14 @@ export default defineComponent({
   },
   methods: {
     handleSubmit: function () {
-      try {
-        this.execute(this.variables).then((result) => {
-          this.token = result.data.loginUser;
+      this.execute(this.variables)
+        .then((result) => {
+          this.token = result.data;
+          this.$router.push("/Clients");
+        })
+        .catch(() => {
+          throw new Error("Couldn't log user in");
         });
-      } catch {
-        throw new Error("Couldn't register user");
-      }
     },
   },
   data: () => ({

@@ -1,8 +1,10 @@
+import { isBlank } from "@/composables/utils";
+
 const user = {};
 const token: string | undefined = JSON.parse(
   localStorage.getItem("token") as string
 );
-const isAuthenticated = token ? true : false;
+const isAuthenticated = token ? !isBlank(token) : false;
 
 export const auth = {
   namespaced: true,
@@ -23,9 +25,9 @@ export const auth = {
     updateToken(state: any, token: string) {
       state.token = token;
       localStorage.setItem("token", JSON.stringify(state.token));
-      state.isAuthenticated = !!token;
+      state.isAuthenticated = !isBlank(token);
     },
-    async updateUser(state: any, data: any) {
+    updateUser(state: any, data: any) {
       state.user = data;
     },
   },
