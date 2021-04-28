@@ -38,7 +38,7 @@ export const auth = () => {
   };
 };
 
-export const navguard = () => {
+export const isUnauthNavguard = () => {
   const store = useStore();
   const router = useRouter();
   const isAuthenticated = computed(() => store.state.auth.isAuthenticated);
@@ -50,6 +50,22 @@ export const navguard = () => {
   onBeforeMount(() => {
     if (!isAuthenticated.value) {
       router.push("/login");
+    }
+  });
+};
+
+export const isAuthNavguard = () => {
+  const store = useStore();
+  const router = useRouter();
+  const isAuthenticated = computed(() => store.state.auth.isAuthenticated);
+  watch(isAuthenticated, (isAuthenticated) => {
+    if (isAuthenticated.value) {
+      router.push("/Clients");
+    }
+  });
+  onBeforeMount(() => {
+    if (isAuthenticated.value) {
+      router.push("/Clients");
     }
   });
 };

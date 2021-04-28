@@ -36,9 +36,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, watch, onBeforeMount } from "vue";
-import { auth } from "@/composables/auth";
-import { useRouter } from "vue-router";
+import { defineComponent, ref } from "vue";
+import { auth, isAuthNavguard } from "@/composables/auth";
 import useVuelidate from "@vuelidate/core";
 import { required, email } from "@vuelidate/validators";
 import { useMutation } from "villus";
@@ -46,9 +45,9 @@ import { REGISTER_USER } from "@/services/users.ts";
 export default defineComponent({
   name: "Register",
   setup() {
+    isAuthNavguard();
     //Router
-    const router = useRouter();
-    const path = "/login";
+    const loginPath = "/login";
     //Vueliate
     const state = ref({
       name: "",
@@ -69,28 +68,17 @@ export default defineComponent({
     };
     const model = useVuelidate(rules, state);
     //Token
-    const { token, isAuthenticated } = auth();
+    const { token } = auth();
     //Villus
     const variables = state.value;
     const { data, execute } = useMutation(REGISTER_USER);
-    //Redirect
-    watch(isAuthenticated, (isAuthenticated) => {
-      if (isAuthenticated.value) {
-        router.push("/Clients");
-      }
-    });
-    onBeforeMount(() => {
-      if (isAuthenticated.value) {
-        router.push("/Clients");
-      }
-    });
     return {
       variables,
       execute,
       data,
       token,
       model,
-      path,
+      loginPath,
     };
   },
   methods: {

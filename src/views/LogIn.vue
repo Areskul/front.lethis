@@ -18,14 +18,13 @@
       ForgotPasswd(:variables="variables")
   .flex.justify-center.items-center.pt-4
     .flex
-      router-link(:to="path")
+      router-link(:to="registerPath")
         p.text-sm Créer un compte
 </template>
 
 <script lang="ts">
-import { defineComponent, onBeforeMount, ref, watch } from "vue";
-import { auth } from "@/composables/auth";
-import { useRouter } from "vue-router";
+import { defineComponent, ref } from "vue";
+import { auth, isAuthNavguard } from "@/composables/auth";
 import useVuelidate from "@vuelidate/core";
 import { required, email } from "@vuelidate/validators";
 import { useMutation } from "villus";
@@ -37,9 +36,9 @@ export default defineComponent({
     ForgotPasswd,
   },
   setup() {
+    isAuthNavguard();
     //Router
-    const router = useRouter();
-    const path = "/register";
+    const registerPath = "/register";
     //Vueliate
     const state = ref({
       name: "",
@@ -60,29 +59,16 @@ export default defineComponent({
     };
     const model = useVuelidate(rules, state);
     //Token
-    const { token, isAuthenticated } = auth();
+    const { token } = auth();
     //Villus
     const variables = state.value;
     const { execute } = useMutation(LOGIN_USER);
-
-    //Redirect
-    watch(isAuthenticated, (isAuthenticated) => {
-      if (isAuthenticated) {
-        router.push("/Clients");
-      }
-    });
-    onBeforeMount(() => {
-      if (isAuthenticated.value) {
-        router.push("/Clients");
-      }
-    });
-
     return {
       execute,
       variables,
       token,
       model,
-      path,
+      registerPath,
     };
   },
   methods: {

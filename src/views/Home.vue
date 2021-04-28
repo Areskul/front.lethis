@@ -13,7 +13,7 @@ import { defineComponent } from "vue";
 import { useStore } from "vuex";
 import { useQuery } from "villus";
 import { GET_CLIENT } from "@/services/clients";
-import { auth, guard } from "@/composables/auth";
+import { isUnauthNavguard } from "@/composables/auth";
 export default defineComponent({
   name: "Home",
   props: {
@@ -23,8 +23,7 @@ export default defineComponent({
     },
   },
   setup(props) {
-    guard();
-    const { isAuthenticated } = auth();
+    isUnauthNavguard();
     const store = useStore();
     //Dispatch Client
     const { data, execute } = useQuery({
@@ -32,7 +31,6 @@ export default defineComponent({
       variables: { id: props.uid },
     });
     return {
-      isAuthenticated,
       data,
       execute,
       store,

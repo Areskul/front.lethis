@@ -27,10 +27,10 @@ import { defineComponent, ref } from "vue";
 import { useQuery } from "villus";
 import { useStore } from "vuex";
 import { GET_CLIENTS } from "@/services/clients";
-import { navguard } from "@/composables/auth";
+import { isUnauthNavguard } from "@/composables/auth";
 export default defineComponent({
   setup() {
-    navguard();
+    isUnauthNavguard();
     const store = useStore();
     const { data } = useQuery({
       query: GET_CLIENTS,
