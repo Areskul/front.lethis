@@ -11,8 +11,8 @@ import { useQuery } from "villus";
 export default defineComponent({
   props: {
     modelValue: {
-      type: Object,
-      required: true,
+      type: String,
+      required: false,
     },
     query: {
       type: Object,

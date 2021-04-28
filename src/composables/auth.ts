@@ -1,56 +1,44 @@
-import {
-  useClient,
-  defaultPlugins,
-  //handleSubscriptions,
-  ClientPlugin,
-} from "villus";
-import { authPlugin } from "@/services/authPlugin";
-import {
-  handleSubscriptions,
-  subscriptionForwarder,
-} from "@/services/subPlugin";
-import { useStore } from "vuex";
 import { watch, computed, onBeforeMount } from "vue";
+import { useStore } from "vuex";
 import { useRouter } from "vue-router";
+import { useQuery } from "villus";
+import { USER_INFO } from "@/services/users";
 
 export const auth = () => {
   const store = useStore();
+  const { data, execute } = useQuery({ query: USER_INFO });
+
+  const isAuthenticated = computed(() => store.state.auth.isAuthenticated);
   const token = computed({
     get: () => store.state.auth.token,
     set: (val) => {
       store.dispatch("auth/setToken", val);
     },
   });
-  const isAuthenticated = computed(() => store.state.auth.isAuthenticated);
+  watch(token, (token) => {
+    if (token != "") {
+      execute();
+    }
+  });
   const user = computed({
     get: () => store.state.auth.user,
     set: (val) => {
       store.dispatch("auth/setUser", val);
     },
   });
-  const villusClientSetup = function () {
-    const api = process.env.VUE_APP_API as string;
-    useClient({
-      url: api,
-      /*use: [...defaultPlugins()],*/
-      use: [
-        //authPlugin({ token: token }),
-        authPlugin(),
-        handleSubscriptions(subscriptionForwarder) as ClientPlugin,
-        ...defaultPlugins(),
-      ],
-      cachePolicy: "network-only",
-    });
-  };
+  watch(data, (data) => {
+    if (data) {
+      user.value = data.user;
+    }
+  });
   return {
+    isAuthenticated,
     token,
     user,
-    isAuthenticated,
-    villusClientSetup,
   };
 };
 
-export const guard = () => {
+export const navguard = () => {
   const store = useStore();
   const router = useRouter();
   const isAuthenticated = computed(() => store.state.auth.isAuthenticated);

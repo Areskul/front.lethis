@@ -21,7 +21,7 @@
 import { defineComponent, ref } from "vue";
 import dropdown from "@/components/containers/dropdown.vue";
 import { local } from "@/composables/storage";
-import { client, saveCliToStore } from "@/composables/client";
+import { clientUtils } from "@/composables/client";
 import useVuelidate from "@vuelidate/core";
 import { useMutation } from "villus";
 import { UPDATE_CLIENT } from "@/services/clients";
@@ -38,7 +38,7 @@ export default defineComponent({
     },
   },
   setup() {
-    const { cli } = client();
+    const { client } = clientUtils();
     //LocalStorage
     const { filter } = local();
     const initialState = {
@@ -47,7 +47,9 @@ export default defineComponent({
       birthdate: "",
       dependants: "",
       employees: "",
-      job: "",
+      job: {
+        name: "",
+      },
       retirementAge: "",
       adress: "",
       cedex: "",
@@ -70,8 +72,8 @@ export default defineComponent({
       email: "Mail",
     };
     const useState = () => {
-      if (Object.entries(cli.value).length != 0) {
-        return cli.value;
+      if (Object.entries(client.value).length != 0) {
+        return client.value;
       } else if (initialState) {
         return initialState;
       }
@@ -136,11 +138,13 @@ export default defineComponent({
     //Villus
     const variables = filter(state.value);
     const { execute } = useMutation(UPDATE_CLIENT);
-    saveCliToStore(execute, variables);
+    /*saveCliToStore(execute, variables);*/
     return {
       model,
       labels,
       dropdown,
+      variables,
+      execute,
     };
   },
 });

@@ -35,34 +35,13 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import { useVillus } from "@/villus/setup";
 import { auth } from "@/composables/auth";
-import { useQuery } from "villus";
-import { USER_INFO } from "@/services/users.ts";
 export default defineComponent({
   setup() {
     //Villus
-    const { villusClientSetup, token, user } = auth();
-    villusClientSetup();
-    //Dispatch villus data in app
-    const { data, execute } = useQuery({ query: USER_INFO });
-    return {
-      execute,
-      data,
-      user,
-      token,
-    };
-  },
-  watch: {
-    data: function (val) {
-      if (val) {
-        this.user = val.user;
-      }
-    },
-    token: function (val) {
-      if (val != "") {
-        this.execute();
-      }
-    },
+    useVillus();
+    auth();
   },
 });
 </script>

@@ -23,27 +23,14 @@ div
 import newCli from "@/components/input/new.vue";
 import client from "@/components/containers/client.vue";
 import { mdiAccountPlus } from "@mdi/js";
-import { defineComponent, watch, onBeforeMount, ref } from "vue";
+import { defineComponent, ref } from "vue";
 import { useQuery } from "villus";
-import { useRouter } from "vue-router";
 import { useStore } from "vuex";
 import { GET_CLIENTS } from "@/services/clients";
-import { auth, guard } from "@/composables/auth";
+import { navguard } from "@/composables/auth";
 export default defineComponent({
   setup() {
-    guard();
-    const router = useRouter();
-    const { isAuthenticated } = auth();
-    watch(isAuthenticated, (isAuthenticated) => {
-      if (!isAuthenticated) {
-        router.push("/login");
-      }
-    });
-    onBeforeMount(() => {
-      if (!isAuthenticated.value) {
-        router.push("/login");
-      }
-    });
+    navguard();
     const store = useStore();
     const { data } = useQuery({
       query: GET_CLIENTS,
@@ -54,7 +41,6 @@ export default defineComponent({
     const account = mdiAccountPlus;
     const handleClick = () => {
       store.dispatch("client/setCurrentClient", {});
-      /*router.push("/Discover/Identity");*/
       state.value.show = !state.value.show;
     };
     return {
@@ -70,6 +56,7 @@ export default defineComponent({
   },
 });
 </script>
+
 <style lang="postcss" scoped>
 .fab {
   @apply absolute z-10 bottom-10 right-10 h-16 w-16 px-3 py-4 shadow-xl;

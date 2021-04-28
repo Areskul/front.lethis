@@ -2,28 +2,26 @@ import { computed } from "vue";
 import { onBeforeRouteLeave } from "vue-router";
 import { useStore } from "vuex";
 
-export const client = () => {
+export const clientUtils = () => {
   //Store
   const store = useStore();
 
-  const cli = computed(() => store.state.client.currentClient);
-  return {
-    cli,
-  };
-};
-export const saveCliToStore = (execute, variables) => {
-  //Store
-  const store = useStore();
+  const client = computed({
+    get: () => store.state.client.currentClient,
+    set: (data) => {
+      store.dispatch("client/setCurrentClient", data);
+    },
+  });
 
   const handleSubmit = (execute, variables) => {
     let id = "";
     execute(variables).then((res) => {
       if (res.data.updateClient) {
-        dispatchClient(res.data.updateClient);
+        client.value = res.data.updateClient;
         id = res.data.updateClient.id;
       } else {
         console.log(res.error);
-        dispatchClient({});
+        client.value = {};
       }
     });
     return id;
@@ -31,18 +29,38 @@ export const saveCliToStore = (execute, variables) => {
   //Router
   const saveOnLeave = onBeforeRouteLeave((to, from) => {
     if (!from.params.uid) {
-      dispatchClient({});
+      client.value = {};
     } else if (!to.params.uid) {
-      dispatchClient({});
+      client.value = {};
     } else {
-      handleSubmit(execute, variables);
+      //handleSubmit(execute, variables);
     }
   });
-  const dispatchClient = (data) => {
-    store.dispatch("client/setCurrentClient", data);
+  //const saveCliToStore = (execute, variables) => {
+  //}
+  const isBlank = (str: any) => {
+    return !str || /^\s*$/.test(str);
+  };
+  const isBlankTuple = (key: any, value: any) => {
+    if (isBlank(value)) {
+      return key;
+    }
+  };
+  const removeBlankTuples = (obj: any) => {
+    const entries = Object.entries(obj);
+    const empty: string[] = [];
+    entries.forEach(([key, value]) => {
+      empty.push(isBlankTuple(key, value));
+    });
+    empty.forEach((key) => {
+      delete obj[key];
+    });
+    return obj;
   };
   return {
-    dispatchClient,
+    handleSubmit,
+    client,
     saveOnLeave,
+    removeBlankTuples,
   };
 };

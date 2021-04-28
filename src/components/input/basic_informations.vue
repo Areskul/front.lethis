@@ -17,15 +17,15 @@
           input#x(type="text", v-model="model[i].$model")
 </template>
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import {
+  defineComponent,
+  /*ref*/
+} from "vue";
 import selectable from "@/components/containers/selectable.vue";
-import useVuelidate from "@vuelidate/core";
-import { required } from "@vuelidate/validators";
-import { useMutation } from "villus";
-import { UPDATE_CLIENT } from "@/services/clients";
+/*import { useMutation } from "villus";*/
+/*import { UPDATE_CLIENT } from "@/services/clients";*/
 import { GET_GENDERS } from "@/services/fields";
-import { local } from "@/composables/storage";
-import { client, saveCliToStore } from "@/composables/client";
+import { clientUtils } from "@/composables/client";
 export default defineComponent({
   name: "basicInformations",
   components: {
@@ -38,9 +38,12 @@ export default defineComponent({
     },
   },
   setup() {
-    const { cli } = client();
+    const {
+      client,
+      /*saveCliToStore,*/
+      /*removeBlankTuples */
+    } = clientUtils();
     //LocalStorage
-    const { filter } = local();
     const initialState = {
       gender: null,
       lastname: null,
@@ -52,13 +55,14 @@ export default defineComponent({
       firstname: "prénom",
     };
     const useState = () => {
-      if (Object.entries(cli.value).length != 0) {
-        return cli.value;
+      if (Object.entries(client.value).length != 0) {
+        return client.value;
       } else if (initialState) {
         return initialState;
       }
     };
-    const state = ref(useState());
+    useState();
+    /*const state = ref(useState());*/
     const selectable = {
       gender: {
         bool: true,
@@ -73,22 +77,21 @@ export default defineComponent({
       },
     };
     //Vueliate
-    const rules = {
-      gender: {},
-      lastname: {
-        required,
-      },
-      firstname: {
-        required,
-      },
-    };
-    const model = useVuelidate(rules, state);
+    /*const rules = {*/
+    /*gender: {},*/
+    /*lastname: {*/
+    /*required,*/
+    /*},*/
+    /*firstname: {*/
+    /*required,*/
+    /*},*/
+    /*};*/
     //Villus
-    const variables = filter(state.value);
-    const { execute } = useMutation(UPDATE_CLIENT);
-    saveCliToStore(execute, variables);
+    /*const variables = removeBlankTuples(state.value);*/
+    /*const { execute } = useMutation(UPDATE_CLIENT);*/
+    /*saveCliToStore(execute, variables);*/
     return {
-      model,
+      /*model,*/
       labels,
       selectable,
     };
