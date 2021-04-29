@@ -2,11 +2,7 @@
 div
   .container(v-if="data")
     .flex.flex-wrap.justify-around
-      client.px-4(
-        v-for="client in data.clients",
-        :key="client",
-        :client="client"
-      )
+      client.px-4(v-for="client in data", :key="client", :client="client")
 
   transition(
     mode="out-in",
