@@ -12,8 +12,14 @@
     @apply bg-blue-400 text-white;
     @apply dark:bg-purple-400 dark:text-white;
   }
-  .myinput {
-    @apply flex relative rounded h-10;
+  .input-container {
+    @apply flex relative h-12 py-1 my-12;
+    autocomplete: off;
+  }
+  span.message {
+    bottom: -25%;
+    @apply absolute left-3 text-xs;
+    @apply text-purple-500;
     autocomplete: off;
   }
   input[type="text"],
@@ -22,7 +28,7 @@
   input[type="tel"],
   input[type="password"],
   select {
-    @apply rounded w-full h-full py-2 transition-all;
+    @apply rounded w-full h-full transition-all;
     @apply dark:bg-gray-900;
   }
   label {

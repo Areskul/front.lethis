@@ -15,8 +15,8 @@ import gql from "graphql-tag";
 //}
 //`;
 export const LOGIN_USER = gql`
-  query($name: String, $email: String, $password: String!) {
-    loginUser(name: $name, email: $email, password: $password)
+  query($email: String, $password: String!) {
+    loginUser(email: $email, password: $password)
   }
 `;
 export const REGISTER_USER = gql`
