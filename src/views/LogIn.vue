@@ -42,6 +42,7 @@ export default defineComponent({
     isAuthNavguard();
     const router = useRouter();
     const { token } = auth();
+    //Vee-validate
     const schema = yup.object({
       email: yup.string().required(),
       password: yup.string().required().min(4),

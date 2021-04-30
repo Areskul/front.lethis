@@ -4,24 +4,25 @@
   .alert(@click.prevent)
     .flex.justify-center.pb-4
       h1 Informations personnelles du client
-    form(@submit.prevent)
-      .flex.flex-wrap.justify-center
-        .flex.p-4(v-for="(x, i) in labels")
-          .myinput
-            label(for="x") {{ x }}
-            input#x(type="text", v-model="model[i].$model")
-      .flex.flex-wrap.justify-center
-        button.btn(@click="handleSubmit") Créer
+    form#form
+      .input-container
+        label.autocomplete(for="firstname") Prénom
+        input#email(type="text", autocomplete="on", v-model="firstname")
+      .input-container
+        label.autocomplete(for="lastname") Nom
+        input#email(type="text", autocomplete="on", v-model="lastname")
+      .input-container
+        label.autocomplete(for="gender") Civilité
+        input#email(type="text", autocomplete="on", v-model="gender")
+    .flex.flex-wrap.justify-center
+      button.btn(@click="onSubmit") Créer
 </template>
 <script lang="ts">
-import { defineComponent, computed, ref } from "vue";
-import { useStore } from "vuex";
+import { defineComponent, ref } from "vue";
+import { useForm, useField } from "vee-validate";
+import * as yup from "yup";
+import { clientUtils } from "@/composables/client";
 import { useRouter } from "vue-router";
-import useVuelidate from "@vuelidate/core";
-import { required } from "@vuelidate/validators";
-import { useMutation } from "villus";
-import { CREATE_CLIENT } from "@/services/clients";
-/*import { local } from "@/composables/storage";*/
 export default defineComponent({
   name: "basicInformations",
   /*emits: ["update:modelValue"],*/
@@ -36,67 +37,42 @@ export default defineComponent({
     },
   },
   setup(props, { emit }) {
-    //Store
-    const store = useStore();
     const router = useRouter();
-    const cli = computed(() => store.state.client.currentClient);
-    const dispatchClient = (data) => {
-      store.dispatch("client/setCurrentClient", data);
-      router.push({ name: "Informations", params: { uid: cli.value.id } });
-    };
-    const initialState = {
-      gender: "",
-      lastname: "",
-      firstname: "",
-    };
-    const labels = {
-      gender: "civilité",
-      lastname: "nom",
-      firstname: "prénom",
-    };
-    const state = ref(initialState);
-    //Vueliate
-    const rules = {
-      gender: {},
-      lastname: {
-        required,
-      },
-      firstname: {
-        required,
-      },
-    };
-    const model = useVuelidate(rules, state);
+    const { createClient } = clientUtils();
+    //Vee-validate
+    const schema = yup.object({
+      firstname: yup.string(),
+      lastname: yup.string(),
+      gender: yup.string(),
+    });
+    const { handleSubmit } = useForm({
+      validationSchema: schema,
+    });
+    const { value: firstname } = useField("firstname");
+    const { value: lastname } = useField("lastname");
+    const { value: gender } = useField("gender");
     //Villus
-    const variables = state.value;
-    const { execute } = useMutation(CREATE_CLIENT);
+    const state = ref({
+      firstname: firstname.value,
+      lastname: lastname.value,
+      gender: gender.value,
+    });
+    const onSubmit = handleSubmit((variables) => {
+      createClient(variables);
+      router.push("/Informations");
+    });
 
     const handleClick = function (bool) {
       emit("update:modelValue", bool);
     };
     return {
+      firstname,
+      lastname,
+      gender,
       handleClick,
-      dispatchClient,
-      cli,
-      model,
-      labels,
-      variables,
-      execute,
+      onSubmit,
+      state,
     };
-  },
-  //Router
-  beforeRouteLeave(to, from) {
-    this.handleSubmit();
-  },
-  methods: {
-    handleSubmit: function () {
-      this.execute(this.variables).then((res) => {
-        if (res.data.createClient) {
-          this.dispatchClient(res.data.createClient);
-        } else {
-          this.dispatchClient({});
-        }
-      });
-    },
   },
 });
 </script>

@@ -1,43 +1,20 @@
 import { computed } from "vue";
-import { onBeforeRouteLeave } from "vue-router";
 import { useStore } from "vuex";
+import { useMutation } from "villus";
+import { UPDATE_CLIENT } from "@/services/clients";
+import { CREATE_CLIENT } from "@/services/clients";
 
 export const clientUtils = () => {
+  const { execute } = useMutation(UPDATE_CLIENT);
+  const { execute: create } = useMutation(CREATE_CLIENT);
   //Store
   const store = useStore();
-
   const client = computed({
     get: () => store.state.client.currentClient,
     set: (data) => {
       store.dispatch("client/setCurrentClient", data);
     },
   });
-
-  const handleSubmit = (execute, variables) => {
-    let id = "";
-    execute(variables).then((res) => {
-      if (res.data.updateClient) {
-        client.value = res.data.updateClient;
-        id = res.data.updateClient.id;
-      } else {
-        console.log(res.error);
-        client.value = {};
-      }
-    });
-    return id;
-  };
-  //Router
-  const saveOnLeave = onBeforeRouteLeave((to, from) => {
-    if (!from.params.uid) {
-      client.value = {};
-    } else if (!to.params.uid) {
-      client.value = {};
-    } else {
-      //handleSubmit(execute, variables);
-    }
-  });
-  //const saveCliToStore = (execute, variables) => {
-  //}
   const isBlank = (str: any) => {
     return !str || /^\s*$/.test(str);
   };
@@ -57,10 +34,47 @@ export const clientUtils = () => {
     });
     return obj;
   };
+  //const useState = () => {
+  //if (Object.entries(client.value).length != 0) {
+  //return client.value;
+  //} else if (initialState) {
+  //return initialState;
+  //}
+  //};
+  const updateClient = (clientId, variables) => {
+    variables["id"] = clientId;
+    variables = removeBlankTuples(variables);
+    let id = "";
+    execute(variables).then((res) => {
+      if (res.data) {
+        client.value = res.data;
+        id = res.data.id;
+      } else {
+        console.log(res.error);
+        client.value = {};
+      }
+    });
+    return id;
+  };
+  const createClient = (variables) => {
+    variables = removeBlankTuples(variables);
+    let id = "";
+    create(variables).then((res) => {
+      if (res.data) {
+        client.value = res.data;
+        id = res.data.id;
+      } else {
+        console.log(res.error);
+        client.value = {};
+      }
+    });
+    return id;
+  };
+  //Router
   return {
-    handleSubmit,
     client,
-    saveOnLeave,
-    removeBlankTuples,
+    //saveOnLeave,
+    updateClient,
+    createClient,
   };
 };

@@ -5,9 +5,8 @@ import { useQuery } from "villus";
 import { USER_INFO } from "@/services/users";
 
 export const auth = () => {
-  const store = useStore();
   const { data, execute } = useQuery({ query: USER_INFO });
-
+  const store = useStore();
   const isAuthenticated = computed(() => store.state.auth.isAuthenticated);
   const token = computed({
     get: () => store.state.auth.token,
