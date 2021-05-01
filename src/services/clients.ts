@@ -51,7 +51,6 @@ export const CREATE_CLIENT = gql`
     $birthdate: String
     $dependants: String
     $employees: String
-    $job: String
     $retirementAge: String
     $phone: String
     $email: String
@@ -65,7 +64,6 @@ export const CREATE_CLIENT = gql`
       birthdate: $birthdate
       dependants: $dependants
       employees: $employees
-      job: $job
       retirementAge: $retirementAge
       phone: $phone
       email: $email
@@ -103,7 +101,6 @@ export const UPDATE_CLIENT = gql`
     $birthdate: String
     $dependants: String
     $employees: String
-    $job: String
     $retirementAge: String
     $phone: String
     $email: String
@@ -118,7 +115,6 @@ export const UPDATE_CLIENT = gql`
       birthdate: $birthdate
       dependants: $dependants
       employees: $employees
-      job: $job
       retirementAge: $retirementAge
       phone: $phone
       email: $email

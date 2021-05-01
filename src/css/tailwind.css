@@ -27,6 +27,7 @@
   input[type="email"],
   input[type="tel"],
   input[type="password"],
+  input,
   select {
     @apply rounded w-full h-full transition-all;
     @apply dark:bg-gray-900;

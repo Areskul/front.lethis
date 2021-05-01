@@ -3,10 +3,12 @@ import { useStore } from "vuex";
 import { useMutation } from "villus";
 import { UPDATE_CLIENT } from "@/services/clients";
 import { CREATE_CLIENT } from "@/services/clients";
+import { GET_CLIENT } from "@/services/clients";
 
 export const clientUtils = () => {
-  const { execute } = useMutation(UPDATE_CLIENT);
+  const { execute: update } = useMutation(UPDATE_CLIENT);
   const { execute: create } = useMutation(CREATE_CLIENT);
+  const { execute: get } = useMutation(GET_CLIENT);
   //Store
   const store = useStore();
   const client = computed({
@@ -45,7 +47,7 @@ export const clientUtils = () => {
     variables["id"] = clientId;
     variables = removeBlankTuples(variables);
     let id = "";
-    execute(variables).then((res) => {
+    update(variables).then((res) => {
       if (res.data) {
         client.value = res.data;
         id = res.data.id;
@@ -58,22 +60,30 @@ export const clientUtils = () => {
   };
   const createClient = (variables) => {
     variables = removeBlankTuples(variables);
-    let id = "";
     create(variables).then((res) => {
       if (res.data) {
         client.value = res.data;
-        id = res.data.id;
       } else {
         console.log(res.error);
         client.value = {};
       }
     });
-    return id;
+  };
+  const dispatchClient = (clientId) => {
+    get(clientId).then((res) => {
+      if (res.data) {
+        client.value = res.data;
+      } else {
+        console.log(res.error);
+        client.value = {};
+      }
+    });
   };
   //Router
   return {
     client,
     //saveOnLeave,
+    dispatchClient,
     updateClient,
     createClient,
   };

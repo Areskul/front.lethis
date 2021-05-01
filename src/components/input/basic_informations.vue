@@ -4,21 +4,24 @@
     h1 Informations personnelles du client
   .flex.justify-center.items-center
     form#form
-      .input-container
-        label.autocomplete(for="firstname") Prénom
-        input#email(type="text", autocomplete="on", v-model="firstname")
-      .input-container
-        label.autocomplete(for="lastname") Nom
-        input#email(type="text", autocomplete="on", v-model="lastname")
-      .input-container
-        label.autocomplete(for="gender") Civilité
-        input#email(type="text", autocomplete="on", v-model="gender")
+      .input-container(
+        v-for="{ name, as, label, children, ...attrs } in schema.fields"
+      )
+        label.autocomplete(:for="name") {{ label }}
+        Field(:as="as", :id="name", :name="name", v-bind="attrs")
+          template(v-if="children && children.length")
+            component(
+              v-for="({ tag, text, ...childAttrs }, idx) in children",
+              :key="idx",
+              :is="tag",
+              v-bind="childAttrs"
+            ) {{ text }}
 </template>
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { defineComponent } from "vue";
 import selectable from "@/components/containers/selectable.vue";
-import { onBeforeRouteLeave } from "vue-router";
-import { useForm, useField } from "vee-validate";
+import { onBeforeRouteUpdate, onBeforeRouteLeave } from "vue-router";
+import { useForm, Field } from "vee-validate";
 import * as yup from "yup";
 import { clientUtils } from "@/composables/client";
 /*import { GET_GENDERS } from "@/services/fields";*/
@@ -35,10 +38,7 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const {
-      updateClient,
-      /*client*/
-    } = clientUtils();
+    const { updateClient, client, dispatchClient } = clientUtils();
     //Vee-validate
     const schema = yup.object({
       firstname: yup.string(),
@@ -46,16 +46,8 @@ export default defineComponent({
       gender: yup.string(),
     });
     const { handleSubmit } = useForm({
+      initialValues: client,
       validationSchema: schema,
-    });
-    const { value: firstname } = useField("firstname");
-    const { value: lastname } = useField("lastname");
-    const { value: gender } = useField("gender");
-    //Villus
-    const state = ref({
-      firstname: firstname.value,
-      lastname: lastname.value,
-      gender: gender.value,
     });
     const onSubmit = handleSubmit((variables) => {
       updateClient(props.uid, variables);
@@ -63,11 +55,11 @@ export default defineComponent({
     onBeforeRouteLeave((to, from) => {
       onSubmit();
     });
+    onBeforeRouteUpdate((to, from) => {
+      dispatchClient(props.uid);
+    });
     return {
-      state,
-      firstname,
-      lastname,
-      gender,
+      schema,
       onSubmit,
     };
   },
