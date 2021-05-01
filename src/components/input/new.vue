@@ -43,7 +43,7 @@ export default defineComponent({
   },
   setup(props, { emit }) {
     const router = useRouter();
-    const { createClient, client } = clientUtils();
+    const { updateClient, client } = clientUtils();
     //Vee-validate
     interface FieldSchema {
       as: string;
@@ -91,7 +91,7 @@ export default defineComponent({
       validationSchema: schema.validation,
     });
     const onSubmit = handleSubmit((variables) => {
-      createClient(variables);
+      updateClient(variables);
       router.push({ name: "Identité", params: { uid: client.value.id } });
     });
 

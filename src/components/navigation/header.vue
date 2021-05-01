@@ -1,29 +1,26 @@
 <template lang="pug">
 div
-  .flex.header.p-3(v-if="current")
-    p.p-1 {{ current.gender }}
-    p.p-1 {{ current.firstname }}
-    p.p-1 {{ current.lastname }}
+  .flex.header.p-3(v-if="client")
+    p.p-1 {{ client.gender }}
+    p.p-1 {{ client.firstname }}
+    p.p-1 {{ client.lastname }}
   .flex
   breadcrumbs
 </template>
 
 <script lang="ts">
-import { useStore } from "vuex";
-import { defineComponent, computed } from "vue";
+import { defineComponent } from "vue";
 import breadcrumbs from "@/components/navigation/breadcrumbs.vue";
+import { clientUtils } from "@/composables/client";
 export default defineComponent({
   name: "v-header",
   components: {
     breadcrumbs,
   },
   setup() {
-    const store = useStore();
-    const current = computed(() => {
-      return store.state.client.currentClient;
-    });
+    const { client } = clientUtils();
     return {
-      current,
+      client,
     };
   },
 });

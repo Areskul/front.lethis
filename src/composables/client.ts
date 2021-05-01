@@ -36,36 +36,14 @@ export const clientUtils = () => {
     });
     return obj;
   };
-  //const useState = () => {
-  //if (Object.entries(client.value).length != 0) {
-  //return client.value;
-  //} else if (initialState) {
-  //return initialState;
-  //}
-  //};
-  const updateClient = (clientId, variables) => {
+  const updateClient = (variables, clientId?) => {
     variables["id"] = clientId;
     variables = removeBlankTuples(variables);
-    let id = "";
-    update(variables).then((res) => {
-      if (res.data) {
-        client.value = res.data;
-        id = res.data.id;
-      } else {
-        console.log(res.error);
-        client.value = {};
-      }
-    });
-    return id;
-  };
-  const createClient = (variables) => {
-    variables = removeBlankTuples(variables);
-    create(variables).then((res) => {
+    (clientId ? update(variables) : create(variables)).then((res) => {
       if (res.data) {
         client.value = res.data;
       } else {
         console.log(res.error);
-        client.value = {};
       }
     });
   };
@@ -85,6 +63,5 @@ export const clientUtils = () => {
     //saveOnLeave,
     dispatchClient,
     updateClient,
-    createClient,
   };
 };
