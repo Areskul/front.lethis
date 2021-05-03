@@ -4,6 +4,8 @@ import { useMutation } from "villus";
 import { UPDATE_CLIENT } from "@/services/clients";
 import { CREATE_CLIENT } from "@/services/clients";
 import { GET_CLIENT } from "@/services/clients";
+import { onBeforeRouteLeave } from "vue-router";
+import { useForm } from "vee-validate";
 
 export const clientUtils = () => {
   const { execute: update } = useMutation(UPDATE_CLIENT);
@@ -58,10 +60,22 @@ export const clientUtils = () => {
       }
     });
   };
-  //Router
+  const saveOnLeave = (client, schema) => {
+    const { handleSubmit } = useForm({
+      initialValues: client,
+      validationSchema: schema.validation,
+    });
+    onBeforeRouteLeave((to, from) => {
+      const onSubmit = handleSubmit((variables) => {
+        updateClient(variables, client.id);
+      });
+      onSubmit();
+    });
+  };
   return {
     client,
     dispatchClient,
+    saveOnLeave,
     updateClient,
   };
 };

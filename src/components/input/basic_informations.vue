@@ -18,8 +18,7 @@
 </template>
 <script lang="ts">
 import { defineComponent } from "vue";
-import { onBeforeRouteLeave } from "vue-router";
-import { useForm, Field } from "vee-validate";
+import { Field } from "vee-validate";
 import * as yup from "yup";
 import { clientUtils } from "@/composables/client";
 import { GET_GENDERS } from "@/services/fields";
@@ -30,19 +29,10 @@ export default defineComponent({
   components: {
     Field,
   },
-  props: {
-    uid: {
-      type: String,
-      required: false,
-    },
-  },
-  setup(props) {
-    const { updateClient, client } = clientUtils();
+  setup() {
+    const { saveOnLeave, client } = clientUtils();
     const { data } = useQuery({
       query: GET_GENDERS,
-    });
-    onBeforeRouteLeave((to, from) => {
-      onSubmit();
     });
     //Vee-validate
     const schema: FormSchema = {
@@ -71,18 +61,11 @@ export default defineComponent({
         gender: yup.string(),
       }),
     };
-    const { handleSubmit } = useForm({
-      initialValues: client,
-      validationSchema: schema.validation,
-    });
-    const onSubmit = handleSubmit((variables) => {
-      updateClient(variables, props.uid);
-    });
+    saveOnLeave(client, schema);
     return {
       data,
       client,
       schema,
-      onSubmit,
     };
   },
 });
