@@ -10,10 +10,8 @@
 </template>
 <script lang="typescript">
 import { defineComponent } from "vue";
-import { useStore } from "vuex";
-import { useQuery } from "villus";
-import { GET_CLIENT } from "@/services/clients";
 import { isUnauthNavguard } from "@/composables/auth";
+import {clientUtils} from "@/composables/client"
 export default defineComponent({
   name: "Home",
   props: {
@@ -24,32 +22,10 @@ export default defineComponent({
   },
   setup(props) {
     isUnauthNavguard();
-    const store = useStore();
-    //Dispatch Client
-    const { data, execute } = useQuery({
-      query: GET_CLIENT,
-      variables: { id: props.uid },
-    });
+    const {dispatchClient} = clientUtils()
+    dispatchClient(props.uid)
     return {
-      data,
-      execute,
-      store,
     };
-  },
-  mounted() {
-    if (this.uid) {
-      this.execute().then((res) => {
-        this.dispatchClifromRoute(this.data ? this.data : res);
-      });
-    } else {
-      this.dispatchClifromRoute({});
-    }
-  },
-  methods: {
-    dispatchClifromRoute: function (data) {
-      const client = data.client ? data.client : {};
-      this.store.dispatch("client/setCurrentClient", client);
-    },
   },
 });
 </script>

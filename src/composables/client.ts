@@ -48,19 +48,19 @@ export const clientUtils = () => {
     });
   };
   const dispatchClient = (clientId) => {
-    get(clientId).then((res) => {
+    const variables = { id: clientId };
+    get(variables).then((res) => {
       if (res.data) {
+        console.log(res);
         client.value = res.data;
       } else {
         console.log(res.error);
-        client.value = {};
       }
     });
   };
   //Router
   return {
     client,
-    //saveOnLeave,
     dispatchClient,
     updateClient,
   };

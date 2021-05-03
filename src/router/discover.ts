@@ -1,6 +1,7 @@
 import { RouteRecordRaw } from "vue-router";
 const baseTitle = "LETHIS";
 const separator = " | ";
+
 export const discover: Array<RouteRecordRaw> = [
   {
     path: "/Discover/:uid(\\d+)?/",

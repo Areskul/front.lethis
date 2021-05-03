@@ -7,7 +7,7 @@
     p.p-5 {{ client.gender }}
     p.p-5 {{ client.lastname }}
     p.p-5 {{ client.firstname }}
-    button(@click="dispatchClient")
+    button(@click="dispatchClientId")
       svg.fill-current.opacity-50(viewBox="0 0 35 45", v-show="show")
         path(:d="pencil")
 </template>
@@ -15,9 +15,7 @@
 <script lang="ts">
 import { mdiPencil } from "@mdi/js";
 import { defineComponent } from "vue";
-import { useStore } from "vuex";
 import { useRouter } from "vue-router";
-import { clientUtils } from "@/composables/client";
 export default defineComponent({
   props: {
     client: {
@@ -26,16 +24,12 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const { client } = clientUtils();
-    const store = useStore();
     const router = useRouter();
-    const dispatchClient = () => {
-      client.value = props.client;
+    const dispatchClientId = () => {
       router.push({ name: "Identité", params: { uid: props.client.id } });
     };
     return {
-      store,
-      dispatchClient,
+      dispatchClientId,
     };
   },
   data: () => ({
