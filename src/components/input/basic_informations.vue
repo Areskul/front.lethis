@@ -15,10 +15,11 @@
               v-for="{ name } in data.enumValues",
               :selected="name == client.gender ? 'selected' : null"
             ) {{ name }}
+        ErrorMessage(:name="name")
 </template>
 <script lang="ts">
 import { defineComponent } from "vue";
-import { Field } from "vee-validate";
+import { Field, ErrorMessage } from "vee-validate";
 import * as yup from "yup";
 import { clientUtils } from "@/composables/client";
 import { GET_GENDERS } from "@/services/fields";
@@ -28,6 +29,7 @@ export default defineComponent({
   name: "basicInformations",
   components: {
     Field,
+    ErrorMessage,
   },
   setup() {
     const { saveOnLeave, client } = clientUtils();

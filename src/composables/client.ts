@@ -38,10 +38,10 @@ export const clientUtils = () => {
     });
     return obj;
   };
-  const updateClient = (variables, clientId?) => {
-    variables["id"] = clientId;
+  const updateClient = (variables, client?) => {
+    console.log(variables);
     variables = removeBlankTuples(variables);
-    (clientId ? update(variables) : create(variables)).then((res) => {
+    (client.id ? update(variables) : create(variables)).then((res) => {
       if (res.data) {
         client.value = res.data;
       } else {
@@ -53,7 +53,6 @@ export const clientUtils = () => {
     const variables = { id: clientId };
     get(variables).then((res) => {
       if (res.data) {
-        console.log(res);
         client.value = res.data;
       } else {
         console.log(res.error);
@@ -67,7 +66,7 @@ export const clientUtils = () => {
     });
     onBeforeRouteLeave((to, from) => {
       const onSubmit = handleSubmit((variables) => {
-        updateClient(variables, client.id);
+        updateClient(variables, client);
       });
       onSubmit();
     });

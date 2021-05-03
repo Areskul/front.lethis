@@ -4,90 +4,111 @@
     h1 Informations personnelles du client
   .flex.justify-center.items-center
     form#form
-      .input-container
-        label.autocomplete(for="firstname") Prénom
-        input#email(type="text", autocomplete="on", v-model="firstname")
-      .input-container
-        label.autocomplete(for="lastname") Nom
-        input#email(type="text", autocomplete="on", v-model="lastname")
-      .input-container
-        label.autocomplete(for="gender") Civilité
-        input#email(type="text", autocomplete="on", v-model="gender")
+      .input-container(
+        v-for="{ name, as, label, enumValues, ...attrs } in schema.fields"
+      )
+        label.autocomplete(:for="name") {{ label }}
+        Field(:as="as", :id="name", :name="name", v-bind="attrs")
+        ErrorMessage(:name="name")
 </template>
 <script lang="ts">
-import { defineComponent, ref } from "vue";
-import { onBeforeRouteLeave } from "vue-router";
+import { defineComponent } from "vue";
 /*import dropdown from "@/components/containers/dropdown.vue";*/
 /*import { GET_JOBS } from "@/services/fields";*/
-import { useForm, useField } from "vee-validate";
+import { Field, ErrorMessage } from "vee-validate";
 import * as yup from "yup";
 import { clientUtils } from "@/composables/client";
+import { FormSchema } from "@/common/types";
 export default defineComponent({
   name: "Informations",
-  /*components: {*/
-  /*dropdown,*/
-  /*},*/
-  props: {
-    uid: {
-      type: String,
-      required: false,
-    },
+  components: {
+    Field,
+    ErrorMessage,
+    /*dropdown,*/
   },
-  setup(props) {
-    const {
-      updateClient,
-      /*client*/
-    } = clientUtils();
+  setup() {
+    const { saveOnLeave, client } = clientUtils();
     //Vee-validate
-    const schema = yup.object({
-      firstname: yup.string(),
-      lastname: yup.string(),
-      gender: yup.string(),
-    });
-    const { handleSubmit } = useForm({
-      validationSchema: schema,
-    });
-    const { value: firstname } = useField("firstname");
-    const { value: lastname } = useField("lastname");
-    const { value: gender } = useField("gender");
-    //Villus
-    const state = ref({
-      firstname: firstname.value,
-      lastname: lastname.value,
-      gender: gender.value,
-    });
-    const onSubmit = handleSubmit((variables) => {
-      updateClient(props.uid, variables);
-    });
-    onBeforeRouteLeave((to, from) => {
-      /*if (!from.params.uid) {*/
-      /*client.value = {};*/
-      /*} else if (!to.params.uid) {*/
-      /*client.value = {};*/
-      /*} else {*/
-      console.log("access");
-      onSubmit();
-      /*}*/
-    });
-    const labels = {
-      type: "type",
-      family: "date de naissance",
-      birthdate: "situation familliale",
-      dependants: "Personnes à charge",
-      employees: "Salariés",
-      job: "Profession",
-      retirementAge: "Age de départ à la retraite",
-      adress: "Adresse",
-      cedex: "Code postal",
-      city: "Ville",
-      phone: "Téléphone",
-      email: "Mail",
+    const schema: FormSchema = {
+      fields: [
+        {
+          as: "input",
+          name: "type",
+          label: "Type",
+          type: "text",
+        },
+        {
+          as: "input",
+          name: "birthdate",
+          label: "Date de naissance",
+          type: "text",
+        },
+        {
+          as: "input",
+          name: "family",
+          label: "Situation familliale",
+          type: "text",
+        },
+        {
+          as: "input",
+          name: "dependants",
+          label: "Personnes à charge",
+          type: "text",
+        },
+        {
+          as: "input",
+          name: "employees",
+          label: "Salariés",
+          type: "text",
+        },
+        {
+          as: "input",
+          name: "job",
+          label: "Profession",
+          type: "text",
+        },
+        {
+          as: "input",
+          name: "retirementAge",
+          label: "Age de départ à la retraite",
+          type: "text",
+        },
+        {
+          as: "input",
+          name: "adress",
+          label: "Adress",
+          type: "text",
+        },
+        {
+          as: "input",
+          name: "phone",
+          label: "Téléphone",
+          type: "text",
+        },
+        {
+          as: "input",
+          name: "email",
+          label: "Mail",
+          type: "text",
+        },
+      ],
+      validation: yup.object({
+        type: yup.string(),
+        birthdate: yup.string(),
+        family: yup.string(),
+        dependants: yup.string(),
+        employees: yup.string(),
+        job: yup.string(),
+        retirementAge: yup.string(),
+        address: yup.string(),
+        phone: yup.string(),
+        email: yup.string(),
+      }),
     };
-    //Villus
-    /*saveCliToStore(execute, variables);*/
+    saveOnLeave(client, schema);
     return {
-      labels,
-      state,
+      client,
+      schema,
     };
   },
 });
