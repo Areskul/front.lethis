@@ -26,6 +26,12 @@ export default defineComponent({
     ErrorMessage,
     /*dropdown,*/
   },
+  props: {
+    uid: {
+      type: String,
+      required: false,
+    },
+  },
   setup() {
     const { saveOnLeave, client } = clientUtils();
     //Vee-validate
@@ -105,7 +111,7 @@ export default defineComponent({
         email: yup.string(),
       }),
     };
-    saveOnLeave(client, schema);
+    saveOnLeave(schema);
     return {
       client,
       schema,

@@ -4,38 +4,35 @@
   .alert(@click.prevent)
     .flex.justify-center.pb-4
       h1 Informations personnelles du client
+      div {{ client }}
     form#form
       .input-container(
         v-for="{ name, as, label, children, ...attrs } in schema.fields"
       )
         label.autocomplete(:for="name") {{ label }}
         Field(:as="as", :id="name", :name="name", v-bind="attrs")
-          template(v-if="children && children.length")
-            component(
-              v-for="({ tag, text, ...childAttrs }, idx) in children",
-              :key="idx",
-              :is="tag",
-              v-bind="childAttrs"
-            ) {{ text }}
+          template(v-if="data")
+            component(is="option", v-for="{ name } in data.enumValues") {{ name }}
+        ErrorMessage(:name="name")
     .flex.flex-wrap.justify-center
       button.btn(@click="onSubmit") Créer
 </template>
 <script lang="ts">
 import { defineComponent } from "vue";
-import { useForm, Field } from "vee-validate";
-import * as yup from "yup";
-import { clientUtils } from "@/composables/client";
 import { useRouter } from "vue-router";
+import { GET_GENDERS } from "@/services/fields";
+import { useQuery } from "villus";
+import { clientUtils } from "@/composables/client";
+import { useForm, Field, ErrorMessage } from "vee-validate";
+import * as yup from "yup";
+import { FormSchema } from "@/common/types";
 export default defineComponent({
   name: "basicInformations",
   components: {
     Field,
+    ErrorMessage,
   },
   props: {
-    uid: {
-      type: String,
-      required: false,
-    },
     modelValue: {
       type: Boolean,
       required: true,
@@ -44,22 +41,9 @@ export default defineComponent({
   setup(props, { emit }) {
     const router = useRouter();
     const { updateClient, client } = clientUtils();
-    //Vee-validate
-    interface FieldSchema {
-      as: string;
-      name: string;
-      label: string;
-      [k: string]: any;
-      children?: Array<{
-        tag: string; // the tag that will be rendered
-        text?: string; // a text content (optional)
-        [k: string]: any; // any additional attributes
-      }>;
-    }
-    interface FormSchema {
-      fields: FieldSchema[];
-      validation: any;
-    }
+    const { data } = useQuery({
+      query: GET_GENDERS,
+    });
     const schema: FormSchema = {
       fields: [
         {
@@ -86,19 +70,21 @@ export default defineComponent({
         gender: yup.string(),
       }),
     };
-
     const { handleSubmit } = useForm({
       validationSchema: schema.validation,
     });
-    const onSubmit = handleSubmit((variables) => {
-      updateClient(variables);
+    const onSubmit = async () => {
+      handleSubmit((variables) => {
+        updateClient(variables);
+      });
       router.push({ name: "Identité", params: { uid: client.value.id } });
-    });
-
+    };
     const handleClick = function (bool) {
       emit("update:modelValue", bool);
     };
     return {
+      client,
+      data,
       schema,
       handleClick,
       onSubmit,

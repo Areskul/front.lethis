@@ -16,6 +16,7 @@
 import { mdiPencil } from "@mdi/js";
 import { defineComponent } from "vue";
 import { useRouter } from "vue-router";
+import { clientUtils } from "@/composables/client";
 export default defineComponent({
   props: {
     client: {
@@ -25,7 +26,9 @@ export default defineComponent({
   },
   setup(props) {
     const router = useRouter();
+    const { dispatchClient } = clientUtils();
     const dispatchClientId = () => {
+      dispatchClient(props.client.id);
       router.push({ name: "Identité", params: { uid: props.client.id } });
     };
     return {

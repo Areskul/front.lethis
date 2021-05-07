@@ -11,7 +11,7 @@
 <script lang="typescript">
 import { defineComponent } from "vue";
 import { isUnauthNavguard } from "@/composables/auth";
-import {clientUtils} from "@/composables/client"
+import { clientUtils } from "@/composables/client";
 export default defineComponent({
   name: "Home",
   props: {
@@ -22,10 +22,8 @@ export default defineComponent({
   },
   setup(props) {
     isUnauthNavguard();
-    const {dispatchClient} = clientUtils()
-    dispatchClient(props.uid)
-    return {
-    };
+    const { dispatchClient } = clientUtils();
+    dispatchClient(props.uid);
   },
 });
 </script>

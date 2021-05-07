@@ -20,6 +20,7 @@ export const discover: Array<RouteRecordRaw> = [
       {
         name: "Identité",
         path: "Identity",
+        props: true,
         components: {
           input: () => import("@/components/input/basic_informations.vue"),
         },
@@ -30,6 +31,7 @@ export const discover: Array<RouteRecordRaw> = [
       {
         name: "Informations",
         path: "Informations",
+        props: true,
         components: {
           input: () => import("@/components/input/informations.vue"),
         },
@@ -41,7 +43,7 @@ export const discover: Array<RouteRecordRaw> = [
         name: "Revenues",
         path: "Incomes",
         components: {
-          input: () => import("@/components/input/incomes.vue"),
+          //input: () => import("@/components/input/incomes.vue"),
         },
         meta: {
           title: baseTitle + separator + "Revenues",
@@ -51,7 +53,7 @@ export const discover: Array<RouteRecordRaw> = [
         name: "Charges courrantes",
         path: "Charges",
         components: {
-          input: () => import("@/components/input/charges.vue"),
+          //input: () => import("@/components/input/charges.vue"),
         },
         meta: {
           title: baseTitle + separator + "Charges courrantes",
@@ -61,7 +63,7 @@ export const discover: Array<RouteRecordRaw> = [
         name: "Impôts",
         path: "Taxes",
         components: {
-          input: () => import("@/components/input/taxes.vue"),
+          //input: () => import("@/components/input/taxes.vue"),
         },
         meta: {
           title: baseTitle + separator + "Impots",
@@ -71,7 +73,7 @@ export const discover: Array<RouteRecordRaw> = [
         name: "Patrimoine immobilier non-locatif",
         path: "Assets",
         components: {
-          input: () => import("@/components/input/assets.vue"),
+          //input: () => import("@/components/input/assets.vue"),
         },
         meta: {
           title: baseTitle + separator + "Imobilier non-locatif",
@@ -81,7 +83,7 @@ export const discover: Array<RouteRecordRaw> = [
         name: "Immobilier locatif",
         path: "RealEstate",
         components: {
-          input: () => import("@/components/input/realestate.vue"),
+          //input: () => import("@/components/input/realestate.vue"),
         },
         meta: {
           title: baseTitle + separator + "Imobilier locatif",

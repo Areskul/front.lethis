@@ -2,14 +2,12 @@ import { computed } from "vue";
 import { useStore } from "vuex";
 import { useMutation } from "villus";
 import { UPDATE_CLIENT } from "@/services/clients";
-import { CREATE_CLIENT } from "@/services/clients";
 import { GET_CLIENT } from "@/services/clients";
 import { onBeforeRouteLeave } from "vue-router";
 import { useForm } from "vee-validate";
 
 export const clientUtils = () => {
   const { execute: update } = useMutation(UPDATE_CLIENT);
-  const { execute: create } = useMutation(CREATE_CLIENT);
   const { execute: get } = useMutation(GET_CLIENT);
   //Store
   const store = useStore();
@@ -38,12 +36,13 @@ export const clientUtils = () => {
     });
     return obj;
   };
-  const updateClient = (variables, client?) => {
-    console.log(variables);
+  const updateClient = (variables) => {
+    variables["id"] = client.value.id;
     variables = removeBlankTuples(variables);
-    (client.id ? update(variables) : create(variables)).then((res) => {
+    update({ client: variables }).then((res) => {
       if (res.data) {
         client.value = res.data;
+        return res;
       } else {
         console.log(res.error);
       }
@@ -55,18 +54,19 @@ export const clientUtils = () => {
       if (res.data) {
         client.value = res.data;
       } else {
+        client.value = {};
         console.log(res.error);
       }
     });
   };
-  const saveOnLeave = (client, schema) => {
+  const saveOnLeave = (schema) => {
     const { handleSubmit } = useForm({
-      initialValues: client,
+      initialValues: client.value,
       validationSchema: schema.validation,
     });
-    onBeforeRouteLeave((to, from) => {
+    onBeforeRouteLeave(() => {
       const onSubmit = handleSubmit((variables) => {
-        updateClient(variables, client);
+        updateClient(variables);
       });
       onSubmit();
     });

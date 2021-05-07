@@ -19,7 +19,7 @@
 </template>
 <script lang="ts">
 import { defineComponent } from "vue";
-import { Field, ErrorMessage } from "vee-validate";
+import { useForm, Field, ErrorMessage } from "vee-validate";
 import * as yup from "yup";
 import { clientUtils } from "@/composables/client";
 import { GET_GENDERS } from "@/services/fields";
@@ -63,8 +63,13 @@ export default defineComponent({
         gender: yup.string(),
       }),
     };
-    saveOnLeave(client, schema);
+    const { handleSubmit } = useForm({
+      initialValues: client.value,
+      validationSchema: schema.validation,
+    });
+    saveOnLeave(schema);
     return {
+      handleSubmit,
       data,
       client,
       schema,

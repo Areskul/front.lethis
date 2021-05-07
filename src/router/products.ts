@@ -24,7 +24,7 @@ export const products: Array<RouteRecordRaw> = [
         name: "Comptes et livrets",
         path: "Accounts",
         components: {
-          input: () => import("@/components/input/realestate.vue"),
+          //input: () => import("@/components/input/realestate.vue"),
         },
         meta: {
           title: baseTitle + separator + "Comptes et livrets",
@@ -34,7 +34,7 @@ export const products: Array<RouteRecordRaw> = [
         name: "Prévoyance",
         path: "Foresight",
         components: {
-          input: () => import("@/components/input/realestate.vue"),
+          //input: () => import("@/components/input/realestate.vue"),
         },
         meta: {
           title: baseTitle + separator + "Prévoyance",
@@ -44,7 +44,7 @@ export const products: Array<RouteRecordRaw> = [
         name: "Épargne retraite",
         path: "PensionSaving",
         components: {
-          input: () => import("@/components/input/realestate.vue"),
+          //input: () => import("@/components/input/realestate.vue"),
         },
         meta: {
           title: baseTitle + separator + "Épargne retraite",
@@ -54,7 +54,7 @@ export const products: Array<RouteRecordRaw> = [
         name: "Assurance vie",
         path: "LifeInsurance",
         components: {
-          input: () => import("@/components/input/realestate.vue"),
+          //input: () => import("@/components/input/realestate.vue"),
         },
         meta: {
           title: baseTitle + separator + "Assurance vie",
