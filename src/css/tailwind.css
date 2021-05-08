@@ -13,7 +13,7 @@
     @apply dark:bg-purple-400 dark:text-white;
   }
   .input-container {
-    @apply flex relative h-12 py-1 my-12;
+    @apply flex relative h-12 py-1 my-12 w-64 mx-6;
     autocomplete: off;
   }
   span.message {
@@ -21,6 +21,10 @@
     @apply absolute left-3 text-xs;
     @apply text-purple-500;
     autocomplete: off;
+  }
+  span[role="alert"] {
+    @apply text-xs absolute left-0 -bottom-12 px-1;
+    @apply text-purple-400;
   }
   input[type="text"],
   input[type="date"],
@@ -33,17 +37,20 @@
     @apply dark:bg-gray-900;
   }
   label {
-    top: 0%;
-    transform: translateY(-50%);
-    @apply absolute left-3 transition-all px-1;
+    @apply absolute left-3 -top-7 transition-all px-1;
     @apply text-pink-400 bg-white;
     @apply dark:bg-gray-900;
   }
   label.autocomplete {
-    transform: translateY(-100%);
+    @apply -top-3;
   }
   .empty input:not(focus) + label {
-    top: 50%;
     transform: translateY(-50%);
+  }
+  .dropdown {
+    @apply origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg ring-1;
+    @apply ring-black ring-opacity-5 divide-y divide-gray-100 focus:outline-none;
+    @apply bg-white;
+    @apply dark:bg-gray-900;
   }
 }

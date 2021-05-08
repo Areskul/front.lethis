@@ -11,12 +11,14 @@ export const clientUtils = () => {
   const { execute: get } = useMutation(GET_CLIENT);
   //Store
   const store = useStore();
+
   const client = computed({
     get: () => store.state.client.currentClient,
     set: (data) => {
       store.dispatch("client/setCurrentClient", data);
     },
   });
+
   const isBlank = (str: any) => {
     return !str || /^\s*$/.test(str);
   };
@@ -37,9 +39,9 @@ export const clientUtils = () => {
     return obj;
   };
   const updateClient = (variables) => {
-    variables["id"] = client.value.id;
+    variables.client["id"] = client.value.id;
     variables = removeBlankTuples(variables);
-    update({ client: variables }).then((res) => {
+    update(variables).then((res) => {
       if (res.data) {
         client.value = res.data;
         return res;
@@ -61,7 +63,10 @@ export const clientUtils = () => {
   };
   const saveOnLeave = (schema) => {
     const { handleSubmit } = useForm({
-      initialValues: client.value,
+      initialValues: {
+        client: client.value,
+        job: client.value.job ? client.value.job : {},
+      },
       validationSchema: schema.validation,
     });
     onBeforeRouteLeave(() => {

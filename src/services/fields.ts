@@ -1,8 +1,8 @@
 import gql from "graphql-tag";
 
-export const GET_GENDERS = gql`
-  query genders {
-    __type(name: "Gender") {
+export const GET_ENUM = gql`
+  query enum($name: String!) {
+    __type(name: $name) {
       enumValues {
         name
       }

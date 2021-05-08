@@ -20,9 +20,9 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import { useRouter } from "vue-router";
-import { GET_GENDERS } from "@/services/fields";
-import { useQuery } from "villus";
 import { clientUtils } from "@/composables/client";
+import { GET_ENUM } from "@/services/fields";
+import { useQuery } from "villus";
 import { useForm, Field, ErrorMessage } from "vee-validate";
 import * as yup from "yup";
 import { FormSchema } from "@/common/types";
@@ -42,7 +42,8 @@ export default defineComponent({
     const router = useRouter();
     const { updateClient, client } = clientUtils();
     const { data } = useQuery({
-      query: GET_GENDERS,
+      query: GET_ENUM,
+      variables: { name: "Gender" },
     });
     const schema: FormSchema = {
       fields: [

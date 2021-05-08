@@ -11,6 +11,10 @@ export const GET_CLIENTS = gql`
       birthdate
       dependants
       employees
+      job {
+        id
+        name
+      }
       retirementAge
       phone
       email
@@ -29,6 +33,7 @@ export const GET_CLIENT = gql`
       dependants
       employees
       job {
+        id
         name
       }
       retirementAge
@@ -43,8 +48,8 @@ export const GET_CLIENT = gql`
   }
 `;
 export const UPDATE_CLIENT = gql`
-  mutation updateClient($client: ClientInput!) {
-    updateClient(client: $client) {
+  mutation updateClient($client: ClientInput!, $job: JobInput) {
+    updateClient(client: $client, job: $job) {
       id
       lastname
       firstname
@@ -52,6 +57,11 @@ export const UPDATE_CLIENT = gql`
       gender
       birthdate
       dependants
+      employees
+      job {
+        id
+        name
+      }
       retirementAge
       phone
       email
