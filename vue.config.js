@@ -4,4 +4,7 @@ module.exports = {
   css: {
     extract: true,
   },
+  chainWebpack: (config) => {
+    config.devServer.disableHostCheck(true);
+  },
 };

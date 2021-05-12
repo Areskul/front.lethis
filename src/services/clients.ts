@@ -8,6 +8,7 @@ export const GET_CLIENTS = gql`
       firstname
       gender
       type
+      family
       birthdate
       dependants
       employees
@@ -28,6 +29,7 @@ export const GET_CLIENT = gql`
       lastname
       firstname
       type
+      family
       gender
       birthdate
       dependants
@@ -57,6 +59,7 @@ export const UPDATE_CLIENT = gql`
       gender
       birthdate
       dependants
+      family
       employees
       job {
         id

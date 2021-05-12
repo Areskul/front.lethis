@@ -55,7 +55,7 @@ export default defineComponent({
 
 <style lang="postcss" scoped>
 .fab {
-  @apply absolute z-10 bottom-10 right-10 h-16 w-16 px-3 py-4 shadow-xl;
+  @apply fixed z-10 bottom-10 right-10 h-16 w-16 px-3 py-4 shadow-xl;
   @apply text-white bg-blue-600;
   @apply dark:text-white dark:bg-purple-600;
   border-radius: 50%;

@@ -7,17 +7,48 @@
       .flex(v-for="{ name, as, label, enumValues, ...attrs } in schema.fields")
         .input-container
           label(:for="name") {{ label }}
-          Field(:as="as", :id="name", :name="name", v-bind="attrs")
-            template(v-if="data")
-              component(
-                is="option",
-                v-for="{ name } in data.enumValues",
-                :selected="name == client.family ? 'selected' : null"
-              ) {{ name }}
+          Field.w-full(
+            v-if="data && as == 'select'",
+            as="div",
+            :id="name",
+            :name="name",
+            v-bind="attrs",
+            v-model="client.family"
+          )
+            Listbox(v-model="client.family")
+              ListboxButton
+                span.my-auto.px-3 {{ client.family }}
+              transition(
+                leave-active-class="transition duration-100 ease-in",
+                leave-from-class="opacity-100",
+                leave-to-class="opacity-0"
+              )
+                ListboxOptions.options
+                  ListboxOption(
+                    v-slot="{ active, selected }",
+                    v-for="{ name: n } in data.enumValues",
+                    :key="n",
+                    :value="n",
+                    as="template"
+                  )
+                    li(
+                      :class="[active ? 'text-amber-900 bg-amber-100' : 'text-gray-900', 'cursor-default select-none relative py-2 pl-10 pr-4']"
+                    )
+                      span.option(
+                        :class="[selected ? 'font-medium' : 'font-normal', 'block truncate']"
+                      ) {{ n }}
+          Field(v-else, :as="as", :id="name", :name="name", v-bind="attrs")
           ErrorMessage(:name="name")
 </template>
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
+import {
+  Listbox,
+  ListboxButton,
+  ListboxOptions,
+  ListboxOption,
+} from "@headlessui/vue";
+
 /*import dropdown from "@/components/containers/dropdown.vue";*/
 /*import { GET_JOBS } from "@/services/fields";*/
 import { GET_ENUM } from "@/services/fields";
@@ -31,6 +62,10 @@ export default defineComponent({
   components: {
     Field,
     ErrorMessage,
+    Listbox,
+    ListboxButton,
+    ListboxOptions,
+    ListboxOption,
     /*dropdown,*/
   },
   props: {
@@ -46,6 +81,8 @@ export default defineComponent({
       query: GET_ENUM,
       variables: { name: "Family" },
     });
+    const family = ref();
+
     //Vee-validate
     const schema: FormSchema = {
       fields: [
@@ -125,10 +162,24 @@ export default defineComponent({
     saveOnLeave(schema);
     return {
       data,
+      family,
       client,
       job,
       schema,
     };
   },
+  data: () => ({
+    open: true,
+  }),
 });
 </script>
+<style lang="postcss" scoped>
+button {
+  @apply relative w-full py-3 text-left bg-white rounded-lg shadow-md cursor-default focus:outline-none sm:text-sm;
+  @apply text-black;
+}
+.options {
+  @apply absolute z-10 w-full py-1 mt-1 overflow-hidden text-base bg-white rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm;
+  @apply text-black;
+}
+</style>

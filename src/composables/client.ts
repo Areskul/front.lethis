@@ -71,6 +71,7 @@ export const clientUtils = () => {
     });
     onBeforeRouteLeave(() => {
       const onSubmit = handleSubmit((variables) => {
+        console.log(variables);
         updateClient(variables);
       });
       onSubmit();

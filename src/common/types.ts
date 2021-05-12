@@ -10,11 +10,11 @@ export interface FieldSchema {
   as: string;
   name: string;
   label: string;
-  children?: Array<{
-    tag?: string; // the tag that will be rendered
-    text?: string; // a text content (optional)
-    [k: string]: any; // any additional attributes
-  }>;
+  //children?: Array<{
+  //tag?: string; // the tag that will be rendered
+  //text?: string; // a text content (optional)
+  //[k: string]: any; // any additional attributes
+  //}>;
   enumValues?: enumValues[];
   [k: string]: any;
 }
