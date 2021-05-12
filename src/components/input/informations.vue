@@ -32,7 +32,7 @@
                     as="template"
                   )
                     li(
-                      :class="[active ? 'text-amber-900 bg-amber-100' : 'text-gray-900', 'cursor-default select-none relative py-2 pl-10 pr-4']"
+                      :class="[active ? 'text-amber-900 bg-amber-100 dark:text-white' : 'dark:text-gray-400 text-gray-900', 'cursor-default select-none relative py-2 pl-10 pr-4']"
                     )
                       span.option(
                         :class="[selected ? 'font-medium' : 'font-normal', 'block truncate']"
@@ -175,11 +175,13 @@ export default defineComponent({
 </script>
 <style lang="postcss" scoped>
 button {
-  @apply relative w-full py-3 text-left bg-white rounded-lg shadow-md cursor-default focus:outline-none sm:text-sm;
-  @apply text-black;
+  @apply relative w-full py-3 text-left rounded-lg shadow-md cursor-default focus:outline-none sm:text-sm;
+  @apply text-black bg-white;
+  @apply dark:text-white dark:bg-gray-900;
 }
 .options {
-  @apply absolute z-10 w-full py-1 mt-1 overflow-hidden text-base bg-white rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm;
+  @apply absolute z-10 w-full py-1 mt-1 overflow-hidden rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm;
+  @apply dark:text-white dark:bg-gray-900;
   @apply text-black;
 }
 </style>
