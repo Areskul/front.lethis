@@ -9,15 +9,14 @@
           label(:for="name") {{ label }}
           Field.w-full(
             v-if="as == 'select'",
-            as="div",
             :id="name",
             :name="name",
             v-bind="attrs",
-            v-model="attrs.model"
+            v-model="models[attrs.modelkey]"
           )
-            Listbox(v-model="attrs.model")
+            Listbox(v-model="models[attrs.modelkey]")
               ListboxButton
-                span.my-auto.px-3 {{ attrs.model }}
+                span.my-auto.px-3 {{ models[attrs.modelkey] }}
               transition(
                 leave-active-class="transition duration-100 ease-in",
                 leave-from-class="opacity-100",
@@ -26,7 +25,7 @@
                 ListboxOptions.options
                   ListboxOption(
                     v-slot="{ active, selected }",
-                    v-for="{ name: n } in data[attrs.data].enumValues",
+                    v-for="{ name: n } in data[attrs.modelkey].enumValues",
                     :key="n",
                     :value="n",
                     as="template"
@@ -41,11 +40,7 @@
           ErrorMessage(:name="name")
 </template>
 <script lang="ts">
-import {
-  defineComponent,
-  ref,
-  /*reactive,*/
-} from "vue";
+import { defineComponent, ref, computed } from "vue";
 import {
   Listbox,
   ListboxButton,
@@ -80,7 +75,13 @@ export default defineComponent({
   },
   setup() {
     const { saveOnLeave, client } = clientUtils();
-    let job = { name: client.value.job as string };
+    const job = computed(() => {
+      if (client.value.job) {
+        return client.value.job;
+      } else {
+        return { name: null };
+      }
+    });
     const { data: dataFam } = useQuery({
       query: GET_ENUM,
       variables: { name: "Family" },
@@ -94,11 +95,10 @@ export default defineComponent({
         enumValues: dataJob,
       },
     });
-    console.log(dataJob);
-    console.log(data.value["job"]);
-    console.log(dataFam);
-    console.log(data.value["family"]);
-
+    const models = ref({
+      family: client.value.family,
+      job: job.value.name,
+    });
     //Vee-validate
     const schema: FormSchema = {
       fields: [
@@ -118,8 +118,7 @@ export default defineComponent({
           as: "select",
           name: "client.family",
           label: "Situation familliale",
-          model: client.value.family,
-          data: "family",
+          modelkey: "family",
         },
         {
           as: "input",
@@ -137,8 +136,7 @@ export default defineComponent({
           as: "select",
           name: "job.name",
           label: "Profession",
-          model: client.value.job,
-          data: "job",
+          modelkey: "job",
         },
         {
           as: "input",
@@ -181,14 +179,12 @@ export default defineComponent({
     saveOnLeave(schema);
     return {
       data,
+      models,
       client,
       job,
       schema,
     };
   },
-  data: () => ({
-    open: true,
-  }),
 });
 </script>
 <style lang="postcss" scoped>

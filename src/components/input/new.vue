@@ -1,7 +1,7 @@
 <template lang="pug">
 .overlay(v-if="modelValue")
   .under(@click="handleClick(false)")
-  .alert(@click.prevent)
+  .alert
     .flex.justify-center.pb-4
       h1 Informations personnelles du client
       div {{ client }}
@@ -12,14 +12,18 @@
         label.autocomplete(:for="name") {{ label }}
         Field(:as="as", :id="name", :name="name", v-bind="attrs")
           template(v-if="data")
-            component(is="option", v-for="{ name } in data.enumValues") {{ name }}
+            component(
+              is="option",
+              v-for="{ name } in data.enumValues",
+              :selected="name == client.gender ? 'selected' : null"
+            ) {{ name }}
         ErrorMessage(:name="name")
     .flex.flex-wrap.justify-center
       button.btn(@click="onSubmit") Créer
 </template>
 <script lang="ts">
 import { defineComponent } from "vue";
-import { useRouter } from "vue-router";
+/*import { useRouter } from "vue-router";*/
 import { clientUtils } from "@/composables/client";
 import { GET_ENUM } from "@/services/fields";
 import { useQuery } from "villus";
@@ -39,7 +43,7 @@ export default defineComponent({
     },
   },
   setup(props, { emit }) {
-    const router = useRouter();
+    /*const router = useRouter();*/
     const { updateClient, client } = clientUtils();
     const { data } = useQuery({
       query: GET_ENUM,
@@ -49,19 +53,19 @@ export default defineComponent({
       fields: [
         {
           as: "input",
-          name: "firstname",
+          name: "client.firstname",
           label: "Prénom",
           type: "text",
         },
         {
           as: "input",
-          name: "lastname",
+          name: "client.lastname",
           label: "Nom",
           type: "text",
         },
         {
           as: "select",
-          name: "gender",
+          name: "client.gender",
           label: "Civilité",
         },
       ],
@@ -74,12 +78,11 @@ export default defineComponent({
     const { handleSubmit } = useForm({
       validationSchema: schema.validation,
     });
-    const onSubmit = async () => {
-      handleSubmit((variables) => {
-        updateClient(variables);
-      });
-      router.push({ name: "Identité", params: { uid: client.value.id } });
-    };
+    const onSubmit = handleSubmit((variables) => {
+      updateClient(variables);
+    });
+    /*router.push({ name: "Identité", params: { uid: client.value.id } });*/
+    /*};*/
     const handleClick = function (bool) {
       emit("update:modelValue", bool);
     };

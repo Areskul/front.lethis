@@ -5,6 +5,7 @@ import { UPDATE_CLIENT } from "@/services/clients";
 import { GET_CLIENT } from "@/services/clients";
 import { onBeforeRouteLeave } from "vue-router";
 import { useForm } from "vee-validate";
+import { removeBlankTuples, isEmpty } from "./utils";
 
 export const clientUtils = () => {
   const { execute: update } = useMutation(UPDATE_CLIENT);
@@ -18,28 +19,10 @@ export const clientUtils = () => {
       store.dispatch("client/setCurrentClient", data);
     },
   });
-
-  const isBlank = (str: any) => {
-    return !str || /^\s*$/.test(str);
-  };
-  const isBlankTuple = (key: any, value: any) => {
-    if (isBlank(value)) {
-      return key;
-    }
-  };
-  const removeBlankTuples = (obj: any) => {
-    const entries = Object.entries(obj);
-    const empty: string[] = [];
-    entries.forEach(([key, value]) => {
-      empty.push(isBlankTuple(key, value));
-    });
-    empty.forEach((key) => {
-      delete obj[key];
-    });
-    return obj;
-  };
   const updateClient = (variables) => {
-    variables.client["id"] = client.value.id;
+    if (!isEmpty(client.value)) {
+      variables.client["id"] = client.value.id;
+    }
     variables = removeBlankTuples(variables);
     update(variables).then((res) => {
       if (res.data) {
@@ -65,7 +48,7 @@ export const clientUtils = () => {
     const { handleSubmit } = useForm({
       initialValues: {
         client: client.value,
-        job: client.value.job ? client.value.job : {},
+        job: client.value.job ? client.value.job : { name: null },
       },
       validationSchema: schema.validation,
     });
