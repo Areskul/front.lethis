@@ -8,16 +8,16 @@
         .input-container
           label(:for="name") {{ label }}
           Field.w-full(
-            v-if="data && as == 'select'",
+            v-if="as == 'select'",
             as="div",
             :id="name",
             :name="name",
             v-bind="attrs",
-            v-model="client.family"
+            v-model="attrs.model"
           )
-            Listbox(v-model="client.family")
+            Listbox(v-model="attrs.model")
               ListboxButton
-                span.my-auto.px-3 {{ client.family }}
+                span.my-auto.px-3 {{ attrs.model }}
               transition(
                 leave-active-class="transition duration-100 ease-in",
                 leave-from-class="opacity-100",
@@ -26,7 +26,7 @@
                 ListboxOptions.options
                   ListboxOption(
                     v-slot="{ active, selected }",
-                    v-for="{ name: n } in data.enumValues",
+                    v-for="{ name: n } in data[attrs.data].enumValues",
                     :key="n",
                     :value="n",
                     as="template"
@@ -41,7 +41,11 @@
           ErrorMessage(:name="name")
 </template>
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import {
+  defineComponent,
+  ref,
+  /*reactive,*/
+} from "vue";
 import {
   Listbox,
   ListboxButton,
@@ -51,7 +55,7 @@ import {
 
 /*import dropdown from "@/components/containers/dropdown.vue";*/
 /*import { GET_JOBS } from "@/services/fields";*/
-import { GET_ENUM } from "@/services/fields";
+import { GET_ENUM, GET_JOBS } from "@/services/fields";
 import { useQuery } from "villus";
 import { Field, ErrorMessage } from "vee-validate";
 import * as yup from "yup";
@@ -77,11 +81,23 @@ export default defineComponent({
   setup() {
     const { saveOnLeave, client } = clientUtils();
     let job = { name: client.value.job as string };
-    const { data } = useQuery({
+    const { data: dataFam } = useQuery({
       query: GET_ENUM,
       variables: { name: "Family" },
     });
-    const family = ref();
+    const { data: dataJob } = useQuery({
+      query: GET_JOBS,
+    });
+    const data = ref({
+      family: dataFam,
+      job: {
+        enumValues: dataJob,
+      },
+    });
+    console.log(dataJob);
+    console.log(data.value["job"]);
+    console.log(dataFam);
+    console.log(data.value["family"]);
 
     //Vee-validate
     const schema: FormSchema = {
@@ -102,6 +118,8 @@ export default defineComponent({
           as: "select",
           name: "client.family",
           label: "Situation familliale",
+          model: client.value.family,
+          data: "family",
         },
         {
           as: "input",
@@ -116,10 +134,11 @@ export default defineComponent({
           type: "text",
         },
         {
-          as: "input",
+          as: "select",
           name: "job.name",
           label: "Profession",
-          type: "text",
+          model: client.value.job,
+          data: "job",
         },
         {
           as: "input",
@@ -162,7 +181,6 @@ export default defineComponent({
     saveOnLeave(schema);
     return {
       data,
-      family,
       client,
       job,
       schema,
