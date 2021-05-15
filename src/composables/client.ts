@@ -49,6 +49,13 @@ export const clientUtils = () => {
       initialValues: {
         client: client.value,
         job: client.value.job ? client.value.job : { name: null },
+        place: client.value.place
+          ? client.value.place
+          : {
+              adress: null,
+              cedex: null,
+              city: null,
+            },
       },
       validationSchema: schema.validation,
     });

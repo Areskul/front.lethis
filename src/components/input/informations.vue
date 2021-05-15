@@ -76,6 +76,17 @@ export default defineComponent({
   setup() {
     const { saveOnLeave, client } = clientUtils();
     const job = computed(() => {
+      if (client.value.place) {
+        return client.value.place;
+      } else {
+        return {
+          adress: null,
+          cedex: null,
+          city: null,
+        };
+      }
+    });
+    const place = computed(() => {
       if (client.value.job) {
         return client.value.job;
       } else {
@@ -146,8 +157,20 @@ export default defineComponent({
         },
         {
           as: "input",
-          name: "adress",
-          label: "Adress",
+          name: "place.adress",
+          label: "Adresse",
+          type: "text",
+        },
+        {
+          as: "input",
+          name: "place.cedex",
+          label: "Code",
+          type: "text",
+        },
+        {
+          as: "input",
+          name: "place.city",
+          label: "Ville",
           type: "text",
         },
         {
@@ -164,20 +187,30 @@ export default defineComponent({
         },
       ],
       validation: yup.object({
-        type: yup.string(),
-        birthdate: yup.date(),
-        family: yup.string(),
-        dependants: yup.number(),
-        employees: yup.number(),
-        job: yup.string(),
-        retirementAge: yup.number(),
-        address: yup.string(),
-        phone: yup.number(),
-        email: yup.string().email(),
+        client: yup.object({
+          type: yup.string(),
+          birthdate: yup.date(),
+          family: yup.string(),
+          dependants: yup.number(),
+          employees: yup.number(),
+          retirementAge: yup.number(),
+          adress: yup.string(),
+          phone: yup.number(),
+          email: yup.string().email(),
+        }),
+        job: yup.object({
+          name: yup.string(),
+        }),
+        place: yup.object({
+          adress: yup.string(),
+          cedex: yup.number(),
+          city: yup.string(),
+        }),
       }),
     };
     saveOnLeave(schema);
     return {
+      place,
       data,
       models,
       client,

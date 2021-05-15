@@ -19,6 +19,11 @@ export const GET_CLIENTS = gql`
       retirementAge
       phone
       email
+      place {
+        adress
+        cedex
+        city
+      }
     }
   }
 `;
@@ -50,8 +55,12 @@ export const GET_CLIENT = gql`
   }
 `;
 export const UPDATE_CLIENT = gql`
-  mutation updateClient($client: ClientInput!, $job: JobInput) {
-    updateClient(client: $client, job: $job) {
+  mutation updateClient(
+    $client: ClientInput!
+    $job: JobInput
+    $place: PlaceInput
+  ) {
+    updateClient(client: $client, job: $job, place: $place) {
       id
       lastname
       firstname
@@ -68,6 +77,11 @@ export const UPDATE_CLIENT = gql`
       retirementAge
       phone
       email
+      place {
+        adress
+        cedex
+        city
+      }
     }
   }
 `;
