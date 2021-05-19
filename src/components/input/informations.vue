@@ -36,6 +36,8 @@
                       span.option(
                         :class="[selected ? 'font-medium' : 'font-normal', 'block truncate']"
                       ) {{ n }}
+          div(v-if="attrs.add")
+            Dialog(:entity="attrs.modelkey")
           Field(v-else, :as="as", :id="name", :name="name", v-bind="attrs")
           ErrorMessage(:name="name")
 </template>
@@ -47,9 +49,7 @@ import {
   ListboxOptions,
   ListboxOption,
 } from "@headlessui/vue";
-
-/*import dropdown from "@/components/containers/dropdown.vue";*/
-/*import { GET_JOBS } from "@/services/fields";*/
+import Dialog from "@/components/containers/dialog.vue";
 import { GET_ENUM, GET_JOBS } from "@/services/fields";
 import { useQuery } from "villus";
 import { Field, ErrorMessage } from "vee-validate";
@@ -65,7 +65,7 @@ export default defineComponent({
     ListboxButton,
     ListboxOptions,
     ListboxOption,
-    /*dropdown,*/
+    Dialog,
   },
   props: {
     uid: {
@@ -148,6 +148,7 @@ export default defineComponent({
           name: "job.name",
           label: "Profession",
           modelkey: "job",
+          add: true,
         },
         {
           as: "input",

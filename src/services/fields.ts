@@ -17,3 +17,9 @@ export const GET_JOBS = gql`
     }
   }
 `;
+
+export const ADD_JOB = gql`
+  mutation add($name: String!) {
+    createJob(name: $name)
+  }
+`;
