@@ -43,7 +43,7 @@ export const discover: Array<RouteRecordRaw> = [
         name: "Revenues",
         path: "Incomes",
         components: {
-          //input: () => import("@/components/input/incomes.vue"),
+          input: () => import("@/components/input/incomes.vue"),
         },
         meta: {
           title: baseTitle + separator + "Revenues",

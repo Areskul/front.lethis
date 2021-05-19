@@ -126,6 +126,6 @@ button {
 .options {
   @apply absolute z-10 w-full py-1 mt-1 overflow-hidden rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm;
   @apply dark:text-white dark:bg-gray-900;
-  @apply text-black;
+  @apply text-black text-white bg-white;
 }
 </style>
