@@ -29,8 +29,8 @@ import {
   DialogTitle,
 } from "@headlessui/vue";
 import { defineComponent, ref } from "vue";
-import { useMutation } from "villus";
-import { ADD_JOB } from "@/services/fields";
+/*import { useMutation } from "villus";*/
+/*import { ADD_JOB } from "@/services/fields";*/
 export default defineComponent({
   components: {
     TransitionRoot,
@@ -47,7 +47,7 @@ export default defineComponent({
   },
   setup(props) {
     const isOpen = ref(false);
-    const { execute } = useMutation(ADD_JOB);
+    /*const { execute } = useMutation(ADD_JOB);*/
     return {
       isOpen,
       closeModal() {

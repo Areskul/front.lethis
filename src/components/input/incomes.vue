@@ -54,25 +54,25 @@ export default defineComponent({
         {
           as: "input",
           name: "incomes.wage",
-          label: "Revenues salariés",
+          label: "Revenus salariés",
           type: "text",
         },
         {
           as: "input",
           name: "incomes.landed",
-          label: "Revenues fonciers",
+          label: "Revenus fonciers",
           type: "text",
         },
         {
           as: "input",
           name: "incomes.others",
-          label: "Autres revenues",
+          label: "Autres revenus",
           type: "text",
         },
         {
           as: "input",
           name: "incomes.joint",
-          label: "Revenues du conjoint",
+          label: "Revenus du conjoint",
           type: "text",
         },
         {

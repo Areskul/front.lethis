@@ -40,7 +40,7 @@ export const discover: Array<RouteRecordRaw> = [
         },
       },
       {
-        name: "Revenues",
+        name: "Revenus",
         path: "Incomes",
         components: {
           input: () => import("@/components/input/incomes.vue"),
