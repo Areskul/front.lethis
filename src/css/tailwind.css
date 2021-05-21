@@ -27,6 +27,7 @@
     @apply text-purple-400;
   }
   input[type="text"],
+  input[type="number"],
   input[type="date"],
   input[type="email"],
   input[type="tel"],
