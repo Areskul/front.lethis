@@ -59,20 +59,23 @@ export const clientUtils = () => {
         incomes: client.value.incomes
           ? client.value.incomes
           : {
-              benefits: 0,
-              wage: 0,
-              landed: 0,
-              others: 0,
-              joint: 0,
-              qp: 0,
-              total: 0,
-              result: 0,
+              benefits: null,
+              wage: null,
+              landed: null,
+              others: null,
+              joint: null,
+              qp: null,
+              total: null,
+              result: null,
             },
       },
       validationSchema: schema.validation,
     });
     onBeforeRouteLeave(() => {
       const onSubmit = handleSubmit((variables) => {
+        if (variables.incomes) {
+          variables.incomes.id = client.value.incomes.id;
+        }
         if (!variables.client) {
           variables.client = { id: client.value.id };
         }

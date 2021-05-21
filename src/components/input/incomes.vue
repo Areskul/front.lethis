@@ -3,7 +3,6 @@
   .flex.justify-center.items-center.py-6
     h1 Informations personnelles du client
   form#form
-    div {{ total }}
     .flex.flex-wrap.justify-center
       .flex(v-for="{ name, as, label, ...attrs } in schema.fields")
         .input-container
@@ -42,18 +41,18 @@ export default defineComponent({
         return client.value.incomes;
       } else {
         return {
-          benefits: 0,
-          wage: 0,
-          landed: 0,
-          others: 0,
-          joint: 0,
-          total: 0,
+          benefits: null,
+          wage: null,
+          landed: null,
+          others: null,
+          joint: null,
+          total: null,
         };
       }
     });
-    let total = incomes.value.total;
+    /*let total = incomes.value.total;*/
     watch(incomes, () => {
-      total = incomes.value.benefits + incomes.value.wages;
+      incomes.value.total = incomes.value.benefits + incomes.value.wages;
     });
     //Vee-validate
     const schema: FormSchema = {
@@ -62,37 +61,37 @@ export default defineComponent({
           as: "input",
           name: "incomes.benefits",
           label: "Bénéfices professionnels",
-          type: "number",
+          type: "text",
         },
         {
           as: "input",
           name: "incomes.wage",
           label: "Revenus salariés",
-          type: "number",
+          type: "text",
         },
         {
           as: "input",
           name: "incomes.landed",
           label: "Revenus fonciers",
-          type: "number",
+          type: "text",
         },
         {
           as: "input",
           name: "incomes.others",
           label: "Autres revenus",
-          type: "number",
+          type: "text",
         },
         {
           as: "input",
           name: "incomes.joint",
           label: "Revenus du conjoint",
-          type: "number",
+          type: "text",
         },
         {
           as: "input",
           name: "incomes.total",
           label: "Total",
-          type: "number",
+          type: "text",
           computed: true,
           default: true,
         },
@@ -100,13 +99,13 @@ export default defineComponent({
           as: "input",
           name: "incomes.qp",
           label: "Quote Part",
-          type: "number",
+          type: "text",
         },
         {
           as: "input",
           name: "incomes.result",
           label: "Resultat",
-          type: "number",
+          type: "text",
         },
       ],
       validation: yup.object({
@@ -127,7 +126,7 @@ export default defineComponent({
       client,
       incomes,
       schema,
-      total,
+      /*total,*/
     };
   },
 });

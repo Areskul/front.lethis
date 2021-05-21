@@ -17,6 +17,7 @@ export const GET_CLIENTS = gql`
         name
       }
       incomes {
+        id
         benefits
         wage
         landed
@@ -54,6 +55,7 @@ export const GET_CLIENT = gql`
         name
       }
       incomes {
+        id
         benefits
         wage
         landed
@@ -96,6 +98,7 @@ export const UPDATE_CLIENT = gql`
         name
       }
       incomes {
+        id
         benefits
         wage
         landed
