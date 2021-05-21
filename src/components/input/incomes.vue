@@ -12,12 +12,13 @@
             :id="name",
             :name="name",
             v-bind="attrs",
-            :readonly="attrs.computed"
+            :readonly="attrs.computed",
+            v-model="models[attrs.modelkey]"
           )
         ErrorMessage(:name="name")
 </template>
 <script lang="ts">
-import { defineComponent, computed, watch } from "vue";
+import { defineComponent, computed, watch, ref } from "vue";
 import { Field, ErrorMessage } from "vee-validate";
 import * as yup from "yup";
 import { clientUtils } from "@/composables/client";
@@ -50,7 +51,10 @@ export default defineComponent({
         };
       }
     });
-    /*let total = incomes.value.total;*/
+    let total = null;
+    const models = ref({
+      total: total,
+    });
     watch(incomes, () => {
       incomes.value.total = incomes.value.benefits + incomes.value.wages;
     });
@@ -93,7 +97,7 @@ export default defineComponent({
           label: "Total",
           type: "text",
           computed: true,
-          default: true,
+          modelkey: "total",
         },
         {
           as: "input",
@@ -126,7 +130,7 @@ export default defineComponent({
       client,
       incomes,
       schema,
-      /*total,*/
+      models,
     };
   },
 });

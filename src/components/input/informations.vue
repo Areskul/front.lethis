@@ -36,8 +36,8 @@
                       span.option(
                         :class="[selected ? 'font-medium' : 'font-normal', 'block truncate']"
                       ) {{ n }}
-          div(v-if="attrs.add")
-            Dialog(:entity="attrs.modelkey")
+                  div(v-if="attrs.add")
+                    Dialog(:entity="attrs.modelkey")
           Field(v-else, :as="as", :id="name", :name="name", v-bind="attrs")
           ErrorMessage(:name="name")
 </template>

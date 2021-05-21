@@ -27,9 +27,9 @@ export default defineComponent({
   setup(props) {
     const router = useRouter();
     const { dispatchClient } = clientUtils();
-    const dispatchClientId = () => {
-      dispatchClient(props.client.id);
-      router.push({ name: "Identité", params: { uid: props.client.id } });
+    const dispatchClientId = async () => {
+      await dispatchClient(props.client.id);
+      await router.push({ name: "Identité", params: { uid: props.client.id } });
     };
     return {
       dispatchClientId,

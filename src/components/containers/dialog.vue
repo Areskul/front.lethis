@@ -1,9 +1,10 @@
 <template lang="pug">
-button.px-4.py-2.text-sm.font-medium.text-white.bg-black.rounded-md.bg-opacity-20(
-  type="button",
-  @click="openModal",
-  class="hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
-) Open dialog
+.text-center
+  button.px-4.py-2.text-sm.font-medium.text-white.bg-black.rounded-md.bg-opacity-20(
+    type="button",
+    @click="openModal",
+    class="hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
+  ) Ajouter
 transition(
   enter="duration-300 ease-out",
   enter-from="opacity-0 scale-95",
@@ -14,10 +15,16 @@ transition(
 )
   div(v-show="isOpen")
     .fixed.inset-0.z-10.overflow-y-auto
-      .min-h-screen.text-center
-        .modal.inline-block.h-screen.align-middle
-          input
-          button.btn(type="button", @click="closeModal") Got it, thanks!
+      .text-center.h-screen
+        .modal
+          .flex.flex-wrap.justify-center
+            .flex
+              form#form
+                .input-container
+                  label(:for="field.name") {{ field.label }}
+                  Field.px-4(:id="field.name", :name="field.name")
+                  ErrorMessage(:name="field.name")
+          button.btn(type="button", @click="onSubmit") Ajouter
 </template>
 
 <script lang="ts">
@@ -29,10 +36,15 @@ import {
   DialogTitle,
 } from "@headlessui/vue";
 import { defineComponent, ref } from "vue";
-/*import { useMutation } from "villus";*/
-/*import { ADD_JOB } from "@/services/fields";*/
+import { useMutation } from "villus";
+import { ADD_JOB } from "@/services/fields";
+import { Field, ErrorMessage, useForm } from "vee-validate";
+import * as yup from "yup";
+
 export default defineComponent({
   components: {
+    Field,
+    ErrorMessage,
     TransitionRoot,
     TransitionChild,
     Dialog,
@@ -47,15 +59,44 @@ export default defineComponent({
   },
   setup(props) {
     const isOpen = ref(false);
-    /*const { execute } = useMutation(ADD_JOB);*/
+    const { execute } = useMutation(ADD_JOB);
+    const closeModal = () => {
+      isOpen.value = false;
+    };
+    const openModal = () => {
+      isOpen.value = true;
+    };
+    //Vee-validate
+    const job = {
+      name: null,
+    };
+    const field = {
+      name: "job.name",
+      label: "nom",
+      as: "input",
+      type: "text",
+    };
+
+    const schema = {
+      validation: yup.object({
+        job: yup.object({
+          name: yup.string(),
+        }),
+      }),
+    };
+    const { handleSubmit } = useForm({ validationSchema: schema.validation });
+    const onSubmit = handleSubmit((variables) => {
+      execute(variables);
+      closeModal();
+    });
     return {
+      job,
+      onSubmit,
       isOpen,
-      closeModal() {
-        isOpen.value = false;
-      },
-      openModal() {
-        isOpen.value = true;
-      },
+      execute,
+      openModal,
+      closeModal,
+      field,
     };
   },
 });
@@ -63,8 +104,8 @@ export default defineComponent({
 
 <style lang="postcss" scoped>
 .modal {
-  @apply m-auto my-52 z-10 w-64 py-1 overflow-hidden rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm;
-  @apply dark:text-white dark:bg-gray-700;
-  @apply text-black;
+  @apply align-middle h-64 mt-52 mx-auto z-10 w-64 py-1 rounded-md shadow-lg;
+  @apply dark:text-white dark:bg-gray-900;
+  @apply bg-white text-black;
 }
 </style>

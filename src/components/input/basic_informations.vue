@@ -118,7 +118,7 @@ export default defineComponent({
 </script>
 
 <style lang="postcss" scoped>
-button {
+.btn {
   @apply relative w-full py-3 text-left rounded-lg shadow-md cursor-default focus:outline-none sm:text-sm;
   @apply text-black bg-white;
   @apply dark:text-white dark:bg-gray-900;
