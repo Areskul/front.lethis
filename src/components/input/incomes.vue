@@ -3,16 +3,22 @@
   .flex.justify-center.items-center.py-6
     h1 Informations personnelles du client
   form#form
+    div {{ total }}
     .flex.flex-wrap.justify-center
       .flex(v-for="{ name, as, label, ...attrs } in schema.fields")
         .input-container
           label(:for="name") {{ label }}
-          Field(:as="as", :id="name", :name="name", v-bind="attrs")
-            component(is="button", v-bind="incomes") {{ label }}
+          Field(
+            :as="as",
+            :id="name",
+            :name="name",
+            v-bind="attrs",
+            :readonly="attrs.computed"
+          )
         ErrorMessage(:name="name")
 </template>
 <script lang="ts">
-import { defineComponent, computed } from "vue";
+import { defineComponent, computed, watch } from "vue";
 import { Field, ErrorMessage } from "vee-validate";
 import * as yup from "yup";
 import { clientUtils } from "@/composables/client";
@@ -36,11 +42,18 @@ export default defineComponent({
         return client.value.incomes;
       } else {
         return {
-          adress: null,
-          cedex: null,
-          city: null,
+          benefits: 0,
+          wage: 0,
+          landed: 0,
+          others: 0,
+          joint: 0,
+          total: 0,
         };
       }
+    });
+    let total = incomes.value.total;
+    watch(incomes, () => {
+      total = incomes.value.benefits + incomes.value.wages;
     });
     //Vee-validate
     const schema: FormSchema = {
@@ -76,11 +89,12 @@ export default defineComponent({
           type: "text",
         },
         {
-          as: "div",
+          as: "input",
           name: "incomes.total",
           label: "Total",
           type: "text",
           computed: true,
+          default: true,
         },
         {
           as: "input",
@@ -108,6 +122,7 @@ export default defineComponent({
       client,
       incomes,
       schema,
+      total,
     };
   },
 });

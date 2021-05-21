@@ -56,11 +56,26 @@ export const clientUtils = () => {
               cedex: null,
               city: null,
             },
+        incomes: client.value.incomes
+          ? client.value.incomes
+          : {
+              benefits: 0,
+              wage: 0,
+              landed: 0,
+              others: 0,
+              joint: 0,
+              qp: 0,
+              total: 0,
+              result: 0,
+            },
       },
       validationSchema: schema.validation,
     });
     onBeforeRouteLeave(() => {
       const onSubmit = handleSubmit((variables) => {
+        if (!variables.client) {
+          variables.client = { id: client.value.id };
+        }
         updateClient(variables);
       });
       onSubmit();

@@ -75,7 +75,7 @@ export default defineComponent({
   },
   setup() {
     const { saveOnLeave, client } = clientUtils();
-    const job = computed(() => {
+    const place = computed(() => {
       if (client.value.place) {
         return client.value.place;
       } else {
@@ -86,7 +86,7 @@ export default defineComponent({
         };
       }
     });
-    const place = computed(() => {
+    const job = computed(() => {
       if (client.value.job) {
         return client.value.job;
       } else {

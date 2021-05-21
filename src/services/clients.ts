@@ -16,6 +16,16 @@ export const GET_CLIENTS = gql`
         id
         name
       }
+      incomes {
+        benefits
+        wage
+        landed
+        others
+        joint
+        qp
+        total
+        result
+      }
       retirementAge
       phone
       email
@@ -43,6 +53,16 @@ export const GET_CLIENT = gql`
         id
         name
       }
+      incomes {
+        benefits
+        wage
+        landed
+        others
+        joint
+        qp
+        total
+        result
+      }
       retirementAge
       phone
       email
@@ -59,8 +79,9 @@ export const UPDATE_CLIENT = gql`
     $client: ClientInput!
     $job: JobInput
     $place: PlaceInput
+    $incomes: IncomesInput
   ) {
-    updateClient(client: $client, job: $job, place: $place) {
+    updateClient(client: $client, job: $job, place: $place, incomes: $incomes) {
       id
       lastname
       firstname
@@ -73,6 +94,16 @@ export const UPDATE_CLIENT = gql`
       job {
         id
         name
+      }
+      incomes {
+        benefits
+        wage
+        landed
+        others
+        joint
+        qp
+        total
+        result
       }
       retirementAge
       phone
