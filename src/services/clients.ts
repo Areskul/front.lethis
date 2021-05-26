@@ -7,34 +7,6 @@ export const GET_CLIENTS = gql`
       lastname
       firstname
       gender
-      type
-      family
-      birthdate
-      dependants
-      employees
-      job {
-        id
-        name
-      }
-      incomes {
-        id
-        benefits
-        wage
-        landed
-        others
-        joint
-        qp
-        total
-        result
-      }
-      retirementAge
-      phone
-      email
-      place {
-        adress
-        cedex
-        city
-      }
     }
   }
 `;
