@@ -1,10 +1,14 @@
 <template lang="pug">
 .text-center
-  button.px-4.py-2.text-sm.font-medium.text-white.bg-black.rounded-md.bg-opacity-20(
+  button.px-4.pt-2.text-sm.text-green-500(
     type="button",
+    @mousever="active = true",
+    @mouseleave="active = false",
     @click="openModal",
     class="hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
-  ) Ajouter
+  )
+    svg.fill-current.opacity-50(viewBox="0 0 35 45")
+      path(:d="plus")
 transition(
   enter="duration-300 ease-out",
   enter-from="opacity-0 scale-95",
@@ -36,6 +40,7 @@ import {
   DialogTitle,
 } from "@headlessui/vue";
 import { defineComponent, ref } from "vue";
+import { mdiPlusCircle } from "@mdi/js";
 import { useMutation } from "villus";
 import { ADD_JOB } from "@/services/fields";
 import { Field, ErrorMessage, useForm } from "vee-validate";
@@ -51,6 +56,10 @@ export default defineComponent({
     DialogOverlay,
     DialogTitle,
   },
+  data: () => ({
+    plus: mdiPlusCircle,
+    active: false,
+  }),
   props: {
     entity: {
       type: String,

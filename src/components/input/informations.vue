@@ -228,7 +228,7 @@ button {
   @apply dark:text-white dark:bg-gray-900;
 }
 .options {
-  @apply absolute z-10 w-full py-1 mt-1 overflow-hidden rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm;
+  @apply absolute z-10 w-full py-1 mt-1 overflow-auto rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm;
   @apply text-black bg-white;
   @apply dark:text-white dark:bg-gray-900;
 }
