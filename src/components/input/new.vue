@@ -1,6 +1,6 @@
 <template lang="pug">
 .overlay(v-if="modelValue")
-  .under(@click="handleClick(false)")
+  .under(@click="handleClickOutside(false)")
   .alert
     .flex.justify-center.items-center.py-6
       h1 Informations personnelles du client
@@ -43,7 +43,7 @@
             Field(v-else, :as="as", :id="name", :name="name", v-bind="attrs")
             ErrorMessage(:name="name")
     .flex.flex-wrap.justify-center
-      button.btn(@click="onSubmit") Créer
+      button.btn(@click="handleClick") Créer
 </template>
 <script lang="ts">
 import { useRouter } from "vue-router";
@@ -121,17 +121,20 @@ export default defineComponent({
     });
     const onSubmit = handleSubmit((variables) => {
       updateClient(variables);
-      router.push({ name: "Identité", params: { uid: client.value.id } });
     });
-    const handleClick = function (bool) {
+    const handleClickOutside = (bool: boolean) => {
       emit("update:modelValue", bool);
+    };
+    const handleClick = () => {
+      onSubmit();
+      router.push({ name: "Identité", params: { uid: client.value.id } });
     };
     return {
       data,
       models,
       schema,
       handleClick,
-      onSubmit,
+      handleClickOutside,
     };
   },
 });

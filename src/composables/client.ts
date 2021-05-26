@@ -27,9 +27,11 @@ export const clientUtils = () => {
     update(variables).then((res) => {
       if (res.data) {
         client.value = res.data;
-        return res;
+        return res.data;
       } else {
+        //client.value = {};
         console.log(res.error);
+        return res.error;
       }
     });
   };
@@ -38,9 +40,11 @@ export const clientUtils = () => {
     get(variables).then((res) => {
       if (res.data) {
         client.value = res.data;
+        return res.data;
       } else {
-        client.value = {};
+        //client.value = {};
         console.log(res.error);
+        return res.error;
       }
     });
   };
