@@ -10,6 +10,15 @@ export const GET_CLIENTS = gql`
     }
   }
 `;
+export const DELETE_CLIENT = gql`
+  mutation deleteClient($id: String!) {
+    deleteClient(id: $id) {
+      id
+      lastname
+      firstname
+    }
+  }
+`;
 export const GET_CLIENT = gql`
   query client($id: String!) {
     client(id: $id) {

@@ -15,7 +15,7 @@
             v-model="models[attrs.modelkey]"
           )
             Listbox(v-model="models[attrs.modelkey]")
-              ListboxButton
+              ListboxButton.listbtn
                 span.my-auto.px-3 {{ models[attrs.modelkey] }}
               transition(
                 leave-active-class="transition duration-100 ease-in",
@@ -47,7 +47,6 @@ import {
   ListboxOptions,
   ListboxOption,
 } from "@headlessui/vue";
-
 import { Field, ErrorMessage } from "vee-validate";
 import * as yup from "yup";
 import { clientUtils } from "@/composables/client";
@@ -118,14 +117,14 @@ export default defineComponent({
 </script>
 
 <style lang="postcss" scoped>
-.btn {
+.listbtn {
   @apply relative w-full py-3 text-left rounded-lg shadow-md cursor-default focus:outline-none sm:text-sm;
   @apply text-black bg-white;
   @apply dark:text-white dark:bg-gray-900;
 }
 .options {
   @apply absolute z-10 w-full py-1 mt-1 overflow-hidden rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm;
+  @apply text-black bg-white;
   @apply dark:text-white dark:bg-gray-900;
-  @apply text-black text-white bg-white;
 }
 </style>

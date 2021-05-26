@@ -5,7 +5,13 @@ div
     p.p-1 {{ client.firstname }}
     p.p-1 {{ client.lastname }}
   .flex
-  breadcrumbs
+  router-view(name="titles", v-slot="{ Component }")
+    transition(
+      mode="out-in",
+      enter-active-class="fade-in-fwd",
+      leave-active-class="fade-out-bck"
+    )
+      component(:is="Component")
 </template>
 
 <script lang="ts">

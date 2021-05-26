@@ -9,6 +9,8 @@ module.exports = {
       center: true,
     },
     colors: {
+      red: colors.red,
+      green: colors.green,
       pink: colors.pink,
       purple: colors.purple,
       white: colors.white,

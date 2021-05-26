@@ -13,19 +13,21 @@ export const discover: Array<RouteRecordRaw> = [
       bodyContent: () => import("@/views/Home.vue"),
     },
     children: [
-      {
-        path: "",
-        redirect: "/Discover/Informations",
-      },
+      //{
+      //path: "",
+      //redirect: "/Discover/Informations",
+      //},
       {
         name: "Identité",
         path: "Identity",
         props: true,
         components: {
           input: () => import("@/components/input/basic_informations.vue"),
+          titles: () => import("@/components/navigation/breadcrumbs.vue"),
         },
         meta: {
           title: baseTitle + separator + "Identité",
+          enabled: true,
         },
       },
       {
@@ -34,9 +36,11 @@ export const discover: Array<RouteRecordRaw> = [
         props: true,
         components: {
           input: () => import("@/components/input/informations.vue"),
+          titles: () => import("@/components/navigation/breadcrumbs.vue"),
         },
         meta: {
           title: baseTitle + separator + "Informations",
+          enabled: true,
         },
       },
       {
@@ -44,9 +48,11 @@ export const discover: Array<RouteRecordRaw> = [
         path: "Incomes",
         components: {
           input: () => import("@/components/input/incomes.vue"),
+          titles: () => import("@/components/navigation/breadcrumbs.vue"),
         },
         meta: {
           title: baseTitle + separator + "Revenues",
+          enabled: true,
         },
       },
       {
@@ -54,9 +60,11 @@ export const discover: Array<RouteRecordRaw> = [
         path: "Charges",
         components: {
           //input: () => import("@/components/input/charges.vue"),
+          titles: () => import("@/components/navigation/breadcrumbs.vue"),
         },
         meta: {
           title: baseTitle + separator + "Charges courrantes",
+          enabled: true,
         },
       },
       {
@@ -67,6 +75,7 @@ export const discover: Array<RouteRecordRaw> = [
         },
         meta: {
           title: baseTitle + separator + "Impots",
+          enabled: false,
         },
       },
       {
@@ -77,6 +86,7 @@ export const discover: Array<RouteRecordRaw> = [
         },
         meta: {
           title: baseTitle + separator + "Imobilier non-locatif",
+          enabled: false,
         },
       },
       {
@@ -87,12 +97,14 @@ export const discover: Array<RouteRecordRaw> = [
         },
         meta: {
           title: baseTitle + separator + "Imobilier locatif",
+          enabled: false,
         },
       },
     ],
     // footer: () => import("@/components/navigation/footer.vue"),
     meta: {
       title: baseTitle + separator + "Nouveau Client",
+      enabled: false,
     },
   },
 ];

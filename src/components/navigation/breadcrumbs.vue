@@ -2,8 +2,10 @@
 .container.header.mb-20
   .flex.flex-row.flex-wrap.justify-center(class="md:justify-around")
     .flex.flex-col.px-4(v-for="route in children", :key="route.path")
-      router-link(:to="route.path")
-        button(:class="[route.name == current.name ? 'active' : null]") {{ route.name }}
+      router-link(:to="route.path", :class="{ disabled: !route.meta.enabled }")
+        button(
+          :class="{ active: route.name == current.name, disabled: !route.meta.enabled }"
+        ) {{ route.name }}
 </template>
 
 <script lang="ts">
@@ -48,5 +50,10 @@ button {
 .header {
   @apply justify-between py-4;
   @apply bg-white dark:bg-gray-900;
+}
+.disabled {
+  @apply select-none pointer-events-none;
+  @apply text-gray-300;
+  @apply dark:text-gray-600;
 }
 </style>

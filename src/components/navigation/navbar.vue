@@ -8,13 +8,15 @@
     :class="hover ? 'large' : 'tight'"
   )
     .flex.py-4.justify-center(v-for="route in routes", :key="route.name")
-      button(:class="[route.name == parents.name ? 'active' : null]")
+      button(
+        :class="{ active: route.name == parents.name, disabled: !route.enabled }"
+      )
         svg.fill-current(viewBox="0 0 25 35")
           path(:d="route.svg")
       button.bottom(
         @click="handleClick(route)",
         v-if="hover",
-        :class="[route.name == parents.name ? 'active' : null]"
+        :class="{ active: route.name == parents.name, disabled: !route.enabled }"
       ) {{ route.name }}
     .flex.flex-grow
     .flex.py-4.justify-center
@@ -88,28 +90,33 @@ export default defineComponent({
         name: "Clients",
         path: "/Clients",
         svg: accounts,
+        enabled: true,
       },
       {
         name: "Découverte",
         childname: "Informations",
         path: "/Discover/Informations",
         svg: informations,
+        enabled: true,
       },
       {
         name: "Produits",
         childname: "Comptes et livrets",
         path: "/Products/Accounts",
         svg: cart,
+        enabled: false,
       },
       {
         name: "Budget",
         path: "/Budget",
         svg: piggy,
+        enabled: false,
       },
       {
         name: "Capacité d'épargne",
         path: "/Saving",
         svg: battery,
+        enabled: false,
       },
     ]);
     return {
@@ -154,5 +161,10 @@ button {
 .active {
   @apply text-purple-600;
   @apply dark:text-blue-500;
+}
+.disabled {
+  @apply select-none pointer-events-none;
+  @apply text-gray-300;
+  @apply dark:text-gray-600;
 }
 </style>

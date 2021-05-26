@@ -12,7 +12,7 @@
 import { defineComponent } from "vue";
 import { isUnauthNavguard } from "@/composables/auth";
 import { clientUtils } from "@/composables/client";
-import {onBeforeRouteUpdate} from "vue-router"
+import { onBeforeRouteUpdate } from "vue-router";
 export default defineComponent({
   name: "Home",
   props: {
@@ -25,10 +25,9 @@ export default defineComponent({
     isUnauthNavguard();
     const { dispatchClient } = clientUtils();
     dispatchClient(props.uid);
-    onBeforeRouteUpdate(()=>{
-    dispatchClient(props.uid);
-
-        })
+    onBeforeRouteUpdate(() => {
+      dispatchClient(props.uid);
+    });
   },
 });
 </script>

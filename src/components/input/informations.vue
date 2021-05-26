@@ -39,7 +39,7 @@
                   div(v-if="attrs.add")
                     Dialog(:entity="attrs.modelkey")
           Field(v-else, :as="as", :id="name", :name="name", v-bind="attrs")
-          ErrorMessage(:name="name")
+          ErrorMessage(v-if="as != 'select'", :name="name")
 </template>
 <script lang="ts">
 import { defineComponent, ref, computed } from "vue";
@@ -229,7 +229,7 @@ button {
 }
 .options {
   @apply absolute z-10 w-full py-1 mt-1 overflow-hidden rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm;
+  @apply text-black bg-white;
   @apply dark:text-white dark:bg-gray-900;
-  @apply text-black;
 }
 </style>

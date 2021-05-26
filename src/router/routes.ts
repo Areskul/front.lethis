@@ -25,6 +25,7 @@ const others: Array<RouteRecordRaw> = [
     },
     meta: {
       title: baseTitle + separator + "Clients",
+      enabled: true,
     },
   },
   {
@@ -39,6 +40,7 @@ const others: Array<RouteRecordRaw> = [
     },
     meta: {
       title: baseTitle + separator + "Budget",
+      enabled: false,
     },
   },
   {
@@ -53,6 +55,7 @@ const others: Array<RouteRecordRaw> = [
     },
     meta: {
       title: baseTitle + separator + "register",
+      enabled: false,
     },
   },
   {
@@ -79,6 +82,7 @@ const others: Array<RouteRecordRaw> = [
     },
     meta: {
       title: baseTitle + separator + "Goals",
+      enabled: false,
     },
   },
   {
@@ -92,6 +96,7 @@ const others: Array<RouteRecordRaw> = [
     },
     meta: {
       title: baseTitle + separator + "Potential",
+      enabled: false,
     },
   },
 ];
