@@ -27,13 +27,32 @@ export const clientUtils = () => {
     update(variables).then((res) => {
       if (res.data) {
         client.value = res.data;
-        return res.data;
       } else {
         //client.value = {};
         console.log(res.error);
-        return res.error;
       }
+      return res;
     });
+  };
+  const updateClientAsync = (variables) => {
+    if (!isEmpty(client.value)) {
+      variables.client["id"] = client.value.id;
+    }
+    variables = removeBlankTuples(variables);
+    update(variables).then((res) => {
+      if (res.data) {
+        client.value = res.data;
+      } else {
+        //client.value = {};
+        console.log(res.error);
+      }
+      return res;
+    });
+    //let promise = new Promise((resolve, reject) => {
+    //resolve(res.data);
+    //reject(res.error);
+    //});
+    //return promise;
   };
   const dispatchClient = (clientId) => {
     const variables = { id: clientId };
@@ -93,5 +112,6 @@ export const clientUtils = () => {
     dispatchClient,
     saveOnLeave,
     updateClient,
+    updateClientAsync,
   };
 };

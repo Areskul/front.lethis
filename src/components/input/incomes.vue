@@ -8,12 +8,21 @@
         .input-container
           label(:for="name") {{ label }}
           Field(
+            v-if="attrs.modelkey",
             :as="as",
             :id="name",
             :name="name",
             v-bind="attrs",
             :readonly="attrs.computed",
             v-model="models[attrs.modelkey]"
+          )
+          Field(
+            v-else,
+            :as="as",
+            :id="name",
+            :name="name",
+            v-bind="attrs",
+            :readonly="attrs.computed"
           )
         ErrorMessage(:name="name")
 </template>
