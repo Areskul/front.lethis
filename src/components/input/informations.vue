@@ -15,7 +15,7 @@
             v-model="models[attrs.modelkey]"
           )
             Listbox(v-model="models[attrs.modelkey]")
-              ListboxButton
+              ListboxButton.listbtn
                 span.my-auto.px-3 {{ models[attrs.modelkey] }}
               transition(
                 leave-active-class="transition duration-100 ease-in",
@@ -37,12 +37,21 @@
                         :class="[selected ? 'font-medium' : 'font-normal', 'block truncate']"
                       ) {{ n }}
                   div(v-if="attrs.add")
-                    Dialog(:entity="attrs.modelkey")
+                    .flex.text-center.justify-center
+                      button.px-4.pt-2.text-sm.text-green-500(
+                        type="button",
+                        @mousever="active = true",
+                        @mouseleave="active = false",
+                        @click="state.show = true"
+                      )
+                        svg.fill-current.opacity-50(viewBox="0 0 35 45")
+                          path(:d="plus")
+                  Dialog(:entity="attrs.modelkey", v-model="state.show")
           Field(v-else, :as="as", :id="name", :name="name", v-bind="attrs")
           ErrorMessage(v-if="as != 'select'", :name="name")
 </template>
 <script lang="ts">
-import { defineComponent, ref, computed } from "vue";
+import { defineComponent, ref, computed, watch } from "vue";
 import {
   Listbox,
   ListboxButton,
@@ -50,6 +59,7 @@ import {
   ListboxOption,
 } from "@headlessui/vue";
 import Dialog from "@/components/containers/dialog.vue";
+import { mdiPlusCircle } from "@mdi/js";
 import { GET_ENUM, GET_JOBS } from "@/services/fields";
 import { useQuery } from "villus";
 import { Field, ErrorMessage } from "vee-validate";
@@ -73,6 +83,9 @@ export default defineComponent({
       required: false,
     },
   },
+  data: () => ({
+    plus: mdiPlusCircle,
+  }),
   setup() {
     const { saveOnLeave, client } = clientUtils();
     const place = computed(() => {
@@ -97,8 +110,18 @@ export default defineComponent({
       query: GET_ENUM,
       variables: { name: "Family" },
     });
-    const { data: dataJob } = useQuery({
+    const { data: dataJob, execute } = useQuery({
       query: GET_JOBS,
+    });
+    const state = ref({
+      show: false,
+    });
+    watch(state.value, () => {
+      if (!state.value.show) {
+        /*necessary*/
+        execute();
+        execute();
+      }
     });
     const data = ref({
       family: dataFam,
@@ -211,6 +234,7 @@ export default defineComponent({
     };
     saveOnLeave(schema);
     return {
+      state,
       place,
       data,
       models,
@@ -222,7 +246,7 @@ export default defineComponent({
 });
 </script>
 <style lang="postcss" scoped>
-button {
+.listbtn {
   @apply relative w-full py-3 text-left rounded-lg shadow-md cursor-default focus:outline-none sm:text-sm;
   @apply text-black bg-white;
   @apply dark:text-white dark:bg-gray-900;

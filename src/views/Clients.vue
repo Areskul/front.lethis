@@ -41,7 +41,6 @@ export default defineComponent({
     };
     watch(state.value, () => {
       if (!state.value.show) {
-        console.log("watch");
         execute();
       }
     });
