@@ -59,7 +59,7 @@ export const discover: Array<RouteRecordRaw> = [
         name: "Charges courrantes",
         path: "Charges",
         components: {
-          //input: () => import("@/components/input/charges.vue"),
+          input: () => import("@/components/input/charges.vue"),
           titles: () => import("@/components/navigation/breadcrumbs.vue"),
         },
         meta: {

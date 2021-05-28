@@ -19,7 +19,7 @@ div
 import newCli from "@/components/input/new.vue";
 import client from "@/components/containers/client.vue";
 import { mdiAccountPlus } from "@mdi/js";
-import { defineComponent, ref } from "vue";
+import { defineComponent, ref, watch } from "vue";
 import { useQuery } from "villus";
 import { useStore } from "vuex";
 import { GET_CLIENTS } from "@/services/clients";
@@ -28,7 +28,7 @@ export default defineComponent({
   setup() {
     isUnauthNavguard();
     const store = useStore();
-    const { data } = useQuery({
+    const { data, execute } = useQuery({
       query: GET_CLIENTS,
     });
     const state = ref({
@@ -39,6 +39,12 @@ export default defineComponent({
       store.dispatch("client/setCurrentClient", {});
       state.value.show = !state.value.show;
     };
+    watch(state.value, () => {
+      if (!state.value.show) {
+        console.log("watch");
+        execute();
+      }
+    });
     return {
       state,
       data,

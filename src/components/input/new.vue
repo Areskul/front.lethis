@@ -43,10 +43,10 @@
             Field(v-else, :as="as", :id="name", :name="name", v-bind="attrs")
             ErrorMessage(:name="name")
     .flex.flex-wrap.justify-center
-      button.btn(@click="handleClick") Créer
+      button.btn(@click="onSubmit") Créer
 </template>
 <script lang="ts">
-import { useRouter } from "vue-router";
+/*import { useRouter } from "vue-router";*/
 import { defineComponent, ref } from "vue";
 import {
   Listbox,
@@ -77,7 +77,7 @@ export default defineComponent({
     },
   },
   setup(props, { emit }) {
-    const router = useRouter();
+    /*const router = useRouter();*/
     const { updateClient, client } = clientUtils();
     const { data: dataGen } = useQuery({
       query: GET_ENUM,
@@ -121,19 +121,16 @@ export default defineComponent({
     });
     const onSubmit = handleSubmit((variables) => {
       updateClient(variables);
+      handleClickOutside(false);
     });
     const handleClickOutside = (bool: boolean) => {
       emit("update:modelValue", bool);
-    };
-    const handleClick = () => {
-      onSubmit();
-      router.push({ name: "Identité", params: { uid: client.value.id } });
     };
     return {
       data,
       models,
       schema,
-      handleClick,
+      onSubmit,
       handleClickOutside,
     };
   },

@@ -60,7 +60,7 @@ export default defineComponent({
         };
       }
     });
-    let total = incomes.value.benefits;
+    let total = null;
     const models = ref({
       total: total,
     });
