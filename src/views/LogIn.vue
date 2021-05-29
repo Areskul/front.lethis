@@ -1,24 +1,26 @@
 <template lang="pug">
-.container.py-5.my-52
-  .flex.justify-center.items-center
-    form#form(@submit="onSubmit")
-      .input-container
-        label.autocomplete(for="email") email
-        input#email(type="text", autocomplete="on", v-model="email")
-        span.message {{ emailError }}
-      .input-container
-        label.autocomplete(for="email") mot de passe
-        input#email(type="password", autocomplete="on", v-model="password")
-        span.message {{ passwordError }}
-  .flex.justify-center.items-center.py-4
-    button.btn(type="submit", form="form") Se connecter
-  .flex.justify-center.items-center
-    .flex
-      ForgotPasswd(:variables="state")
-  .flex.justify-center.items-center.pt-4
-    .flex
-      router-link(:to="path")
-        p.text-sm Créer un compte
+.py-5.my-52
+  img.bg(src="/wallpaper.jpg")
+  .z-10
+    .flex.justify-center.items-center
+      form#form(@submit="onSubmit")
+        .input-container
+          label.autocomplete(for="email") email
+          input#email(type="text", autocomplete="on", v-model="email")
+          span.message {{ emailError }}
+        .input-container
+          label.autocomplete(for="email") mot de passe
+          input#email(type="password", autocomplete="on", v-model="password")
+          span.message {{ passwordError }}
+    .flex.justify-center.items-center.py-4
+      button.btn.z-10(type="submit", form="form") Se connecter
+    .flex.justify-center.items-center
+      .flex
+        ForgotPasswd(:variables="state")
+    .flex.justify-center.items-center.pt-4
+      .flex
+        router-link(:to="path")
+          p.text-sm Créer un compte
 </template>
 
 <script lang="ts">
@@ -82,3 +84,10 @@ export default defineComponent({
   },
 });
 </script>
+
+<style lang="postcss" scoped>
+.bg {
+  @apply absolute inset-y-24 inset-x-0;
+  @apply object-cover h-screen w-screen;
+}
+</style>
