@@ -44,7 +44,7 @@ button {
   @apply dark:text-white;
 }
 .active {
-  @apply bg-purple-500 text-white;
+  @apply bg-blue-500 text-white;
   @apply dark:bg-purple-400 dark:text-black;
 }
 .header {

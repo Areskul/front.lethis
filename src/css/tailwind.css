@@ -10,7 +10,7 @@
   .btn {
     @apply px-3 py-2 rounded-md;
     @apply bg-blue-400 text-white;
-    @apply dark:bg-purple-400 dark:text-white;
+    @apply dark:bg-green-400 dark:text-white;
   }
   .input-container {
     @apply flex relative h-12 py-1 my-12 w-64 mx-6;
@@ -39,8 +39,8 @@
   }
   label {
     @apply absolute left-3 -top-7 transition-all px-1;
-    @apply text-pink-400 bg-white;
-    @apply dark:bg-gray-900;
+    @apply text-gray-800 bg-white;
+    @apply dark:text-white dark:bg-gray-900;
   }
   label.autocomplete {
     @apply -top-3;

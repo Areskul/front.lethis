@@ -159,8 +159,8 @@ button {
   @apply dark:text-white;
 }
 .active {
-  @apply text-purple-600;
-  @apply dark:text-blue-500;
+  @apply text-green-600;
+  @apply dark:text-green-500;
 }
 .disabled {
   @apply select-none pointer-events-none;

@@ -110,6 +110,10 @@ export default defineComponent({
       query: GET_ENUM,
       variables: { name: "Family" },
     });
+    const { data: dataTyp } = useQuery({
+      query: GET_ENUM,
+      variables: { name: "Type" },
+    });
     const { data: dataJob, execute } = useQuery({
       query: GET_JOBS,
     });
@@ -125,22 +129,24 @@ export default defineComponent({
     });
     const data = ref({
       family: dataFam,
+      type: dataTyp,
       job: {
         enumValues: dataJob,
       },
     });
     const models = ref({
       family: client.value.family,
+      type: client.value.type,
       job: job.value.name,
     });
     //Vee-validate
     const schema: FormSchema = {
       fields: [
         {
-          as: "input",
+          as: "select",
           name: "client.type",
           label: "Type de bilan",
-          type: "text",
+          modelkey: "type",
         },
         {
           as: "input",

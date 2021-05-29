@@ -1,6 +1,8 @@
 <template lang="pug">
 div
-  .flex.header.p-3(v-if="client")
+  .flex.w-24
+    img(src="/logo.png", height="20", widht="100")
+  .flex.header.p-3(v-if="client && isAuthenticated")
     p.p-1 {{ client.gender }}
     p.p-1 {{ client.firstname }}
     p.p-1 {{ client.lastname }}
@@ -18,6 +20,7 @@ div
 import { defineComponent } from "vue";
 import breadcrumbs from "@/components/navigation/breadcrumbs.vue";
 import { clientUtils } from "@/composables/client";
+import { auth } from "@/composables/auth";
 export default defineComponent({
   name: "v-header",
   components: {
@@ -25,8 +28,10 @@ export default defineComponent({
   },
   setup() {
     const { client } = clientUtils();
+    const { isAuthenticated } = auth();
     return {
       client,
+      isAuthenticated,
     };
   },
 });

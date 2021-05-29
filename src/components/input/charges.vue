@@ -1,7 +1,7 @@
 <template lang="pug">
 .container
   .flex.justify-center.items-center.py-6
-    h1 Informations personnelles du client
+    h1 Detail des charges
   form#form
     .flex.flex-wrap.justify-center
       .flex(v-for="{ name, as, label, ...attrs } in schema.fields")
@@ -73,31 +73,81 @@ export default defineComponent({
         {
           as: "input",
           name: "incomes.benefits",
-          label: "Bénéfices professionnels",
+          label: "Loyer",
           type: "text",
         },
         {
           as: "input",
           name: "incomes.wage",
-          label: "Revenus salariés",
+          label: "Alimentaire",
           type: "text",
         },
         {
           as: "input",
           name: "incomes.landed",
-          label: "Revenus fonciers",
+          label: "Eau/Électrivité/Gaz",
           type: "text",
         },
         {
           as: "input",
           name: "incomes.others",
-          label: "Autres revenus",
+          label: "Téléphone/Internet",
           type: "text",
         },
         {
           as: "input",
           name: "incomes.joint",
-          label: "Revenus du conjoint",
+          label: "Frais de scolarité",
+          type: "text",
+        },
+        {
+          as: "input",
+          name: "incomes.total",
+          label: "Assurances IARD",
+          type: "text",
+          computed: true,
+          modelkey: "total",
+        },
+        {
+          as: "input",
+          name: "incomes.qp",
+          label: "Aide à Domicile",
+          type: "text",
+        },
+        {
+          as: "input",
+          name: "incomes.result",
+          label: "Transports",
+          type: "text",
+        },
+        {
+          as: "input",
+          name: "incomes.result",
+          label: "Loisirs",
+          type: "text",
+        },
+        {
+          as: "input",
+          name: "incomes.result",
+          label: "Vacances Annuelles",
+          type: "text",
+        },
+        {
+          as: "input",
+          name: "incomes.result",
+          label: "Crédit consommation",
+          type: "text",
+        },
+        {
+          as: "input",
+          name: "incomes.result",
+          label: "Autres",
+          type: "text",
+        },
+        {
+          as: "input",
+          name: "incomes.result",
+          label: "Charges de copropriétés",
           type: "text",
         },
         {
@@ -110,15 +160,19 @@ export default defineComponent({
         },
         {
           as: "input",
-          name: "incomes.qp",
+          name: "incomes.total",
           label: "Quote Part",
           type: "text",
+          computed: true,
+          modelkey: "total",
         },
         {
           as: "input",
-          name: "incomes.result",
-          label: "Resultat",
+          name: "incomes.total",
+          label: "Résultat",
           type: "text",
+          computed: true,
+          modelkey: "total",
         },
       ],
       validation: yup.object({

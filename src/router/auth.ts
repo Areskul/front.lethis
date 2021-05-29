@@ -7,7 +7,7 @@ export const auth: Array<RouteRecordRaw> = [
     name: "login",
     props: true,
     components: {
-      //header: () => import("@/components/navigation/header.vue"),
+      header: () => import("@/components/navigation/header.vue"),
       bodyContent: () => import("@/views/LogIn.vue"),
       // footer: () => import("@/components/navigation/footer.vue"),
     },
@@ -21,7 +21,7 @@ export const auth: Array<RouteRecordRaw> = [
     name: "register",
     props: true,
     components: {
-      //header: () => import("@/components/navigation/header.vue"),
+      header: () => import("@/components/navigation/header.vue"),
       bodyContent: () => import("@/views/Register.vue"),
       // footer: () => import("@/components/navigation/footer.vue"),
     },
@@ -34,7 +34,7 @@ export const auth: Array<RouteRecordRaw> = [
     name: "reset",
     props: true,
     components: {
-      //header: () => import("@/components/navigation/header.vue"),
+      header: () => import("@/components/navigation/header.vue"),
       bodyContent: () => import("@/views/ResetPasswd.vue"),
       // footer: () => import("@/components/navigation/footer.vue"),
     },

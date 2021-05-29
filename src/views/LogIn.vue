@@ -3,7 +3,7 @@
   .flex.justify-center.items-center
     form#form(@submit="onSubmit")
       .input-container
-        label.autocomplete(for="email") email ou pseudo
+        label.autocomplete(for="email") email
         input#email(type="text", autocomplete="on", v-model="email")
         span.message {{ emailError }}
       .input-container

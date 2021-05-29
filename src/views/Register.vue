@@ -3,7 +3,7 @@
   .flex.justify-center.items-center
     form#form(@submit="onSubmit")
       .input-container 
-        label.autocomplete(for="username") username
+        label.autocomplete(for="username") nom d'utilisateur
         input#username(type="text", autocomplete="on", v-model="name")
         span.message {{ nameError }}
       .input-container
@@ -11,7 +11,7 @@
         input#email(type="text", autocomplete="on", v-model="email")
         span.message {{ emailError }}
       .input-container
-        label.autocomplete(for="password") password
+        label.autocomplete(for="password") mot de passe
         input#password(type="password", autocomplete="on", v-model="password")
         span.message {{ passwordError }}
   .flex.justify-center.items-center.py-4
