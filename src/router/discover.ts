@@ -71,11 +71,12 @@ export const discover: Array<RouteRecordRaw> = [
         name: "Impôts",
         path: "Taxes",
         components: {
-          //input: () => import("@/components/input/taxes.vue"),
+          input: () => import("@/components/input/taxes.vue"),
+          titles: () => import("@/components/navigation/breadcrumbs.vue"),
         },
         meta: {
           title: baseTitle + separator + "Impots",
-          enabled: false,
+          enabled: true,
         },
       },
       {
