@@ -1,7 +1,5 @@
 <template lang="pug">
 .container
-  .flex.justify-center.items-center.py-6
-    h1 Informations personnelles du client
   form#form
     .flex.flex-wrap.justify-center
       .flex(v-for="{ name, as, label, enumValues, ...attrs } in schema.fields")

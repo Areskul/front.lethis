@@ -127,7 +127,6 @@ export default defineComponent({
     });
     const data = ref({
       family: dataFam,
-      employees: dataBool,
       type: dataTyp,
       job: {
         enumValues: dataJob,
@@ -135,7 +134,6 @@ export default defineComponent({
     });
     const models = ref({
       family: client.value.family,
-      employees: client.value.employees,
       type: client.value.type,
       job: job.value.name,
     });
@@ -169,8 +167,8 @@ export default defineComponent({
         {
           as: "select",
           name: "client.employees",
-          label: "Salarié",
-          modelkey: "employees",
+          label: "Salariés",
+          type: "text",
         },
         {
           as: "select",
@@ -194,7 +192,7 @@ export default defineComponent({
         {
           as: "input",
           name: "place.cedex",
-          label: "Code postal",
+          label: "Code",
           type: "text",
         },
         {

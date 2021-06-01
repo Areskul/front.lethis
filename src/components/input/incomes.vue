@@ -1,7 +1,5 @@
 <template lang="pug">
 .container
-  .flex.justify-center.items-center.py-6
-    h1 Informations personnelles du client
   form#form
     .flex.flex-wrap.justify-center
       .flex(v-for="{ name, as, label, ...attrs } in schema.fields")
@@ -16,18 +14,11 @@
             :readonly="attrs.computed",
             v-model="models[attrs.modelkey]"
           )
-          Field(
-            v-else,
-            :as="as",
-            :id="name",
-            :name="name",
-            v-bind="attrs",
-            :readonly="attrs.computed"
-          )
+          Field(v-else, :as="as", :id="name", :name="name", v-bind="attrs")
         ErrorMessage(:name="name")
 </template>
 <script lang="ts">
-import { defineComponent, computed, watch, ref } from "vue";
+import { defineComponent, computed, ref } from "vue";
 import { Field, ErrorMessage } from "vee-validate";
 import * as yup from "yup";
 import { clientUtils } from "@/composables/client";
@@ -51,23 +42,17 @@ export default defineComponent({
         return client.value.incomes;
       } else {
         return {
-          benefits: null,
-          wage: null,
-          landed: null,
-          others: null,
-          joint: null,
-          total: null,
+          benefits: "0",
+          wage: "0",
+          landed: "0",
+          others: "0",
+          joint: "0",
+          qp: "0",
+          total: "0",
+          result: "0",
         };
       }
     });
-    let total = incomes.value.benefits;
-    const models = ref({
-      total: total,
-    });
-    watch(incomes, () => {
-      incomes.value.total = incomes.value.benefits + incomes.value.wages;
-    });
-    //Vee-validate
     const schema: FormSchema = {
       fields: [
         {
@@ -75,12 +60,14 @@ export default defineComponent({
           name: "incomes.benefits",
           label: "Bénéfices professionnels",
           type: "text",
+          modelkey: "benefits",
         },
         {
           as: "input",
           name: "incomes.wage",
           label: "Revenus salariés",
           type: "text",
+          modelkey: "wage",
         },
         {
           as: "input",
@@ -134,6 +121,16 @@ export default defineComponent({
         }),
       }),
     };
+    const total = computed(() => {
+      const res = new String(
+        parseFloat(incomes.value.benefits) + parseFloat(incomes.value.wage)
+      );
+      incomes.value.total = res;
+      return res;
+    });
+    const models = ref({
+      total: total,
+    });
     saveOnLeave(schema);
     return {
       client,
