@@ -1,7 +1,5 @@
 <template lang="pug">
 .container
-  .flex.justify-center.items-center.py-6
-    h1 Informations personnelles du client
   form#form
     .flex.flex-wrap.justify-center
       .flex(v-for="{ name, as, label, enumValues, ...attrs } in schema.fields")
@@ -36,18 +34,16 @@
                       span.option(
                         :class="[selected ? 'font-medium' : 'font-normal', 'block truncate']"
                       ) {{ n }}
-                  div(v-if="attrs.add")
-                    .flex.text-center.justify-center
-                      button.px-4.pt-2.text-sm.text-green-500(
-                        type="button",
-                        @mousever="active = true",
-                        @mouseleave="active = false",
-                        @click="state.show = true"
-                      )
-                        svg.fill-current.opacity-50(viewBox="0 0 35 45")
-                          path(:d="plus")
-                  Dialog(:entity="attrs.modelkey", v-model="state.show")
           Field(v-else, :as="as", :id="name", :name="name", v-bind="attrs")
+          div(v-if="attrs.add")
+            .flex.text-center.justify-center
+              button.px-4.pt-2.text-sm.text-green-500(
+                type="button",
+                @click="state.show = true"
+              )
+                svg.fill-current.opacity-50(viewBox="0 0 35 45")
+                  path(:d="plus")
+            Dialog(:entity="attrs.modelkey", v-model="state.show")
           ErrorMessage(v-if="as != 'select'", :name="name")
 </template>
 <script lang="ts">
@@ -87,6 +83,14 @@ export default defineComponent({
     plus: mdiPlusCircle,
   }),
   setup() {
+    const state = ref({
+      show: false,
+    });
+    watch(state.value, () => {
+      if (!state.value.show) {
+        setTimeout(execute, 200);
+      }
+    });
     const { saveOnLeave, client } = clientUtils();
     const place = computed(() => {
       if (client.value.place) {
@@ -116,16 +120,6 @@ export default defineComponent({
     });
     const { data: dataJob, execute } = useQuery({
       query: GET_JOBS,
-    });
-    const state = ref({
-      show: false,
-    });
-    watch(state.value, () => {
-      if (!state.value.show) {
-        /*necessary*/
-        execute();
-        execute();
-      }
     });
     const data = ref({
       family: dataFam,
@@ -205,13 +199,13 @@ export default defineComponent({
         },
         {
           as: "input",
-          name: "phone",
+          name: "client.phone",
           label: "Téléphone",
           type: "text",
         },
         {
           as: "input",
-          name: "email",
+          name: "client.email",
           label: "Mail",
           type: "text",
         },
@@ -222,10 +216,10 @@ export default defineComponent({
           birthdate: yup.date(),
           family: yup.string(),
           dependants: yup.number(),
-          employees: yup.number(),
+          employees: yup.string(),
           retirementAge: yup.number(),
           adress: yup.string(),
-          phone: yup.number(),
+          phone: yup.string(),
           email: yup.string().email(),
         }),
         job: yup.object({

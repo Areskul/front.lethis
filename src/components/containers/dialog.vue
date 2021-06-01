@@ -8,7 +8,7 @@ transition(
   leave-to="opacity-0 scale-95"
 )
   .overlay(v-if="modelValue")
-    .under(@click="handleClickOutside(false)")
+    .under(@click.prevent="handleClickOutside(false)")
     .alert
       .flex.flex-wrap.justify-center.text-center
         .flex

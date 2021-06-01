@@ -1,5 +1,5 @@
 <template lang="pug">
-.container.header.mb-20
+.container.header.mb-5
   .flex.flex-row.flex-wrap.justify-center(class="md:justify-around")
     .flex.flex-col.px-4(v-for="route in children", :key="route.path")
       router-link(:to="route.path", :class="{ disabled: !route.meta.enabled }")

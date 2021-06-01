@@ -41,7 +41,7 @@ export default defineComponent({
     };
     watch(state.value, () => {
       if (!state.value.show) {
-        execute();
+        setTimeout(execute, 200);
       }
     });
     return {

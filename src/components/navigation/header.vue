@@ -1,7 +1,7 @@
 <template lang="pug">
 .z-10
   .flex.w-24
-    img(src="/logo.png", height="20", widht="100")
+    // img(src="/logo.png", height="20", widht="100")
   .flex.header.p-3(v-if="client && isAuthenticated")
     p.p-1 {{ client.gender }}
     p.p-1 {{ client.firstname }}
