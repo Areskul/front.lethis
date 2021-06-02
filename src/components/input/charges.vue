@@ -114,8 +114,6 @@ export default defineComponent({
           name: "charges.insurance",
           label: "Assurances IARD",
           type: "text",
-          computed: true,
-          modelkey: "total",
           icon: "euro",
         },
         {
@@ -190,7 +188,7 @@ export default defineComponent({
           type: "text",
           icon: "euro",
           computed: true,
-          modelkey: "total",
+          modelkey: "result",
         },
       ],
       validation: yup.object({
@@ -215,14 +213,29 @@ export default defineComponent({
       }),
     };
     const total = computed(() => {
-      const res = new String(
-        parseFloat(charges.value.benefits) + parseFloat(charges.value.wage)
-      );
-      charges.value.total = res;
-      return res;
+      let res = 0;
+      let values = charges.value;
+      const erata = ["id", "total", "qp", "result"];
+      for (const [key, value] of Object.entries(values)) {
+        if (!erata.includes(key)) {
+          res += parseFloat(value as string);
+        }
+      }
+
+      const str = String(res);
+      charges.value.total = str;
+      return str;
+    });
+    const result = computed(() => {
+      const res =
+        parseFloat(total.value) * (parseFloat(charges.value.qp) / 100);
+      const str = String(res);
+      charges.value.result = str;
+      return str;
     });
     const models = ref({
       total: total,
+      result: result,
     });
     saveOnLeave(schema);
     return {

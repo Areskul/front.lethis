@@ -70,7 +70,6 @@ export default defineComponent({
           label: "Bénéfices professionnels",
           type: "text",
           icon: "euro",
-          modelkey: "benefits",
         },
         {
           as: "input",
@@ -78,7 +77,6 @@ export default defineComponent({
           label: "Revenus salariés",
           type: "text",
           icon: "euro",
-          modelkey: "wage",
         },
         {
           as: "input",
@@ -123,6 +121,8 @@ export default defineComponent({
           label: "Resultat",
           type: "text",
           icon: "euro",
+          computed: true,
+          modelkey: "result",
         },
       ],
       validation: yup.object({
@@ -139,14 +139,21 @@ export default defineComponent({
       }),
     };
     const total = computed(() => {
-      const res = new String(
-        parseFloat(incomes.value.benefits) + parseFloat(incomes.value.wage)
-      );
-      incomes.value.total = res;
+      const res =
+        parseFloat(incomes.value.benefits) + parseFloat(incomes.value.wage);
+      const str = new String(res);
+      incomes.value.total = str;
+      return res;
+    });
+    const result = computed(() => {
+      const res = (total.value * parseFloat(incomes.value.qp)) / 100;
+      const str = new String(res);
+      incomes.value.result = str;
       return res;
     });
     const models = ref({
       total: total,
+      result: result,
     });
     saveOnLeave(schema);
     return {

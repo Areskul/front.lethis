@@ -55,7 +55,6 @@ export default defineComponent({
           label: "Impot sur le revenu annuel",
           type: "text",
           icon: "euro",
-          modelkey: "benefits",
         },
         {
           as: "input",
@@ -63,7 +62,6 @@ export default defineComponent({
           label: "Revenus salariés",
           type: "text",
           icon: "euro",
-          modelkey: "wage",
         },
         {
           as: "input",
