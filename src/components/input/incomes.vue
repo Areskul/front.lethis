@@ -5,6 +5,8 @@
       .flex(v-for="{ name, as, label, ...attrs } in schema.fields")
         .input-container
           label(:for="name") {{ label }}
+          svg.icon(viewBox="0 0 25 25")
+            path(:d="icons[attrs.icon]")
           Field(
             v-if="attrs.modelkey",
             :as="as",
@@ -18,6 +20,7 @@
         ErrorMessage(:name="name")
 </template>
 <script lang="ts">
+import { mdiCurrencyEur, mdiPercent } from "@mdi/js";
 import { defineComponent, computed, ref } from "vue";
 import { Field, ErrorMessage } from "vee-validate";
 import * as yup from "yup";
@@ -35,6 +38,12 @@ export default defineComponent({
       required: false,
     },
   },
+  data: () => ({
+    icons: {
+      euro: mdiCurrencyEur,
+      percent: mdiPercent,
+    },
+  }),
   setup() {
     const { saveOnLeave, client } = clientUtils();
     const incomes = computed(() => {
@@ -60,6 +69,7 @@ export default defineComponent({
           name: "incomes.benefits",
           label: "Bénéfices professionnels",
           type: "text",
+          icon: "euro",
           modelkey: "benefits",
         },
         {
@@ -67,6 +77,7 @@ export default defineComponent({
           name: "incomes.wage",
           label: "Revenus salariés",
           type: "text",
+          icon: "euro",
           modelkey: "wage",
         },
         {
@@ -74,24 +85,28 @@ export default defineComponent({
           name: "incomes.landed",
           label: "Revenus fonciers",
           type: "text",
+          icon: "euro",
         },
         {
           as: "input",
           name: "incomes.others",
           label: "Autres revenus",
           type: "text",
+          icon: "euro",
         },
         {
           as: "input",
           name: "incomes.joint",
           label: "Revenus du conjoint",
           type: "text",
+          icon: "euro",
         },
         {
           as: "input",
           name: "incomes.total",
           label: "Total",
           type: "text",
+          icon: "euro",
           computed: true,
           modelkey: "total",
         },
@@ -100,12 +115,14 @@ export default defineComponent({
           name: "incomes.qp",
           label: "Quote Part",
           type: "text",
+          icon: "percent",
         },
         {
           as: "input",
           name: "incomes.result",
           label: "Resultat",
           type: "text",
+          icon: "euro",
         },
       ],
       validation: yup.object({
@@ -142,6 +159,11 @@ export default defineComponent({
 });
 </script>
 <style lang="postcss" scoped>
+.icon {
+  @apply fill-current absolute right-0 p-2;
+  @apply text-gray-400;
+  @apply dark:text-gray-400;
+}
 button {
   @apply relative w-full py-3 text-left rounded-lg shadow-md cursor-default focus:outline-none sm:text-sm;
   @apply text-black bg-white;

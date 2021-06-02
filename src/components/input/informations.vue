@@ -225,7 +225,7 @@ export default defineComponent({
           employees: yup.string(),
           retirementAge: yup.number(),
           adress: yup.string(),
-          phone: yup.string(),
+          phone: yup.number(),
           email: yup.string().email(),
         }),
         job: yup.object({

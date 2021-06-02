@@ -5,6 +5,8 @@
       .flex(v-for="{ name, as, label, ...attrs } in schema.fields")
         .input-container
           label(:for="name") {{ label }}
+          svg.icon(viewBox="0 0 25 25")
+            path(:d="icons[attrs.icon]")
           Field(
             v-if="attrs.modelkey",
             :as="as",
@@ -14,10 +16,12 @@
             :readonly="attrs.computed",
             v-model="models[attrs.modelkey]"
           )
+
           Field(v-else, :as="as", :id="name", :name="name", v-bind="attrs")
         ErrorMessage(:name="name")
 </template>
 <script lang="ts">
+import { mdiCurrencyEur, mdiPercent } from "@mdi/js";
 import { defineComponent, computed, ref } from "vue";
 import { Field, ErrorMessage } from "vee-validate";
 import * as yup from "yup";
@@ -35,6 +39,12 @@ export default defineComponent({
       required: false,
     },
   },
+  data: () => ({
+    icons: {
+      euro: mdiCurrencyEur,
+      percent: mdiPercent,
+    },
+  }),
   setup() {
     const { saveOnLeave, client } = clientUtils();
     const charges = computed(() => {
@@ -69,30 +79,35 @@ export default defineComponent({
           name: "charges.rent",
           label: "Loyer",
           type: "text",
+          icon: "euro",
         },
         {
           as: "input",
           name: "charges.food",
           label: "Alimentaire",
           type: "text",
+          icon: "euro",
         },
         {
           as: "input",
           name: "charges.energy",
           label: "Eau/Électrivité/Gaz",
           type: "text",
+          icon: "euro",
         },
         {
           as: "input",
           name: "charges.isp",
           label: "Téléphone/Internet",
           type: "text",
+          icon: "euro",
         },
         {
           as: "input",
           name: "charges.school",
           label: "Frais de scolarité",
           type: "text",
+          icon: "euro",
         },
         {
           as: "input",
@@ -101,54 +116,63 @@ export default defineComponent({
           type: "text",
           computed: true,
           modelkey: "total",
+          icon: "euro",
         },
         {
           as: "input",
           name: "charges.help",
           label: "Aide à Domicile",
           type: "text",
+          icon: "euro",
         },
         {
           as: "input",
           name: "charges.transports",
           label: "Transports",
           type: "text",
+          icon: "euro",
         },
         {
           as: "input",
           name: "charges.recreation",
           label: "Loisirs",
           type: "text",
+          icon: "euro",
         },
         {
           as: "input",
           name: "charges.holidays",
           label: "Vacances Annuelles",
           type: "text",
+          icon: "euro",
         },
         {
           as: "input",
           name: "charges.consumer",
           label: "Crédit consommation",
           type: "text",
+          icon: "euro",
         },
         {
           as: "input",
           name: "charges.others",
           label: "Autres",
           type: "text",
+          icon: "euro",
         },
         {
           as: "input",
           name: "charges.coownership",
           label: "Charges de copropriétés",
           type: "text",
+          icon: "euro",
         },
         {
           as: "input",
           name: "charges.total",
           label: "Total",
           type: "text",
+          icon: "euro",
           computed: true,
           modelkey: "total",
         },
@@ -157,14 +181,14 @@ export default defineComponent({
           name: "charges.qp",
           label: "Quote Part",
           type: "text",
-          computed: true,
-          modelkey: "total",
+          icon: "percent",
         },
         {
           as: "input",
           name: "charges.result",
           label: "Résultat",
           type: "text",
+          icon: "euro",
           computed: true,
           modelkey: "total",
         },
@@ -211,6 +235,11 @@ export default defineComponent({
 });
 </script>
 <style lang="postcss" scoped>
+.icon {
+  @apply fill-current absolute right-0 p-2;
+  @apply text-gray-400;
+  @apply dark:text-gray-400;
+}
 button {
   @apply relative w-full py-3 text-left rounded-lg shadow-md cursor-default focus:outline-none sm:text-sm;
   @apply text-black bg-white;

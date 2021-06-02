@@ -12,7 +12,7 @@
         :class="{ active: route.name == parents.name, disabled: !route.enabled }"
       )
         svg.fill-current(viewBox="0 0 25 35")
-          path(:d="route.svg")
+          path(:d="icons[route.icon]")
       button.bottom(
         @click="handleClick(route)",
         v-if="hover",
@@ -51,16 +51,18 @@ export default defineComponent({
   },
   data: () => ({
     hover: false,
+    icons: {
+      accounts: mdiAccountSearchOutline,
+      informations: mdiInformationOutline,
+      cart: mdiCart,
+      battery: mdiBatteryPositive,
+      piggy: mdiPiggyBank,
+    },
   }),
   setup(props) {
     //Use Router
     const router = useRouter();
     const { user, isAuthenticated, token } = auth();
-    const accounts = mdiAccountSearchOutline;
-    const informations = mdiInformationOutline;
-    const cart = mdiCart;
-    const battery = mdiBatteryPositive;
-    const piggy = mdiPiggyBank;
 
     const handleClick = ({ path, name, childname }) => {
       router.push({
@@ -89,33 +91,33 @@ export default defineComponent({
       {
         name: "Clients",
         path: "/Clients",
-        svg: accounts,
+        icon: "accounts",
         enabled: true,
       },
       {
         name: "Découverte",
         childname: "Informations",
         path: "/Discover/Informations",
-        svg: informations,
+        icon: "informations",
         enabled: true,
       },
       {
         name: "Produits",
         childname: "Comptes et livrets",
         path: "/Products/Accounts",
-        svg: cart,
+        icon: "cart",
         enabled: false,
       },
       {
         name: "Budget",
         path: "/Budget",
-        svg: piggy,
+        icon: "piggy",
         enabled: false,
       },
       {
         name: "Capacité d'épargne",
         path: "/Saving",
-        svg: battery,
+        icon: "battery",
         enabled: false,
       },
     ]);

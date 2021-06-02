@@ -5,10 +5,13 @@
       .flex(v-for="{ name, as, label, ...attrs } in schema.fields")
         .input-container
           label(:for="name") {{ label }}
+          svg.icon(viewBox="0 0 25 25")
+            path(:d="icons[attrs.icon]")
           Field(:as="as", :id="name", :name="name", v-bind="attrs")
         ErrorMessage(:name="name")
 </template>
 <script lang="ts">
+import { mdiCurrencyEur } from "@mdi/js";
 import { defineComponent, computed } from "vue";
 import { Field, ErrorMessage } from "vee-validate";
 import * as yup from "yup";
@@ -26,6 +29,11 @@ export default defineComponent({
       required: false,
     },
   },
+  data: () => ({
+    icons: {
+      euro: mdiCurrencyEur,
+    },
+  }),
   setup() {
     const { saveOnLeave, client } = clientUtils();
     const taxes = computed(() => {
@@ -46,6 +54,7 @@ export default defineComponent({
           name: "taxes.income",
           label: "Impot sur le revenu annuel",
           type: "text",
+          icon: "euro",
           modelkey: "benefits",
         },
         {
@@ -53,6 +62,7 @@ export default defineComponent({
           name: "taxes.wage",
           label: "Revenus salariés",
           type: "text",
+          icon: "euro",
           modelkey: "wage",
         },
         {
@@ -60,6 +70,7 @@ export default defineComponent({
           name: "taxes.housing",
           label: "Taxe d'habitation",
           type: "text",
+          icon: "euro",
         },
       ],
       validation: yup.object({
@@ -80,6 +91,11 @@ export default defineComponent({
 });
 </script>
 <style lang="postcss" scoped>
+.icon {
+  @apply fill-current absolute right-0 p-2;
+  @apply text-gray-400;
+  @apply dark:text-gray-400;
+}
 button {
   @apply relative w-full py-3 text-left rounded-lg shadow-md cursor-default focus:outline-none sm:text-sm;
   @apply text-black bg-white;
