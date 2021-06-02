@@ -28,14 +28,14 @@ export default defineComponent({
   },
   setup() {
     const { saveOnLeave, client } = clientUtils();
-    const incomes = computed(() => {
-      if (client.value.incomes) {
-        return client.value.incomes;
+    const taxes = computed(() => {
+      if (client.value.taxes) {
+        return client.value.taxes;
       } else {
         return {
-          benefits: "0",
+          income: "0",
           wage: "0",
-          landed: "0",
+          housing: "0",
         };
       }
     });
@@ -43,37 +43,37 @@ export default defineComponent({
       fields: [
         {
           as: "input",
-          name: "incomes.benefits",
-          label: "Bénéfices professionnels",
+          name: "taxes.income",
+          label: "Impot sur le revenu annuel",
           type: "text",
           modelkey: "benefits",
         },
         {
           as: "input",
-          name: "incomes.wage",
+          name: "taxes.wage",
           label: "Revenus salariés",
           type: "text",
           modelkey: "wage",
         },
         {
           as: "input",
-          name: "incomes.landed",
-          label: "Revenus fonciers",
+          name: "taxes.housing",
+          label: "Taxe d'habitation",
           type: "text",
         },
       ],
       validation: yup.object({
-        incomes: yup.object({
-          benefits: yup.number(),
+        taxes: yup.object({
+          income: yup.number(),
           wage: yup.number(),
-          landed: yup.number(),
+          housing: yup.number(),
         }),
       }),
     };
     saveOnLeave(schema);
     return {
       client,
-      incomes,
+      taxes,
       schema,
     };
   },

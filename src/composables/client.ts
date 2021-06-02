@@ -91,6 +91,26 @@ export const clientUtils = () => {
               total: "0",
               result: "0",
             },
+        charges: client.value.charges
+          ? client.value.charges
+          : {
+              rent: "0",
+              food: "0",
+              energy: "0",
+              isp: "0",
+              school: "0",
+              insurance: "0",
+              help: "0",
+              transports: "0",
+              recreation: "0",
+              holidays: "0",
+              consumer: "0",
+              others: "0",
+              coownership: "0",
+              total: "0",
+              qp: "0",
+              result: "0",
+            },
       },
       validationSchema: schema.validation,
     });
