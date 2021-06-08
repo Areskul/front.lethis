@@ -1,7 +1,16 @@
-const currentClient = JSON.parse(
-  localStorage.getItem("currentClient") as string
-);
+//const currentClient = JSON.parse(
+//localStorage.getItem("currentClient") as string
+//);
 
+const makeCurrentCli = () => {
+  if (localStorage.getItem("currentClient")) {
+    return JSON.parse(localStorage.getItem("currentClient") as string);
+  } else {
+    return {};
+  }
+};
+
+const currentClient = makeCurrentCli();
 export const client = {
   namespaced: true,
   state: {

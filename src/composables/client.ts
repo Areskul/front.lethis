@@ -19,6 +19,42 @@ export const clientUtils = () => {
       store.dispatch("client/setCurrentClient", data);
     },
   });
+
+  const defaultValues = {
+    place: {
+      adress: null,
+      cedex: null,
+      city: null,
+    },
+    incomes: {
+      benefits: "0",
+      wage: "0",
+      landed: "0",
+      others: "0",
+      joint: "0",
+      qp: "0",
+      total: "0",
+      result: "0",
+    },
+    charges: {
+      rent: "0",
+      food: "0",
+      energy: "0",
+      isp: "0",
+      school: "0",
+      insurance: "0",
+      help: "0",
+      transports: "0",
+      recreation: "0",
+      holidays: "0",
+      consumer: "0",
+      others: "0",
+      coownership: "0",
+      total: "0",
+      qp: "0",
+      result: "0",
+    },
+  };
   const updateClient = (variables) => {
     if (!isEmpty(client.value)) {
       variables.client["id"] = client.value.id;
@@ -72,45 +108,13 @@ export const clientUtils = () => {
       initialValues: {
         client: client.value,
         job: client.value.job ? client.value.job : { name: null },
-        place: client.value.place
-          ? client.value.place
-          : {
-              adress: null,
-              cedex: null,
-              city: null,
-            },
+        place: client.value.place ? client.value.place : defaultValues.place,
         incomes: client.value.incomes
           ? client.value.incomes
-          : {
-              benefits: "0",
-              wage: "0",
-              landed: "0",
-              others: "0",
-              joint: "0",
-              qp: "0",
-              total: "0",
-              result: "0",
-            },
+          : defaultValues.incomes,
         charges: client.value.charges
           ? client.value.charges
-          : {
-              rent: "0",
-              food: "0",
-              energy: "0",
-              isp: "0",
-              school: "0",
-              insurance: "0",
-              help: "0",
-              transports: "0",
-              recreation: "0",
-              holidays: "0",
-              consumer: "0",
-              others: "0",
-              coownership: "0",
-              total: "0",
-              qp: "0",
-              result: "0",
-            },
+          : defaultValues.charges,
       },
       validationSchema: schema.validation,
     });

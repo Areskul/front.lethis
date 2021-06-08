@@ -87,7 +87,7 @@ export default defineComponent({
       gender: dataGen,
     });
     const models = ref({
-      gender: client.value.gender,
+      gender: client ? client.value.gender : "",
     });
     const schema: FormSchema = {
       fields: [

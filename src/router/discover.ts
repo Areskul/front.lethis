@@ -84,21 +84,22 @@ export const discover: Array<RouteRecordRaw> = [
         path: "Assets",
         components: {
           //input: () => import("@/components/input/assets.vue"),
+          input: () => import("@/components/input/realestate.vue"),
         },
         meta: {
           title: baseTitle + separator + "Imobilier non-locatif",
-          enabled: false,
+          enabled: true,
         },
       },
       {
         name: "Immobilier locatif",
         path: "RealEstate",
         components: {
-          //input: () => import("@/components/input/realestate.vue"),
+          input: () => import("@/components/input/realestate.vue"),
         },
         meta: {
           title: baseTitle + separator + "Imobilier locatif",
-          enabled: false,
+          enabled: true,
         },
       },
     ],

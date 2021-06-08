@@ -221,7 +221,6 @@ export default defineComponent({
           res += parseFloat(value as string);
         }
       }
-
       const str = String(res);
       charges.value.total = str;
       return str;
@@ -252,15 +251,5 @@ export default defineComponent({
   @apply fill-current absolute right-0 p-2;
   @apply text-gray-400;
   @apply dark:text-gray-400;
-}
-button {
-  @apply relative w-full py-3 text-left rounded-lg shadow-md cursor-default focus:outline-none sm:text-sm;
-  @apply text-black bg-white;
-  @apply dark:text-white dark:bg-gray-900;
-}
-.options {
-  @apply absolute z-10 w-full py-1 mt-1 overflow-hidden rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm;
-  @apply dark:text-white dark:bg-gray-900;
-  @apply text-black;
 }
 </style>
