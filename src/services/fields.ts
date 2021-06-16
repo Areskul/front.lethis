@@ -13,6 +13,7 @@ export const GET_ENUM = gql`
 export const GET_JOBS = gql`
   query jobs {
     jobs {
+      id
       name
     }
   }

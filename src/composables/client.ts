@@ -21,6 +21,9 @@ export const clientUtils = () => {
   });
 
   const defaultValues = {
+    job: {
+      name: null,
+    },
     place: {
       adress: null,
       cedex: null,
@@ -112,7 +115,7 @@ export const clientUtils = () => {
     const { handleSubmit } = useForm({
       initialValues: {
         client: client.value,
-        job: client.value.job ? client.value.job : { name: null },
+        job: client.value.job ? client.value.job : defaultValues.job,
         place: client.value.place ? client.value.place : defaultValues.place,
         incomes: client.value.incomes
           ? client.value.incomes
