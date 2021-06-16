@@ -26,6 +26,11 @@ export const clientUtils = () => {
       cedex: null,
       city: null,
     },
+    taxes: {
+      income: "0",
+      wage: "0",
+      housing: "0",
+    },
     incomes: {
       benefits: "0",
       wage: "0",
@@ -115,6 +120,7 @@ export const clientUtils = () => {
         charges: client.value.charges
           ? client.value.charges
           : defaultValues.charges,
+        taxes: client.value.taxes ? client.value.taxes : defaultValues.taxes,
       },
       validationSchema: schema.validation,
     });

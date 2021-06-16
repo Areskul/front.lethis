@@ -49,12 +49,6 @@ export const GET_CLIENT = gql`
         total
         result
       }
-      taxes {
-        id
-        income
-        wage
-        housing
-      }
       charges {
         id
         rent
@@ -81,6 +75,7 @@ export const GET_CLIENT = gql`
         housing
       }
       place {
+        id
         adress
         cedex
         city
