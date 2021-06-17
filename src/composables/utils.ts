@@ -1,5 +1,13 @@
-export const isBlank = (str: any) => {
-  return !str || /^\s*$/.test(str);
+export const isBlank = (str: any): boolean => {
+  if (!str) {
+    return true;
+  } else if (str === null) {
+    return true;
+  } else if (/^\s*$/.test(str)) {
+    return true;
+  } else {
+    return false;
+  }
 };
 const isBlankTuple = (key: any, value: any) => {
   if (isBlank(value)) {
@@ -10,6 +18,9 @@ export const removeBlankTuples = (obj: any) => {
   const entries = Object.entries(obj);
   const empty: string[] = [];
   entries.forEach(([key, value]) => {
+    if (typeof value === "object" && value != null) {
+      value = removeBlankTuples(value);
+    }
     empty.push(isBlankTuple(key, value));
   });
   empty.forEach((key) => {

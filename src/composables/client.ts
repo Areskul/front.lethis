@@ -67,7 +67,13 @@ export const clientUtils = () => {
     if (!isEmpty(client.value)) {
       variables.client["id"] = client.value.id;
     }
+    delete variables.client["job"];
+    delete variables.client["charges"];
+    delete variables.client["taxes"];
+    delete variables.client["incomes"];
+    delete variables.client["place"];
     variables = removeBlankTuples(variables);
+
     update(variables).then((res) => {
       if (res.data) {
         client.value = res.data;
@@ -77,26 +83,6 @@ export const clientUtils = () => {
       }
       return res;
     });
-  };
-  const updateClientAsync = (variables) => {
-    if (!isEmpty(client.value)) {
-      variables.client["id"] = client.value.id;
-    }
-    variables = removeBlankTuples(variables);
-    update(variables).then((res) => {
-      if (res.data) {
-        client.value = res.data;
-      } else {
-        //client.value = {};
-        console.log(res.error);
-      }
-      return res;
-    });
-    //let promise = new Promise((resolve, reject) => {
-    //resolve(res.data);
-    //reject(res.error);
-    //});
-    //return promise;
   };
   const dispatchClient = (clientId) => {
     const variables = { id: clientId };
@@ -115,23 +101,24 @@ export const clientUtils = () => {
     const { handleSubmit } = useForm({
       initialValues: {
         client: client.value,
-        job: client.value.job ? client.value.job : defaultValues.job,
-        place: client.value.place ? client.value.place : defaultValues.place,
-        incomes: client.value.incomes
-          ? client.value.incomes
-          : defaultValues.incomes,
-        charges: client.value.charges
-          ? client.value.charges
-          : defaultValues.charges,
-        taxes: client.value.taxes ? client.value.taxes : defaultValues.taxes,
+        //job: client.value.job ? client.value.job : defaultValues.job,
+        //place: client.value.place ? client.value.place : defaultValues.place,
+        //incomes: client.value.incomes
+        //? client.value.incomes
+        //: defaultValues.incomes,
+        //charges: client.value.charges
+        //? client.value.charges
+        //: defaultValues.charges,
+        //taxes: client.value.taxes ? client.value.taxes : defaultValues.taxes,
       },
       validationSchema: schema.validation,
     });
     onBeforeRouteLeave(() => {
       const onSubmit = handleSubmit((variables) => {
-        if (!variables.incomes) {
-          variables.incomes = client.value.incomes;
-        }
+        console.log(variables);
+        //if (!variables.incomes) {
+        //variables.incomes = client.value.incomes;
+        //}
         if (!variables.client) {
           variables.client = { id: client.value.id };
         }
@@ -145,6 +132,6 @@ export const clientUtils = () => {
     dispatchClient,
     saveOnLeave,
     updateClient,
-    updateClientAsync,
+    defaultValues,
   };
 };
