@@ -106,7 +106,7 @@ export const discover: Array<RouteRecordRaw> = [
     // footer: () => import("@/components/navigation/footer.vue"),
     meta: {
       title: baseTitle + separator + "Nouveau Client",
-      enabled: false,
+      enabled: true,
     },
   },
 ];
