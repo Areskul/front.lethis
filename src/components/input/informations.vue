@@ -225,25 +225,19 @@ export default defineComponent({
           dependants: yup.number().nullable(),
           employees: yup.string().nullable(),
           retirementAge: yup.number().nullable(),
-          adress: yup.string().nullable(),
           phone: yup.number().nullable(),
           email: yup.string().email().nullable(),
         }),
         job: yup.object({
-          name: yup.string(),
+          name: yup.string().nullable(),
         }),
         place: yup.object({
-          adress: yup.string(),
-          cedex: yup.number(),
-          city: yup.string(),
+          adress: yup.string().nullable(),
+          cedex: yup.number().nullable(),
+          city: yup.string().nullable(),
         }),
       }),
     };
-    /*delete client.value["job"];*/
-    /*delete client.value["charges"];*/
-    /*delete client.value["taxes"];*/
-    /*delete client.value["incomes"];*/
-    /*delete client.value["place"];*/
     saveOnLeave(schema);
     return {
       state,

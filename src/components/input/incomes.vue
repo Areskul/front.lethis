@@ -45,21 +45,12 @@ export default defineComponent({
     },
   }),
   setup() {
-    const { saveOnLeave, client } = clientUtils();
+    const { saveOnLeave, client, defaultValues } = clientUtils();
     const incomes = computed(() => {
       if (client.value.incomes) {
         return client.value.incomes;
       } else {
-        return {
-          benefits: "0",
-          wage: "0",
-          landed: "0",
-          others: "0",
-          joint: "0",
-          total: "0",
-          qp: "0",
-          result: "0",
-        };
+        return defaultValues.incomes;
       }
     });
     const schema: FormSchema = {

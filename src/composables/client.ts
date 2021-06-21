@@ -40,7 +40,7 @@ export const clientUtils = () => {
       landed: "0",
       others: "0",
       joint: "0",
-      qp: "0",
+      qp: "100",
       total: "0",
       result: "0",
     },
@@ -59,7 +59,7 @@ export const clientUtils = () => {
       others: "0",
       coownership: "0",
       total: "0",
-      qp: "0",
+      qp: "100",
       result: "0",
     },
   };
@@ -96,11 +96,17 @@ export const clientUtils = () => {
     const { handleSubmit } = useForm({
       initialValues: {
         client: client.value,
-        job: isEmpty(client.value.job) ? client.value.job : null,
-        place: isEmpty(client.value.place) ? client.value.place : null,
-        incomes: client.value.incomes ? client.value.incomes : null,
-        charges: client.value.charges ? client.value.charges : null,
-        taxes: client.value.taxes ? client.value.taxes : null,
+        job: isEmpty(client.value.job) ? client.value.job : defaultValues.job,
+        place: isEmpty(client.value.place)
+          ? client.value.place
+          : defaultValues.place,
+        incomes: client.value.incomes
+          ? client.value.incomes
+          : defaultValues.incomes,
+        charges: client.value.charges
+          ? client.value.charges
+          : defaultValues.charges,
+        taxes: client.value.taxes ? client.value.taxes : defaultValues.taxes,
       },
       validationSchema: schema.validation,
     });
