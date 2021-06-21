@@ -5,7 +5,7 @@ import { UPDATE_CLIENT } from "@/services/clients";
 import { GET_CLIENT } from "@/services/clients";
 import { onBeforeRouteLeave } from "vue-router";
 import { useForm } from "vee-validate";
-import { removeBlankTuples, isEmpty } from "./utils";
+import { removeBlankTuples, isEmpty, removeDeepObjects } from "./utils";
 
 export const clientUtils = () => {
   const { execute: update } = useMutation(UPDATE_CLIENT);
@@ -67,18 +67,13 @@ export const clientUtils = () => {
     if (!isEmpty(client.value)) {
       variables.client["id"] = client.value.id;
     }
-    delete variables.client["job"];
-    delete variables.client["charges"];
-    delete variables.client["taxes"];
-    delete variables.client["incomes"];
-    delete variables.client["place"];
+    variables.client = removeDeepObjects(variables.client);
     variables = removeBlankTuples(variables);
-
+    //console.log(variables);
     update(variables).then((res) => {
       if (res.data) {
         client.value = res.data;
       } else {
-        //client.value = {};
         console.log(res.error);
       }
       return res;
@@ -91,7 +86,7 @@ export const clientUtils = () => {
         client.value = res.data;
         return res.data;
       } else {
-        //client.value = {};
+        client.value = {};
         console.log(res.error);
         return res.error;
       }
@@ -101,15 +96,11 @@ export const clientUtils = () => {
     const { handleSubmit } = useForm({
       initialValues: {
         client: client.value,
-        //job: client.value.job ? client.value.job : defaultValues.job,
-        //place: client.value.place ? client.value.place : defaultValues.place,
-        //incomes: client.value.incomes
-        //? client.value.incomes
-        //: defaultValues.incomes,
-        //charges: client.value.charges
-        //? client.value.charges
-        //: defaultValues.charges,
-        //taxes: client.value.taxes ? client.value.taxes : defaultValues.taxes,
+        job: isEmpty(client.value.job) ? client.value.job : null,
+        place: isEmpty(client.value.place) ? client.value.place : null,
+        incomes: client.value.incomes ? client.value.incomes : null,
+        charges: client.value.charges ? client.value.charges : null,
+        taxes: client.value.taxes ? client.value.taxes : null,
       },
       validationSchema: schema.validation,
     });
@@ -122,6 +113,12 @@ export const clientUtils = () => {
         if (!variables.client) {
           variables.client = { id: client.value.id };
         }
+        //delete variables.client["job"];
+        //delete variables.client["charges"];
+        //delete variables.client["taxes"];
+        //delete variables.client["incomes"];
+        //delete variables.client["place"];
+
         updateClient(variables);
       });
       onSubmit();

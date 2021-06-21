@@ -1,7 +1,16 @@
-export const isBlank = (str: any): boolean => {
+export const isBlankOrNull = (str: any): boolean => {
   if (!str) {
     return true;
   } else if (str === null) {
+    return true;
+  } else if (/^\s*$/.test(str)) {
+    return true;
+  } else {
+    return false;
+  }
+};
+export const isBlank = (str: any): boolean => {
+  if (!str) {
     return true;
   } else if (/^\s*$/.test(str)) {
     return true;
@@ -39,4 +48,17 @@ export const isEmpty = (obj) => {
   }
 
   return true;
+};
+export const removeDeepObjects = (obj) => {
+  const entries = Object.entries(obj);
+  const objects: string[] = [];
+  entries.forEach(([key, value]) => {
+    if (typeof value === "object") {
+      objects.push(key);
+    }
+  });
+  objects.forEach((key) => {
+    delete obj[key];
+  });
+  return obj;
 };
