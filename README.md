@@ -27,6 +27,8 @@ Basé sur node.js
 
 Framework: 
 Vue3 (SFC ,composition API)
+Villus -> permet de requetter le backend (alternative a Apollo Client)
+https://villus.logaretm.com/
 
 Languages:
 
@@ -55,13 +57,17 @@ yarn add tailwindcss@npm:@tailwindcss/postcss7-compat @areskul/postcss @areskul/
 ```
 ou vous rendre sur le site de TailwindCSS pour plus de détail sur la compatibilité avec webpack
 
+
 # Etat de l'application
 
 Formulaires: in progress
   -> certains champs doivent être renommés
+  -> besoin de rajouter des champs
 
 Graphiques: in pogress
   -> retrouver les données clients en demandant au back-end: checked
   -> générer des graphiques à partir des données clients: not checked
 
 Style: in progress
+
+
