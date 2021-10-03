@@ -91,6 +91,7 @@ export const UPDATE_CLIENT = gql`
     $incomes: IncomesInput
     $charges: ChargesInput
     $taxes: TaxesInput
+    $realestate: RealEstateInput
   ) {
     updateClient(
       client: $client
@@ -99,6 +100,7 @@ export const UPDATE_CLIENT = gql`
       incomes: $incomes
       charges: $charges
       taxes: $taxes
+      realestate: $realestate
     ) {
       id
       lastname
@@ -156,6 +158,9 @@ export const UPDATE_CLIENT = gql`
         adress
         cedex
         city
+      }
+      realestate {
+        id
       }
     }
   }

@@ -22,7 +22,7 @@
 </template>
 <script lang="ts">
 import { mdiCurrencyEur, mdiPercent } from "@mdi/js";
-import { defineComponent, computed, ref } from "vue";
+import { defineComponent, computed, ref, watch } from "vue";
 import { Field, ErrorMessage } from "vee-validate";
 import * as yup from "yup";
 import { clientUtils } from "@/composables/client";
@@ -222,15 +222,19 @@ export default defineComponent({
         }
       }
       const str = String(res);
-      charges.value.total = str;
       return str;
+    });
+    watch(total, (str) => {
+      charges.value.total = str;
     });
     const result = computed(() => {
       const res =
         parseFloat(total.value) * (parseFloat(charges.value.qp) / 100);
       const str = String(res);
-      charges.value.result = str;
       return str;
+    });
+    watch(result, (str) => {
+      charges.value.result = str;
     });
     const models = ref({
       total: total,

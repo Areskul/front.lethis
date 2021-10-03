@@ -62,6 +62,7 @@ import { Field, ErrorMessage } from "vee-validate";
 import * as yup from "yup";
 import { clientUtils } from "@/composables/client";
 import { FormSchema } from "@/common/types";
+import { isEmpty } from "@/composables/utils";
 export default defineComponent({
   name: "Informations",
   components: {
@@ -93,7 +94,7 @@ export default defineComponent({
     });
     const { saveOnLeave, client } = clientUtils();
     const place = computed(() => {
-      if (client.value.place) {
+      if (!isEmpty(client.value.place)) {
         return client.value.place;
       } else {
         return {
@@ -104,7 +105,7 @@ export default defineComponent({
       }
     });
     const job = computed(() => {
-      if (client.value.job) {
+      if (!isEmpty(client.value.job)) {
         return client.value.job;
       } else {
         return { name: null };
@@ -218,34 +219,33 @@ export default defineComponent({
       ],
       validation: yup.object({
         client: yup.object({
-          type: yup.string(),
-          birthdate: yup.date(),
-          family: yup.string(),
-          dependants: yup.number(),
-          employees: yup.string(),
-          retirementAge: yup.number(),
-          adress: yup.string(),
-          phone: yup.number(),
-          email: yup.string().email(),
+          type: yup.string().nullable(),
+          birthdate: yup.date().nullable(),
+          family: yup.string().nullable(),
+          dependants: yup.number().nullable(),
+          employees: yup.string().nullable(),
+          retirementAge: yup.number().nullable(),
+          phone: yup.number().nullable(),
+          email: yup.string().email().nullable(),
         }),
         job: yup.object({
-          name: yup.string(),
+          name: yup.string().nullable(),
         }),
         place: yup.object({
-          adress: yup.string(),
-          cedex: yup.number(),
-          city: yup.string(),
+          adress: yup.string().nullable(),
+          cedex: yup.number().nullable(),
+          city: yup.string().nullable(),
         }),
       }),
     };
     saveOnLeave(schema);
     return {
       state,
+      client,
       place,
+      job,
       data,
       models,
-      client,
-      job,
       schema,
     };
   },

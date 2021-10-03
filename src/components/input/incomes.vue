@@ -21,7 +21,7 @@
 </template>
 <script lang="ts">
 import { mdiCurrencyEur, mdiPercent } from "@mdi/js";
-import { defineComponent, computed, ref } from "vue";
+import { defineComponent, computed, watch, ref } from "vue";
 import { Field, ErrorMessage } from "vee-validate";
 import * as yup from "yup";
 import { clientUtils } from "@/composables/client";
@@ -45,21 +45,12 @@ export default defineComponent({
     },
   }),
   setup() {
-    const { saveOnLeave, client } = clientUtils();
+    const { saveOnLeave, client, defaultValues } = clientUtils();
     const incomes = computed(() => {
       if (client.value.incomes) {
         return client.value.incomes;
       } else {
-        return {
-          benefits: "0",
-          wage: "0",
-          landed: "0",
-          others: "0",
-          joint: "0",
-          qp: "0",
-          total: "0",
-          result: "0",
-        };
+        return defaultValues.incomes;
       }
     });
     const schema: FormSchema = {
@@ -141,15 +132,20 @@ export default defineComponent({
     const total = computed(() => {
       const res =
         parseFloat(incomes.value.benefits) + parseFloat(incomes.value.wage);
-      const str = new String(res);
+      const str = String(res);
+      return str;
+    });
+    watch(total, (str) => {
       incomes.value.total = str;
-      return res;
     });
     const result = computed(() => {
-      const res = (total.value * parseFloat(incomes.value.qp)) / 100;
-      const str = new String(res);
+      const res =
+        parseFloat(total.value) * (parseFloat(incomes.value.qp) / 100);
+      const str = String(res);
+      return str;
+    });
+    watch(result, (str) => {
       incomes.value.result = str;
-      return res;
     });
     const models = ref({
       total: total,

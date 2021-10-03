@@ -1,5 +1,22 @@
-export const isBlank = (str: any) => {
-  return !str || /^\s*$/.test(str);
+export const isBlankOrNull = (str: any): boolean => {
+  if (!str) {
+    return true;
+  } else if (str === null) {
+    return true;
+  } else if (/^\s*$/.test(str)) {
+    return true;
+  } else {
+    return false;
+  }
+};
+export const isBlank = (str: any): boolean => {
+  if (!str) {
+    return true;
+  } else if (/^\s*$/.test(str)) {
+    return true;
+  } else {
+    return false;
+  }
 };
 const isBlankTuple = (key: any, value: any) => {
   if (isBlank(value)) {
@@ -10,6 +27,9 @@ export const removeBlankTuples = (obj: any) => {
   const entries = Object.entries(obj);
   const empty: string[] = [];
   entries.forEach(([key, value]) => {
+    if (typeof value === "object" && value != null) {
+      value = removeBlankTuples(value);
+    }
     empty.push(isBlankTuple(key, value));
   });
   empty.forEach((key) => {
@@ -28,4 +48,17 @@ export const isEmpty = (obj) => {
   }
 
   return true;
+};
+export const removeDeepObjects = (obj) => {
+  const entries = Object.entries(obj);
+  const objects: string[] = [];
+  entries.forEach(([key, value]) => {
+    if (typeof value === "object") {
+      objects.push(key);
+    }
+  });
+  objects.forEach((key) => {
+    delete obj[key];
+  });
+  return obj;
 };
